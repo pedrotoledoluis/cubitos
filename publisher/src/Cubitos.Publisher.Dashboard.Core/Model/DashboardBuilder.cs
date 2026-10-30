@@ -1,6 +1,7 @@
 using Cubitos.Publisher.Core.Queue;
 using Cubitos.Publisher.Core.Stats;
 using Cubitos.Publisher.Dashboard.Core.Data;
+using Cubitos.Publisher.Dashboard.Core.Formatting;
 
 namespace Cubitos.Publisher.Dashboard.Core.Model;
 
@@ -23,7 +24,7 @@ public static class DashboardBuilder
             Heatmap(data.RecentSnapshots),
             launch,
             Average(launch.Where(c => c.ObservedFromStart && c.Cumulative.Count == FirstDayCurve.Hours).ToList()),
-            Queue(data.Queue));
+            Queue(data));
     }
 
     private static Kpis Kpis(DashboardData data, IReadOnlyList<RankingEntry> ranking, DateTimeOffset now)
@@ -33,7 +34,7 @@ public static class DashboardBuilder
         var next = data.Queue
             .Where(q => Waiting.Contains(q.Status))
             .OrderBy(q => q.PublishAt)
-            .Select(q => new NextPublish(q.EpisodeId, q.PublishAt))
+            .Select(q => new NextPublish(q.EpisodeId, Title(data, q.EpisodeId), q.PublishAt))
             .FirstOrDefault();
         return new Kpis(
             ranking.Sum(r => r.TotalViews),
@@ -112,14 +113,27 @@ public static class DashboardBuilder
         return avg;
     }
 
-    private static List<QueueEntry> Queue(IReadOnlyList<QueueItem> items)
+    /// <summary>Metadata title, then the newest uploaded video of the episode, then the folder name.</summary>
+    private static string Title(DashboardData data, string episodeId)
     {
+        if (data.EpisodeTitles?.TryGetValue(episodeId, out var title) == true) return title;
+        var video = data.Videos
+            .Where(v => v.EpisodeId == episodeId && v.Title.Length > 0)
+            .OrderByDescending(v => v.PublishedAt)
+            .FirstOrDefault();
+        return video?.Title ?? EpisodeTitles.FromSlug(episodeId);
+    }
+
+    private static List<QueueEntry> Queue(DashboardData data)
+    {
+        var items = data.Queue;
         var active = items.Where(q => q.IsActive).OrderBy(q => q.PublishAt);
         var finished = items.Where(q => !q.IsActive).OrderByDescending(q => q.PublishAt);
         return active.Concat(finished)
             .Select(q => new QueueEntry(
                 q.Id, q.EpisodeId, q.Status, q.PublishAt, q.RetryAt, q.LastError, q.Attempts,
-                q.NewVideoId is { Length: > 0 } id ? $"https://youtu.be/{id}" : null, q.ReplacesVideoId, q.IsActive))
+                q.NewVideoId is { Length: > 0 } id ? $"https://youtu.be/{id}" : null, q.ReplacesVideoId, q.IsActive,
+                Title(data, q.EpisodeId)))
             .ToList();
     }
 }

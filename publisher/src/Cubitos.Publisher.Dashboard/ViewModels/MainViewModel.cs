@@ -46,7 +46,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
     /// <summary>Raised when visible drawables must repaint (new data or new theme).</summary>
     public event Action? RedrawRequested;
 
-    /// <summary>Raised when the background animation should start or stop.</summary>
+    /// <summary>Raised when the animation timer (notch pumpkin + background) should start or stop.</summary>
     public event Action<bool>? AnimationStateChanged;
 
     public ICommand RefreshCommand { get; }
@@ -101,7 +101,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public string TotalViews => NumberFormat.Views(_model?.Kpis.TotalViews ?? 0);
     public string ViewsToday => NumberFormat.Views(_model?.Kpis.ViewsToday ?? 0);
     public string VideosPublished => (_model?.Kpis.VideosPublished ?? 0).ToString();
-    public string NextPublishEpisode => _model?.Kpis.NextPublish?.EpisodeId ?? "Nada en cola";
+    public string NextPublishTitle => _model?.Kpis.NextPublish?.Title ?? "Nada en cola";
     public string NextPublishWhen => _model?.Kpis.NextPublish is { } n ? PeruFormat.DayTime(n.PublishAt) : "—";
     public string NextPublishCountdown => _model?.Kpis.NextPublish is { } n ? Countdown.Format(n.PublishAt - DateTimeOffset.UtcNow) : "";
 
@@ -155,7 +155,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
     {
         if (IsWindowVisible == visible) return;
         IsWindowVisible = visible;
-        AnimationStateChanged?.Invoke(visible && ThemeManager.Current.Embers);
+        AnimationStateChanged?.Invoke(visible);
     }
 
     /// <summary>Re-evaluates relative times once a second without touching the database.</summary>
@@ -211,7 +211,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
             catch (Exception) { /* not remembered, still applied */ }
         }
         Rebuild(); // badge colors and crests depend on the theme
-        AnimationStateChanged?.Invoke(IsWindowVisible && theme.Embers);
+        AnimationStateChanged?.Invoke(IsWindowVisible);
     }
 
     private void Rebuild()
@@ -237,7 +237,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
         Queue = _model?.Queue.Select(q => new QueueRowVm(q, now, OpenVideoCommand)).ToList() ?? [];
 
         foreach (var name in (string[])[
-            nameof(TotalViews), nameof(ViewsToday), nameof(VideosPublished), nameof(NextPublishEpisode), nameof(NextPublishWhen),
+            nameof(TotalViews), nameof(ViewsToday), nameof(VideosPublished), nameof(NextPublishTitle), nameof(NextPublishWhen),
             nameof(NextPublishCountdown), nameof(Podium), nameof(RankingRest), nameof(HasRanking), nameof(HasNoRanking),
             nameof(BestHours), nameof(HasBestHours), nameof(HasNoBestHours), nameof(LaunchOptions), nameof(HasLaunchOptions), nameof(HasNoLaunchOptions),
             nameof(HasAverage), nameof(Queue), nameof(HasQueue), nameof(HasNoQueue)])

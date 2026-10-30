@@ -69,6 +69,9 @@ public static class ThemeCatalog
         BodyFont = "Segoe UI",
         DrawingFont = "Segoe UI",
         DrawingHeadingFont = "Arial Black",
+        NotchFill = C("#05081a"),
+        NotchGlow = C("#ffd23a"),
+        NotchStroke = C("#000000"),
         StatusColors = new Dictionary<QueueStatus, Color>
         {
             [QueueStatus.Pending] = C("#4c6ef5"),
@@ -188,6 +191,9 @@ public static class ThemeCatalog
         BodyFont = "Segoe UI",
         DrawingFont = "Bahnschrift",
         DrawingHeadingFont = "Bahnschrift",
+        NotchFill = C("#03040c"),
+        NotchGlow = C("#ff2bd6"),
+        NotchStroke = C("#00e5ff"),
         NeonGrid = true,
         StatusColors = new Dictionary<QueueStatus, Color>
         {

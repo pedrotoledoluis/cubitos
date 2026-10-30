@@ -40,17 +40,6 @@
             <Setter Property="FontSize" Value="30" />
             <Setter Property="TextColor" Value="{DynamicResource Accent}" />
         </Style>
-        <Style x:Key="NavItem" TargetType="Border">
-            <Setter Property="StrokeThickness" Value="0" />
-            <Setter Property="StrokeShape" Value="RoundRectangle 10" />
-            <Setter Property="Padding" Value="14,11" />
-            <Setter Property="Background" Value="{DynamicResource NavIdleBackground}" />
-        </Style>
-        <Style x:Key="NavLabel" TargetType="Label">
-            <Setter Property="FontFamily" Value="{DynamicResource HeadingFont}" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="TextColor" Value="{DynamicResource PageText}" />
-        </Style>
         <Style x:Key="ColumnHeader" TargetType="Label" BasedOn="{StaticResource SectionSub}">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="HorizontalTextAlignment" Value="End" />
@@ -61,331 +50,251 @@
         <!-- Animated / decorative background layer. -->
         <GraphicsView x:Name="AmbientView" InputTransparent="True" />
 
-        <Grid ColumnDefinitions="230,*">
-            <!-- Sidebar -->
-            <Grid Grid.Column="0" Background="{DynamicResource SidebarBackground}" RowDefinitions="Auto,*,Auto" Padding="18,26,18,18">
-                <VerticalStackLayout Spacing="2" Margin="4,0,0,26">
-                    <Label Text="HISTORIA EN" FontFamily="{DynamicResource HeadingFont}" FontSize="15" TextColor="{DynamicResource PageText}" />
-                    <Label Text="CUBITOS" FontFamily="{DynamicResource HeadingFont}" FontSize="32" TextColor="{DynamicResource Accent}" />
-                    <Label Text="{DynamicResource T_BrandSubtitle}" Style="{StaticResource SectionSub}" />
-                </VerticalStackLayout>
-
-                <VerticalStackLayout Grid.Row="1" Spacing="6">
-                    <Border Style="{StaticResource NavItem}">
-                        <Border.Triggers>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsRanking}" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource NavSelectedBackground}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSectionCommand}" CommandParameter="ranking" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{DynamicResource T_Nav_Ranking}" Style="{StaticResource NavLabel}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsRanking}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                    </Border>
-                    <Border Style="{StaticResource NavItem}">
-                        <Border.Triggers>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsHeatmap}" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource NavSelectedBackground}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSectionCommand}" CommandParameter="heatmap" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{DynamicResource T_Nav_Heatmap}" Style="{StaticResource NavLabel}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsHeatmap}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                    </Border>
-                    <Border Style="{StaticResource NavItem}">
-                        <Border.Triggers>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsFirstDay}" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource NavSelectedBackground}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSectionCommand}" CommandParameter="firstday" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{DynamicResource T_Nav_FirstDay}" Style="{StaticResource NavLabel}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsFirstDay}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                    </Border>
-                    <Border Style="{StaticResource NavItem}">
-                        <Border.Triggers>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsQueue}" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource NavSelectedBackground}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSectionCommand}" CommandParameter="queue" />
-                        </Border.GestureRecognizers>
-                        <Label Text="{DynamicResource T_Nav_Queue}" Style="{StaticResource NavLabel}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsQueue}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                    </Border>
-                </VerticalStackLayout>
-
-                <VerticalStackLayout Grid.Row="2" Spacing="4">
-                    <Label Text="Base de datos (solo lectura)" Style="{StaticResource SectionSub}" FontSize="11" />
-                    <Label Text="{Binding DatabasePath}" Style="{StaticResource SectionSub}" FontSize="11" LineBreakMode="CharacterWrap" />
-                </VerticalStackLayout>
+        <!-- Main area; its left margin follows the notch (collapsed tab or pinned panel). -->
+        <Grid x:Name="ContentHost" Margin="70,0,0,0" RowDefinitions="Auto,Auto,*" Padding="24,24,28,20" RowSpacing="18">
+            <!-- Header: status, refresh, theme selector -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="14" Margin="0,8,0,0">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="{DynamicResource Accent}" HeightRequest="18" WidthRequest="18" />
+                    <Label Text="{Binding LastUpdated}" Style="{StaticResource SectionSub}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <Label Grid.Column="1" Text="Tema" Style="{StaticResource SectionSub}" VerticalOptions="Center" />
+                <Picker x:Name="ThemePicker" Grid.Column="2" ItemsSource="{Binding ThemeNames}" SelectedIndex="{Binding SelectedThemeIndex}" WidthRequest="230"
+                        TextColor="{DynamicResource PageText}" BackgroundColor="{DynamicResource InputBackground}" FontFamily="{DynamicResource BodyFont}" />
+                <Button Grid.Column="3" Text="Actualizar" Command="{Binding RefreshCommand}" Background="{DynamicResource AccentBrush}"
+                        TextColor="{DynamicResource AccentText}" FontFamily="{DynamicResource HeadingFont}" FontSize="14" CornerRadius="10" Padding="18,8" />
             </Grid>
-            <BoxView Grid.Column="0" WidthRequest="2" HorizontalOptions="End" Color="{DynamicResource SidebarStroke}" />
 
-            <!-- Main area -->
-            <Grid Grid.Column="1" RowDefinitions="Auto,Auto,*" Padding="28,24,28,20" RowSpacing="18">
-                <!-- Header: status, refresh, theme selector -->
-                <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="14" Margin="0,8,0,0">
-                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                        <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="{DynamicResource Accent}" HeightRequest="18" WidthRequest="18" />
-                        <Label Text="{Binding LastUpdated}" Style="{StaticResource SectionSub}" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                    <Label Grid.Column="1" Text="Tema" Style="{StaticResource SectionSub}" VerticalOptions="Center" />
-                    <Picker Grid.Column="2" ItemsSource="{Binding ThemeNames}" SelectedIndex="{Binding SelectedThemeIndex}" WidthRequest="230"
-                            TextColor="{DynamicResource PageText}" BackgroundColor="{DynamicResource InputBackground}" FontFamily="{DynamicResource BodyFont}" />
-                    <Button Grid.Column="3" Text="Actualizar" Command="{Binding RefreshCommand}" Background="{DynamicResource AccentBrush}"
-                            TextColor="{DynamicResource AccentText}" FontFamily="{DynamicResource HeadingFont}" FontSize="14" CornerRadius="10" Padding="18,8" />
-                </Grid>
-
-                <!-- KPIs -->
-                <Grid Grid.Row="1" ColumnDefinitions="*,*,*,1.4*" ColumnSpacing="18">
-                    <controls:Card>
-                        <VerticalStackLayout Spacing="2">
-                            <Label Text="{DynamicResource T_Kpi_Total}" Style="{StaticResource CardLabel}" FontSize="13" />
-                            <Label Text="{Binding TotalViews}" Style="{StaticResource KpiValue}" />
-                        </VerticalStackLayout>
-                    </controls:Card>
-                    <controls:Card Grid.Column="1">
-                        <VerticalStackLayout Spacing="2">
-                            <Label Text="{DynamicResource T_Kpi_Today}" Style="{StaticResource CardLabel}" FontSize="13" />
-                            <Label Text="{Binding ViewsToday}" Style="{StaticResource KpiValue}" />
-                        </VerticalStackLayout>
-                    </controls:Card>
-                    <controls:Card Grid.Column="2">
-                        <VerticalStackLayout Spacing="2">
-                            <Label Text="{DynamicResource T_Kpi_Videos}" Style="{StaticResource CardLabel}" FontSize="13" />
-                            <Label Text="{Binding VideosPublished}" Style="{StaticResource KpiValue}" />
-                        </VerticalStackLayout>
-                    </controls:Card>
-                    <controls:Card Grid.Column="3" IsHighlighted="True">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
-                            <Label Text="{DynamicResource T_Kpi_Next}" Style="{StaticResource CardLabel}" FontSize="13" />
-                            <Label Grid.Row="1" Text="{Binding NextPublishEpisode}" Style="{StaticResource CardValue}" LineBreakMode="TailTruncation" />
-                            <Label Grid.Row="2" Text="{Binding NextPublishWhen}" Style="{StaticResource CardLabel}" FontSize="13" />
-                            <Label Grid.Column="1" Grid.RowSpan="3" Text="{Binding NextPublishCountdown}" Style="{StaticResource KpiValue}" FontSize="22"
-                                   TextColor="{DynamicResource Highlight}" VerticalOptions="Center" Margin="12,0,0,0" />
-                        </Grid>
-                    </controls:Card>
-                </Grid>
-
-                <!-- Sections -->
-                <Grid Grid.Row="2" IsVisible="{Binding HasData}">
-                    <!-- 1. Ranking -->
-                    <ScrollView IsVisible="{Binding IsRanking}">
-                        <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
-                            <Label Text="{DynamicResource T_Title_Ranking}" Style="{StaticResource SectionTitle}" />
-                            <Label Text="{DynamicResource T_Sub_Ranking}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
-                            <Label Text="Todavía no hay estadísticas de videos." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoRanking}" />
-
-                            <FlexLayout BindableLayout.ItemsSource="{Binding Podium}" Direction="Row" AlignItems="End" JustifyContent="Start"
-                                        HeightRequest="314" Padding="0,12" IsVisible="{Binding HasRanking}">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:RankingRowVm">
-                                        <controls:Card FlexLayout.Grow="1" FlexLayout.Basis="0" FlexLayout.Order="{Binding PodiumOrder}"
-                                                       HeightRequest="{Binding PodiumHeight}" Margin="0,0,18,0" IsHighlighted="{Binding IsFirst}">
-                                            <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="Auto,*" ColumnSpacing="12" RowSpacing="6">
-                                                <GraphicsView Drawable="{Binding Crest}" WidthRequest="66" HeightRequest="66" />
-                                                <Label Grid.Column="1" Text="{Binding Title}" Style="{StaticResource CardBody}" MaxLines="3"
-                                                       LineBreakMode="TailTruncation" VerticalOptions="Center" />
-                                                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8" VerticalOptions="End">
-                                                    <Label Text="{Binding TotalViews}" Style="{StaticResource KpiValue}" FontSize="32" />
-                                                    <Label Text="vistas" Style="{StaticResource CardLabel}" FontSize="14" VerticalOptions="End" Margin="0,0,0,6" />
-                                                </HorizontalStackLayout>
-                                                <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="*,*,*,*">
-                                                    <VerticalStackLayout>
-                                                        <Label Text="+1 h" Style="{StaticResource CardLabel}" />
-                                                        <Label Text="{Binding Last1h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" />
-                                                    </VerticalStackLayout>
-                                                    <VerticalStackLayout Grid.Column="1">
-                                                        <Label Text="+24 h" Style="{StaticResource CardLabel}" />
-                                                        <Label Text="{Binding Last24h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" />
-                                                    </VerticalStackLayout>
-                                                    <VerticalStackLayout Grid.Column="2">
-                                                        <Label Text="Me gusta" Style="{StaticResource CardLabel}" />
-                                                        <Label Text="{Binding Likes}" Style="{StaticResource CardValue}" />
-                                                    </VerticalStackLayout>
-                                                    <VerticalStackLayout Grid.Column="3">
-                                                        <Label Text="Comentarios" Style="{StaticResource CardLabel}" />
-                                                        <Label Text="{Binding Comments}" Style="{StaticResource CardValue}" />
-                                                    </VerticalStackLayout>
-                                                </Grid>
-                                                <GraphicsView Grid.Row="3" Grid.ColumnSpan="2" Drawable="{Binding Sparkline}" HeightRequest="38" />
-                                            </Grid>
-                                        </controls:Card>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </FlexLayout>
-
-                            <Grid ColumnDefinitions="60,*,110,80,90,90,100,180" ColumnSpacing="12" Padding="20,6,20,0" IsVisible="{Binding HasRanking}">
-                                <Label Grid.Column="1" Text="Video" Style="{StaticResource ColumnHeader}" HorizontalTextAlignment="Start" />
-                                <Label Grid.Column="2" Text="Vistas" Style="{StaticResource ColumnHeader}" />
-                                <Label Grid.Column="3" Text="+1 h" Style="{StaticResource ColumnHeader}" />
-                                <Label Grid.Column="4" Text="+24 h" Style="{StaticResource ColumnHeader}" />
-                                <Label Grid.Column="5" Text="Me gusta" Style="{StaticResource ColumnHeader}" />
-                                <Label Grid.Column="6" Text="Comentarios" Style="{StaticResource ColumnHeader}" />
-                                <Label Grid.Column="7" Text="Últimas 24 h" Style="{StaticResource ColumnHeader}" HorizontalTextAlignment="Center" />
-                            </Grid>
-                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding RankingRest}" Spacing="10">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:RankingRowVm">
-                                        <controls:Card>
-                                            <Grid ColumnDefinitions="60,*,110,80,90,90,100,180" ColumnSpacing="12">
-                                                <GraphicsView Drawable="{Binding Crest}" WidthRequest="50" HeightRequest="50" />
-                                                <Label Grid.Column="1" Text="{Binding Title}" Style="{StaticResource CardBody}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
-                                                <Label Grid.Column="2" Text="{Binding TotalViews}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Accent}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                                <Label Grid.Column="3" Text="{Binding Last1h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                                <Label Grid.Column="4" Text="{Binding Last24h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                                <Label Grid.Column="5" Text="{Binding Likes}" Style="{StaticResource CardValue}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                                <Label Grid.Column="6" Text="{Binding Comments}" Style="{StaticResource CardValue}" HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                                <GraphicsView Grid.Column="7" Drawable="{Binding Sparkline}" HeightRequest="40" />
-                                            </Grid>
-                                        </controls:Card>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </VerticalStackLayout>
-                        </VerticalStackLayout>
-                    </ScrollView>
-
-                    <!-- 2. Peak hours -->
-                    <ScrollView IsVisible="{Binding IsHeatmap}">
-                        <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
-                            <Label Text="{DynamicResource T_Title_Heatmap}" Style="{StaticResource SectionTitle}" />
-                            <Label Text="{DynamicResource T_Sub_Heatmap}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
-                            <controls:Card>
-                                <GraphicsView x:Name="HeatmapView" Drawable="{Binding Heatmap}" HeightRequest="360" />
-                            </controls:Card>
-                            <Label Text="{DynamicResource T_BestHours}" Style="{StaticResource SectionTitle}" FontSize="20" Margin="0,10,0,0" />
-                            <Label Text="Todavía no hay suficientes datos para recomendar horas." Style="{StaticResource SectionSub}" IsVisible="{Binding HasNoBestHours}" />
-                            <FlexLayout BindableLayout.ItemsSource="{Binding BestHours}" Direction="Row" JustifyContent="Start" Padding="0,0,0,12">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:BestHourVm">
-                                        <controls:Card FlexLayout.Grow="1" FlexLayout.Basis="0" Margin="0,0,18,0">
-                                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
-                                                <Label Text="{Binding Rank}" Style="{StaticResource KpiValue}" FontSize="40" TextColor="{DynamicResource Highlight}" VerticalOptions="Center" />
-                                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                                    <Label Text="{Binding Range}" Style="{StaticResource CardValue}" FontSize="22" />
-                                                    <Label Text="{Binding Views}" Style="{StaticResource CardLabel}" FontSize="13" />
-                                                </VerticalStackLayout>
-                                            </Grid>
-                                        </controls:Card>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </FlexLayout>
-                        </VerticalStackLayout>
-                    </ScrollView>
-
-                    <!-- 3. First 24 hours -->
-                    <ScrollView IsVisible="{Binding IsFirstDay}">
-                        <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
-                            <Label Text="{DynamicResource T_Title_FirstDay}" Style="{StaticResource SectionTitle}" />
-                            <Label Text="{DynamicResource T_Sub_FirstDay}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
-                            <Label Text="Todavía no hay videos con fecha de publicación y estadísticas de su primer día." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoLaunchOptions}" />
-                            <controls:Card IsVisible="{Binding HasLaunchOptions}">
-                                <VerticalStackLayout Spacing="12">
-                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                                        <Label Text="Video" Style="{StaticResource CardLabel}" FontSize="14" VerticalOptions="Center" />
-                                        <Picker Grid.Column="1" ItemsSource="{Binding LaunchOptions}" ItemDisplayBinding="{Binding Label, x:DataType=vm:LaunchOptionVm}"
-                                                SelectedItem="{Binding SelectedLaunch}" TextColor="{DynamicResource CardText}" BackgroundColor="{DynamicResource InputBackground}"
-                                                FontFamily="{DynamicResource BodyFont}" />
-                                        <HorizontalStackLayout Grid.Column="2" Spacing="16" VerticalOptions="Center">
-                                            <HorizontalStackLayout Spacing="6">
-                                                <BoxView Color="{DynamicResource ChartPrimary}" WidthRequest="22" HeightRequest="4" VerticalOptions="Center" />
-                                                <Label Text="Este video" Style="{StaticResource CardLabel}" FontSize="13" />
-                                            </HorizontalStackLayout>
-                                            <HorizontalStackLayout Spacing="6" IsVisible="{Binding HasAverage}">
-                                                <BoxView Color="{DynamicResource ChartSecondary}" WidthRequest="22" HeightRequest="4" VerticalOptions="Center" />
-                                                <Label Text="Promedio del canal" Style="{StaticResource CardLabel}" FontSize="13" />
-                                            </HorizontalStackLayout>
-                                        </HorizontalStackLayout>
-                                    </Grid>
-                                    <GraphicsView x:Name="FirstDayView" Drawable="{Binding FirstDayChart}" HeightRequest="380" />
-                                    <Label Text="{Binding LaunchSummary}" Style="{StaticResource CardBody}" FontSize="14" />
-                                </VerticalStackLayout>
-                            </controls:Card>
-                        </VerticalStackLayout>
-                    </ScrollView>
-
-                    <!-- 4. Queue -->
-                    <ScrollView IsVisible="{Binding IsQueue}">
-                        <VerticalStackLayout Spacing="10" Padding="0,0,14,12">
-                            <Label Text="{DynamicResource T_Title_Queue}" Style="{StaticResource SectionTitle}" />
-                            <Label Text="{DynamicResource T_Sub_Queue}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
-                            <Label Text="La cola está vacía." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoQueue}" />
-                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Queue}" Spacing="10">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:QueueRowVm">
-                                        <controls:Card Opacity="{Binding RowOpacity}">
-                                            <Grid ColumnDefinitions="170,*,Auto" ColumnSpacing="18">
-                                                <Border BackgroundColor="{Binding BadgeBackground}" StrokeThickness="2" Stroke="{DynamicResource SidebarStroke}"
-                                                        StrokeShape="{DynamicResource BadgeShape}" Padding="12,8" HorizontalOptions="Start" VerticalOptions="Center">
-                                                    <Label Text="{Binding StatusLabel}" TextColor="{Binding BadgeText}" FontFamily="{DynamicResource HeadingFont}" FontSize="13" />
-                                                </Border>
-                                                <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                                                    <Label Text="{Binding Episode}" Style="{StaticResource CardBody}" FontSize="16" />
-                                                    <Label Style="{StaticResource CardLabel}" FontSize="13">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Publicación: " />
-                                                                <Span Text="{Binding PublishAt}" />
-                                                                <Span Text="   " />
-                                                                <Span Text="{Binding PublishRelative}" TextColor="{DynamicResource Highlight}" />
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-                                                    <Label Text="{Binding RetryAt}" Style="{StaticResource CardLabel}" FontSize="13" IsVisible="{Binding HasRetry}" />
-                                                    <Label Text="{Binding Replaces}" Style="{StaticResource CardLabel}" FontSize="13" IsVisible="{Binding HasReplaces}" />
-                                                    <Label Text="{Binding LastError}" FontSize="13" TextColor="{DynamicResource Highlight}" FontFamily="{DynamicResource BodyFont}"
-                                                           IsVisible="{Binding HasError}" MaxLines="3" LineBreakMode="TailTruncation" />
-                                                </VerticalStackLayout>
-                                                <VerticalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
-                                                    <Button Text="Ver video" IsVisible="{Binding HasVideo}" Command="{Binding OpenCommand}" CommandParameter="{Binding VideoUrl}"
-                                                            Background="{DynamicResource AccentBrush}" TextColor="{DynamicResource AccentText}" FontFamily="{DynamicResource HeadingFont}"
-                                                            FontSize="13" CornerRadius="8" Padding="14,6" />
-                                                    <Label Text="{Binding Attempts}" Style="{StaticResource CardLabel}" HorizontalTextAlignment="End" />
-                                                </VerticalStackLayout>
-                                            </Grid>
-                                        </controls:Card>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </VerticalStackLayout>
-                        </VerticalStackLayout>
-                    </ScrollView>
-                </Grid>
-
-                <!-- Empty state -->
-                <controls:Card Grid.Row="2" IsVisible="{Binding IsEmpty}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="640">
-                    <VerticalStackLayout Spacing="12" Padding="10">
-                        <Label Text="{Binding EmptyTitle}" Style="{StaticResource CardValue}" FontSize="24" HorizontalTextAlignment="Center" />
-                        <Label Text="{Binding EmptyDetail}" Style="{StaticResource CardLabel}" FontSize="14" HorizontalTextAlignment="Center" />
+            <!-- KPIs -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,1.7*" ColumnSpacing="18">
+                <controls:Card>
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{DynamicResource T_Kpi_Total}" Style="{StaticResource CardLabel}" FontSize="13" />
+                        <Label Text="{Binding TotalViews}" Style="{StaticResource KpiValue}" />
+                    </VerticalStackLayout>
+                </controls:Card>
+                <controls:Card Grid.Column="1">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{DynamicResource T_Kpi_Today}" Style="{StaticResource CardLabel}" FontSize="13" />
+                        <Label Text="{Binding ViewsToday}" Style="{StaticResource KpiValue}" />
+                    </VerticalStackLayout>
+                </controls:Card>
+                <controls:Card Grid.Column="2">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{DynamicResource T_Kpi_Videos}" Style="{StaticResource CardLabel}" FontSize="13" />
+                        <Label Text="{Binding VideosPublished}" Style="{StaticResource KpiValue}" />
+                    </VerticalStackLayout>
+                </controls:Card>
+                <controls:Card Grid.Column="3" IsHighlighted="True">
+                    <VerticalStackLayout Spacing="3">
+                        <Label Text="{DynamicResource T_Kpi_Next}" Style="{StaticResource CardLabel}" FontSize="13" />
+                        <controls:ClampedLabel Text="{Binding NextPublishTitle}" Style="{StaticResource CardValue}" />
+                        <!-- One label, so the countdown drops to its own line only when it does not fit. -->
+                        <Label Style="{StaticResource CardLabel}" FontSize="13" LineBreakMode="WordWrap">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding NextPublishWhen}" />
+                                    <Span Text="   " />
+                                    <Span Text="{Binding NextPublishCountdown}" FontFamily="{DynamicResource HeadingFont}" FontSize="19" TextColor="{DynamicResource Highlight}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
                     </VerticalStackLayout>
                 </controls:Card>
             </Grid>
+
+            <!-- Sections -->
+            <Grid Grid.Row="2" IsVisible="{Binding HasData}">
+                <!-- 1. Ranking -->
+                <ScrollView IsVisible="{Binding IsRanking}">
+                    <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
+                        <Label Text="{DynamicResource T_Title_Ranking}" Style="{StaticResource SectionTitle}" />
+                        <Label Text="{DynamicResource T_Sub_Ranking}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
+                        <Label Text="Todavía no hay estadísticas de videos." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoRanking}" />
+
+                        <controls:PodiumLayout BindableLayout.ItemsSource="{Binding Podium}" Spacing="18" Padding="0,12" IsVisible="{Binding HasRanking}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:RankingRowVm">
+                                    <controls:Card controls:PodiumLayout.Order="{Binding PodiumOrder}" controls:PodiumLayout.Lift="{Binding PodiumLift}"
+                                                   IsHighlighted="{Binding IsFirst}">
+                                        <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="Auto,*" ColumnSpacing="12" RowSpacing="8">
+                                            <GraphicsView Drawable="{Binding Crest}" WidthRequest="62" HeightRequest="62" VerticalOptions="Start" />
+                                            <controls:ClampedLabel Grid.Column="1" Text="{Binding Title}" Style="{StaticResource CardBody}" VerticalOptions="Center" />
+                                            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8" VerticalOptions="End">
+                                                <Label Text="{Binding TotalViews}" Style="{StaticResource KpiValue}" FontSize="32" />
+                                                <Label Text="vistas" Style="{StaticResource CardLabel}" FontSize="14" VerticalOptions="End" Margin="0,0,0,6" />
+                                            </HorizontalStackLayout>
+                                            <controls:UniformGridLayout Grid.Row="2" Grid.ColumnSpan="2" MinItemWidth="78" ColumnSpacing="8" RowSpacing="6">
+                                                <VerticalStackLayout>
+                                                    <Label Text="+1 h" Style="{StaticResource CardLabel}" />
+                                                    <Label Text="{Binding Last1h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout>
+                                                    <Label Text="+24 h" Style="{StaticResource CardLabel}" />
+                                                    <Label Text="{Binding Last24h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout>
+                                                    <Label Text="Me gusta" Style="{StaticResource CardLabel}" />
+                                                    <Label Text="{Binding Likes}" Style="{StaticResource CardValue}" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout>
+                                                    <Label Text="Comentarios" Style="{StaticResource CardLabel}" />
+                                                    <Label Text="{Binding Comments}" Style="{StaticResource CardValue}" />
+                                                </VerticalStackLayout>
+                                            </controls:UniformGridLayout>
+                                            <GraphicsView Grid.Row="3" Grid.ColumnSpan="2" Drawable="{Binding Sparkline}" HeightRequest="38" />
+                                        </Grid>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </controls:PodiumLayout>
+
+                        <Grid ColumnDefinitions="56,3.2*,*,0.8*,0.8*,0.9*,*,1.7*" ColumnSpacing="12" Padding="{DynamicResource RankHeaderPadding}" IsVisible="{Binding HasRanking}">
+                            <Label Grid.Column="1" Text="Video" Style="{StaticResource ColumnHeader}" HorizontalTextAlignment="Start" />
+                            <Label Grid.Column="2" Text="Vistas" Style="{StaticResource ColumnHeader}" />
+                            <Label Grid.Column="3" Text="+1 h" Style="{StaticResource ColumnHeader}" />
+                            <Label Grid.Column="4" Text="+24 h" Style="{StaticResource ColumnHeader}" />
+                            <Label Grid.Column="5" Text="Me gusta" Style="{StaticResource ColumnHeader}" />
+                            <Label Grid.Column="6" Text="Comentarios" Style="{StaticResource ColumnHeader}" />
+                            <Label Grid.Column="7" Text="Últimas 24 h" Style="{StaticResource ColumnHeader}" HorizontalTextAlignment="Center" />
+                        </Grid>
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RankingRest}" Spacing="10">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:RankingRowVm">
+                                    <controls:Card>
+                                        <Grid ColumnDefinitions="56,3.2*,*,0.8*,0.8*,0.9*,*,1.7*" ColumnSpacing="12">
+                                            <GraphicsView Drawable="{Binding Crest}" WidthRequest="50" HeightRequest="50" />
+                                            <controls:ClampedLabel Grid.Column="1" Text="{Binding Title}" Style="{StaticResource CardBody}" VerticalOptions="Center" />
+                                            <Label Grid.Column="2" Text="{Binding TotalViews}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Accent}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                            <Label Grid.Column="3" Text="{Binding Last1h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                            <Label Grid.Column="4" Text="{Binding Last24h}" Style="{StaticResource CardValue}" TextColor="{DynamicResource Positive}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                            <Label Grid.Column="5" Text="{Binding Likes}" Style="{StaticResource CardValue}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                            <Label Grid.Column="6" Text="{Binding Comments}" Style="{StaticResource CardValue}" HorizontalTextAlignment="End" VerticalOptions="Center" />
+                                            <GraphicsView Grid.Column="7" Drawable="{Binding Sparkline}" HeightRequest="40" />
+                                        </Grid>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!-- 2. Peak hours -->
+                <ScrollView IsVisible="{Binding IsHeatmap}">
+                    <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
+                        <Label Text="{DynamicResource T_Title_Heatmap}" Style="{StaticResource SectionTitle}" />
+                        <Label Text="{DynamicResource T_Sub_Heatmap}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
+                        <controls:Card>
+                            <GraphicsView x:Name="HeatmapView" Drawable="{Binding Heatmap}" HeightRequest="340" />
+                        </controls:Card>
+                        <Label Text="{DynamicResource T_BestHours}" Style="{StaticResource SectionTitle}" FontSize="20" Margin="0,10,0,0" />
+                        <Label Text="Todavía no hay suficientes datos para recomendar horas." Style="{StaticResource SectionSub}" IsVisible="{Binding HasNoBestHours}" />
+                        <controls:UniformGridLayout BindableLayout.ItemsSource="{Binding BestHours}" MinItemWidth="230" ColumnSpacing="18" RowSpacing="14" Padding="0,0,0,12">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:BestHourVm">
+                                    <controls:Card>
+                                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                                            <Label Text="{Binding Rank}" Style="{StaticResource KpiValue}" FontSize="40" TextColor="{DynamicResource Highlight}" VerticalOptions="Center" />
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                                <Label Text="{Binding Range}" Style="{StaticResource CardValue}" FontSize="22" />
+                                                <Label Text="{Binding Views}" Style="{StaticResource CardLabel}" FontSize="13" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </controls:UniformGridLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!-- 3. First 24 hours -->
+                <ScrollView IsVisible="{Binding IsFirstDay}">
+                    <VerticalStackLayout Spacing="12" Padding="0,0,14,12">
+                        <Label Text="{DynamicResource T_Title_FirstDay}" Style="{StaticResource SectionTitle}" />
+                        <Label Text="{DynamicResource T_Sub_FirstDay}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
+                        <Label Text="Todavía no hay videos con fecha de publicación y estadísticas de su primer día." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoLaunchOptions}" />
+                        <controls:Card IsVisible="{Binding HasLaunchOptions}">
+                            <VerticalStackLayout Spacing="12">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                                    <Label Text="Video" Style="{StaticResource CardLabel}" FontSize="14" VerticalOptions="Center" />
+                                    <Picker Grid.Column="1" ItemsSource="{Binding LaunchOptions}" ItemDisplayBinding="{Binding Label, x:DataType=vm:LaunchOptionVm}"
+                                            SelectedItem="{Binding SelectedLaunch}" TextColor="{DynamicResource CardText}" BackgroundColor="{DynamicResource InputBackground}"
+                                            FontFamily="{DynamicResource BodyFont}" />
+                                    <HorizontalStackLayout Grid.Column="2" Spacing="16" VerticalOptions="Center">
+                                        <HorizontalStackLayout Spacing="6">
+                                            <BoxView Color="{DynamicResource ChartPrimary}" WidthRequest="22" HeightRequest="4" VerticalOptions="Center" />
+                                            <Label Text="Este video" Style="{StaticResource CardLabel}" FontSize="13" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="6" IsVisible="{Binding HasAverage}">
+                                            <BoxView Color="{DynamicResource ChartSecondary}" WidthRequest="22" HeightRequest="4" VerticalOptions="Center" />
+                                            <Label Text="Promedio del canal" Style="{StaticResource CardLabel}" FontSize="13" />
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                                <GraphicsView x:Name="FirstDayView" Drawable="{Binding FirstDayChart}" HeightRequest="360" />
+                                <Label Text="{Binding LaunchSummary}" Style="{StaticResource CardBody}" FontSize="14" />
+                            </VerticalStackLayout>
+                        </controls:Card>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!-- 4. Queue -->
+                <ScrollView IsVisible="{Binding IsQueue}">
+                    <VerticalStackLayout Spacing="10" Padding="0,0,14,12">
+                        <Label Text="{DynamicResource T_Title_Queue}" Style="{StaticResource SectionTitle}" />
+                        <Label Text="{DynamicResource T_Sub_Queue}" Style="{StaticResource SectionSub}" Margin="0,0,0,6" />
+                        <Label Text="La cola está vacía." Style="{StaticResource SectionSub}" FontSize="16" IsVisible="{Binding HasNoQueue}" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Queue}" Spacing="10">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:QueueRowVm">
+                                    <controls:Card Opacity="{Binding RowOpacity}">
+                                        <Grid ColumnDefinitions="170,*,Auto" ColumnSpacing="18">
+                                            <Border BackgroundColor="{Binding BadgeBackground}" StrokeThickness="2" Stroke="{DynamicResource SidebarStroke}"
+                                                    StrokeShape="{DynamicResource BadgeShape}" Padding="12,8" HorizontalOptions="Start" VerticalOptions="Center">
+                                                <Label Text="{Binding StatusLabel}" TextColor="{Binding BadgeText}" FontFamily="{DynamicResource HeadingFont}" FontSize="13" />
+                                            </Border>
+                                            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                                <controls:ClampedLabel Text="{Binding Title}" Style="{StaticResource CardBody}" FontSize="16" />
+                                                <Label Text="{Binding Episode}" Style="{StaticResource CardLabel}" FontSize="12" />
+                                                <Label Style="{StaticResource CardLabel}" FontSize="13">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Publicación: " />
+                                                            <Span Text="{Binding PublishAt}" />
+                                                            <Span Text="   " />
+                                                            <Span Text="{Binding PublishRelative}" TextColor="{DynamicResource Highlight}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label Text="{Binding RetryAt}" Style="{StaticResource CardLabel}" FontSize="13" IsVisible="{Binding HasRetry}" />
+                                                <Label Text="{Binding Replaces}" Style="{StaticResource CardLabel}" FontSize="13" IsVisible="{Binding HasReplaces}" />
+                                                <Label Text="{Binding LastError}" FontSize="13" TextColor="{DynamicResource Highlight}" FontFamily="{DynamicResource BodyFont}"
+                                                       IsVisible="{Binding HasError}" MaxLines="3" LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                                <Button Text="Ver video" IsVisible="{Binding HasVideo}" Command="{Binding OpenCommand}" CommandParameter="{Binding VideoUrl}"
+                                                        Background="{DynamicResource AccentBrush}" TextColor="{DynamicResource AccentText}" FontFamily="{DynamicResource HeadingFont}"
+                                                        FontSize="13" CornerRadius="8" Padding="14,6" />
+                                                <Label Text="{Binding Attempts}" Style="{StaticResource CardLabel}" HorizontalTextAlignment="End" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!-- Empty state -->
+            <controls:Card Grid.Row="2" IsVisible="{Binding IsEmpty}" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="640">
+                <VerticalStackLayout Spacing="12" Padding="10">
+                    <Label Text="{Binding EmptyTitle}" Style="{StaticResource CardValue}" FontSize="24" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding EmptyDetail}" Style="{StaticResource CardLabel}" FontSize="14" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </controls:Card>
         </Grid>
+
+        <controls:NotchPanel x:Name="Notch" />
     </Grid>
 </ContentPage>

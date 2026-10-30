@@ -1,5 +1,6 @@
 using Cubitos.Publisher.Dashboard.Core.Configuration;
 using Cubitos.Publisher.Dashboard.Core.Data;
+using Cubitos.Publisher.Dashboard.Core.Navigation;
 using Cubitos.Publisher.Dashboard.ViewModels;
 
 namespace Cubitos.Publisher.Dashboard;
@@ -33,14 +34,17 @@ public static class MauiProgram
 }
 
 /// <summary>
-/// Optional start-up overrides: <c>--theme=&lt;id&gt;</c>, <c>--section=&lt;id&gt;</c> and <c>--screenshot=&lt;png&gt;</c>
-/// (renders the window to a PNG a few seconds after loading, then exits; used for smoke tests).
+/// Optional start-up overrides: <c>--theme=&lt;id&gt;</c>, <c>--section=&lt;id&gt;</c>, <c>--screenshot=&lt;png&gt;</c>
+/// (renders the window to a PNG a few seconds after loading, then exits; used for smoke tests), <c>--size=WxH</c>
+/// (window size) and <c>--notch=collapsed|expanded|pinned</c> (forced notch state, not remembered).
 /// </summary>
 public sealed class LaunchOptions(IReadOnlyList<string> args)
 {
     public string? Theme { get; } = Value(args, "--theme=");
     public string? Section { get; } = Value(args, "--section=");
     public string? Screenshot { get; } = Value(args, "--screenshot=");
+    public (double Width, double Height)? Size { get; } = LaunchArgs.Size(args);
+    public NotchState? Notch { get; } = LaunchArgs.Notch(args);
 
     private static string? Value(IReadOnlyList<string> args, string prefix) =>
         args.FirstOrDefault(a => a.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))?[prefix.Length..];

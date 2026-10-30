@@ -69,8 +69,13 @@ publisher\src\Cubitos.Publisher.Dashboard\bin\Debug\net10.0-windows10.0.19041.0\
 
 The DB path comes from `--db <path>` (or `--Publisher:DatabasePath=<path>`), then `Publisher__DatabasePath`, then
 `appsettings.json` next to the exe, then `D:\PROYECTS\cubitos\publisher\data\publisher.db`. `--theme=<cubitos|halloween|neon>`,
-`--section=<ranking|heatmap|firstday|queue>` and `--screenshot=<file.png>` (render the window to PNG and exit) exist
-for smoke tests.
+`--section=<ranking|heatmap|firstday|queue>`, `--screenshot=<file.png>` (render the window to PNG and exit),
+`--size=<W>x<H>` (window size) and `--notch=<collapsed|expanded|pinned>` (forced, not remembered) exist for smoke tests.
+
+Navigation lives in a notch on the left edge with an animated flaming pumpkin: hovering opens the panel, leaving closes
+it after 0.4 s, and the pin button keeps it open beside the content (remembered). The "next publish" KPI shows the
+episode title from its `metadata.json` (repo-relative folders are looked up above the DB), else the uploaded video's
+title, else the folder name.
 
 ## Files
 

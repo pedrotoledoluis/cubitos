@@ -11,7 +11,8 @@ public sealed record DashboardModel(
     IReadOnlyList<double>? ChannelAverageCurve,
     IReadOnlyList<QueueEntry> Queue);
 
-public sealed record NextPublish(string EpisodeId, DateTimeOffset PublishAt);
+/// <param name="Title">Episode title from its metadata, the uploaded video, or the folder name.</param>
+public sealed record NextPublish(string EpisodeId, string Title, DateTimeOffset PublishAt);
 
 /// <param name="ViewsToday">Views earned since midnight of the current Peru day.</param>
 public sealed record Kpis(long TotalViews, double ViewsToday, int VideosPublished, NextPublish? NextPublish);
@@ -39,4 +40,4 @@ public sealed record LaunchCurve(
 
 public sealed record QueueEntry(
     Guid Id, string EpisodeId, QueueStatus Status, DateTimeOffset PublishAt, DateTimeOffset? RetryAt,
-    string? LastError, int Attempts, string? VideoUrl, string? ReplacesVideoId, bool IsActive);
+    string? LastError, int Attempts, string? VideoUrl, string? ReplacesVideoId, bool IsActive, string Title);

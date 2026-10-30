@@ -17,9 +17,9 @@ public sealed class RankingRowVm(RankingEntry entry)
     public string Comments => NumberFormat.Views(entry.Comments);
     public bool IsPodium => entry.IsPodium;
     public bool IsFirst => entry.Position == 1;
-    /// <summary>Podium step height: first place stands tallest.</summary>
-    public double PodiumHeight => entry.Position switch { 1 => 284, 2 => 262, _ => 248 };
-    /// <summary>Flex order so the podium reads 2 - 1 - 3.</summary>
+    /// <summary>Extra height over the tallest card's natural height: first place stands tallest.</summary>
+    public double PodiumLift => entry.Position switch { 1 => 36, 2 => 14, _ => 0 };
+    /// <summary>Column order so the podium reads 2 - 1 - 3.</summary>
     public int PodiumOrder => entry.Position switch { 1 => 1, 2 => 0, _ => 2 };
     public IDrawable Crest { get; } = new CrestDrawable(entry.Position);
     public IDrawable Sparkline { get; } = new SparklineDrawable(entry.Sparkline);
@@ -30,6 +30,7 @@ public sealed class QueueRowVm(QueueEntry entry, DateTimeOffset now, ICommand op
     private readonly Color _badge = ThemeManager.Current.StatusColor(entry.Status);
 
     public string Episode => entry.EpisodeId;
+    public string Title => entry.Title;
     public string StatusLabel => StatusText.Label(entry.Status);
     public Color BadgeBackground => _badge;
     public Color BadgeText => ThemeDefinition.ContrastText(_badge);

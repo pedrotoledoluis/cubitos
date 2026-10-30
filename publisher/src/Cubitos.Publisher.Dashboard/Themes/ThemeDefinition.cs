@@ -48,6 +48,11 @@ public sealed class ThemeDefinition
     public required string DrawingFont { get; init; }
     public required string DrawingHeadingFont { get; init; }
 
+    // Left-edge navigation notch: near-black tab, an inner glow and the pumpkin's light color.
+    public Color NotchFill { get; init; } = Color.FromArgb("#0b0610");
+    public Color NotchGlow { get; init; } = Color.FromArgb("#fa9c33");
+    public Color NotchStroke { get; init; } = Color.FromArgb("#5a3418");
+
     // Decoration.
     public bool Ornate { get; init; }
     public bool Embers { get; init; }
@@ -59,6 +64,9 @@ public sealed class ThemeDefinition
 
     /// <summary>Section titles and other theme-specific wording.</summary>
     public required IReadOnlyDictionary<string, string> Texts { get; init; }
+
+    /// <summary>Horizontal padding inside cards; column headers outside a card use it to line up with the rows.</summary>
+    public double CardPaddingX => (Ornate ? 22 : 18) + CardStrokeThickness;
 
     public Color StatusColor(QueueStatus status) => StatusColors.TryGetValue(status, out var c) ? c : PageMuted;
 

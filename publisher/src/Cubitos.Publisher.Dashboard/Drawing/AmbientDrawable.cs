@@ -16,8 +16,8 @@ public sealed class AmbientDrawable : IDrawable
     private SizeF _size;
     private float _time;
 
-    /// <summary>Left edge of the header lantern string (the sidebar width).</summary>
-    public float ContentLeft { get; set; } = 230;
+    /// <summary>Left edge of the header lantern string (where the content starts, right of the notch).</summary>
+    public float ContentLeft { get; set; } = 70;
 
     public bool IsAnimated => ThemeManager.Current.Embers;
 
@@ -42,7 +42,7 @@ public sealed class AmbientDrawable : IDrawable
     public void Draw(ICanvas canvas, RectF rect)
     {
         var t = ThemeManager.Current;
-        if (_size != rect.Size) Reset(rect.Size);
+        if (_size != rect.Size) Resize(rect.Size);
         if (t.NeonGrid) DrawNeonGrid(canvas, rect, t);
         if (!t.Embers) return;
 
@@ -133,8 +133,24 @@ public sealed class AmbientDrawable : IDrawable
         }
     }
 
-    private void Reset(SizeF size)
+    /// <summary>
+    /// Seeds the particles once; later resizes only rescale their positions, so dragging the window edge never
+    /// reshuffles or stretches the scene.
+    /// </summary>
+    private void Resize(SizeF size)
     {
+        if (_size.Width > 0 && _size.Height > 0 && _embers.Count > 0)
+        {
+            var sx = size.Width / _size.Width;
+            var sy = size.Height / _size.Height;
+            foreach (var p in _embers.Concat(_orbs))
+            {
+                p.X *= sx;
+                p.Y *= sy;
+            }
+            _size = size;
+            return;
+        }
         _size = size;
         _embers.Clear();
         _orbs.Clear();

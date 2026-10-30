@@ -43,6 +43,7 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
 - [x] T3 Worker: Windows Service host, publish loop, stats loop, CLI `enqueue`/`list`, install/uninstall scripts.
       Route: delegated.
 - [x] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
+- [x] T6 Dashboard polish (owner feedback 2026-10-30, `ideas/EVIDENCIAS/Screenshot_14.png`): responsive layout without clipping on resize (podium cards, long titles, KPI "Próxima misión"), smooth resize; sidebar becomes a left-edge notch with an animated flaming pumpkin that expands on hover and can be pinned open. Route: delegated.
 - [ ] T5 Cut-over: install the service, enqueue the 019-022 replacements (replacing the session cron job so nothing
       uploads twice), update AGENT_GUIDE.md. Route: inline.
 
@@ -139,3 +140,25 @@ T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionall
   job cancelled so nothing uploads twice. Real `run-once`: upload limit detected, all 4 items WaitingForQuota; stats
   cycle wrote 21 snapshots (first real YouTube calls OK). Dashboard launched on the real DB. PENDING: service install
   needs an elevated PowerShell (owner). Known cosmetic: theme picker label can show "Cubitos" while another theme is active.
+- T6 done (delegated writer, 2026-10-30): responsive layout + left-edge pumpkin notch + theme picker fix.
+  - Dashboard.Core: `NotchStateMachine` (Collapsed/Expanded/Pinned, 400 ms hover-out delay, exits without an enter
+    ignored, spring for open/pin progress, staggered reveal), `PumpkinIdleCycle` (flicker, wink, flame burst, bounce,
+    spark shower every 4 s), `LaunchArgs` (`--size=WxH`, `--notch=`), `ResponsiveGrid.Columns`, `EpisodeTitles`
+    (metadata.json title, repo-relative lookup above the DB, slug fallback). `NextPublish` and `QueueEntry` gained
+    `Title` (metadata, then catalog video of the episode, then slug).
+  - UI: FlexLayout podium/best-hours replaced by `PodiumLayout` (equal columns, 2-1-3 order, natural height + lift,
+    bottom aligned) and `UniformGridLayout` (wraps evenly: stats 4 or 2 columns); `ClampedLabel` (2-line word wrap with
+    ellipsis only on the last line); ranking rows use star columns with headers padded like the cards; KPI shows the
+    title and puts the countdown in the same wrapping label; heatmap/first-day charts keep an aspect ratio; ambient
+    particles rescale on resize instead of reseeding. Sidebar replaced by `NotchPanel` (GraphicsView tab + panel morph,
+    pumpkin drawn with paths, flare on open, pin persisted in Preferences, content margin springs when pinned, root only
+    as wide as the tab while collapsed). One 33 ms timer drives pumpkin + background, stopped while minimized.
+  - Theme picker: re-applies SelectedIndex after the control loads and after each theme swap.
+  - Test-first: RED observed (20 compile errors for the new Core types), then GREEN.
+  - `dotnet build publisher`: 0 errors, 0 warnings. `dotnet test publisher`: Core 75, Infrastructure 41, Worker 29,
+    Dashboard 69 passed; 0 failed.
+  - Screenshots (`%TEMP%\cubitos-t6-*.png`; copy of the real DB in `%TEMP%\cubitos-t6-db`, seeded DB for charts):
+    halloween-ranking-1100, halloween-ranking-1640, halloween-ranking-2560 (collapsed), halloween-ranking-expanded,
+    halloween-ranking-pinned, cubitos-ranking-1640, neon-ranking-1640, halloween-queue-1100, halloween-heatmap-2560,
+    neon-firstday-1100. No clipping or overlap observed.
+  - Gaps: hover/pin interaction and resize smoothness verified only by forced states (no pointer automation).

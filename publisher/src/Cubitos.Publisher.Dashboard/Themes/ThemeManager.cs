@@ -59,6 +59,11 @@ public static class ThemeManager
             ["ShowOrnaments"] = t.Ornate,
             ["CardStyle"] = CardStyle(t, t.CardStroke),
             ["CardHighlightStyle"] = CardStyle(t, t.HighlightStroke),
+            ["NotchText"] = t.Ornate ? t.PageText : Colors.White,
+            ["NotchMuted"] = t.PageMuted,
+            ["NotchSelected"] = new SolidColorBrush(t.NotchGlow.WithAlpha(0.9f)),
+            ["NotchSelectedText"] = t.NotchFill,
+            ["RankHeaderPadding"] = new Thickness(t.CardPaddingX, 6, t.CardPaddingX, 0),
             ["BadgeShape"] = new RoundRectangle { CornerRadius = t.Ornate ? 14 : 8 },
         };
         foreach (var (key, value) in t.Texts) d["T_" + key] = value;
