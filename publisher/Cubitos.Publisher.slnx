@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Cubitos.Publisher.Core/Cubitos.Publisher.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Cubitos.Publisher.Core.Tests/Cubitos.Publisher.Core.Tests.csproj" />
+  </Folder>
+</Solution>
