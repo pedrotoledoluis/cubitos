@@ -31,6 +31,7 @@ public sealed class AmbientLayer : VisualLayer, IFrameListener
     private double _contentLeft = 70;
     private StreamGeometry? _stringGeometry;
     private bool _listening;
+    private bool _suspended;
 
     public AmbientLayer()
     {
@@ -51,6 +52,18 @@ public sealed class AmbientLayer : VisualLayer, IFrameListener
             _contentLeft = value;
             _stringGeometry = null;
             if (!_listening) Redraw();
+        }
+    }
+
+    /// <summary>Stops animating (and drawing) while the panel is hidden or minimized; resumes where it left off.</summary>
+    public bool Suspended
+    {
+        get => _suspended;
+        set
+        {
+            if (_suspended == value) return;
+            _suspended = value;
+            Listen(!value && ThemeManager.Current.Embers);
         }
     }
 
@@ -77,7 +90,7 @@ public sealed class AmbientLayer : VisualLayer, IFrameListener
 
     private void OnTheme(ThemeDefinition theme)
     {
-        Listen(theme.Embers);
+        Listen(theme.Embers && !_suspended);
         Redraw();
     }
 

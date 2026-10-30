@@ -140,6 +140,17 @@ public class DesktopSettingsStoreTests : IDisposable
     }
 
     [Fact]
+    public void Remembers_the_panel_size()
+    {
+        var store = new DesktopSettingsStore(File);
+        Assert.Null(store.Load().PanelWidth);
+        Assert.True(store.Save(new DesktopSettings(PanelWidth: 2000, PanelHeight: 1100)));
+        var loaded = store.Load();
+        Assert.Equal(2000, loaded.PanelWidth);
+        Assert.Equal(1100, loaded.PanelHeight);
+    }
+
+    [Fact]
     public void Corrupt_file_gives_defaults_instead_of_throwing()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(File)!);

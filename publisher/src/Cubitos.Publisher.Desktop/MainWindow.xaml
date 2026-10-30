@@ -6,6 +6,7 @@
         xmlns:notch="clr-namespace:Cubitos.Publisher.Desktop.Notch"
         Title="Historia en Cubitos — Panel"
         Width="1440" Height="900" MinWidth="1100" MinHeight="720"
+        Left="-32000" Top="-32000" WindowStartupLocation="Manual" ShowInTaskbar="False" Topmost="True"
         Icon="/appicon.png"
         Background="{DynamicResource TitleBarBackground}"
         UseLayoutRounding="True" SnapsToDevicePixels="False"
@@ -18,6 +19,36 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
+        <!-- Section tabs of the header (they replace the old in-window notch navigation). -->
+        <Style x:Key="SectionTab" TargetType="RadioButton">
+            <Setter Property="FontFamily" Value="{DynamicResource HeadingFont}" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="{DynamicResource PageMuted}" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="Bg" Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,3" CornerRadius="10,10,0,0" Padding="16,9">
+                            <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" TextWrapping="NoWrap" Foreground="{TemplateBinding Foreground}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="{DynamicResource NotchHover}" />
+                                <Setter Property="Foreground" Value="{DynamicResource PageText}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="{DynamicResource NotchHover}" />
+                                <Setter TargetName="Bg" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                                <Setter Property="Foreground" Value="{DynamicResource PageText}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- First item of the ranking list: title, podium and column headers (scrolls with the rows). -->
         <StackPanel x:Key="RankingHeader" Margin="0,0,0,8">
             <TextBlock Text="{DynamicResource T_Title_Ranking}" Style="{StaticResource SectionTitle}" />
@@ -115,6 +146,9 @@
             <!-- Animated / decorative background layer (embers, glow orbs, lanterns, neon grid). -->
             <r:AmbientLayer x:Name="Ambient" Grid.RowSpan="2" />
 
+            <!-- Light burst on the left edge while the panel comes out of (or goes back into) the notch. -->
+            <notch:EmergeGlow x:Name="Emerge" Grid.RowSpan="2" />
+
             <!-- Title bar -->
             <Grid x:Name="TitleBar" Background="{DynamicResource TitleBarBackground}">
                 <Grid.ColumnDefinitions>
@@ -149,10 +183,13 @@
                         VerticalAlignment="Center" Margin="0,0,12,0" WindowChrome.IsHitTestVisibleInChrome="True" />
 
                 <StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True">
-                    <Button Style="{StaticResource ChromeButton}" Click="OnMinimize" ToolTip="Minimizar">
+                    <Button x:Name="PinButton" Style="{StaticResource ChromeButton}" Click="OnPinClicked" ToolTip="Fijar el panel (deja de cerrarse solo)">
+                        <notch:PinIcon x:Name="PinGlyph" Width="20" Height="20" />
+                    </Button>
+                    <Button x:Name="MinButton" Style="{StaticResource ChromeButton}" Click="OnMinimize" ToolTip="Minimizar">
                         <TextBlock Text="&#xE921;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
                     </Button>
-                    <Button Style="{StaticResource ChromeButton}" Click="OnMaximize" ToolTip="Maximizar">
+                    <Button x:Name="MaxButton" Style="{StaticResource ChromeButton}" Click="OnMaximize" ToolTip="Maximizar">
                         <TextBlock x:Name="MaxGlyph" Text="&#xE922;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
                     </Button>
                     <Button Style="{StaticResource CloseButton}" Click="OnClose" ToolTip="Cerrar">
@@ -161,16 +198,25 @@
                 </StackPanel>
             </Grid>
 
-            <!-- Main area; its left margin follows the notch (collapsed tab or pinned panel). -->
-            <Grid x:Name="ContentHost" Grid.Row="1" Margin="70,0,0,0">
-                <Grid Margin="24,18,28,0">
+            <!-- Main area; the left gutter leaves room for the screen notch that overlaps the panel's left edge. -->
+            <Grid x:Name="ContentHost" Grid.Row="1" Margin="76,0,0,0">
+                <Grid Margin="24,12,28,0">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <!-- Section tabs -->
+                    <StackPanel x:Name="Tabs" Orientation="Horizontal" Margin="0,0,0,14">
+                        <RadioButton x:Name="Tab0" Style="{StaticResource SectionTab}" GroupName="sections" Tag="ranking" Content="{DynamicResource T_Nav_Ranking}" Click="OnTabClicked" />
+                        <RadioButton x:Name="Tab1" Style="{StaticResource SectionTab}" GroupName="sections" Tag="heatmap" Content="{DynamicResource T_Nav_Heatmap}" Click="OnTabClicked" />
+                        <RadioButton x:Name="Tab2" Style="{StaticResource SectionTab}" GroupName="sections" Tag="firstday" Content="{DynamicResource T_Nav_FirstDay}" Click="OnTabClicked" />
+                        <RadioButton x:Name="Tab3" Style="{StaticResource SectionTab}" GroupName="sections" Tag="queue" Content="{DynamicResource T_Nav_Queue}" Click="OnTabClicked" />
+                    </StackPanel>
+
                     <!-- KPIs -->
-                    <Grid Margin="0,0,14,18">
+                    <Grid Grid.Row="1" Margin="0,0,14,18">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -211,7 +257,7 @@
                     </Grid>
 
                     <!-- Sections: only one is visible; MainWindow fades/slides them on switch. -->
-                    <Grid x:Name="SectionHost" Grid.Row="1" Visibility="{Binding HasData, Converter={StaticResource BoolToVisibility}}">
+                    <Grid x:Name="SectionHost" Grid.Row="2" Visibility="{Binding HasData, Converter={StaticResource BoolToVisibility}}">
 
                         <!-- 1. Ranking: one virtualized list (header element + rows) so off-screen rows cost no layout. -->
                         <ItemsControl x:Name="RankingSection" Visibility="Collapsed" Focusable="False" Padding="0,0,14,18"
@@ -311,7 +357,7 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Video" Style="{StaticResource CardLabel}" FontSize="14" VerticalAlignment="Center" Margin="0,0,14,0" />
-                                            <ComboBox Grid.Column="1" ItemsSource="{Binding LaunchOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedLaunch, Mode=TwoWay}" />
+                                            <ComboBox x:Name="LaunchPicker" Grid.Column="1" ItemsSource="{Binding LaunchOptions}" DisplayMemberPath="Label" SelectedItem="{Binding SelectedLaunch, Mode=TwoWay}" />
                                             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                                                 <Rectangle Width="22" Height="4" Fill="{DynamicResource ChartPrimary}" VerticalAlignment="Center" />
                                                 <TextBlock Text="Este video" Style="{StaticResource CardLabel}" FontSize="13" Margin="6,0,16,0" />
@@ -380,7 +426,7 @@
                     </Grid>
 
                     <!-- Empty state -->
-                    <c:Card Grid.Row="1" MaxWidth="640" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    <c:Card Grid.Row="2" MaxWidth="640" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Visibility="{Binding HasData, Converter={StaticResource InverseBoolToVisibility}}">
                         <StackPanel Margin="10">
                             <TextBlock Text="{Binding EmptyTitle}" Style="{StaticResource CardValue}" FontSize="24" TextAlignment="Center" TextWrapping="Wrap" />
@@ -389,8 +435,6 @@
                     </c:Card>
                 </Grid>
             </Grid>
-
-            <notch:NotchControl x:Name="Notch" Grid.Row="1" />
 
             <!-- Snapshot of the previous theme, faded out over the new one. -->
             <Image x:Name="ThemeFade" Grid.RowSpan="2" IsHitTestVisible="False" Visibility="Collapsed" Stretch="Fill" />

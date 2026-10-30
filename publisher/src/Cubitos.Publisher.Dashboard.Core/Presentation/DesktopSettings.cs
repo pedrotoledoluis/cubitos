@@ -3,7 +3,11 @@ using System.Text.Json;
 namespace Cubitos.Publisher.Dashboard.Core.Presentation;
 
 /// <summary>What the desktop panel remembers between runs.</summary>
-public sealed record DesktopSettings(string? Theme = null, bool NotchPinned = false);
+public sealed record DesktopSettings(
+    string? Theme = null,
+    bool NotchPinned = false,
+    double? PanelWidth = null,
+    double? PanelHeight = null);
 
 /// <summary>Small JSON file of user preferences. Never throws: unreadable or unwritable files only lose the preference.</summary>
 public sealed class DesktopSettingsStore(string path)

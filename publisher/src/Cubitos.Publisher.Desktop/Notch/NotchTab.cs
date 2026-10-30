@@ -1,21 +1,18 @@
 using System.Windows;
 using System.Windows.Media;
+using Cubitos.Publisher.Dashboard.Core.Navigation;
 using Cubitos.Publisher.Desktop.Rendering;
 using Cubitos.Publisher.Desktop.Themes;
 
 namespace Cubitos.Publisher.Desktop.Notch;
 
 /// <summary>
-/// The notch body: a near-black tab with rounded right corners that morphs into the full navigation panel as
-/// <see cref="Open"/> goes from 0 to 1, with the pumpkin moving from the tab to the top of the panel.
+/// The notch body drawn in the transparent notch window: a near-black tab flush with the screen's left edge, rounded
+/// on the right, with the flaming pumpkin inside. While the panel opens (<see cref="Open"/> 0 to 1) the tab swells a
+/// little, its inner glow brightens and the pumpkin flares, so the panel reads as coming out of it.
 /// </summary>
-public sealed class NotchSurface : VisualLayer
+public sealed class NotchTab : VisualLayer
 {
-    public const double CollapsedWidth = 58;
-    public const double CollapsedHeight = 136;
-    public const double PanelWidth = 264;
-    public const double PanelInset = 12;
-
     private static readonly Pen[] ShadowPens =
     [
         BrushCache.Pen(BrushCache.Get(Colors.Black, 0.10), 26),
@@ -23,48 +20,46 @@ public sealed class NotchSurface : VisualLayer
         BrushCache.Pen(BrushCache.Get(Colors.Black, 0.16), 8),
     ];
 
-    public NotchSurface() => IsHitTestVisible = false;
+    private static readonly Dictionary<Color, RadialGradientBrush> GlowBrushes = [];
+
+    public NotchTab() => IsHitTestVisible = true;
 
     public PumpkinRenderer Pumpkin { get; } = new();
 
-    /// <summary>Spring value of the opening (may overshoot 1 a little).</summary>
+    /// <summary>Eased opening of the panel in [0, 1].</summary>
     public double Open { get; set; }
+
+    /// <summary>Tab rectangle (DIPs, relative to this element) for a layer of <paramref name="size"/>.</summary>
+    public static Rect TabRect(Size size) =>
+        new(0, (size.Height - NotchDock.TabHeight) / 2, NotchDock.TabWidth, NotchDock.TabHeight);
 
     protected override void Draw(DrawingContext dc, Size size)
     {
         var t = ThemeManager.Current;
-        var o = Math.Clamp(Open, 0, 1.25);
-        var oc = Math.Min(o, 1);
-        var midY = size.Height / 2;
-        var collapsedTop = midY - CollapsedHeight / 2;
-        var collapsedBottom = midY + CollapsedHeight / 2;
-        var expandedTop = PanelInset;
-        var expandedBottom = PanelInset + Math.Max(CollapsedHeight, size.Height - 2 * PanelInset);
-        var top = Math.Max(2, Lerp(collapsedTop, expandedTop, oc));
-        var bottom = Math.Min(size.Height - 2, Lerp(collapsedBottom, expandedBottom, oc));
-        var shape = new Rect(0, top, Lerp(CollapsedWidth, PanelWidth, o), Math.Max(1, bottom - top));
-        var path = Shape(shape, Lerp(18, 26, oc));
+        var o = Math.Clamp(Open, 0, 1);
+        var tab = TabRect(size);
+        var swell = 8 * o;
+        var shape = new Rect(0, tab.Top - swell, tab.Width + 0.5 * swell, tab.Height + 2 * swell);
+        var path = Shape(shape, 18);
 
-        // Soft shadow on the right edge: wide translucent strokes under the fill.
         foreach (var pen in ShadowPens) dc.DrawGeometry(null, pen, path);
         dc.DrawGeometry(BrushCache.Get(t.NotchFill, 1), null, path);
 
-        var pumpkin = new Point(Lerp(CollapsedWidth / 2, PanelWidth / 2, oc), Lerp(midY + 14, expandedTop + 88, oc));
+        var pumpkin = new Point(shape.Width / 2, size.Height / 2 + 14);
 
-        // Inner glow: a soft light around the pumpkin and a faint rim, clipped to the shape.
+        // Inner glow around the pumpkin plus a faint rim, clipped to the tab.
         dc.PushClip(path);
-        var glowR = Lerp(70, 180, oc);
-        dc.PushOpacity(0.22);
+        var glowR = 70 + 30 * o;
+        dc.PushOpacity(0.22 + 0.25 * o);
         dc.DrawEllipse(Glow(t.NotchGlow), null, pumpkin, glowR, glowR);
         dc.Pop();
-        dc.DrawGeometry(null, new Pen(BrushCache.Get(t.NotchGlow, 0.18), 5), path);
+        dc.DrawGeometry(null, BrushCache.Pen(BrushCache.Get(t.NotchGlow, 0.18 + 0.3 * o), 5), path);
         dc.Pop();
-        dc.DrawGeometry(null, new Pen(BrushCache.Get(t.NotchStroke, 1), 1.2), path);
+        dc.DrawGeometry(null, BrushCache.Pen(BrushCache.Get(o > 0.02 ? t.NotchGlow : t.NotchStroke, 0.4 + 0.6 * (1 - o)), 1.2), path);
 
-        Pumpkin.Draw(dc, pumpkin, Lerp(19, 33, oc), t.NotchGlow);
+        Pumpkin.Heat = o;
+        Pumpkin.Draw(dc, pumpkin, 19 + 3 * o, t.NotchGlow);
     }
-
-    private static readonly Dictionary<Color, RadialGradientBrush> GlowBrushes = [];
 
     private static RadialGradientBrush Glow(Color c)
     {
@@ -77,9 +72,7 @@ public sealed class NotchSurface : VisualLayer
         return brush;
     }
 
-    private static double Lerp(double a, double b, double f) => a + (b - a) * f;
-
-    /// <summary>Flush with the window's left edge, rounded on the right.</summary>
+    /// <summary>Flush with the screen's left edge, rounded on the right.</summary>
     private static StreamGeometry Shape(Rect r, double radius)
     {
         radius = Math.Min(radius, Math.Min(r.Width, r.Height) / 2);

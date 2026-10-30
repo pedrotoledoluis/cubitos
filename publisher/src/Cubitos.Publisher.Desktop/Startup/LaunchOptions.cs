@@ -5,9 +5,11 @@ namespace Cubitos.Publisher.Desktop.Startup;
 
 /// <summary>
 /// Start-up switches: <c>--db</c> (see <see cref="DatabasePathResolver"/>), <c>--theme=&lt;id&gt;</c>,
-/// <c>--section=&lt;id&gt;</c>, and for smoke tests <c>--size=WxH</c>, <c>--notch=collapsed|expanded|pinned</c> (forced,
-/// not remembered), <c>--screenshot=&lt;png&gt;</c> (renders the window to PNG, then exits) and the hidden
-/// <c>--fps-log=&lt;path&gt;</c> (records frame times for ~10 s while resizing the window and toggling the notch, then exits).
+/// <c>--section=&lt;id&gt;</c>, and for smoke tests <c>--size=WxH</c> (panel size in DIPs, not remembered),
+/// <c>--notch=collapsed|expanded|pinned</c> (app state: only the notch, panel open as if hovered, or pinned window;
+/// forced, not remembered), <c>--screenshot=&lt;png&gt;</c> (collapsed: the notch window; otherwise the panel with the
+/// notch on top; then exits) and the hidden <c>--fps-log=&lt;path&gt;</c> (frame times and open times for ~10 s of
+/// hover open/close cycles, then exits).
 /// </summary>
 public sealed class LaunchOptions
 {

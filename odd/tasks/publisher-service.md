@@ -46,6 +46,10 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
 - [x] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
 - [x] T6 Dashboard polish (owner feedback 2026-10-30, `ideas/EVIDENCIAS/Screenshot_14.png`): responsive layout without clipping on resize (podium cards, long titles, KPI "Próxima misión"), smooth resize; sidebar becomes a left-edge notch with an animated flaming pumpkin that expands on hover and can be pinned open. Route: delegated.
 - [x] T7 Replace the MAUI dashboard with WPF (owner 2026-10-30: MAUI resize/animation not smooth). Reuse Dashboard.Core; notch to be refined after the owner shares a reference notch. Route: delegated.
+- [x] T8 App-level hover notch (owner 2026-10-30, earlier notch was misunderstood): the whole app is a screen notch on
+      the primary screen's left edge (flaming pumpkin); hover slides the full dashboard out (< 250 ms), leaving both
+      windows collapses it after 0.5 s, thumbtack pins it as a normal window; sections become header tabs. Route:
+      delegated (writer trigger).
 - [ ] T5 Cut-over: install the service, enqueue the 019-022 replacements (replacing the session cron job so nothing
       uploads twice), update AGENT_GUIDE.md. Route: inline.
 
@@ -194,3 +198,33 @@ T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionall
     only 90.7 fps; while resizing every frame 44.5 fps (heatmap/queue 50 fps = every other vsync). Live resize is the
     remaining cost: each WM_SIZE lays out and renders synchronously (~20 ms for the ranking view).
   - Gaps: hover/pin verified by the fps script and forced states, not by real pointer automation.
+- T7 commit `cbc5f25`; follow-up fix `b0535c1` (anchor the `data/` ignore rule to the publisher root so
+  `Dashboard.Core/Data` is never ignored again). Native review for T7 UNAVAILABLE (same cause).
+- T8 done (delegated writer, 2026-10-30): the app itself is the notch.
+  - Dashboard.Core: `NotchStateMachine` reworked (0.5 s collapse delay; `Track(now, overNotch, overPanel, popupOpen,
+    buttonDown)` treats notch + panel as one hover area, the hidden panel never opens anything, entering the closing
+    panel reopens it, an open popup or a press that started inside holds it open; fixed 220 ms ease-out-cubic open /
+    200 ms reverse close instead of the spring; pin spring removed). New `NotchDock` (tab flush left and centered; panel
+    70% x 80% of the work area or the remembered size, left-anchored, centered, min 1100x720 capped to the screen;
+    `SlideX`). `DesktopSettings` gained `PanelWidth`/`PanelHeight`.
+  - Desktop: `Notch/NotchWindow` (borderless per-pixel transparent topmost tool window, `WS_EX_NOACTIVATE`, click-through
+    outside the tab, right-click menu "Fijar / soltar el panel" / "Salir"), `Notch/NotchTab` (tab + pumpkin, swells and
+    flares while open; `PumpkinRenderer.Heat`), `Notch/NotchController` (pre-created panel kept alive at alpha 0,
+    click-through, parked left of the screen; per frame it polls the cursor over both windows, slides the panel with a
+    move-only `SetWindowPos` and fades DWM alpha via `SetLayeredWindowAttributes`; pin/unpin chrome; returns focus to the
+    previous window on collapse; re-docks on display/work-area changes using the primary work area + monitor DPI),
+    `Notch/EmergeGlow` (light burst on the panel's left edge mid-animation). `MainWindow` is the panel: header tabs
+    (replacing the old in-window notch), thumbtack, min/max only when pinned, caption drag only when pinned, remembers
+    size on resize end. Old `NotchControl`/`NotchSurface`/`INavigationNotch` removed. `SettingsSession` is the single
+    writer of the settings file. Taskbar: none (least intrusive; the notch is the app's presence).
+  - Test-first: RED observed (CS0246 `DockRect` missing), then GREEN.
+  - `dotnet build publisher`: 0 warnings, 0 errors. `dotnet test publisher`: Core 75, Dashboard 106, Infrastructure 41,
+    Worker 29 passed; 0 failed.
+  - Screenshots (`%TEMP%\cubitos-t8-*.png`, T6 copy of the real DB, Halloween): collapsed (notch window only), expanded
+    (panel + notch at its real offset), pinned (heatmap tab, min/max shown). A desktop-region capture confirmed the real
+    composition (layered WPF panel draws correctly, notch on top, transparent around the tab); not kept (it showed the
+    owner's other windows).
+  - fps log (10 s, 5 hover open/close cycles): all frames avg 90.7 fps, worst 32.2 ms, p95 19.0 ms, 0 slow frames;
+    while animating avg 73.4 fps, worst 20.8 ms; open time avg 223.7 ms, max 232.2 ms (target 220 ms).
+  - Gaps: real pointer hover/guards verified by unit tests and simulated hover only; a monitor left of the primary with a
+    different DPI could rescale the parked panel; pinned window position is not remembered (size is).

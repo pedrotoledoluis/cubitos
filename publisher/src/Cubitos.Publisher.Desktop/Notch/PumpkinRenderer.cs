@@ -45,12 +45,15 @@ public sealed class PumpkinRenderer
     /// <summary>Flame burst + glow pulse, decaying over about a second.</summary>
     public void Flare() => _flare = 1;
 
+    /// <summary>Sustained excitement in [0, 1] (the panel is open): taller flames, brighter glow, more sparks.</summary>
+    public double Heat { get; set; }
+
     public void Step(double seconds)
     {
         _time += seconds;
         _flare = Math.Max(0, _flare - seconds / 1.1);
         var (mood, phase) = PumpkinIdleCycle.At(_time);
-        var rate = 3 + (mood == PumpkinMood.SparkShower ? 40 * Envelope(phase) : 0) + 45 * _flare;
+        var rate = 3 + (mood == PumpkinMood.SparkShower ? 40 * Envelope(phase) : 0) + 45 * _flare + 12 * Heat;
         _emitDebt += rate * seconds;
         while (_emitDebt >= 1)
         {
@@ -74,10 +77,10 @@ public sealed class PumpkinRenderer
         var env = Envelope(phase);
         var flicker = 0.82 + 0.18 * Math.Sin(_time * 13) * Math.Sin(_time * 7.3);
         if (mood == PumpkinMood.Flicker) flicker *= 1 - 0.45 * env * Math.Abs(Math.Sin(_time * 29));
-        var flame = 1 + (mood == PumpkinMood.FlameBurst ? 0.9 * env : 0) + 1.1 * _flare;
+        var flame = 1 + (mood == PumpkinMood.FlameBurst ? 0.9 * env : 0) + 1.1 * _flare + 0.45 * Heat;
         var bounce = mood == PumpkinMood.Bounce ? env : 0;
         var wink = mood == PumpkinMood.Wink ? env : 0;
-        var boost = 0.8 * _flare + (mood == PumpkinMood.FlameBurst ? 0.4 * env : 0);
+        var boost = 0.8 * _flare + (mood == PumpkinMood.FlameBurst ? 0.4 * env : 0) + 0.35 * Heat;
 
         var cx = center.X;
         var cy = center.Y + Math.Sin(_time * 1.7) * 0.07 * r - 0.35 * r * Math.Abs(Math.Sin(phase / 0.3 * Math.PI)) * bounce;

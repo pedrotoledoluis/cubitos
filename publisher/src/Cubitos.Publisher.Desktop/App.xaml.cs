@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using Cubitos.Publisher.Dashboard.Core.Data;
 using Cubitos.Publisher.Dashboard.Core.Presentation;
+using Cubitos.Publisher.Desktop.Notch;
+using Cubitos.Publisher.Desktop.Rendering;
 using Cubitos.Publisher.Desktop.Startup;
 using Cubitos.Publisher.Desktop.Themes;
 using Cubitos.Publisher.Desktop.ViewModels;
@@ -19,16 +21,22 @@ public partial class App : Application
         Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = 120 });
 
         var options = new LaunchOptions(e.Args, ReadAppSettings());
-        var settingsStore = new DesktopSettingsStore(DesktopSettingsStore.DefaultPath);
-        var settings = settingsStore.Load();
+        var store = new DesktopSettingsStore(DesktopSettingsStore.DefaultPath);
+        var settings = new SettingsSession(store, store.Load(), readOnly: options.IsAutomated);
 
         var vm = new MainViewModel(new ReadOnlyDashboardStore(options.DatabasePath), options.Section);
-        // Apply the theme before the window exists so no DynamicResource starts empty.
-        vm.InitializeTheme(ThemeCatalog.Find(options.Theme ?? settings.Theme));
+        // Apply the theme before the windows exist so no DynamicResource starts empty.
+        vm.InitializeTheme(ThemeCatalog.Find(options.Theme ?? settings.Current.Theme));
 
-        var window = new MainWindow(vm, options, settingsStore, settings);
-        MainWindow = window;
-        window.Show();
+        // The panel is created once and kept alive; the notch window is what the user sees while collapsed.
+        var panel = new MainWindow(vm, settings);
+        var controller = new NotchController(panel, new NotchWindow(), options, settings);
+        MainWindow = panel;
+        ShutdownMode = ShutdownMode.OnMainWindowClose;
+        controller.Start();
+
+        if (options.FpsLog is { Length: > 0 } fpsPath) _ = FpsProbe.RunAsync(controller, panel.FirstRefresh, fpsPath);
+        else if (options.Screenshot is { Length: > 0 } shot) _ = controller.CaptureAndExitAsync(shot);
     }
 
     private static string? ReadAppSettings()
