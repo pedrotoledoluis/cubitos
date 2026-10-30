@@ -38,7 +38,8 @@ Last update: 2026-10-30 ~17:30 Peru. Read this first after `/clear`, then `AGENT
 - Apply the coaster's look moderately: bloom on lights, ACES + light color grade, soft fog, vignette. Keep 30 fps.
 - Approved topics: San Martín de Porres (3 Nov; dog, cat and mouse eating from one plate, told as legend);
   guaguas de pan (1–2 Nov, Andes). Rejected: Yma Sumac, Abraham Valdelomar.
-- Candidates to confirm: Lisbon earthquake on All Saints' Day (1 Nov 1755); why the US votes on a Tuesday
+- Candidates to confirm: Nueva Esperanza (Villa María del Triunfo, called the largest cemetery in Latin America;
+  families celebrate with music and dancing at the tombs on 1 Nov); Lisbon earthquake on All Saints' Day (1 Nov 1755); why the US votes on a Tuesday
   (midterms 3 Nov 2026); Guy Fawkes and the mask (5 Nov); Callao tsunami of 1746.
 
 ## Owner preferences
