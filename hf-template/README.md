@@ -120,6 +120,22 @@ To add one: write a function in `scenes.js` (or a new file) and add it to `SCENE
 - Camera shots live in `SHOTS` in `src/stage.js`. If you change them, snapshot every line
   (`npx hyperframes snapshot --at ...`) and check the sheet.
 
+## Look (post-processing, `src/look.js`)
+
+A moderate cinematic look on the 3D scene only (captions, wipe and thumbnail text are HTML and stay untouched):
+selective bloom on glowing things (emissive lamps/neon, Tito's antenna, Nova's star, additive FX), ACES filmic
+tone mapping (per material, so the `toneMapped: false` board stays exact), a light split-tone grade (warm
+highlights, cool shadows), slightly tightened location fog and a soft vignette. Deterministic, 30 fps.
+
+- Tune everything in the `LOOK` object at the top of `src/look.js`; `enabled: false` turns it off globally.
+- A material glows when `luminance(emissive) * emissiveIntensity >= LOOK.bloom.minEmissive`, or when it is an
+  additive `MeshBasicMaterial`. Force it either way with `material.userData.glow = true | false`.
+- Per episode: `"look": false` (off) or `"look": { "vignette": 0, "bloom": { "strength": 0.3 } }` (overrides)
+  on `window.EPISODE`. Note: `scripts/build-audio.mjs` must copy `look` into `src/episode-data.js` for the
+  episode-JSON field to take effect (pending).
+- Bloom addon files are vendored (three r169, MIT) in `src/vendor/three-addons/`; no network.
+- Cost: one extra scene pass (glow only) plus bloom per frame.
+
 ## Voices
 
 - Profe: Kokoro `em_alex` via `npx hyperframes tts` (speed 0.95, pitch 0.93).
@@ -135,6 +151,7 @@ To add one: write a function in `scenes.js` (or a new file) and add it to `SCENE
 | `index.html` | Main 1080x1920 composition (Three.js canvas + caption + mix audio) |
 | `compositions/thumbnail.html` | 1280x720 thumbnail (text from `thumbnailText`) |
 | `src/stage.js` | Camera shots, acting (poses/emotions/look-at), captions, board updates |
+| `src/look.js` | Post-processing look (bloom, grade, vignette, fog scale) |
 | `src/locations/` | Location presets (`office`, `athens`, `sanfrancisco1870`), `BOARD` placement, shared props (chicken, pigeon) |
 | `src/costumes.js` | Profe costume presets (`napoleon greek norton roman medieval tycho nasa einstein`) + poof + handheld lamp |
 | `src/characters/` | Characters v2 (copy of `../characters-v2/src`) |

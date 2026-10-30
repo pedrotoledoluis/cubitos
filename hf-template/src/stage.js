@@ -5,6 +5,7 @@ import { createProfe, createTito, createNova } from './characters/index.js';
 import { clamp, lerp, smooth } from './characters/util.js';
 import { attachCostumes, createPoof } from './costumes.js';
 import { drawBoard, normalizeBoard } from './board/index.js';
+import { createLook, resolveLook } from './look.js';
 
 // Deterministic stage for HyperFrames: every frame is a pure function of time t.
 // The composition calls renderAt(t) from the `hf-seek` event.
@@ -87,6 +88,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
   const locations = createLocations(scene, renderer, ['office', thumbLocation, ...lines.map((l) => l.location ?? 'office')]);
   const { board } = locations;
   const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 120);
+  const look = createLook(renderer, scene, camera, width, height, resolveLook(episode)); // post FX: src/look.js
   const profe = createProfe();
   const tito = createTito();
   const hasNova = lines.some((l) => l.speaker === 'nova') || !!episode?.withNova;
@@ -286,7 +288,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
     updateProps(t, idx);
     updateBoard(t, locations.boardStyle());
     placeCamera(shotFor(cur), cur, t);
-    renderer.render(scene, camera);
+    look.render();
     updateWipe(t);
 
     if (captionEl) {
@@ -332,7 +334,8 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
       gr.addColorStop(0, 'rgba(255,236,170,1)'); gr.addColorStop(0.3, 'rgba(255,190,70,0.55)'); gr.addColorStop(1, 'rgba(255,120,40,0)');
       g.fillStyle = gr; g.fillRect(0, 0, 2 * r, 2 * r);
     });
-    const mat = (map, opacity) => new THREE.MeshBasicMaterial({ map, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, toneMapped: false });
+    // glow: false keeps the big sunburst out of the bloom (it would haze over the whole thumbnail)
+    const mat = (map, opacity) => Object.assign(new THREE.MeshBasicMaterial({ map, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, toneMapped: false }), { userData: { glow: false } });
     const center = nova ? [0.6, 1.7, -3.4] : [0.0, 1.6, -3.4];
     const burst = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), mat(rays, 0.7));
     burst.position.set(...center); burst.rotation.z = 0.12;
@@ -364,7 +367,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
     }
     if (nova) nova.update({ t, mouth: 0, emotion: 'smug', lookAt: TITO_FACE });
     placeCamera(height > width ? (nova ? 'cover3' : 'cover') : (nova ? 'thumb3' : 'thumb'), null, t);
-    renderer.render(scene, camera);
+    look.render();
   }
 
   return { renderAt: (t) => (mode === 'video' ? renderVideo(t) : renderThumbnail()) };

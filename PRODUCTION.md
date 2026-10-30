@@ -48,6 +48,7 @@ Template details: `hf-template/README.md`. Brand: `branding-v2/brand.md`. Charac
 | Pacing | 0.25 s gap between lines (+0.2 s after board lines, +0.3 s before a location change). No dead air. |
 | Captions | Top-center block (13%..~30% of height), max 3 lines per page, Arial Black with black stroke, **colored by speaker**: Profe cream `#fff3d6`, Tito yellow `#ffd23a`, Nova light violet `#c9b8ff` (`CAPTION_COLOR` in `src/stage.js`). Never over board/sign content. |
 | Loudness | Master ~-15 LUFS integrated, true peak -1.5 dB |
+| Look | Moderate post FX on the 3D scene only (`src/look.js`): selective bloom on lights/emissives, ACES, light warm/cool grade, soft fog, vignette. On by default; `"look": false` per episode (see `hf-template/README.md`). Captions and board must stay crisp. |
 | Shots | `wide`, `profe`, `tito`, `board` (auto on board lines); `dutch: true` tilts. Close-ups are near eye level. With Nova: `nova` close-up, two-shots `titoProfe` / `profeNova`, and `wide` becomes the three-shot `wide3`. |
 
 ## 4. Characters and voices
