@@ -1,5 +1,6 @@
 // One command per episode: audio -> check -> render video -> render thumbnail -> description/metadata -> deliverables.
-// Usage: node scripts/make-episode.mjs episodes/NNN-slug.json [--skip-render]
+// Usage: node scripts/make-episode.mjs episodes/NNN-slug.json [--skip-render] [--print-description]
+//   --print-description  prints the description text and exits (no audio, render or file writes).
 // Deliverables: ../videos/<id>/<id>.mp4, <id>-thumbnail.png, <id>-description.txt, metadata.json
 // Verification artifacts (not deliverables): .build/verify/<id>-sheet.jpg (one frame per line).
 import fs from 'node:fs';
@@ -11,14 +12,31 @@ import { cleanupProcesses } from './processes.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VIDEOS = path.resolve(ROOT, '..', 'videos');
 const HF = 'hyperframes@0.8.214';
-const CHANNEL_LINE = 'La historia real, pero en cubitos. Dos sketches por semana sobre los momentos más absurdos, épicos y raros de la humanidad. Todo es verdad. Las caras no.';
 const MIN = 60000;
+const TARGET = { min: 35, max: 55 }; // seconds (PRODUCTION.md section 3)
+
+/**
+ * Unique per-episode description (no fixed channel paragraph: YouTube bans repetitive description sentences).
+ * Layout: title, `summary` (1-2 unique sentences; omitted for older episodes without it), sources, 3-5 hashtags.
+ */
+export function buildDescription(ep) {
+  const out = [ep.title, ''];
+  if (ep.summary?.trim()) out.push(ep.summary.trim(), '');
+  out.push('Fuentes:', ...(ep.sources ?? []).map((s) => `- ${s}`));
+  const tags = ep.hashtags ?? [];
+  if (tags.length) out.push('', tags.join(' '));
+  return out.join('\n') + '\n';
+}
 
 const args = process.argv.slice(2);
 const epFile = args.find((a) => !a.startsWith('--'));
-if (!epFile) { console.error('Usage: node scripts/make-episode.mjs episodes/NNN-slug.json [--skip-render]'); process.exit(1); }
+if (!epFile) { console.error('Usage: node scripts/make-episode.mjs episodes/NNN-slug.json [--skip-render] [--print-description]'); process.exit(1); }
 const skipRender = args.includes('--skip-render');
 const ep = JSON.parse(fs.readFileSync(path.resolve(epFile), 'utf8'));
+if (args.includes('--print-description')) { process.stdout.write(buildDescription(ep)); process.exit(0); }
+if (!ep.summary?.trim()) console.warn('WARNING: episode has no `summary`; the description will only list title, sources and hashtags');
+const nTags = ep.hashtags?.length ?? 0;
+if (nTags < 3 || nTags > 5) console.warn(`WARNING: ${nTags} hashtags; the rule is 3-5 topic hashtags`);
 const id = ep.id;
 const outDir = path.join(VIDEOS, id);
 const renders = path.join(ROOT, 'renders');
@@ -59,13 +77,11 @@ try {
   }
 
   // ---- deliverables ----
-  const description = [
-    ep.title, '', CHANNEL_LINE, '', 'Fuentes:', ...ep.sources.map((s) => `- ${s}`), '', ep.hashtags.join(' '),
-  ].join('\n') + '\n';
+  const description = buildDescription(ep);
   fs.copyFileSync(video, path.join(outDir, `${id}.mp4`));
   spawnSync('ffmpeg', ['-y', '-v', 'error', '-ss', '0.5', '-i', thumbVideo, '-frames:v', '1', path.join(outDir, `${id}-thumbnail.png`)], { windowsHide: true });
   fs.writeFileSync(path.join(outDir, `${id}-description.txt`), description, 'utf8');
-  const tags = [...new Set([...(ep.tags ?? []), ...ep.hashtags.map((h) => h.replace(/^#/, ''))])];
+  const tags = [...new Set([...(ep.tags ?? []), ...(ep.hashtags ?? []).map((h) => h.replace(/^#/, ''))])];
   fs.writeFileSync(path.join(outDir, 'metadata.json'), JSON.stringify({
     id, title: ep.title, description, tags, categoryId: '27', defaultLanguage: 'es', defaultAudioLanguage: 'es',
     madeForKids: false, selfDeclaredMadeForKids: false, privacyStatus: 'private',
@@ -88,7 +104,7 @@ try {
   const report = { id, duration: +streams.format.duration, streams: streams.streams, lufs: Number(lufs), blackSegments: black, timings, sheet: path.join(verify, `${id}-sheet.jpg`) };
   fs.writeFileSync(path.join(verify, `${id}-report.json`), JSON.stringify(report, null, 2));
   log(`verify: ${JSON.stringify({ duration: report.duration, lufs: report.lufs, black: black.length, timings })}`);
-  if (report.duration < 60 || report.duration > 90) console.warn(`WARNING: duration ${report.duration}s is outside the 60-90 s target`);
+  if (report.duration < TARGET.min || report.duration > TARGET.max) console.warn(`WARNING: duration ${report.duration}s is outside the ${TARGET.min}-${TARGET.max} s target`);
   // Transition strips: frames around every location change and costume poof.
   const events = EP.lines.filter((l) => l.locationChanged || l.costumeChanged);
   events.forEach((l, n) => {

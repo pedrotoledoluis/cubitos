@@ -1,0 +1,52 @@
+# Epic format v2 — 4-episode experiment
+
+## Objective
+Evolve the channel format based on the research report (`reports/Estrategia de Shorts virales.md`) and produce
+4 new episodes (019–022) for publishing on 2026-10-31.
+
+## Problem / why
+Channel has 6 subscribers and 321 views. Best videos open on one absurd premise; worst need setup first.
+Descriptions repeat a fixed channel paragraph (YouTube policy bans repetitive sentences). 60–90 s is likely
+too long for a new channel. Owner asked for "epic" thumbnails and full creative freedom.
+
+## Scope (authorized by owner 2026-10-30)
+- New format: 35–55 s, 1-second hook, loop ending, per-character caption colors, short unique description,
+  3–5 topic hashtags, no fixed channel paragraph.
+- Epic thumbnail template v2.
+- New costumes/locations needed by the 4 topics.
+- 4 episodes: 019 Canción Criolla (Oct 31), 020 CDMX parade / James Bond, 021 Inca mummies in November,
+  022 La Catrina satire.
+- Upload is NOT in scope until the owner OKs quality (daily upload limit also applies).
+
+## Constraints
+- Tito voice unchanged. One render at a time. Leftover process check after renders.
+- Real facts only, hedge unconfirmed claims; sources in description.
+- Code/comments/docs in English; episode content in Spanish.
+
+## Delivery strategy
+ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded below.
+
+## Tasks
+- [x] T1 Pipeline + rules: description template (per-episode `summary`, no CHANNEL_LINE), per-character caption
+      colors, PRODUCTION.md rules for 35–55 s / 9–12 lines / loop ending / hashtags. Route: delegated (writer trigger, 3+ files).
+- [ ] T2 Epic thumbnail v2 (`compositions/thumbnail.html`). Route: delegated (preparation trigger).
+- [ ] T3 New costumes + locations for 019–022. Route: delegated (writer trigger).
+- [ ] T4 Scripts 019–022 (JSON) + duration check with build-audio (35–55 s). Route: delegated (4 files).
+- [ ] T5 Render 019–022 one at a time, verify sheets/reports/thumbnails. Route: inline per-action.
+- [ ] T6 Update AGENT_GUIDE.md §8 state. Route: inline (one mechanical file).
+
+## Acceptance
+- Each episode 35–55 s, 1080x1920, 30 fps, ~-15 LUFS, captions not over board, thumbnail readable at 320x180.
+- Description: title + 1–2 unique sentences + sources + 3–5 hashtags.
+
+## Progress / evidence
+- T1 (delegated writer): `make-episode.mjs` exports `buildDescription(ep)` (title, `summary`, Fuentes, hashtags;
+  CHANNEL_LINE removed), `--print-description` dry mode, warnings for missing `summary` / hashtag count outside 3-5,
+  duration warning now 35-55 s. `src/stage.js` `CAPTION_COLOR` (Profe `#fff3d6`, Tito `#ffd23a`, Nova `#c9b8ff`).
+  PRODUCTION.md rules (§2 hook/9-12 lines/loop/title/description/tags, §3 format, §10 JSON, §12 checklist), README.
+  Evidence: `node --check` OK on make-episode.mjs and stage.js; `--print-description` on 018 prints title,
+  sources, hashtags (no channel line), with a test `summary` it appears after the title; snapshot of 018 at 2 s
+  (Tito, yellow caption) and 11 s (Profe, cream caption); leftover check 0. Published `videos/` untouched.
+
+## Next step
+T1.

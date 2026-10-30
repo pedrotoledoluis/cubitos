@@ -50,6 +50,8 @@ const PROPS = {
 const easeInOut = (x) => { x = clamp(x); return x * x * (3 - 2 * x); };
 const easeOut = (x) => 1 - (1 - clamp(x)) ** 3;
 const WIPE = 0.28; // half-duration of the location wipe (s)
+// Caption fill color per speaker (the black stroke stays): viewers tell who talks at a glance.
+const CAPTION_COLOR = { profe: '#fff3d6', tito: '#ffd23a', nova: '#c9b8ff' };
 
 /**
  * Per-line acting resolved from episode data:
@@ -291,6 +293,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
       for (const pg of pages) if (t >= pg.start) page = pg;
       captionEl.textContent = page ? page.text : '';
       captionEl.style.display = page ? 'block' : 'none';
+      captionEl.style.color = CAPTION_COLOR[cur?.speaker] ?? CAPTION_COLOR.profe;
       // Guard: never more than 3 lines; shrink the font if a page still wraps further.
       captionEl.style.fontSize = '72px';
       for (let fs = 72; fs > 48 && captionEl.offsetHeight > 72 * 1.15 * 3 + 4; fs -= 4) captionEl.style.fontSize = `${fs - 4}px`;

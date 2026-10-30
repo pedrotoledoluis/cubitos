@@ -17,24 +17,36 @@ Template details: `hf-template/README.md`. Brand: `branding-v2/brand.md`. Charac
 
 ## 2. Script rules
 
-1. Line 1 is the **hook, asked by Tito** (a question that sounds impossible). Shot `wide`.
-2. 16–22 lines (see rule 7), alternating Tito / Profe. Profe lines ≤ ~25 words; Tito lines short (1–8 words).
+1. Line 1 is the **hook** and must work in the **first second**: it states the absurd premise itself
+   (who did what impossible thing), never a setup or greeting. Usually asked or blurted by Tito; shot `wide`.
+   The promise of the hook must be delivered by the video (no clickbait).
+2. **9–12 lines** (see rule 7), alternating Tito / Profe. Profe lines ≤ ~18 words; Tito lines 1–7 words.
 3. Real facts only. Anecdotal or late sources get a hedge in the line: "Según...", "Dicen que...", "Lo cuenta...".
-4. 4–6 Profe lines carry a **board graphic** (`[board: ...]` in drafts). Spread them out.
-5. Last line: **punchline by Tito**, usually with `profePose: "facepalm"`.
+4. 3–4 Profe lines carry a **board graphic** (`[board: ...]` in drafts). Spread them out.
+5. Last line: **punchline by Tito**, usually with `profePose: "facepalm"`. Write it as a **loop ending**: it should
+   lead back into line 1 (repeat or answer the hook's words) so the replay feels continuous.
 6. Sources go in the description (`sources`), including a note when anecdotes were recorded centuries later.
-7. Length: real TTS runs ~4.5–5 s per line. Aim **16–18 lines** with Profe lines ≤ ~22 words to land in 60–90 s; check the `timeline:` duration from `build-audio` before rendering.
+7. Length: **35–55 s** (about 120–170 spoken words). Real TTS runs ~3–5 s per line, so aim **9–12 lines**; check
+   the `timeline:` duration from `build-audio` before rendering (cut lines when over 55 s, add a beat when under 35 s).
 8. Modern topics (2026+): research current facts first; frame anything unconfirmed as "lo que se sabe / rumores", never invent numbers; add "no es asesoría financiera" / responsible-gambling / safety notes where relevant. Light Peruvian flavor is welcome for Tito/Nova (causa, pata, chévere, bacán, chamba, ya fue, combi, ceviche, Inca Kola, chifa); Profe stays neutral.
 9. Keep the user's text **exactly** when a script is provided. Use `say` (TTS only) to spell numbers/names
    ("1859" → "mil ochocientos cincuenta y nueve", "Joshua" → "Yóshua").
+10. Title: 20–40 characters ideally (mobile cuts near 40), **keyword first**, Spanish accents and opening marks
+    (¿ ¡), no hashtags.
+11. Description (built by `make-episode`): title, the episode's `summary` (1–2 unique sentences: who, what, when,
+    where, without repeating the title), `Fuentes:` and **3–5 topic hashtags** at the end (one broad, one niche,
+    one or two specific; e.g. `#historia #datoscuriosos #caligula`). No fixed channel paragraph (YouTube bans
+    repetitive description sentences). Avoid `#viral #trending #fyp #parati`; `#Shorts` is optional and goes last.
+12. `tags`: add accentless and common misspelled variants of the key names ("caligula", "tico brahe",
+    "cancion criolla"); tags only help with typos.
 
 ## 3. Format
 
 | Item | Rule |
 | --- | --- |
-| Video | 1080x1920, 30 fps, H.264 + AAC, **60–90 s** (Shorts allow up to 3 min; we aim 60–90) |
+| Video | 1080x1920, 30 fps, H.264 + AAC, **35–55 s** (Shorts allow up to 3 min; a new channel needs short tests) |
 | Pacing | 0.25 s gap between lines (+0.2 s after board lines, +0.3 s before a location change). No dead air. |
-| Captions | Top-center block (13%..~30% of height), max 3 lines per page, Arial Black white with black stroke. Never over board/sign content. |
+| Captions | Top-center block (13%..~30% of height), max 3 lines per page, Arial Black with black stroke, **colored by speaker**: Profe cream `#fff3d6`, Tito yellow `#ffd23a`, Nova light violet `#c9b8ff` (`CAPTION_COLOR` in `src/stage.js`). Never over board/sign content. |
 | Loudness | Master ~-15 LUFS integrated, true peak -1.5 dB |
 | Shots | `wide`, `profe`, `tito`, `board` (auto on board lines); `dutch: true` tilts. Close-ups are near eye level. With Nova: `nova` close-up, two-shots `titoProfe` / `profeNova`, and `wide` becomes the three-shot `wide3`. |
 
@@ -143,10 +155,18 @@ board shot keeps the whole board below the caption block.
 
 ## 8. Thumbnail (1280x720)
 
-Auto-rendered from `compositions/thumbnail.html`: `thumbnailText` headline (≤ ~6 words, uppercase, yellow, one key
-word in `*stars*` = white) in the **left ~60%** over a dark gradient; on the right the **costumed Profe**
-(`thumbnailPose`, default shrug) and a **surprised Tito** (`thumbnailTitoEmotion`; plus a **smug Nova** in three-character episodes), in `thumbnailLocation` (default: last line's location);
-logo badge bottom-left; nothing important bottom-right. Check it at 320x180.
+Auto-rendered from `compositions/thumbnail.html` (v2, "epic"): `thumbnailText` headline (≤ ~6 words, uppercase,
+yellow with a thick ink stroke and hard drop shadow; the one key word in `*stars*` sits in a red tilted box) in the
+**left ~60%** over a dark gradient; behind the characters a yellow **sunburst** with rim glow and a vignette; on the
+right the **costumed Profe**, big (`thumbnailPose`, default shrug) and a **reacting Tito** (`thumbnailTitoEmotion`,
+default surprised; plus a **smug Nova** in three-character episodes), in `thumbnailLocation` (default: last line's
+location); logo badge bottom-left; nothing important bottom-right (YouTube timestamp). Check it at 320x180.
+
+| Field | Meaning |
+| --- | --- |
+| `thumbnailText` | Headline, ≤ ~6 words; wrap one key word in `*stars*` |
+| `thumbnailBadge` | Optional small sticker above the headline, ≤ ~12 chars (e.g. `"31 OCT"`, `"REAL"`, `"1518"`) |
+| `thumbnailBoard`, `thumbnailLocation`, `thumbnailPose`, `thumbnailProp`, `thumbnailTitoEmotion` | Optional scene overrides |
 
 ## 9. Folder layout
 
@@ -166,15 +186,17 @@ historia-en-cubitos/
 ```jsonc
 {
   "id": "005-diogenes",                       // NNN-slug, also the output folder name
-  "title": "Diógenes: ...",                   // YouTube title
+  "title": "Diógenes: ...",                   // YouTube title (20-40 chars, keyword first)
+  "summary": "En el siglo IV a. C., Diógenes ...", // 1-2 unique sentences for the description
   "thumbnailText": "¡HUMILLÓ A PLATÓN CON UN *POLLO*!",
+  "thumbnailBadge": "REAL",                    // optional sticker on the thumbnail
   "thumbnailBoard": { "scene": "labelled", "icon": "pluckedChicken", "label": "HOMBRE" }, // optional
   "thumbnailLocation": "athens", "thumbnailPose": "shrug",                                // optional
   "costume": "greek", "costumeFrom": 2,       // Profe's costume, poof on line 2
   "locations": ["office", "athens"],          // first = starting location
   "sources": ["https://...", "Diógenes Laercio, ... (anécdotas recogidas siglos después)"],
-  "hashtags": ["#Shorts", "#historia", "#filosofia"],
-  "tags": ["historia", "diogenes"],           // extra YouTube tags
+  "hashtags": ["#historia", "#filosofia", "#diogenes"],  // 3-5 topic hashtags, end of description
+  "tags": ["historia", "diogenes", "diojenes"], // extra YouTube tags: accentless / misspelled variants
   "lines": [
     { "speaker": "tito", "text": "¿Hubo un filósofo...?", "shot": "wide", "emotion": "surprised" },
     { "speaker": "profe", "location": "athens",          // switch location here (wipe + fly-in)
@@ -208,9 +230,10 @@ node scripts/make-episode.mjs episodes/NNN-slug.json
 - [ ] `.build/verify/<id>-sheet.jpg` (one frame per line): heads fully in frame, mouths moving on the speaker,
       captions never over board/sign content, costume readable, location recognizable.
 - [ ] `.build/verify/<id>-transition-N.jpg`: wipe covers the cut, fly-in lands cleanly, poof hides the costume swap.
-- [ ] `<id>-report.json`: duration 60–90 s, video 1080x1920 h264 30 fps, audio aac, LUFS ≈ -15, no black segments.
+- [ ] `<id>-report.json`: duration 35–55 s, video 1080x1920 h264 30 fps, audio aac, LUFS ≈ -15, no black segments.
 - [ ] Thumbnail: headline in the left ~60%, costumed Profe + reacting Tito on the right, readable at 320x180.
-- [ ] Description: title, channel line, sources (with hedge notes), hashtags.
+- [ ] Description: title, unique `summary`, sources (with hedge notes), 3–5 topic hashtags; no channel paragraph.
+- [ ] Hook works muted in the first second; last line loops back into line 1.
 
 ## 13. Process hygiene
 

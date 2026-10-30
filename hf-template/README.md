@@ -19,13 +19,15 @@ What it does, in order (each step has a hard timeout; leftover processes are sto
 2. `npx hyperframes check`
 3. `npx hyperframes render` → `renders/<id>.mp4` (1080x1920, 30 fps; ~20 min on this machine)
 4. Renders `compositions/thumbnail.html` and grabs a 1280x720 PNG.
-5. Writes the description and `metadata.json`, copies everything to `../videos/<id>/`:
+5. Writes the description (title, `summary`, sources, hashtags; no fixed channel paragraph) and `metadata.json`, copies everything to `../videos/<id>/`:
    `<id>.mp4`, `<id>-thumbnail.png`, `<id>-description.txt`, `metadata.json`
    (title, description, tags, `categoryId` 27 Education, language `es`, `madeForKids` false — for a future uploader).
 6. Verification: `.build/verify/<id>-sheet.jpg` (one frame per line) and `<id>-report.json`
    (duration, streams, LUFS, black segments, step timings). Look at the sheet before publishing.
 
 `--skip-render` reuses existing renders (re-writes deliverables and the report only).
+`--print-description` prints the description text and exits (nothing is built or written).
+The report warns when the duration is outside 35–55 s.
 
 ## Episode JSON
 
@@ -33,13 +35,15 @@ What it does, in order (each step has a hard timeout; leftover processes are sto
 {
   "id": "005-my-slug",
   "title": "YouTube title",
+  "summary": "1-2 unique sentences for the description",
   "thumbnailText": "¡BIG TEXT!",
+  "thumbnailBadge": "31 OCT",                       // optional thumbnail sticker
   "thumbnailBoard": { "scene": "questionCrowd" },   // optional; default = last board scene
   "costume": "greek", "costumeFrom": 2,             // Profe costume (src/costumes.js), poof on line 2
   "locations": ["office", "athens"],                 // first = start location (src/locations/)
   "thumbnailLocation": "athens", "thumbnailPose": "shrug",
   "sources": ["https://..."],
-  "hashtags": ["#Shorts", "#historia"],
+  "hashtags": ["#historia", "#curiosidades", "#tema"], // 3-5 topic hashtags
   "tags": ["historia", "..."],                      // optional extra YouTube tags
   "lines": [
     { "speaker": "tito", "text": "¿Pregunta?", "shot": "wide", "emotion": "surprised" },
@@ -107,7 +111,8 @@ To add one: write a function in `scenes.js` (or a new file) and add it to `SCENE
 
 ## Layout rules (portrait)
 
-- Captions: top-center block, 13%..~30% of the frame, max 3 lines (pages + font guard).
+- Captions: top-center block, 13%..~30% of the frame, max 3 lines (pages + font guard), fill colored by speaker
+  (`CAPTION_COLOR` in `src/stage.js`: Profe cream, Tito yellow, Nova light violet).
 - Board (or in-world sign) sits at `BOARD` in every location; the `board` shot frames it at ~33%..60%,
   with Profe (whole head) and Tito below. Close-ups are near eye level and orbit to the side that pushes the
   board out of frame (Profe from the left, Tito from the right). The pointer is shortened while explaining so
