@@ -1,0 +1,32 @@
+{
+  "id": "022-catrina-burla",
+  "title": "Catrina: nació para burlarse de creídos",
+  "summary": "Hacia 1910-1913, el grabador José Guadalupe Posada creó la Calavera Garbancera para burlarse de quienes renegaban de su origen para aparentar ser de clase alta; décadas después Diego Rivera la vistió y la llamó Catrina en un mural.",
+  "thumbnailText": "LA CATRINA ERA UN *MEME*",
+  "thumbnailBadge": "2 NOV",
+  "thumbnailBoard": { "scene": "showcase", "icon": "catrina", "scale": 1.3, "sparkle": true, "title": "POSADA, c. 1910" },
+  "thumbnailLocation": "cdmx_muertos", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "surprised",
+  "costume": "posada", "costumeFrom": 3,
+  "locations": ["office", "cdmx_muertos"],
+  "sources": [
+    "https://www.milenio.com/cultura/catrina-significado-origen",
+    "https://www.unotv.com/nacional/dia-de-muertos-2020-cual-es-el-origen-de-la-catrina-y-por-que-se-llama-asi/",
+    "https://www.prensalibre.com/vida/que-es-la-catrina-y-cual-es-su-historia/",
+    "Nota: el grabado se fecha hacia 1910-1913 y el mural de Diego Rivera (Sueño de una tarde dominical en la Alameda Central) en 1947 o 1948, según la fuente."
+  ],
+  "hashtags": ["#catrina", "#diademuertos", "#historia", "#mexico"],
+  "tags": ["catrina", "la catrina", "calavera garbancera", "jose guadalupe posada", "diego rivera", "dia de muertos", "calavera", "catrin", "mexico"],
+  "lines": [
+    { "speaker": "nova", "text": "¡La Catrina empezó como un meme para burlarse de los creídos!", "shot": "wide", "emotion": "happy", "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿Un meme en 1910? ¿Con qué wifi?", "say": "¿Un meme en mil novecientos diez? ¿Con qué wifi?", "shot": "tito", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "profe", "location": "cdmx_muertos", "text": "Con grabados, Tito. Hacia 1910, José Guadalupe Posada dibujó una calavera muy elegante con sombrero de lujo.", "say": "Con grabados, Tito. Hacia mil novecientos diez, José Guadalupe Posada dibujó una calavera muy elegante con sombrero de lujo.", "board": { "scene": "showcase", "icon": "catrina", "scale": 1.3, "sparkle": true, "title": "POSADA, c. 1910" }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Y no se llamaba Catrina. Era la Calavera Garbancera.", "shot": "nova", "emotion": "explaining", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "¿Garbancera? ¿Vendía garbanzos?", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Casi. Así les decían a quienes vendían garbanzos y renegaban de sus raíces para aparentar ser de clase alta.", "board": { "scene": "equation", "items": [{ "icon": "calavera", "label": "CALAVERA" }, "+", { "icon": "fancyHat", "label": "SOMBRERO" }, "=", { "icon": "catrina", "label": "CREÍDA" }], "pad": 210, "title": "LA CALAVERA GARBANCERA" }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "El mensaje: rico o pobre, todos terminamos en calavera.", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "Uy. Qué indirecta tan elegante.", "emotion": "scared", "novaEmotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Décadas después, Diego Rivera la vistió con boa de plumas y la llamó Catrina, en un mural de fines de los cuarenta.", "board": { "scene": "labelled", "icon": "catrina", "label": "CATRINA", "title": "DIEGO RIVERA, 1947-48", "scale": 1.1 }, "titoEmotion": "neutral", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Catrina viene de catrín, Tito: alguien elegante y muy presumido.", "emotion": "smug", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "¿Presumida? Nova, ya sé de quién voy a hacer un meme... y en cien años, ¡tradición!", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "surprised" }
+  ]
+}

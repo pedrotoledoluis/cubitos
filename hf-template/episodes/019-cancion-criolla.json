@@ -1,0 +1,32 @@
+{
+  "id": "019-cancion-criolla",
+  "title": "Canción Criolla: ¿por qué el 31?",
+  "summary": "El Día de la Canción Criolla nació por una resolución suprema del 18 de octubre de 1944, firmada en el gobierno de Manuel Prado, y su fecha se eligió para coincidir con la fiesta del Señor de los Milagros, no para competir con Halloween.",
+  "thumbnailText": "¿CONTRA *HALLOWEEN*? ¡FALSO!",
+  "thumbnailBadge": "31 OCT",
+  "thumbnailBoard": { "scene": "decree", "label": "RESOLUCIÓN", "icon": "guitar", "cross": false, "title": "18 OCT 1944" },
+  "thumbnailLocation": "lima_pena_1944", "thumbnailPose": "shrug", "thumbnailProp": "guitar", "thumbnailTitoEmotion": "surprised",
+  "costume": "criollo", "costumeFrom": 2,
+  "locations": ["office", "lima_pena_1944"],
+  "sources": [
+    "https://es.wikipedia.org/wiki/D%C3%ADa_de_la_Canci%C3%B3n_Criolla",
+    "https://hiraoka.com.pe/blog/post/dia-de-la-cancion-criolla-cuando-es-y-por-que-se-celebra",
+    "https://www.inkaterra.com/blog/the-day-of-creole-song/",
+    "Resolución suprema del 18 de octubre de 1944 (gobierno de Manuel Prado Ugarteche), impulsada por Carlos A. Saco, director de El Comercio."
+  ],
+  "hashtags": ["#historiadelperu", "#cancioncriolla", "#peru", "#halloween"],
+  "tags": ["cancion criolla", "dia de la cancion criolla", "31 de octubre", "musica criolla", "manuel prado", "señor de los milagros", "senor de los milagros", "halloween peru", "vals criollo"],
+  "lines": [
+    { "speaker": "tito", "text": "¡La Canción Criolla la inventaron para ganarle a Halloween!", "shot": "wide", "emotion": "surprised", "profePose": "shrug" },
+    { "speaker": "profe", "location": "lima_pena_1944", "text": "Falso, Tito. Nació por resolución suprema en 1944, con el presidente Manuel Prado.", "say": "Falso, Tito. Nació por resolución suprema en mil novecientos cuarenta y cuatro, con el presidente Manuel Prado.", "board": { "scene": "decree", "label": "RESOLUCIÓN", "icon": "guitar", "cross": false, "title": "18 OCT 1944" }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿Un presidente decretó la jarana? ¡Bacán!", "emotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Un día para valses, polkas y marineras, impulsado por Carlos A. Saco, director de El Comercio.", "profeProp": "guitar", "pose": "lamp", "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y por qué justo el 31? ¿Por los disfraces?", "say": "¿Y por qué justo el treinta y uno? ¿Por los disfraces?", "emotion": "skeptical", "profeProp": "guitar" },
+    { "speaker": "profe", "text": "Para coincidir con la fiesta del Señor de los Milagros, en pleno mes morado. Halloween no era el rival.", "board": { "scene": "labelled", "icon": "candle", "label": "OCTUBRE", "title": "SEÑOR DE LOS MILAGROS: EL MES MORADO", "scale": 1.6 }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "O sea, Halloween llegó tarde a la jarana.", "emotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "El primer año hubo banderas en Lima y el Callao, y una misa por los músicos criollos fallecidos.", "board": { "scene": "stage", "title": "31 OCT 1944", "musicians": 2, "dancers": 2 }, "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "Profe, ¿y este año me pongo disfraz o guitarra?", "shot": "tito", "emotion": "skeptical", "profeProp": "guitar" },
+    { "speaker": "profe", "text": "Caben las dos en la misma noche, Tito. No es una guerra.", "pose": "shrug", "profeProp": "guitar", "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "Listo: me disfrazo de vals. Así la Canción Criolla, por fin, le gana a Halloween.", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "021-momias-incas",
+  "title": "Momias incas: de paseo en noviembre",
+  "summary": "Según la crónica de Guamán Poma (hacia 1615), noviembre era para los incas Aya Marcay Quilla, el mes de los muertos: sacaban a sus antepasados momificados en andas, les daban de comer y beber y los vestían entre cantos y bailes.",
+  "thumbnailText": "PASEABAN A SUS *MOMIAS*",
+  "thumbnailBadge": "1 NOV",
+  "thumbnailBoard": { "scene": "showcase", "icon": "litter", "scale": 1.2, "sparkle": true, "title": "MALLQUIS EN ANDAS" },
+  "thumbnailLocation": "cusco_inca", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "scared",
+  "costume": "inca", "costumeFrom": 2,
+  "locations": ["office", "cusco_inca"],
+  "sources": [
+    "https://www.fulcrum.org/concern/file_sets/9c67wq66k?locale=en",
+    "https://utpress.utexas.edu/9781477323410/",
+    "https://academic.oup.com/book/46629/chapter/410059316",
+    "https://andina.pe/agencia/noticia-dia-todos-los-santos-cementerio-mas-grande-sudamerica-esta-lima-fotos-960683.aspx",
+    "Felipe Guamán Poma de Ayala, Nueva corónica y buen gobierno (c. 1615; la fecha de envío al rey varía según la fuente). Es una crónica colonial, escrita décadas después de la conquista."
+  ],
+  "hashtags": ["#incas", "#historiadelperu", "#todoslossantos", "#cusco"],
+  "tags": ["incas", "momias incas", "mallquis", "malquis", "aya marcay quilla", "guaman poma", "huaman poma", "cusco", "cuzco", "todos los santos", "dia de los muertos peru"],
+  "lines": [
+    { "speaker": "tito", "text": "¿Los incas sacaban a pasear a sus abuelos... momificados?", "shot": "wide", "emotion": "scared", "profePose": "shrug" },
+    { "speaker": "profe", "location": "cusco_inca", "text": "Así es, Tito. Según el cronista Guamán Poma, noviembre era Aya Marcay Quilla: el mes de los muertos.", "say": "Así es, Tito. Según el cronista Guamán Poma, noviembre era Aya Marcai Quilla: el mes de los muertos.", "board": { "scene": "labelled", "icon": "mummy", "label": "NOV.", "title": "AYA MARCAY QUILLA", "scale": 1.3 }, "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Un mes entero? Yo con una noche de Halloween ya no duermo.", "emotion": "scared", "profePose": "shrug" },
+    { "speaker": "profe", "text": "A los antepasados momificados, los mallquis, los llevaban en andas por las calles, como en procesión.", "say": "A los antepasados momificados, los malquis, los llevaban en andas por las calles, como en procesión.", "board": { "scene": "showcase", "icon": "litter", "scale": 1.2, "sparkle": true, "title": "MALLQUIS EN ANDAS" }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿Y el abuelo no se mareaba?", "emotion": "skeptical", "profePose": "facepalm" },
+    { "speaker": "profe", "text": "Además les daban de comer, de beber, y los vestían con ropa nueva, entre cantos y bailes.", "board": { "scene": "equation", "items": [{ "icon": "bowl", "label": "COMIDA" }, "+", { "icon": "jar", "label": "BEBIDA" }, "+", { "icon": "unku", "label": "ROPA NUEVA" }], "pad": 220, "title": "LA FIESTA DE LOS DIFUNTOS" }, "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "Como mi abuelita: si no le sirves dos veces, se ofende.", "emotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Para los incas, los antepasados seguían presentes en la familia. Se les honraba con fiesta, no con miedo.", "pose": "wave", "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "¿Y hoy todavía se hace algo así?", "shot": "tito", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Cada uno de noviembre, muchas familias peruanas visitan a sus difuntos con flores, música y comida.", "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "Listo, este domingo saco a pasear a mi abuelo. Vivito, profe. ¡Vivito!", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

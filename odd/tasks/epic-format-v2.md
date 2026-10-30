@@ -70,5 +70,17 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
   equation/labelled labels clipped at the board edge, flat Cusco backdrop, condor crossing captions, cathedral
   windows floating. Not verified: thumbnails of 019-022, motion of animated props in a real render. Leftover check 0.
 
+  Commit `375794a`.
+
+- T4 (delegated writer, PARTIAL): `episodes/019-cancion-criolla.json` (Tito+Profe, 11 lines, 3 boards),
+  `020-desfile-james-bond.json` (Nova hook, 12 lines, 3 boards), `021-momias-incas.json` (Tito+Profe, 11 lines,
+  3 boards), `022-catrina-burla.json` (Nova hook, 11 lines, 3 boards); each with summary, sources + hedge note,
+  4 hashtags, accentless tags, thumbnailText/Badge, loop ending (last Tito line leads back into line 1).
+  Evidence: `make-episode --print-description` OK for all four (title, summary, Fuentes, hashtags; no warnings).
+  BLOCKED: `build-audio` fails on the first Profe line: `kokoro-onnx package is not installed` (Python 3.14 at
+  C:/Python314, no HYPERFRAMES_PYTHON). Voices unchanged, nothing installed. Estimated durations only (not proof):
+  019 52.8 s, 020 53.4 s, 021 53.3 s, 022 50.9 s; all near the 55 s cap, so expect to cut a line if real TTS runs long.
+
 ## Next step
-T4 duration check (needs Kokoro), then T5.
+Install `pip install kokoro-onnx soundfile` (owner decision), run `build-audio` on 019-022 one at a time, record the
+real `timeline:` durations (35-55 s), cut if over; then T5.

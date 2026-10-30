@@ -1,0 +1,34 @@
+{
+  "id": "020-desfile-james-bond",
+  "title": "Día de Muertos: el desfile de James Bond",
+  "summary": "El gran desfile de Día de Muertos de la Ciudad de México se hizo por primera vez en 2016, después de que la película Spectre (2015) mostrara uno que no existía; los altares, las ofrendas y la tradición son mucho más antiguos.",
+  "thumbnailText": "¡LO INVENTÓ *JAMES BOND*!",
+  "thumbnailBadge": "DÍA DE MUERTOS",
+  "thumbnailBoard": { "scene": "equation", "items": [{ "icon": "clapper", "label": "2015" }, "→", { "icon": "calavera", "label": "2016" }], "pad": 300, "title": "LA VIDA IMITA AL CINE" },
+  "thumbnailLocation": "cdmx_muertos", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "surprised",
+  "costume": "bond", "costumeFrom": 3,
+  "locations": ["office", "cdmx_muertos"],
+  "sources": [
+    "https://www.mexicodesconocido.com.mx/desfiles-dia-de-muertos-james-bond.html",
+    "https://www.xataka.com.mx/cine-y-tv/curiosa-historia-como-superproduccion-300-millones-dolares-cambio-para-siempre-dia-muertos-mexico",
+    "https://www.vidaextra.com/cine/desfile-dia-muertos-spectre-nunca-habia-existido-ciudad-mexico-copio-pelicula-james-bond",
+    "https://grupoanimal.mx/estilo-de-vida/desfile-dia-muertos-cdmx-origen",
+    "Nota: la película inspiró el formato del desfile, no la tradición. Ya existía una Mega Procesión de Catrinas ciudadana (2014), a la que el gobierno de la ciudad también da crédito."
+  ],
+  "hashtags": ["#diademuertos", "#jamesbond", "#mexico", "#curiosidades"],
+  "tags": ["dia de muertos", "desfile dia de muertos", "james bond", "spectre", "007", "cdmx", "ciudad de mexico", "zocalo", "catrinas"],
+  "lines": [
+    { "speaker": "nova", "text": "¿El desfile de Día de Muertos en México lo inventó James Bond?", "shot": "wide", "emotion": "curious", "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿El espía? ¿Con licencia para desfilar?", "shot": "tito", "emotion": "surprised", "novaEmotion": "smug" },
+    { "speaker": "profe", "location": "cdmx_muertos", "text": "Casi. En la película Spectre, de 2015, Bond persigue a un villano en pleno desfile de calaveras.", "say": "Casi. En la película Spectre, de dos mil quince, Bond persigue a un villano en pleno desfile de calaveras.", "board": { "scene": "showcase", "icon": "clapper", "scale": 1.5, "sparkle": true, "title": "SPECTRE (2015)" }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Un desfile que en la vida real no existía.", "shot": "nova", "emotion": "smug", "titoEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Lo armaron para el rodaje. Y dicen que luego mucha gente quería verlo.", "titoEmotion": "happy", "novaEmotion": "neutral" },
+    { "speaker": "tito", "text": "Y México dijo: ¿no existe? Ya fue, lo hacemos.", "emotion": "happy", "novaEmotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Así, en octubre de 2016, la ciudad hizo su primer gran desfile, por Reforma hasta el Zócalo.", "say": "Así, en octubre de dos mil dieciséis, la ciudad hizo su primer gran desfile, por Reforma hasta el Zócalo.", "board": { "scene": "equation", "items": [{ "icon": "clapper", "label": "PELÍCULA 2015" }, "→", { "icon": "calavera", "label": "DESFILE 2016" }], "pad": 300, "title": "LA VIDA IMITA AL CINE" }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Ojo: las ofrendas son siglos más antiguas. Y en 2014 ya había una procesión de Catrinas.", "say": "Ojo: las ofrendas son siglos más antiguas. Y en dos mil catorce ya había una procesión de Catrinas.", "emotion": "explaining", "titoEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Bond no inventó la fiesta. Solo inspiró el desfile.", "board": { "scene": "labelled", "icon": "marigold", "label": "SIGLOS", "title": "LA TRADICIÓN ES MUCHO MÁS ANTIGUA", "scale": 1.3 }, "titoEmotion": "neutral", "novaEmotion": "smug" },
+    { "speaker": "tito", "text": "Profe, ese smoking... ¿también es de la película?", "shot": "titoProfe", "emotion": "skeptical", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Es de gala, Tito. A un desfile de calaveras se va elegante.", "pose": "shrug", "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "Ya sé: grabo una peli con desfile en mi barrio. En un año, todos preguntarán...", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "surprised" }
+  ]
+}
