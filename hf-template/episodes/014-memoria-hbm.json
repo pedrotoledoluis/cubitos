@@ -1,0 +1,183 @@
+{
+ "id": "014-memoria-hbm",
+ "title": "¿Por qué la RAM está carísima? La IA se está comiendo la memoria",
+ "thumbnailText": "LA IA SE COMIÓ LA *RAM*",
+ "thumbnailBoard": {
+  "scene": "priceUp",
+  "title": "MEMORIA RAM",
+  "emoji": "💾",
+  "from": "75 €",
+  "to": "447 €"
+ },
+ "thumbnailLocation": "data_center",
+ "thumbnailPose": "shrug",
+ "thumbnailTitoEmotion": "scared",
+ "costume": "none",
+ "locations": [
+  "office",
+  "data_center"
+ ],
+ "sources": [
+  "https://en.wikipedia.org/wiki/High_Bandwidth_Memory",
+  "https://www.tomshardware.com/pc-components/dram/the-ram-pricing-crisis-has-only-just-started-team-group-gm-warns-says-problem-will-get-worse-in-2026-as-dram-and-nand-prices-double-in-one-month",
+  "https://www.channelnews.com.au/ces-2026-samsung-warns-ram-shortage-will-drive-consumer-tech-price-hikes/",
+  "TrendForce (citado por prensa del sector): contratos de DRAM +93-98 % trimestral en el primer trimestre de 2026. Ejemplo de precio minorista de un kit DDR5 2x16 GB en Alemania (75 € en julio 2025 → 447 € en octubre 2026) reportado por medios del sector; los precios varían por país y tienda."
+ ],
+ "hashtags": [
+  "#Shorts",
+  "#tecnologia",
+  "#nvidia"
+ ],
+ "tags": [
+  "memoria ram",
+  "HBM",
+  "nvidia",
+  "escasez de memoria",
+  "gpu",
+  "inteligencia artificial",
+  "precios",
+  "SK hynix",
+  "Samsung",
+  "Micron"
+ ],
+ "lines": [
+  {
+   "speaker": "tito",
+   "text": "Profe, quise armar mi PC gamer y la RAM cuesta más que mi riñón.",
+   "say": "Profe, quise armar mi pecé gamer y la RAM cuesta más que mi riñón.",
+   "shot": "wide",
+   "emotion": "scared"
+  },
+  {
+   "speaker": "profe",
+   "text": "No es tu imaginación, Tito. La culpable tiene nombre: la inteligencia artificial.",
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "profe",
+   "location": "data_center",
+   "text": "Los chips de IA, como las GPU de NVIDIA, necesitan una memoria especial pegada al chip: la HBM, memoria de gran ancho de banda.",
+   "say": "Los chips de IA, como las gepeú de Envidia, necesitan una memoria especial pegada al chip: la hache be eme, memoria de gran ancho de banda.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "HBM: MEMORIA APILADA",
+    "items": [
+     {
+      "emoji": "🧠",
+      "label": "CHIP DE IA"
+     },
+     {
+      "emoji": "🥞",
+      "label": "CAPAS DE MEMORIA"
+     },
+     {
+      "emoji": "⚡",
+      "label": "SÚPER RÁPIDA"
+     }
+    ]
+   },
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿Memoria apilada? Como los panqueques.",
+   "emotion": "happy",
+   "profePose": "shrug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Exacto: chips de memoria uno encima de otro. Pero fabricarla gasta más obleas de silicio que la RAM normal.",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "Y hay pocas fábricas: sobre todo SK hynix, Samsung y Micron. Si fabrican HBM para la IA, queda menos RAM para tu compu.",
+   "say": "Y hay pocas fábricas: sobre todo ese ka jáinix, Sámsung y Máicron. Si fabrican hache be eme para la IA, queda menos RAM para tu compu.",
+   "board": {
+    "scene": "bars",
+    "title": "¿PARA QUIÉN LA MEMORIA?",
+    "items": [
+     {
+      "label": "IA (HBM)",
+      "value": 8,
+      "color": "#7ef0ff",
+      "emoji": "🤖",
+      "display": "PRIORIDAD"
+     },
+     {
+      "label": "TU PC",
+      "value": 3,
+      "color": "#ff6b5e",
+      "emoji": "🎮",
+      "display": "LO QUE SOBRA"
+     }
+    ]
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "tito",
+   "text": "O sea, la IA se sirvió primero en el buffet.",
+   "emotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "Y repitió. Según TrendForce, los contratos de RAM casi se duplicaron en un solo trimestre a inicios de dos mil veintiséis.",
+   "board": {
+    "scene": "bigStat",
+    "title": "PRECIO DE CONTRATOS DRAM",
+    "value": "x2",
+    "emoji": "📈",
+    "label": "EN UN TRIMESTRE (INICIOS DE 2026)",
+    "sub": "SEGÚN TRENDFORCE",
+    "color": "#ff6b5e"
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "profe",
+   "text": "En tiendas, un ejemplo reportado en Alemania: un kit de treinta y dos gigas pasó de setenta y cinco euros a cuatrocientos cuarenta y siete.",
+   "board": {
+    "scene": "priceUp",
+    "title": "KIT DDR5 2x16 GB",
+    "emoji": "💾",
+    "from": "75 €",
+    "to": "447 €",
+    "label": "JULIO 2025 → OCTUBRE 2026"
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "tito",
+   "text": "¡Con eso me compro una combi! Bueno, la llanta de una combi.",
+   "emotion": "surprised",
+   "profePose": "facepalm"
+  },
+  {
+   "speaker": "profe",
+   "text": "¿Y cuándo baja? Una fábrica nueva toma años. Varios fabricantes dicen que la escasez podría seguir hasta dos mil veintisiete.",
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "tito",
+   "text": "Entonces mi PC gamer va a tener cuatro gigas y mucha fe.",
+   "say": "Entonces mi pecé gamer va a tener cuatro gigas y mucha fe.",
+   "emotion": "skeptical",
+   "profePose": "shrug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Consejo práctico: compara precios y no compres por pánico. A veces la mejor mejora es la que ya tienes.",
+   "pose": "wave",
+   "titoEmotion": "neutral"
+  },
+  {
+   "speaker": "tito",
+   "text": "Tranquilo, profe. Yo tengo la mejor memoria del mundo: me acuerdo de todo lo que me debe mi pata.",
+   "shot": "wide",
+   "dutch": true,
+   "emotion": "happy",
+   "profePose": "facepalm"
+  }
+ ]
+}

@@ -1,0 +1,268 @@
+{
+ "id": "012-ia-cripto",
+ "title": "¿Cómo usa la IA el mundo cripto? Bots, arbitraje y estafas",
+ "thumbnailText": "LOS *ROBOTS* QUE TRADEAN CRIPTO",
+ "thumbnailBoard": {
+  "scene": "ticker",
+  "title": "BOT EN ACCIÓN",
+  "emoji": "🤖",
+  "points": [
+   10,
+   12,
+   11,
+   15,
+   13,
+   18,
+   16,
+   22
+  ]
+ },
+ "thumbnailLocation": "trading_floor",
+ "thumbnailPose": "shrug",
+ "thumbnailTitoEmotion": "surprised",
+ "costume": "hacker",
+ "costumeFrom": 4,
+ "locations": [
+  "office",
+  "trading_floor"
+ ],
+ "sources": [
+  "https://en.wikipedia.org/wiki/Algorithmic_trading",
+  "https://ethereum.org/es/developers/docs/mev/",
+  "https://en.wikipedia.org/wiki/Sentiment_analysis",
+  "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-and-scams",
+  "Este video es educativo. No es asesoría financiera."
+ ],
+ "hashtags": [
+  "#Shorts",
+  "#cripto",
+  "#inteligenciaartificial"
+ ],
+ "tags": [
+  "cripto",
+  "bitcoin",
+  "inteligencia artificial",
+  "bots de trading",
+  "MEV",
+  "arbitraje",
+  "estafas",
+  "deepfake"
+ ],
+ "lines": [
+  {
+   "speaker": "nova",
+   "text": "Tito, ¿sabías que en cripto muchas operaciones las hacen robots?",
+   "shot": "wide",
+   "emotion": "smug",
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿Robots? ¿Y les pagan por su chamba en bitcoin?",
+   "emotion": "surprised",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "nova",
+   "text": "Les pagan en milisegundos, primo. Profe, explíquele.",
+   "emotion": "explaining",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "location": "trading_floor",
+   "text": "Primero: bots de trading. Programas que compran y venden solos, las veinticuatro horas.",
+   "board": {
+    "scene": "ticker",
+    "title": "BOT DE TRADING",
+    "emoji": "🤖",
+    "points": [
+     10,
+     12,
+     11,
+     15,
+     13,
+     18,
+     16,
+     22
+    ],
+    "label": "NO DUERME, NO COME, NO SE ASUSTA"
+   },
+   "titoEmotion": "surprised",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "profe",
+   "text": "Segundo: análisis de sentimiento. La IA lee miles de noticias y posts para medir si hay euforia o miedo.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "ANÁLISIS DE SENTIMIENTO",
+    "items": [
+     {
+      "emoji": "📰",
+      "label": "NOTICIAS"
+     },
+     {
+      "emoji": "💬",
+      "label": "REDES"
+     },
+     {
+      "emoji": "🧠",
+      "label": "IA"
+     },
+     {
+      "emoji": "😱",
+      "label": "¿MIEDO?"
+     }
+    ],
+    "arrows": true
+   },
+   "titoEmotion": "surprised",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "tito",
+   "text": "Mi grupo de WhatsApp familiar ya hace eso gratis.",
+   "say": "Mi grupo de guasap familiar ya hace eso gratis.",
+   "emotion": "skeptical",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Tercero: arbitraje. Si el bitcoin está más barato en un mercado que en otro, el bot compra aquí y vende allá.",
+   "board": {
+    "scene": "emojiVs",
+    "title": "ARBITRAJE",
+    "left": {
+     "emoji": "🏪",
+     "label": "COMPRA BARATO",
+     "color": "#9be08a"
+    },
+    "right": {
+     "emoji": "🏬",
+     "label": "VENDE CARO",
+     "color": "#ffe27a"
+    },
+    "bottom": "GANA LA DIFERENCIA... SI ES RÁPIDO"
+   },
+   "titoEmotion": "surprised",
+   "novaEmotion": "happy"
+  },
+  {
+   "speaker": "tito",
+   "text": "¡Como comprar en Gamarra y revender en Miraflores!",
+   "emotion": "happy",
+   "novaEmotion": "surprised"
+  },
+  {
+   "speaker": "nova",
+   "text": "Exacto, pero en un parpadeo. Y en blockchains como Ethereum hay algo más extremo: el MEV.",
+   "say": "Exacto, pero en un parpadeo. Y en blockchains como Ethereum hay algo más extremo: el eme e ve.",
+   "emotion": "smug",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "Bots que ven tu operación antes de que se confirme, y se meten delante para ganar con ella.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "MEV: TE GANAN LA DELANTERA",
+    "items": [
+     {
+      "emoji": "🙋",
+      "label": "TÚ COMPRAS"
+     },
+     {
+      "emoji": "🤖",
+      "label": "BOT SE ADELANTA"
+     },
+     {
+      "emoji": "💸",
+      "label": "PAGAS MÁS"
+     }
+    ],
+    "arrows": true
+   },
+   "titoEmotion": "scared",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "tito",
+   "text": "¡Eso es colarse en la cola del banco!",
+   "emotion": "surprised",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Y lo peor: estafas con IA. Videos falsos de famosos regalando cripto y bots que prometen ganancias seguras.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "ESTAFAS CON IA",
+    "items": [
+     {
+      "emoji": "🎭",
+      "label": "DEEPFAKE",
+      "cross": true
+     },
+     {
+      "emoji": "🎁",
+      "label": "\"REGALO\"",
+      "cross": true
+     },
+     {
+      "emoji": "💯",
+      "label": "\"GANANCIA SEGURA\"",
+      "cross": true
+     }
+    ],
+    "bottom": "SI SUENA DEMASIADO BUENO, ES ESTAFA",
+    "bottomColor": "#ff6b5e"
+   },
+   "titoEmotion": "scared",
+   "novaEmotion": "neutral"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿O sea que el famoso que me escribió no era mi pata?",
+   "emotion": "scared",
+   "novaEmotion": "surprised"
+  },
+  {
+   "speaker": "nova",
+   "text": "Tito. ¿Le mandaste algo?",
+   "shot": "nova",
+   "emotion": "surprised",
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "tito",
+   "text": "...Solo un sticker.",
+   "say": "Solo un sticker.",
+   "emotion": "neutral",
+   "novaEmotion": "smug",
+   "holdAfter": 0.3
+  },
+  {
+   "speaker": "profe",
+   "text": "Regla de oro: nadie serio te garantiza ganancias. Y esto no es asesoría financiera.",
+   "pose": "wave",
+   "titoEmotion": "neutral",
+   "novaEmotion": "happy"
+  },
+  {
+   "speaker": "nova",
+   "text": "Resumen: la IA es rápida, pero la plata la pones tú.",
+   "emotion": "smug",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "tito",
+   "text": "Entonces voy a crear mi propio bot: Tito Bot. Su estrategia es no invertir.",
+   "shot": "wide",
+   "dutch": true,
+   "emotion": "happy",
+   "profePose": "facepalm",
+   "novaEmotion": "surprised"
+  }
+ ]
+}

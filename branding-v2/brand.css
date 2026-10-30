@@ -1,0 +1,19 @@
+/* Historia en Cubitos - brand type. Scale everything by setting font-size on .logo */
+html, body { margin: 0; padding: 0; overflow: hidden; background: transparent; }
+.layer { position: absolute; inset: 0; }
+canvas { display: block; }
+.logo { display: inline-flex; flex-direction: column; align-items: center; font-family: "Arial Black", "Segoe UI Black", sans-serif;
+  font-weight: 900; line-height: 1; font-size: 100px; }
+.logo .l1 { color: #fff; font-size: 0.62em; letter-spacing: 0.04em; -webkit-text-stroke: 0.16em #0a0a14; paint-order: stroke fill;
+  text-shadow: 0 0.05em 0 #0a0a14, 0 0.1em 0 #0a0a14, 0 0.15em 0 #0a0a14, 0 0.2em 0 rgba(0,0,0,.35); margin-bottom: 0.18em; }
+.logo .l2 { display: flex; gap: 0.08em; }
+.tile { width: 1.05em; height: 1.05em; display: grid; place-items: center; color: #fff; font-size: 1em;
+  border: 0.07em solid #0a0a14; border-radius: 0.1em; transform: rotate(var(--r));
+  -webkit-text-stroke: 0.12em #0a0a14; paint-order: stroke fill;
+  box-shadow: 0.1em 0.12em 0 #0a0a14, inset -0.09em -0.11em 0 rgba(0,0,0,.28), inset 0.07em 0.07em 0 rgba(255,255,255,.3); }
+.tile.t0 { background: #e0402f; }
+.tile.t1 { background: #ffd23a; color: #fff; }
+.tile.t2 { background: #9a6236; }
+.tile.t3 { background: #1f8a8a; }
+.tagline { font-family: Bahnschrift, "Segoe UI", sans-serif; font-weight: 700; color: #ffd23a; letter-spacing: 0.03em;
+  -webkit-text-stroke: 0.14em #0a0a14; paint-order: stroke fill; text-shadow: 0 0.08em 0 #0a0a14; }

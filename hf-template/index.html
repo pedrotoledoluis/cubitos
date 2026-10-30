@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Historia en Cubitos - episode</title>
+    <style>
+      @font-face {
+        font-family: "HC Display";
+        src: url("assets/fonts/ariblk.ttf") format("truetype");
+        font-weight: 900;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0d1226;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      #stage {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      #caption {
+        position: absolute;
+        top: 13%;
+        left: 6%;
+        right: 6%;
+        margin: 0;
+        display: none;
+        text-align: center;
+        color: #ffffff;
+        font-family: "HC Display", sans-serif;
+        font-weight: 900;
+        font-size: 72px;
+        line-height: 1.15;
+        -webkit-text-stroke: 14px #000000;
+        paint-order: stroke fill;
+        text-shadow: 0 6px 0 rgba(0, 0, 0, 0.6);
+        transform-origin: 50% 50%;
+      }
+      /* Location change wipe (driven by stage.js, seek-safe): brand yellow band with ink edges. */
+      #wipe {
+        position: absolute;
+        top: -5%;
+        bottom: -5%;
+        left: -35%;
+        width: 170%;
+        display: none;
+        background: linear-gradient(90deg, #0a0a14 0 4%, #ffd23a 4% 30%, #e0402f 30% 34%, #ffd23a 34% 96%, #0a0a14 96%);
+      }
+    </style>
+    <script src="vendor/gsap.min.js"></script>
+    <script type="importmap">
+      { "imports": { "three": "./vendor/three.module.js" } }
+    </script>
+    <script src="src/episode-data.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="88.213" data-width="1080" data-height="1920" data-fps="30">
+      <canvas id="stage" width="1080" height="1920" data-layout-allow-overflow data-hold></canvas>
+      <div id="wipe"></div>
+      <div id="caption"></div>
+      <audio id="mix" src="assets/audio/mix.wav" data-start="0" data-duration="88.213" data-track-index="1"></audio>
+    </div>
+    <script>
+      // Root timeline (empty): the Three.js stage renders from hf-seek; root data-duration sets the length.
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+    <script type="module">
+      import { createStage } from "./src/stage.js";
+
+      const stage = createStage({
+        canvas: document.getElementById("stage"),
+        width: 1080,
+        height: 1920,
+        mode: "video",
+        episode: window.EPISODE,
+        captionEl: document.getElementById("caption"),
+        wipeEl: document.getElementById("wipe"),
+      });
+      window.addEventListener("hf-seek", (event) => stage.renderAt(event.detail.time));
+      document.fonts.load('900 72px "HC Display"').then(() => stage.renderAt(window.__hfThreeTime || 0));
+    </script>
+  </body>
+</html>

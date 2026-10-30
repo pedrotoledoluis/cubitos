@@ -1,0 +1,31 @@
+{
+  "id": "016-fenomeno-el-nino",
+  "title": "El Niño Costero 2026: ¿qué está pasando en el mar del Perú?",
+  "thumbnailText": "EL MAR DEL PERÚ *HIERVE*",
+  "thumbnailBoard": { "scene": "bigStat", "title": "ENFEN", "value": "ALERTA", "emoji": "🌊", "label": "EL NIÑO COSTERO", "color": "#ff6b5e" },
+  "thumbnailLocation": "peru_coast", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "scared",
+  "costume": "fisherman", "costumeFrom": 3,
+  "locations": ["office", "peru_coast"],
+  "sources": ["https://www.gob.pe/institucion/senamhi/colecciones/1308-comunicados-enfen (comunicados oficiales del ENFEN)", "https://canaln.pe/actualidad/enfen-nino-costero-se-extendera-hasta-mediados-otono-2027-n495035 (Comunicado Oficial ENFEN N.° 16-2026)", "https://rpp.pe/peru/actualidad/enfen-mantiene-alerta-por-el-nino-costero-y-advierte-posibles-impactos-hasta-2027-noticia-1686644", "https://es.wikipedia.org/wiki/El_Niño_(fenómeno)", "Pronósticos según el último comunicado del ENFEN disponible al 29/10/2026; pueden cambiar. Sigue los avisos oficiales de SENAMHI e INDECI."],
+  "hashtags": ["#Shorts", "#peru", "#elniño"],
+  "tags": ["fenomeno el niño", "niño costero", "ENFEN", "SENAMHI", "peru", "clima", "lluvias", "anchoveta"],
+  "lines": [
+    { "speaker": "tito", "text": "Profe, es octubre y en Lima hace un calor de verano. ¿Se malogró el clima?", "shot": "wide", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Algo así. Se llama El Niño Costero, y este año viene con fuerza.", "titoEmotion": "scared" },
+    { "speaker": "profe", "location": "peru_coast", "text": "Normalmente nuestro mar es frío. Durante El Niño, el agua frente a la costa se calienta varios grados por encima de lo normal.", "board": { "scene": "emojiVs", "title": "EL MAR DEL PERÚ", "left": { "emoji": "🧊", "label": "NORMAL: FRÍO", "color": "#8ec5ff" }, "right": { "emoji": "🔥", "label": "EL NIÑO: CALIENTE", "color": "#ff6b5e" } }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¡Por fin! Playa sin congelarme los pies.", "emotion": "happy", "profePose": "facepalm" },
+    { "speaker": "profe", "text": "No tan rápido. El ENFEN, la comisión que lo vigila, mantiene el estado de alerta de El Niño Costero.", "say": "No tan rápido. El Enfen, la comisión que lo vigila, mantiene el estado de alerta de El Niño Costero.", "board": { "scene": "bigStat", "title": "ENFEN", "value": "ALERTA", "emoji": "🚨", "label": "EL NIÑO COSTERO", "sub": "COMUNICADO OFICIAL 16-2026", "color": "#ff6b5e" }, "titoEmotion": "scared" },
+    { "speaker": "profe", "text": "Su último pronóstico: magnitud extraordinaria hasta enero, y el evento duraría hasta el otoño de dos mil veintisiete.", "board": { "scene": "bars", "title": "PRONÓSTICO (ENFEN)", "items": [{ "label": "SET-ENE", "value": 10, "color": "#ff6b5e", "display": "EXTRAORD." }, { "label": "OTOÑO 2027", "value": 4, "color": "#ffe27a", "display": "SE VA" }] }, "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Extraordinaria? Eso suena a promoción de pollería.", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Ojalá. Para la costa norte se esperan lluvias por encima de lo normal desde noviembre, y ríos más cargados.", "board": { "scene": "emojiRow", "title": "COSTA NORTE", "items": [{ "emoji": "🌧️", "label": "MÁS LLUVIA" }, { "emoji": "🌊", "label": "RÍOS CRECIDOS" }, { "emoji": "🌡️", "label": "MÁS CALOR" }] }, "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Y el ceviche? ¡No me diga que el ceviche corre peligro!", "say": "¿Y el cebiche? ¡No me diga que el cebiche corre peligro!", "emotion": "scared" },
+    { "speaker": "profe", "text": "El mar cambia. La anchoveta se va a aguas más profundas, y llegan peces de aguas cálidas, como el bonito o el atún.", "board": { "scene": "emojiRow", "title": "EL MAR SE MUDA", "items": [{ "emoji": "🐟", "label": "ANCHOVETA SE HUNDE" }, { "emoji": "🐠", "label": "LLEGAN PECES CÁLIDOS" }], "arrows": true }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "O sea, el ceviche no se cancela. Solo cambia de elenco.", "say": "O sea, el cebiche no se cancela. Solo cambia de elenco.", "emotion": "happy" },
+    { "speaker": "profe", "text": "Y en ciudades como Lima se esperan temperaturas por encima de lo normal, incluso posibles récords de calor.", "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "¿Qué hacemos entonces?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Seguir los avisos de SENAMHI e INDECI, limpiar techos y desagües antes de las lluvias, y no construir en quebradas.", "say": "Seguir los avisos de Senamhi e Indeci, limpiar techos y desagües antes de las lluvias, y no construir en quebradas.", "board": { "scene": "emojiRow", "title": "PREPÁRATE", "items": [{ "emoji": "📻", "label": "AVISOS OFICIALES" }, { "emoji": "🏠", "label": "TECHOS Y DESAGÜES" }, { "emoji": "⛰️", "label": "LEJOS DE QUEBRADAS" }], "bottom": "SENAMHI · INDECI" }, "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "Anotado, profe. Y una pregunta seria.", "emotion": "neutral" },
+    { "speaker": "profe", "text": "Dime.", "pose": "shrug", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "Si El Niño ya tiene alerta, ¿cuándo le ponen su toque de queda a la hora de dormir?", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

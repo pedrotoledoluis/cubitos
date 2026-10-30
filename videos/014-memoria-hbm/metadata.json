@@ -1,0 +1,30 @@
+{
+  "id": "014-memoria-hbm",
+  "title": "¿Por qué la RAM está carísima? La IA se está comiendo la memoria",
+  "description": "¿Por qué la RAM está carísima? La IA se está comiendo la memoria\n\nLa historia real, pero en cubitos. Dos sketches por semana sobre los momentos más absurdos, épicos y raros de la humanidad. Todo es verdad. Las caras no.\n\nFuentes:\n- https://en.wikipedia.org/wiki/High_Bandwidth_Memory\n- https://www.tomshardware.com/pc-components/dram/the-ram-pricing-crisis-has-only-just-started-team-group-gm-warns-says-problem-will-get-worse-in-2026-as-dram-and-nand-prices-double-in-one-month\n- https://www.channelnews.com.au/ces-2026-samsung-warns-ram-shortage-will-drive-consumer-tech-price-hikes/\n- TrendForce (citado por prensa del sector): contratos de DRAM +93-98 % trimestral en el primer trimestre de 2026. Ejemplo de precio minorista de un kit DDR5 2x16 GB en Alemania (75 € en julio 2025 → 447 € en octubre 2026) reportado por medios del sector; los precios varían por país y tienda.\n\n#Shorts #tecnologia #nvidia\n",
+  "tags": [
+    "memoria ram",
+    "HBM",
+    "nvidia",
+    "escasez de memoria",
+    "gpu",
+    "inteligencia artificial",
+    "precios",
+    "SK hynix",
+    "Samsung",
+    "Micron",
+    "Shorts",
+    "tecnologia"
+  ],
+  "categoryId": "27",
+  "defaultLanguage": "es",
+  "defaultAudioLanguage": "es",
+  "madeForKids": false,
+  "selfDeclaredMadeForKids": false,
+  "privacyStatus": "private",
+  "files": {
+    "video": "014-memoria-hbm.mp4",
+    "thumbnail": "014-memoria-hbm-thumbnail.png",
+    "description": "014-memoria-hbm-description.txt"
+  }
+}

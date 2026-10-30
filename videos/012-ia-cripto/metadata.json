@@ -1,0 +1,28 @@
+{
+  "id": "012-ia-cripto",
+  "title": "¿Cómo usa la IA el mundo cripto? Bots, arbitraje y estafas",
+  "description": "¿Cómo usa la IA el mundo cripto? Bots, arbitraje y estafas\n\nLa historia real, pero en cubitos. Dos sketches por semana sobre los momentos más absurdos, épicos y raros de la humanidad. Todo es verdad. Las caras no.\n\nFuentes:\n- https://en.wikipedia.org/wiki/Algorithmic_trading\n- https://ethereum.org/es/developers/docs/mev/\n- https://en.wikipedia.org/wiki/Sentiment_analysis\n- https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-and-scams\n- Este video es educativo. No es asesoría financiera.\n\n#Shorts #cripto #inteligenciaartificial\n",
+  "tags": [
+    "cripto",
+    "bitcoin",
+    "inteligencia artificial",
+    "bots de trading",
+    "MEV",
+    "arbitraje",
+    "estafas",
+    "deepfake",
+    "Shorts",
+    "inteligenciaartificial"
+  ],
+  "categoryId": "27",
+  "defaultLanguage": "es",
+  "defaultAudioLanguage": "es",
+  "madeForKids": false,
+  "selfDeclaredMadeForKids": false,
+  "privacyStatus": "private",
+  "files": {
+    "video": "012-ia-cripto.mp4",
+    "thumbnail": "012-ia-cripto-thumbnail.png",
+    "description": "012-ia-cripto-description.txt"
+  }
+}

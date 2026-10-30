@@ -1,0 +1,224 @@
+{
+ "id": "011-casas-de-apuestas",
+ "title": "¿Por qué la casa de apuestas SIEMPRE gana? (Matemáticas, no suerte)",
+ "thumbnailText": "LA CASA *SIEMPRE* GANA",
+ "thumbnailBoard": {
+  "scene": "roulette",
+  "title": "37 CASILLAS"
+ },
+ "thumbnailLocation": "casino",
+ "thumbnailPose": "shrug",
+ "thumbnailTitoEmotion": "scared",
+ "costume": "croupier",
+ "costumeFrom": 3,
+ "locations": [
+  "office",
+  "casino"
+ ],
+ "sources": [
+  "https://es.wikipedia.org/wiki/Ventaja_de_la_casa",
+  "https://es.wikipedia.org/wiki/Ruleta",
+  "https://en.wikipedia.org/wiki/Mathematics_of_bookmaking",
+  "Si el juego te está causando problemas, busca ayuda profesional. Este video no promociona ninguna casa de apuestas."
+ ],
+ "hashtags": [
+  "#Shorts",
+  "#matematicas",
+  "#apuestas"
+ ],
+ "tags": [
+  "matematicas",
+  "apuestas",
+  "probabilidad",
+  "ruleta",
+  "ventaja de la casa",
+  "cuotas",
+  "juego responsable"
+ ],
+ "lines": [
+  {
+   "speaker": "tito",
+   "text": "Profe, si apuesto mis diez soles al Perú, ¿me hago millonario?",
+   "say": "Profe, si apuesto mis diez soles al Perú, ¿me hago millonario?",
+   "shot": "wide",
+   "emotion": "happy"
+  },
+  {
+   "speaker": "profe",
+   "text": "Antes de apostar, hagamos matemáticas.",
+   "pose": "explain",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "location": "casino",
+   "text": "Ruleta europea: treinta y siete casillas. Dieciocho rojas, dieciocho negras y un cero verde.",
+   "board": {
+    "scene": "roulette",
+    "title": "RULETA EUROPEA",
+    "label": "EL CERO ES DE LA CASA"
+   },
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿Y ese cerito verde quién es?",
+   "emotion": "skeptical",
+   "profePose": "shrug"
+  },
+  {
+   "speaker": "profe",
+   "text": "El socio silencioso. Al rojo ganas dieciocho de cada treinta y siete. Menos de la mitad.",
+   "board": {
+    "scene": "bars",
+    "title": "APUESTAS AL ROJO",
+    "items": [
+     {
+      "label": "GANAS",
+      "value": 18,
+      "color": "#9be08a"
+     },
+     {
+      "label": "PIERDES",
+      "value": 19,
+      "color": "#ff6b5e"
+     }
+    ]
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "profe",
+   "text": "Esa diferencia es la ventaja de la casa: dos coma siete por ciento de todo lo apostado, a la larga.",
+   "board": {
+    "scene": "bigStat",
+    "title": "VENTAJA DE LA CASA",
+    "value": "2,7 %",
+    "emoji": "🏦",
+    "label": "DE CADA APUESTA, A LA LARGA",
+    "color": "#ff6b5e"
+   },
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "En el fútbol, el truco son las cuotas. Si un partido es cincuenta y cincuenta, lo justo es pagar dos a uno. Te pagan uno noventa.",
+   "board": {
+    "scene": "emojiVs",
+    "title": "PARTIDO PAREJO",
+    "left": {
+     "emoji": "⚽",
+     "label": "CUOTA JUSTA 2,00"
+    },
+    "right": {
+     "emoji": "🧾",
+     "label": "LA CASA PAGA 1,90",
+     "color": "#ff6b5e"
+    }
+   },
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿Y quién se queda los diez céntimos?",
+   "say": "¿Y quién se queda los diez céntimos?",
+   "emotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "Suma las probabilidades escondidas en las cuotas: no da cien por ciento. Da unos ciento cinco.",
+   "board": {
+    "scene": "bigStat",
+    "title": "EL MARGEN (OVERROUND)",
+    "value": "105 %",
+    "emoji": "🧮",
+    "label": "100 % ES LA REALIDAD",
+    "sub": "EL 5 % EXTRA ES SU GANANCIA",
+    "color": "#ffe27a"
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "tito",
+   "text": "¡Ciento cinco por ciento! Ni mi profe de mate es tan generoso.",
+   "emotion": "surprised",
+   "profePose": "facepalm"
+  },
+  {
+   "speaker": "tito",
+   "text": "O sea, la casa es como el cobrador de la combi. Siempre cobra.",
+   "emotion": "happy"
+  },
+  {
+   "speaker": "profe",
+   "text": "Y si ganas demasiado seguido, varias casas te limitan las apuestas.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "SI GANAS MUCHO...",
+    "items": [
+     {
+      "emoji": "😎",
+      "label": "GANAS"
+     },
+     {
+      "emoji": "📉",
+      "label": "TE LIMITAN"
+     },
+     {
+      "emoji": "🚪",
+      "label": "CHAU"
+     }
+    ],
+    "arrows": true
+   },
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¡Qué roche! O sea, si pierdo es suerte, y si gano es sospechoso.",
+   "emotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "text": "Lo más peligroso: perseguir pérdidas. Apostar más para recuperar. Así se pierde todo.",
+   "board": {
+    "scene": "ticker",
+    "title": "PERSEGUIR PÉRDIDAS",
+    "points": [
+     10,
+     8,
+     9,
+     6,
+     7,
+     4,
+     5,
+     2,
+     0
+    ],
+    "emoji": "💸",
+    "label": "MÁS APUESTAS = MÁS MARGEN PARA LA CASA"
+   },
+   "titoEmotion": "scared"
+  },
+  {
+   "speaker": "profe",
+   "text": "Si apuestas, que sea poquito y por diversión. Si deja de ser diversión, pide ayuda.",
+   "pose": "wave",
+   "titoEmotion": "happy"
+  },
+  {
+   "speaker": "tito",
+   "text": "Listo. Mis diez soles van a una apuesta segura: un ceviche.",
+   "say": "Listo. Mis diez soles van a una apuesta segura: un cebiche.",
+   "emotion": "happy"
+  },
+  {
+   "speaker": "tito",
+   "text": "Y si me sobra, me compro una Inca Kola. La casa soy yo.",
+   "shot": "wide",
+   "dutch": true,
+   "emotion": "happy",
+   "profePose": "facepalm"
+  }
+ ]
+}

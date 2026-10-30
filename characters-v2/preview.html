@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cubitos Characters v2</title>
+<style>
+  html, body { margin: 0; background: #0d1226; color: #f4efe6; font-family: Bahnschrift, "Segoe UI", sans-serif; }
+  #wrap { position: relative; }
+  canvas { display: block; }
+  .label { position: absolute; font-weight: 700; font-size: 22px; letter-spacing: .04em; color: #ffd23a;
+    text-shadow: 0 2px 0 #000; pointer-events: none; text-transform: uppercase; }
+  .title { position: absolute; left: 24px; top: 14px; font-size: 40px; font-weight: 800; color: #fff; }
+  .col { color: #9fc0ff; font-size: 18px; }
+  #ui { position: fixed; right: 12px; top: 12px; background: #0008; padding: 8px; border-radius: 6px; font-size: 14px; }
+</style>
+<script type="importmap">
+  { "imports": { "three": "/node_modules/three/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="wrap"></div>
+<div id="ui">
+  sheet: <a href="?sheet=profe">profe</a> · <a href="?sheet=tito">tito</a> · <a href="?sheet=faces">faces</a> · <a href="?sheet=lineup">lineup</a>
+  · <label><input type="checkbox" id="anim"> animate</label>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { createProfe, createTito, addStudioLights, PROFE_POSES, TITO_EMOTIONS } from './src/index.js';
+
+const params = new URLSearchParams(location.search);
+const sheet = params.get('sheet') || 'profe';
+if (params.has('render')) document.getElementById('ui').remove();
+
+const ANGLES = [['front', 0], ['3/4', -0.75], ['side', -1.45], ['back 3/4', 2.4]];
+const CELL = 440, HEAD = 100, LEFT = 170;
+
+// A sheet is a list of rows; each row has cells {make, state(t), angle, cam}.
+function profeCam() { return { pos: [0, 1.45, 6.0], look: [0, 1.05, 0], fov: 32 }; }
+function titoCam() { return { pos: [0, 0.95, 3.9], look: [0, 0.68, 0], fov: 32 }; }
+
+function buildSheet() {
+  if (sheet === 'profe') {
+    return { title: 'Profe Claudio v2 - poses (turntable)', cols: ANGLES.map((a) => a[0]),
+      rows: PROFE_POSES.map((pose) => ({ label: pose, cells: ANGLES.map(([, ang]) => ({
+        kind: 'profe', angle: ang, cam: profeCam(),
+        state: (t) => ({ t, pose, mouth: pose === 'explain' ? 0.6 : 0, speaking: pose === 'explain' }),
+      })) })) };
+  }
+  if (sheet === 'tito') {
+    return { title: 'Tito v2 - emotions (turntable)', cols: ANGLES.map((a) => a[0]),
+      rows: TITO_EMOTIONS.map((emotion) => ({ label: emotion, cells: ANGLES.map(([, ang]) => ({
+        kind: 'tito', angle: ang, cam: titoCam(), state: (t) => ({ t, emotion }),
+      })) })) };
+  }
+  if (sheet === 'faces') {
+    const shapes = [['closed', 0], ['half', 0.3], ['open', 0.8], ['O', 0.5]];
+    const looks = [['look L', [-3, 1, 2]], ['look R', [3, 1, 2]], ['look up', [0, 4, 2]], ['look down', [0, -1.5, 3]]];
+    const profeFace = { pos: [0, 1.35, 3.6], look: [0, 1.25, 0], fov: 30 };
+    const titoFace = { pos: [0, 0.8, 2.5], look: [0, 0.75, 0], fov: 30 };
+    return { title: 'Mouth shapes, brows and look-at', cols: ['A', 'B', 'C', 'D'],
+      rows: [
+        { label: 'profe mouth', cells: shapes.map(([sh, amp]) => ({ kind: 'profe', angle: 0.12, cam: profeFace, sub: sh,
+          state: (t) => ({ t: 0.3, mouth: amp, speaking: amp > 0, mouthShape: sh === 'O' ? 'O' : undefined }) })) },
+        { label: 'tito mouth', cells: shapes.map(([sh, amp]) => ({ kind: 'tito', angle: -0.25, cam: titoFace, sub: sh,
+          state: (t) => ({ t: 0.3, mouth: amp, speaking: amp > 0, mouthShape: sh === 'O' ? 'O' : undefined }) })) },
+        { label: 'profe brows/look', cells: looks.map(([nm, p], i) => ({ kind: 'profe', angle: 0.12, cam: profeFace, sub: nm,
+          state: (t) => ({ t: 0.3, lookAt: p, brows: [-0.6, 0, 0.6, 1][i] }) })) },
+        { label: 'tito look', cells: looks.map(([nm, p]) => ({ kind: 'tito', angle: -0.25, cam: titoFace, sub: nm,
+          state: (t) => ({ t: 0.3, lookAt: p }) })) },
+      ] };
+  }
+  return null; // lineup handled separately
+}
+
+const wrap = document.getElementById('wrap');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+wrap.appendChild(renderer.domElement);
+
+function label(text, x, y, cls = '') {
+  const d = document.createElement('div');
+  d.className = 'label ' + cls; d.textContent = text;
+  d.style.left = x + 'px'; d.style.top = y + 'px';
+  wrap.appendChild(d);
+}
+
+let drawFrame;
+if (sheet === 'lineup') {
+  // Both characters inside the real episode set, framed like the vertical video wide shot.
+  const { createSet } = await import('../src/set.js');
+  const W = 1080, H = 1920;
+  renderer.setSize(W, H);
+  const scene = new THREE.Scene();
+  createSet(scene);
+  const profe = createProfe(), tito = createTito();
+  profe.group.position.set(1.1, 0, 0); tito.group.position.set(-1.0, 0, 0.2);
+  scene.add(profe.group, tito.group);
+  const cam = new THREE.PerspectiveCamera(36, W / H, 0.1, 60);
+  cam.position.set(0.05, 2.3, 11.0); cam.lookAt(0.05, 1.7, 0);
+  drawFrame = (t) => {
+    profe.update({ t, pose: 'explain', pointAt: [-1.0, 2.6, 0.4], speaking: true, mouth: 0.5, lookAt: [-1, 1, 0.2] });
+    tito.update({ t, emotion: 'surprised', lookAt: [1.1, 1.4, 0] });
+    renderer.render(scene, cam);
+  };
+} else {
+  const def = buildSheet();
+  const cols = def.cols.length, rows = def.rows.length;
+  const W = LEFT + cols * CELL, H = HEAD + rows * CELL;
+  renderer.setSize(W, H);
+  renderer.setScissorTest(true);
+  const t0 = document.createElement('div'); t0.className = 'title'; t0.textContent = def.title; wrap.appendChild(t0);
+  def.cols.forEach((c, i) => label(c, LEFT + i * CELL + 16, HEAD - 28, 'col'));
+  const cells = [];
+  def.rows.forEach((row, r) => {
+    label(row.label, 16, HEAD + r * CELL + CELL / 2 - 14);
+    row.cells.forEach((cell, c) => {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color((r + c) % 2 ? 0x18224a : 0x1c2852);
+      addStudioLights(scene, { shadows: true });
+      const floor = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 0.1, 8),
+        new THREE.MeshStandardMaterial({ color: 0x7a2f3a, roughness: 0.9, flatShading: true }));
+      floor.position.y = -0.05; floor.receiveShadow = true;
+      scene.add(floor);
+      const ch = cell.kind === 'profe' ? createProfe() : createTito();
+      ch.group.rotation.y = cell.angle;
+      scene.add(ch.group);
+      const cam = new THREE.PerspectiveCamera(cell.cam.fov, 1, 0.1, 50);
+      cam.position.set(...cell.cam.pos); cam.lookAt(...cell.cam.look);
+      if (cell.sub) label(cell.sub, LEFT + c * CELL + 14, HEAD + r * CELL + CELL - 34, 'col');
+      cells.push({ scene, ch, cam, cell, x: LEFT + c * CELL, y: HEAD + r * CELL });
+    });
+  });
+  drawFrame = (t) => {
+    renderer.setClearColor(0x0d1226); renderer.setScissor(0, 0, W, H); renderer.setViewport(0, 0, W, H); renderer.clear();
+    for (const k of cells) {
+      k.ch.update(k.cell.state(t));
+      const yy = H - k.y - CELL; // GL origin bottom-left
+      renderer.setViewport(k.x + 4, yy + 4, CELL - 8, CELL - 8);
+      renderer.setScissor(k.x + 4, yy + 4, CELL - 8, CELL - 8);
+      renderer.render(k.scene, k.cam);
+    }
+  };
+}
+
+const T = Number(params.get('t') ?? 1.3);
+drawFrame(T);
+await document.fonts.ready;
+window.sheetReady = true;
+window.drawFrame = drawFrame;
+
+// Optional live animation (manual preview only; renders use a fixed t).
+const animBox = document.getElementById('anim');
+if (animBox) {
+  let start = null;
+  const loop = (now) => { if (!animBox.checked) { start = null; return; } start ??= now; drawFrame(T + (now - start) / 1000); requestAnimationFrame(loop); };
+  animBox.onchange = () => animBox.checked && requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

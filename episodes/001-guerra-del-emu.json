@@ -1,0 +1,29 @@
+{
+  "id": "001-guerra-del-emu",
+  "title": "Australia le declaró la guerra a los emús… y perdió",
+  "thumbnailText": "¡PERDIERON CONTRA PÁJAROS!",
+  "guest": "emu",
+  "lines": [
+    { "speaker": "tito", "text": "¿Australia le declaró la guerra a quién?", "emotion": "surprised" },
+    { "speaker": "profe", "text": "A los emús. Año 1932." },
+    { "speaker": "tito", "text": "¿Los pájaros esos que no vuelan?" },
+    { "speaker": "profe", "text": "Veinte mil. Se estaban comiendo el trigo de los granjeros." },
+    { "speaker": "tito", "text": "¿Y qué mandaron?" },
+    { "speaker": "profe", "text": "Soldados. Dos ametralladoras. Diez mil balas.", "shot": "guest" },
+    { "speaker": "tito", "text": "Bueno, fácil.", "emotion": "happy" },
+    { "speaker": "profe", "text": "Los emús se separaban en grupitos y corrían a cincuenta kilómetros por hora.", "shot": "guest" },
+    { "speaker": "tito", "text": "¿Usaron estrategia militar?" },
+    { "speaker": "profe", "text": "El comandante dijo que aguantaban las balas como tanques." },
+    { "speaker": "tito", "text": "¿Y cuántos cayeron?" },
+    { "speaker": "profe", "text": "Según el ejército, unos mil. Con casi diez mil balas." },
+    { "speaker": "tito", "text": "¡Diez balas por emú!", "emotion": "surprised" },
+    { "speaker": "profe", "text": "El ejército se retiró. Los emús siguieron comiendo trigo." },
+    { "speaker": "tito", "text": "O sea… ganaron los pájaros.", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Oficialmente nadie lo dice. Pero sí.", "shot": "wide" },
+    { "speaker": "tito", "text": "Voy a respetar más a las palomas." }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Emu_War",
+    "https://www.nma.gov.au/defining-moments/resources/emu-war"
+  ]
+}

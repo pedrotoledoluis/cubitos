@@ -1,0 +1,26 @@
+{
+  "id": "004-caligula-guerra-mar",
+  "title": "El emperador que le declaró la guerra al mar",
+  "thumbnailText": "¡ATACÓ AL MAR!",
+  "thumbnailBoard": { "scene": "equation", "items": ["soldier", "→", "shell"], "title": "BOTÍN DEL OCÉANO" },
+  "sources": ["https://en.wikipedia.org/wiki/Caligula", "Suetonio, \"Vidas de los doce césares\", Calígula 46"],
+  "hashtags": ["#Shorts", "#historia", "#roma"],
+  "tags": ["historia", "caligula", "roma", "imperio romano", "suetonio", "curiosidades", "humor", "historia en cubitos"],
+  "lines": [
+    { "speaker": "tito", "text": "¿Un emperador le declaró la guerra al mar?", "shot": "wide", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Calígula. Año 40 después de Cristo. Llevó a su ejército hasta la costa, frente a Britania.", "say": "Calígula. Año cuarenta después de Cristo. Llevó a su ejército hasta la costa, frente a Britania.", "board": { "scene": "route", "britain": true, "traveler": "soldier", "stops": [{ "label": "ROMA", "x": 720, "y": 560 }, { "label": "COSTA", "x": 380, "y": 300, "dx": 80, "dy": 50 }, { "label": "BRITANIA", "x": 225, "y": 200, "dy": -60, "color": "#8ec5ff" }], "title": "AÑO 40 d.C." }, "sfx": [["whoosh", 2.0]] },
+    { "speaker": "tito", "text": "Para invadir Britania, supongo.", "emotion": "neutral" },
+    { "speaker": "profe", "text": "Eso pensaban todos. Formó a miles de soldados en la playa.", "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Les ordenó... juntar conchas de mar.", "board": { "scene": "equation", "items": ["soldier", "→", "shell"], "title": "ORDEN: JUNTAR CONCHAS" }, "titoEmotion": "skeptical", "sfx": [["pop", 1.6]] },
+    { "speaker": "tito", "text": "¿Conchas?", "emotion": "surprised", "sfx": [["boing", 0.0]] },
+    { "speaker": "profe", "text": "Las llamó \"botín del océano\". Y las mandó a Roma como trofeo de guerra.", "say": "Las llamó botín del océano. Y las mandó a Roma como trofeo de guerra.", "board": { "scene": "route", "britain": true, "traveler": "chest", "travelerScale": 0.5, "stops": [{ "label": "COSTA", "x": 380, "y": 300, "dx": 80, "dy": 50 }, { "label": "ROMA", "x": 720, "y": 560 }], "title": "BOTÍN DEL OCÉANO" }, "titoEmotion": "surprised", "sfx": [["whoosh", 1.8]] },
+    { "speaker": "tito", "text": "¿Y el mar se rindió?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "El mar no dijo nada. Calígula lo declaró vencido igual.", "pose": "shrug", "titoEmotion": "happy", "sfx": [["wave", 0.0]] },
+    { "speaker": "tito", "text": "¿Esto es verdad?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Lo cuenta Suetonio, un historiador romano. Algunos creen que fue un castigo para soldados rebeldes.", "board": { "scene": "scroll", "label": "SUETONIO", "subtitle": "VIDAS DE LOS DOCE CÉSARES" }, "sfx": [["ding", 1.2]] },
+    { "speaker": "tito", "text": "O una excusa para ir a la playa.", "emotion": "happy" },
+    { "speaker": "profe", "text": "También es posible.", "shot": "wide", "dutch": true, "pose": "shrug", "titoEmotion": "happy", "sfx": [["boing", 0.6]] },
+    { "speaker": "tito", "text": "El único emperador que le ganó una guerra al agua.", "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

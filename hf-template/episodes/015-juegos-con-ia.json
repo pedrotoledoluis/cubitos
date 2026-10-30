@@ -1,0 +1,30 @@
+{
+  "id": "015-juegos-con-ia",
+  "title": "¿Se puede crear un videojuego con IA? El DOOM que nadie programó",
+  "thumbnailText": "UN JUEGO *SOÑADO* POR IA",
+  "thumbnailBoard": { "scene": "bigStat", "title": "GAMENGEN (2024)", "value": "20 FPS", "emoji": "👾", "label": "DOOM SIN MOTOR DE JUEGO", "color": "#9be08a" },
+  "thumbnailLocation": "game_studio", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "surprised",
+  "costume": "hacker", "costumeFrom": 4,
+  "locations": ["office", "game_studio"],
+  "sources": ["https://arxiv.org/abs/2408.14837 (Valevski et al., Google Research: \"Diffusion Models Are Real-Time Game Engines\", 2024)", "https://gamengen.github.io/", "https://es.wikipedia.org/wiki/Doom_(videojuego_de_1993)"],
+  "hashtags": ["#Shorts", "#videojuegos", "#inteligenciaartificial"],
+  "tags": ["videojuegos", "inteligencia artificial", "doom", "gamengen", "google", "modelos de difusion", "desarrollo de juegos"],
+  "lines": [
+    { "speaker": "tito", "text": "Profe, ¿la IA puede hacer un videojuego? ¡Le pido uno de cuyes ninja!", "shot": "wide", "emotion": "happy", "novaEmotion": "smug" },
+    { "speaker": "nova", "text": "Tito, la IA no es un delivery de juegos.", "emotion": "smug", "titoEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Pero hay un ejemplo real que les va a volar la cabeza. Vamos al estudio.", "pose": "wave", "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "profe", "location": "game_studio", "text": "En dos mil veinticuatro, Google Research presentó GameNGen: una IA que hace funcionar el clásico DOOM sin el código del juego.", "say": "En dos mil veinticuatro, Google Research presentó Geim en gen: una IA que hace funcionar el clásico Dum sin el código del juego.", "board": { "scene": "bigStat", "title": "GAMENGEN · GOOGLE RESEARCH", "value": "DOOM", "emoji": "👾", "label": "SIN MOTOR DE JUEGO", "sub": "2024", "color": "#ff6b5e" }, "titoEmotion": "surprised", "novaEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿Sin código? ¿Entonces con qué? ¿Con fe?", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "nova", "text": "Con un modelo de difusión, primo. El mismo tipo de IA que genera imágenes.", "emotion": "explaining", "titoEmotion": "surprised" },
+    { "speaker": "profe", "text": "Tú aprietas un botón, y la IA dibuja el siguiente cuadro adivinando qué pasaría. Cuadro tras cuadro, unas veinte veces por segundo.", "board": { "scene": "emojiRow", "title": "CÓMO FUNCIONA", "items": [{ "emoji": "🎮", "label": "TU BOTÓN" }, { "emoji": "🧠", "label": "LA IA PREDICE" }, { "emoji": "🖼️", "label": "NUEVO CUADRO" }], "arrows": true, "bottom": "~20 VECES POR SEGUNDO" }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "O sea, el juego se lo está imaginando en vivo.", "emotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Exacto. Lo entrenaron con muchísimas partidas jugadas por agentes de IA.", "emotion": "explaining", "titoEmotion": "neutral" },
+    { "speaker": "profe", "text": "Y en una prueba con clips cortos, las personas apenas distinguían el juego real del simulado. Acertaban poco más que al azar.", "board": { "scene": "emojiVs", "title": "¿CUÁL ES EL REAL?", "left": { "emoji": "💾", "label": "DOOM REAL" }, "right": { "emoji": "🤖", "label": "DOOM SOÑADO", "color": "#7ef0ff" }, "bottom": "CASI NADIE ACERTABA" }, "titoEmotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "tito", "text": "Como cuando mi tía no distingue el ají de la rocoto.", "say": "Como cuando mi tía no distingue el ají del rocoto.", "emotion": "happy", "novaEmotion": "skeptical", "profePose": "facepalm" },
+    { "speaker": "nova", "text": "Ojo, tiene límites: era un proyecto de investigación, con poca memoria de lo que pasó hace unos segundos.", "emotion": "explaining", "titoEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Hoy los estudios usan IA sobre todo como ayudante: para bocetos, código, texturas y pruebas. Los humanos siguen diseñando la diversión.", "board": { "scene": "emojiRow", "title": "LA IA COMO AYUDANTE", "items": [{ "emoji": "✏️", "label": "BOCETOS" }, { "emoji": "💻", "label": "CÓDIGO" }, { "emoji": "🎨", "label": "TEXTURAS" }, { "emoji": "🧪", "label": "PRUEBAS" }] }, "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¡Bacán! Entonces mi juego de cuyes ninja sí puede existir.", "emotion": "happy", "novaEmotion": "smug" },
+    { "speaker": "nova", "text": "Sí, pero vas a tener que aprender a programar, primo.", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "Ya fue. Mejor le pido a la IA que se imagine que ya lo terminé.", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "surprised" }
+  ]
+}

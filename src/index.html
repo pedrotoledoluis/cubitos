@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Historia en Cubitos stage</title>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #0d1226; }
+  #stage canvas { display: block; }
+  .overlay { position: absolute; left: 0; right: 0; text-align: center; color: #fff;
+    font-family: "Arial Black", "Segoe UI Black", Impact, sans-serif; font-weight: 900;
+    -webkit-text-stroke: 14px #000; paint-order: stroke fill; line-height: 1.15; }
+  #caption { top: 15%; margin: 0 auto; width: 88%; font-size: 76px; display: none;
+    text-shadow: 0 6px 0 rgba(0,0,0,0.6); }
+  #bigtext { display: none; }
+  body.mode-thumbnail #bigtext { display: block; top: 8%; left: 44%; right: 3%; font-size: 108px;
+    color: #ffe14a; -webkit-text-stroke: 18px #000; transform: rotate(-3deg); text-shadow: 0 10px 0 rgba(0,0,0,0.7); }
+  body.mode-banner #bigtext { display: block; top: 50%; transform: translateY(-50%); font-size: 128px;
+    -webkit-text-stroke: 22px #000; text-shadow: 0 12px 0 rgba(0,0,0,0.6); }
+</style>
+<script type="importmap">
+  { "imports": { "three": "/node_modules/three/build/three.module.js" } }
+</script>
+</head>
+<body>
+  <div id="stage"></div>
+  <div id="caption" class="overlay"></div>
+  <div id="bigtext" class="overlay"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

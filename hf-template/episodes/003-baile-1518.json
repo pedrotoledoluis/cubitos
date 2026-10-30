@@ -1,0 +1,28 @@
+{
+  "id": "003-baile-1518",
+  "title": "La epidemia de baile de 1518: bailaron hasta desmayarse",
+  "thumbnailText": "¡NO PODÍAN PARAR DE BAILAR!",
+  "thumbnailBoard": { "scene": "questionCrowd" },
+  "sources": ["https://en.wikipedia.org/wiki/Dancing_plague_of_1518"],
+  "hashtags": ["#Shorts", "#historia", "#curiosidades"],
+  "tags": ["historia", "epidemia de baile", "1518", "estrasburgo", "curiosidades", "humor", "historia en cubitos"],
+  "lines": [
+    { "speaker": "tito", "text": "¿Una ciudad entera se puso a bailar y no podía parar?", "shot": "wide", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Estrasburgo, julio de 1518. Una mujer, Frau Troffea, salió a la calle y empezó a bailar.", "say": "Estrasburgo, julio de mil quinientos dieciocho. Una mujer, Frau Trofea, salió a la calle y empezó a bailar.", "board": { "scene": "mapPin", "pin": [520, 360], "label": "ESTRASBURGO", "date": "JULIO 1518", "icon": "dancer", "title": "FRAU TROFFEA" }, "sfx": [["pop", 1.0]] },
+    { "speaker": "tito", "text": "Bueno, le gustaba la música.", "emotion": "happy" },
+    { "speaker": "profe", "text": "No había música. Y bailó durante días.", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "¿Días?", "emotion": "surprised", "sfx": [["boing", 0.0]] },
+    { "speaker": "profe", "text": "En una semana se le sumaron decenas de personas. Algunas crónicas hablan de cientos.", "board": { "scene": "counter", "label": "BAILARINES", "to": 400, "final": "¿CIENTOS?", "icon": "dancer", "max": 12, "cols": 6 }, "titoEmotion": "surprised", "sfx": [["pop", 1.0], ["pop", 1.8], ["pop", 2.5]] },
+    { "speaker": "tito", "text": "¿Y las autoridades qué hicieron?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Los médicos dijeron que era \"sangre caliente\". Y que la cura era... bailar más.", "say": "Los médicos dijeron que era sangre caliente. Y que la cura era... bailar más.", "board": { "scene": "equation", "items": ["doctor", "+", "dancer", "=", { "icon": "dancer", "count": 3 }], "title": "RECETA: ¡MÁS BAILE!" }, "titoEmotion": "skeptical", "sfx": [["ding", 3.0]] },
+    { "speaker": "tito", "text": "No.", "emotion": "scared", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Construyeron un escenario. Contrataron músicos.", "board": { "scene": "stage", "title": "ESCENARIO + MÚSICOS" }, "titoEmotion": "surprised", "sfx": [["fiddle", 1.0]] },
+    { "speaker": "tito", "text": "¡Le pusieron música a la epidemia!", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Según algunas crónicas, varios murieron de agotamiento.", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Y por qué pasó?", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Hasta hoy nadie lo sabe. La teoría más aceptada: histeria colectiva.", "board": { "scene": "questionCrowd", "title": "¿HISTERIA COLECTIVA?" } },
+    { "speaker": "tito", "text": "O sea que nadie sabe por qué bailaban.", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Exacto.", "shot": "wide", "dutch": true, "pose": "shrug", "titoEmotion": "skeptical", "sfx": [["boing", 0.4]] },
+    { "speaker": "tito", "text": "Igual que en las fiestas de mi familia.", "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

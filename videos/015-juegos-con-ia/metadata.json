@@ -1,0 +1,27 @@
+{
+  "id": "015-juegos-con-ia",
+  "title": "¿Se puede crear un videojuego con IA? El DOOM que nadie programó",
+  "description": "¿Se puede crear un videojuego con IA? El DOOM que nadie programó\n\nLa historia real, pero en cubitos. Dos sketches por semana sobre los momentos más absurdos, épicos y raros de la humanidad. Todo es verdad. Las caras no.\n\nFuentes:\n- https://arxiv.org/abs/2408.14837 (Valevski et al., Google Research: \"Diffusion Models Are Real-Time Game Engines\", 2024)\n- https://gamengen.github.io/\n- https://es.wikipedia.org/wiki/Doom_(videojuego_de_1993)\n\n#Shorts #videojuegos #inteligenciaartificial\n",
+  "tags": [
+    "videojuegos",
+    "inteligencia artificial",
+    "doom",
+    "gamengen",
+    "google",
+    "modelos de difusion",
+    "desarrollo de juegos",
+    "Shorts",
+    "inteligenciaartificial"
+  ],
+  "categoryId": "27",
+  "defaultLanguage": "es",
+  "defaultAudioLanguage": "es",
+  "madeForKids": false,
+  "selfDeclaredMadeForKids": false,
+  "privacyStatus": "private",
+  "files": {
+    "video": "015-juegos-con-ia.mp4",
+    "thumbnail": "015-juegos-con-ia-thumbnail.png",
+    "description": "015-juegos-con-ia-description.txt"
+  }
+}

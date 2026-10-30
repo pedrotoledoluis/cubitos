@@ -1,0 +1,29 @@
+{
+  "id": "002-napoleon-conejos",
+  "title": "Napoleón fue derrotado… por conejos",
+  "thumbnailText": "¡LO ATACARON CONEJOS!",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Alexandre_Berthier",
+    "https://en.wikipedia.org/wiki/Paul_Thi%C3%A9bault"
+  ],
+  "hashtags": ["#Shorts", "#historia", "#napoleon"],
+  "lines": [
+    { "speaker": "tito", "text": "¿Napoleón perdió una batalla contra conejos?", "shot": "wide", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Julio de 1807. Acababa de firmar la paz con Rusia.", "say": "Julio de mil ochocientos siete. Acababa de firmar la paz con Rusia.", "board": "map" },
+    { "speaker": "tito", "text": "Y quiso festejar.", "emotion": "happy" },
+    { "speaker": "profe", "text": "Con una cacería de conejos. La organizó su mano derecha, Berthier.", "say": "Con una cacería de conejos. La organizó su mano derecha, Bertié." },
+    { "speaker": "tito", "text": "¿Cuántos conejos?" },
+    { "speaker": "profe", "text": "Según las memorias de la época, cientos. Algunos dicen tres mil.", "board": "counter", "sfx": [["pop", 1.2], ["pop", 2.0], ["pop", 2.6], ["squeak", 3.3]] },
+    { "speaker": "tito", "text": "Bueno, Napoleón contra conejitos. Gana fácil.", "emotion": "happy" },
+    { "speaker": "profe", "text": "Problema: Berthier no consiguió conejos salvajes. Compró conejos de granja.", "say": "Problema: Bertié no consiguió conejos salvajes. Compró conejos de granja." },
+    { "speaker": "tito", "text": "¿Y eso qué cambia?" },
+    { "speaker": "profe", "text": "Los conejos de granja creen que los humanos traen comida.", "board": "carrot", "sfx": [["squeak", 2.2]] },
+    { "speaker": "tito", "text": "Ay, no.", "emotion": "surprised" },
+    { "speaker": "profe", "text": "Abrieron las jaulas. Y los conejos corrieron directo hacia Napoleón.", "board": "swarm", "sfx": [["whoosh", 1.6], ["squeak", 2.4], ["squeak", 3.1]] },
+    { "speaker": "tito", "text": "¡Lo rodearon!", "emotion": "surprised", "sfx": [["boing", 0.0]] },
+    { "speaker": "profe", "text": "Se le subían a las piernas. Tuvo que escapar en su carruaje.", "board": "carriage", "sfx": [["hooves", 1.4], ["whoosh", 2.2]] },
+    { "speaker": "tito", "text": "El hombre que conquistó media Europa..." },
+    { "speaker": "profe", "text": "...derrotado por el almuerzo.", "shot": "wide", "dutch": true, "sfx": [["boing", 0.9]] },
+    { "speaker": "tito", "text": "Hasta los conejos tenían mejor estrategia.", "emotion": "happy" }
+  ]
+}

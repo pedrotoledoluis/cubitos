@@ -1,0 +1,208 @@
+{
+ "id": "013-ipo-anthropic",
+ "title": "Anthropic sale a bolsa: ¿qué es una IPO? (lo que se sabe)",
+ "thumbnailText": "LA IA SALE A *BOLSA*",
+ "thumbnailBoard": {
+  "scene": "bigStat",
+  "title": "NASDAQ",
+  "value": "ANT",
+  "emoji": "🔔",
+  "label": "TICKER PROPUESTO",
+  "color": "#ffe27a"
+ },
+ "thumbnailLocation": "trading_floor",
+ "thumbnailPose": "shrug",
+ "thumbnailTitoEmotion": "surprised",
+ "costume": "none",
+ "locations": [
+  "office",
+  "trading_floor"
+ ],
+ "sources": [
+  "https://www.bernama.com/en/world/news.php?id=2626193 (Reuters vía Bernama, 27/10/2026: Anthropic presenta su S-1 público)",
+  "https://www.iposcoop.com/the-ipo-buzz-anthropic-ant-proposed-files-its-s-1/",
+  "https://es.wikipedia.org/wiki/Oferta_pública_de_venta",
+  "Datos según el formulario S-1 y reportes de prensa al 29/10/2026; el precio y la fecha final de cotización aún no se conocen. No es asesoría financiera."
+ ],
+ "hashtags": [
+  "#Shorts",
+  "#anthropic",
+  "#bolsa"
+ ],
+ "tags": [
+  "anthropic",
+  "claude",
+  "ipo",
+  "salida a bolsa",
+  "nasdaq",
+  "inteligencia artificial",
+  "acciones",
+  "economia"
+ ],
+ "lines": [
+  {
+   "speaker": "tito",
+   "text": "Nova, dicen que Anthropic sale a bolsa. ¿Le regalamos una bolsa?",
+   "shot": "wide",
+   "emotion": "surprised",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "nova",
+   "text": "Tito, no es una bolsa de pan. Es la bolsa de valores.",
+   "emotion": "smug",
+   "titoEmotion": "skeptical"
+  },
+  {
+   "speaker": "profe",
+   "location": "trading_floor",
+   "text": "Una IPO, u oferta pública inicial, es cuando una empresa privada vende acciones al público por primera vez.",
+   "say": "Una i pe o, u oferta pública inicial, es cuando una empresa privada vende acciones al público por primera vez.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "¿QUÉ ES UNA IPO?",
+    "items": [
+     {
+      "emoji": "🏢",
+      "label": "EMPRESA PRIVADA"
+     },
+     {
+      "emoji": "📄",
+      "label": "ACCIONES"
+     },
+     {
+      "emoji": "👥",
+      "label": "PÚBLICO"
+     }
+    ],
+    "arrows": true
+   },
+   "titoEmotion": "surprised",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "nova",
+   "text": "Y una acción es una tajada de la empresa. Como una tajada de pizza.",
+   "emotion": "explaining",
+   "titoEmotion": "happy"
+  },
+  {
+   "speaker": "profe",
+   "text": "Anthropic es la empresa que creó a Claude, un asistente de inteligencia artificial.",
+   "say": "Anthropic es la empresa que creó a Clod, un asistente de inteligencia artificial.",
+   "titoEmotion": "neutral",
+   "novaEmotion": "happy"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿Claude? ¿Como usted, profe Claudio?",
+   "say": "¿Clod? ¿Como usted, profe Claudio?",
+   "emotion": "surprised",
+   "profePose": "shrug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Pura coincidencia. Yo no cotizo en bolsa. Todavía.",
+   "pose": "shrug",
+   "titoEmotion": "happy",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "profe",
+   "text": "Según Reuters, esta semana Anthropic hizo público su S-1, el documento oficial para salir a bolsa en Estados Unidos.",
+   "board": {
+    "scene": "newspaper",
+    "masthead": "MERCADOS",
+    "date": "OCT 2026",
+    "headline": "ANTHROPIC PRESENTA SU S-1",
+    "sub": "Nasdaq · ticker propuesto: ANT"
+   },
+   "titoEmotion": "surprised",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "nova",
+   "text": "Quiere cotizar en el Nasdaq con el símbolo A, N, T.",
+   "say": "Quiere cotizar en el Násdac con el símbolo a, ene, te.",
+   "emotion": "explaining",
+   "titoEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "¿ANT? ¿Hormiga en inglés? Una hormiga gigante.",
+   "say": "¿Ant? ¿Hormiga en inglés? Una hormiga gigante.",
+   "emotion": "happy",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "profe",
+   "text": "En mayo recaudó sesenta y cinco mil millones de dólares, valorada en unos novecientos sesenta y cinco mil millones.",
+   "board": {
+    "scene": "bigStat",
+    "title": "ÚLTIMA RONDA PRIVADA (MAYO)",
+    "value": "965.000 M$",
+    "emoji": "💰",
+    "label": "VALORACIÓN EN MILLONES DE DÓLARES",
+    "sub": "SEGÚN REUTERS",
+    "color": "#9be08a"
+   },
+   "titoEmotion": "scared",
+   "novaEmotion": "surprised"
+  },
+  {
+   "speaker": "tito",
+   "text": "Con eso me compro todos los chifas de Lima. Dos veces.",
+   "emotion": "surprised",
+   "novaEmotion": "smug"
+  },
+  {
+   "speaker": "nova",
+   "text": "Ojo: el precio por acción y el día exacto aún no se conocen. Se habla de mediados de noviembre.",
+   "emotion": "explaining",
+   "titoEmotion": "neutral"
+  },
+  {
+   "speaker": "profe",
+   "text": "Hay rumores de valoraciones mayores. Rumores. La cifra real la pone el mercado.",
+   "board": {
+    "scene": "emojiRow",
+    "title": "LO QUE SE SABE",
+    "items": [
+     {
+      "emoji": "✅",
+      "label": "S-1 PÚBLICO"
+     },
+     {
+      "emoji": "✅",
+      "label": "NASDAQ: ANT"
+     },
+     {
+      "emoji": "❓",
+      "label": "PRECIO"
+     },
+     {
+      "emoji": "❓",
+      "label": "FECHA"
+     }
+    ]
+   },
+   "titoEmotion": "skeptical",
+   "novaEmotion": "curious"
+  },
+  {
+   "speaker": "tito",
+   "text": "Igual, no es consejo de inversión. Mi capital son tres soles y un pasaje de combi.",
+   "emotion": "neutral",
+   "novaEmotion": "happy"
+  },
+  {
+   "speaker": "tito",
+   "text": "Profe, cuando usted salga a bolsa, yo compro la primera acción de Claudio.",
+   "shot": "wide",
+   "dutch": true,
+   "emotion": "happy",
+   "profePose": "facepalm",
+   "novaEmotion": "smug"
+  }
+ ]
+}

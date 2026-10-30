@@ -1,0 +1,15 @@
+# Credentials - never commit
+secrets/
+uploader/uploaded.json
+
+# Dependencies
+node_modules/
+
+# Generated / heavy outputs (videos live on YouTube)
+*.mp4
+*.wav
+hf-template/renders/
+hf-template/.build/
+build/
+out/
+*.log

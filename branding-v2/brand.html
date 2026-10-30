@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cubitos Branding</title>
+<link rel="stylesheet" href="brand.css">
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js" } }</script>
+</head>
+<body>
+<canvas id="bg" class="layer"></canvas>
+<div id="three" class="layer"></div>
+<div id="type" class="layer"></div>
+<script type="module">
+// Modes: avatar (800x800), banner (2560x1440), logo (transparent), watermark (150x150 transparent).
+import { paintSkyline, create3DLayer, logoHTML } from './brand.js';
+const mode = new URLSearchParams(location.search).get('mode') || 'avatar';
+const W = innerWidth, H = innerHeight;
+const bg = document.getElementById('bg'); bg.width = W; bg.height = H;
+const typ = document.getElementById('type');
+let layer = null;
+
+if (mode === 'avatar') {
+paintSkyline(bg, { seed: 5, glow: [400, 420, 420], horizon: 0.75, roof: 650 });  layer = create3DLayer(document.getElementById('three'), { width: W, height: H, ppu: 215, tilt: 0.1, cast: [    { who: 'profe', px: [470, 640], yaw: -0.12, z: -1, state: { pose: 'wave', lookAt: [-0.8, 0.8, 3] } },    { who: 'tito', px: [290, 672], yaw: 0.15, scale: 1.1, z: 1, state: { emotion: 'neutral', mouthShape: 'smile', lookAt: [0.3, 1.2, 6] } },  ] });
+} else if (mode === 'banner') {
+  paintSkyline(bg, { seed: 42, moon: [1980, 300, 110], glow: [1280, 760, 900], horizon: 0.7, roof: 925 });
+  layer = create3DLayer(document.getElementById('three'), { width: W, height: H, ppu: 170, tilt: 0.1, cast: [
+    { who: 'tito', px: [680, 925], yaw: 0.2, state: { emotion: 'surprised', lookAt: [3, 2, 4] } },
+    { who: 'profe', px: [1840, 925], yaw: -0.2, state: { pose: 'wave', lookAt: [-3, 2, 4] } },
+  ] });
+  typ.innerHTML = `<div style="position:absolute;left:0;right:0;top:575px;text-align:center">${logoHTML()}
+    <br><div class="tagline" style="font-size:48px;margin-top:18px;display:inline-block;padding:6px 34px 12px;border-radius:40px;background:rgba(10,10,24,.78)">La historia real, pero en cubitos</div></div>`;
+  typ.querySelector('.logo').style.fontSize = '84px';
+} else if (mode === 'logo') {
+  bg.remove();
+  typ.innerHTML = `<div style="position:absolute;inset:0;display:grid;place-items:center">${logoHTML()}</div>`;
+  typ.querySelector('.logo').style.fontSize = '190px';
+} else if (mode === 'watermark') {
+  bg.remove();
+  layer = create3DLayer(document.getElementById('three'), { width: W, height: H, ppu: 92, tilt: 0.05, shadow: false, cast: [
+    { who: 'tito', px: [72, 140], yaw: 0.0, state: { emotion: 'happy', lookAt: [0, 1, 6] } },
+  ] });
+}
+if (layer) layer.render(1.3);
+await document.fonts.ready;
+window.sheetReady = true;
+</script>
+</body>
+</html>

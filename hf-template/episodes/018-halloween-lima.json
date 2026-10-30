@@ -1,0 +1,33 @@
+{
+  "id": "018-halloween-lima",
+  "title": "Halloween en Lima: ¿a dónde salir esta noche? (Tito reportero)",
+  "thumbnailText": "TITO REPORTA DESDE *BARRANCO*",
+  "thumbnailBoard": { "scene": "emojiRow", "title": "31 DE OCTUBRE EN LIMA", "items": [{ "emoji": "🎃", "label": "HALLOWEEN" }, { "emoji": "🎸", "label": "CANCIÓN CRIOLLA" }] },
+  "thumbnailLocation": "lima_night", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "happy",
+  "titoProp": "mic",
+  "costume": "none",
+  "locations": ["lima_night"],
+  "sources": ["https://es.wikipedia.org/wiki/Día_de_la_Canción_Criolla", "https://es.wikipedia.org/wiki/Distrito_de_Barranco", "https://es.wikipedia.org/wiki/Puente_de_los_Suspiros_(Lima)", "https://es.wikipedia.org/wiki/Parque_Kennedy", "Horarios y eventos cambian cada año: revisa las redes de cada local y los avisos de tu municipalidad. Si tomas, no manejes."],
+  "hashtags": ["#Shorts", "#lima", "#halloween"],
+  "tags": ["halloween", "lima", "barranco", "miraflores", "calle de las pizzas", "dia de la cancion criolla", "peru", "vida nocturna"],
+  "lines": [
+    { "speaker": "tito", "text": "¡Buenas noches, Lima! Tito en vivo desde la calle. ¿A dónde ir este Halloween?", "shot": "wide", "emotion": "happy" },
+    { "speaker": "tito", "text": "Tengo conmigo a un experto. Profe, ¿por qué no vino disfrazado?", "shot": "titoProfe", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Sí vine disfrazado, Tito. De profesor responsable.", "pose": "shrug", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "Uy, qué miedo. Primera parada, profe.", "emotion": "scared" },
+    { "speaker": "profe", "text": "Barranco. El distrito bohemio: bares, peñas y el Puente de los Suspiros. En Halloween se llena de disfraces.", "board": { "scene": "emojiRow", "title": "BARRANCO", "items": [{ "emoji": "🌉", "label": "PUENTE DE LOS SUSPIROS" }, { "emoji": "🎶", "label": "PEÑAS" }, { "emoji": "🎭", "label": "DISFRACES" }] }, "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "Dicen que si cruzas el puente aguantando la respiración, se cumple tu deseo.", "emotion": "surprised", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Eso dice la leyenda. Yo no lo recomiendo con disfraz de dinosaurio inflable.", "titoEmotion": "happy" },
+    { "speaker": "tito", "text": "Anotado. ¿Y si quiero algo más movido?", "emotion": "neutral" },
+    { "speaker": "profe", "text": "Miraflores. Junto al Parque Kennedy está la famosa Calle de las Pizzas, con música hasta tarde.", "board": { "scene": "emojiRow", "title": "MIRAFLORES", "items": [{ "emoji": "🌳", "label": "PARQUE KENNEDY" }, { "emoji": "🍕", "label": "CALLE DE LAS PIZZAS" }, { "emoji": "🐈", "label": "LOS GATOS DEL PARQUE" }] }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¡Los gatos del parque! Ellos se disfrazan de gato todo el año. Bacán.", "emotion": "happy", "profePose": "facepalm" },
+    { "speaker": "profe", "text": "Y si prefieres algo tranquilo, en San Isidro y Miraflores hay restaurantes y lounges para una noche más calmada.", "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "Profe, en mi barrio la gente no dice Halloween. Dice otra cosa.", "emotion": "skeptical" },
+    { "speaker": "profe", "text": "Claro. El treinta y uno de octubre también es el Día de la Canción Criolla, creado en mil novecientos cuarenta y cuatro.", "board": { "scene": "emojiVs", "title": "31 DE OCTUBRE EN EL PERÚ", "left": { "emoji": "🎃", "label": "HALLOWEEN", "color": "#ff9a3c" }, "right": { "emoji": "🎸", "label": "CANCIÓN CRIOLLA", "color": "#ffe27a" }, "bottom": "¿POR QUÉ NO LOS DOS?" }, "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¡Entonces me disfrazo de fantasma y canto un vals! ¡El fantasma criollo!", "emotion": "happy" },
+    { "speaker": "profe", "text": "Y lo importante, Tito: si tomas, no manejes. Regresa en taxi seguro, cuida tus cosas y avisa dónde estás.", "board": { "scene": "emojiRow", "title": "NOCHE SEGURA", "items": [{ "emoji": "🚫", "label": "SI TOMAS, NO MANEJES" }, { "emoji": "🚕", "label": "TAXI SEGURO" }, { "emoji": "📱", "label": "AVISA DÓNDE ESTÁS" }] }, "pose": "wave", "titoEmotion": "neutral" },
+    { "speaker": "tito", "text": "Clarísimo. Desde las calles de Lima, Tito, para Historia en Cubitos.", "emotion": "happy" },
+    { "speaker": "profe", "text": "Tito, ¿y tu disfraz?", "pose": "shrug", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "Vengo disfrazado de periodista con chamba fija. El disfraz más terrorífico de todos.", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm" }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "017-origen-halloween",
+  "title": "¿De dónde viene Halloween? Celtas, nabos y costumbres rarísimas",
+  "thumbnailText": "HALLOWEEN EMPEZÓ CON UN *NABO*",
+  "thumbnailBoard": { "scene": "emojiVs", "title": "LA LINTERNA ORIGINAL", "left": { "emoji": "🥔", "label": "NABO (IRLANDA)" }, "right": { "emoji": "🎃", "label": "CALABAZA (EE. UU.)" } },
+  "thumbnailLocation": "celtic_night", "thumbnailPose": "shrug", "thumbnailTitoEmotion": "scared",
+  "costume": "druid", "costumeFrom": 4,
+  "locations": ["office", "celtic_night"],
+  "sources": ["https://es.wikipedia.org/wiki/Samhain", "https://es.wikipedia.org/wiki/Halloween", "https://en.wikipedia.org/wiki/Jack-o%27-lantern", "https://es.wikipedia.org/wiki/Día_de_Muertos", "https://en.wikipedia.org/wiki/Hungry_ghost (Festival de los Fantasmas Hambrientos)", "Los detalles sobre los ritos celtas provienen de fuentes medievales y posteriores; mucho de lo que se cuenta sobre Samhain es reconstrucción."],
+  "hashtags": ["#Shorts", "#halloween", "#historia"],
+  "tags": ["halloween", "samhain", "celtas", "historia", "dia de muertos", "jack o lantern", "costumbres", "curiosidades"],
+  "lines": [
+    { "speaker": "nova", "text": "Tito, ¿sabías que las primeras calabazas de Halloween no eran calabazas?", "shot": "wide", "emotion": "smug", "titoEmotion": "surprised" },
+    { "speaker": "tito", "text": "¿Y qué eran? ¿Zapallos con autoestima?", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "nova", "text": "Profe, cuéntele desde el principio. Desde los celtas.", "emotion": "explaining", "titoEmotion": "neutral" },
+    { "speaker": "profe", "location": "celtic_night", "text": "Hace unos dos mil años, los celtas de Irlanda y Escocia celebraban Samhain: el fin de la cosecha y el inicio del invierno.", "say": "Hace unos dos mil años, los celtas de Irlanda y Escocia celebraban Sáuin: el fin de la cosecha y el inicio del invierno.", "board": { "scene": "emojiRow", "title": "SAMHAIN", "items": [{ "emoji": "🌾", "label": "FIN DE COSECHA" }, { "emoji": "❄️", "label": "LLEGA EL INVIERNO" }, { "emoji": "🔥", "label": "HOGUERAS" }] }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Y se creía que esa noche el mundo de los vivos y el de los espíritus se acercaban.", "emotion": "explaining", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Y por qué alguien celebraría eso? Yo cerraría la puerta con llave.", "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Dicen que por eso se disfrazaban: para confundir a los espíritus. Ojo, mucho de esto lo escribieron siglos después.", "titoEmotion": "skeptical", "novaEmotion": "neutral" },
+    { "speaker": "profe", "text": "Luego la Iglesia puso el Día de Todos los Santos el uno de noviembre. La víspera, en inglés antiguo, era All Hallows' Eve.", "say": "Luego la Iglesia puso el Día de Todos los Santos el uno de noviembre. La víspera, en inglés antiguo, era Ol jálous iv.", "board": { "scene": "emojiRow", "title": "DE DÓNDE VIENE EL NOMBRE", "items": [{ "emoji": "😇", "label": "ALL HALLOWS" }, { "emoji": "🌙", "label": "EVE (VÍSPERA)" }, { "emoji": "🎃", "label": "HALLOWEEN" }], "arrows": true }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Y en Irlanda tallaban caras en nabos con una vela dentro. La primera linterna era un nabo.", "emotion": "smug", "titoEmotion": "surprised" },
+    { "speaker": "profe", "text": "Cuando los irlandeses emigraron a Estados Unidos, descubrieron que la calabaza era más grande y fácil de tallar.", "board": { "scene": "emojiVs", "title": "LA LINTERNA ORIGINAL", "left": { "emoji": "🥔", "label": "NABO (IRLANDA)" }, "right": { "emoji": "🎃", "label": "CALABAZA (EE. UU.)", "color": "#ff9a3c" }, "bottom": "UPGRADE DE VERDURA" }, "titoEmotion": "happy", "novaEmotion": "smug" },
+    { "speaker": "tito", "text": "El nabo se fue a Estados Unidos y regresó famoso.", "emotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Ahora lo raro, profe. ¡Costumbres del mundo!", "emotion": "happy", "titoEmotion": "neutral" },
+    { "speaker": "profe", "text": "En México, el Día de Muertos: altares con comida para que los difuntos visiten a su familia. Es una fiesta, no un velorio.", "board": { "scene": "emojiRow", "title": "MÉXICO: DÍA DE MUERTOS", "items": [{ "emoji": "💀", "label": "CALAVERITAS" }, { "emoji": "🌼", "label": "CEMPASÚCHIL" }, { "emoji": "🍞", "label": "PAN DE MUERTO" }] }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "profe", "text": "En partes de Asia, el Festival de los Fantasmas Hambrientos: dejan comida y hasta asientos libres en los espectáculos para los espíritus.", "board": { "scene": "emojiRow", "title": "ASIA: FANTASMAS HAMBRIENTOS", "items": [{ "emoji": "👻", "label": "ESPÍRITUS" }, { "emoji": "🍚", "label": "OFRENDAS" }, { "emoji": "💺", "label": "PRIMERA FILA LIBRE" }] }, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¿Le guardan asiento a un fantasma? En la combi nadie me guarda asiento a mí.", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "nova", "text": "Tienes que morir primero, primo. Es un requisito.", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "Ya fue. Este Halloween me disfrazo de nabo celta y nadie va a entender nada.", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "surprised" }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "historia-en-cubitos",
+  "version": "1.0.0",
+  "description": "Data-driven 3D low-poly YouTube Shorts renderer for Historia en Cubitos",
+  "main": "index.js",
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "branding": "node scripts/branding.mjs",
+    "stills": "node scripts/render.mjs --stills"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^23.11.1",
+    "three": "^0.169.0"
+  }
+}
