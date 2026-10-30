@@ -28,8 +28,17 @@ const GAP = ep.gap ?? 0.25; // keep pacing snappy; episodes that come in under 6
 const TAIL = 1.4;
 const MASTER_LUFS = -15;
 const CAPTION_PAGE_CHARS = 62; // ~3 lines at 72px Arial Black in 88% of 1080px
-const BUNDLED_SFX = 'C:/Users/pmluis/.claude/plugins/cache/claude-plugins-official/hyperframes/0.8.61/skills/media-use/audio/assets/sfx';
+const BUNDLED_SFX = findBundledSfx();
 const TIMEOUT = 180000; // per external command
+
+// HyperFrames ships SFX mp3s inside its npm package; find them in the npx cache (or HYPERFRAMES_SFX_DIR).
+function findBundledSfx() {
+  if (process.env.HYPERFRAMES_SFX_DIR) return process.env.HYPERFRAMES_SFX_DIR;
+  const rel = path.join('node_modules', 'hyperframes', 'dist', 'skills', 'media-use', 'audio', 'assets', 'sfx');
+  const npx = path.join(process.env.LOCALAPPDATA ?? path.join(process.env.HOME ?? '', '.npm'), 'npm-cache', '_npx');
+  const roots = fs.existsSync(npx) ? fs.readdirSync(npx).map((d) => path.join(npx, d, rel)) : [];
+  return roots.find((d) => fs.existsSync(path.join(d, 'whoosh.mp3'))) ?? rel;
+}
 
 // Voice engine + post FX per character.
 const VOICES = {
