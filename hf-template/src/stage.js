@@ -28,13 +28,13 @@ export const SHOTS = {
   tito: { target: [-1.25, 1.3, 0.45], dist: 5.6, az: 0.5, el: 0.13, fov: 26 },
   board: { target: [0.15, 2.5, -0.6], dist: 9.6, az: -0.03, el: 0.0, fov: 42 },
   // thumbnail (16:9): target shifted left so the characters fill the right ~40%, headline on the left
-  thumb: { target: [-2.6, 1.6, 0], dist: 8.9, az: 0.1, el: 0.05, fov: 36 },
+  thumb: { target: [-1.1, 1.45, 0], dist: 6.75, az: 0.12, el: 0.06, fov: 36 },
   // three-character staging (Tito left, Profe center/right, Nova far right)
   wide3: { target: [0.55, 2.3, 0.2], dist: 14.6, az: 0.0, el: 0.02, fov: 40 },
   nova: { target: [2.45, 1.4, 0.55], dist: 7.2, az: -0.45, el: 0.13, fov: 26 },
   titoProfe: { target: [-0.1, 1.7, 0.2], dist: 8.6, az: 0.25, el: 0.08, fov: 34 },
   profeNova: { target: [1.75, 1.7, 0.25], dist: 8.2, az: -0.3, el: 0.08, fov: 34 },
-  thumb3: { target: [-1.8, 1.6, 0], dist: 10.4, az: 0.08, el: 0.05, fov: 36 },
+  thumb3: { target: [-0.5, 1.5, 0], dist: 7.9, az: 0.1, el: 0.06, fov: 36 },
 };
 
 // World props that episode lines can show with `"props": ["name"]` (pop in on the first line of a run).
@@ -302,8 +302,51 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
     }
   }
 
+  // Thumbnail-only "epic" lighting: additive yellow sunburst + glow behind the cast and warm/cool rim lights.
+  let thumbFx = null;
+  function ensureThumbFx() {
+    if (thumbFx) return;
+    const tex = (draw) => {
+      const c = document.createElement('canvas'); c.width = c.height = 1024;
+      draw(c.getContext('2d'), 512);
+      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+    };
+    const rays = tex((g, r) => {
+      const N = 18;
+      for (let i = 0; i < N; i++) {
+        const a0 = (i / N) * Math.PI * 2, a1 = a0 + Math.PI / N;
+        g.beginPath(); g.moveTo(r, r); g.arc(r, r, r * 1.5, a0, a1); g.closePath();
+        g.fillStyle = '#ffd23a'; g.fill();
+      }
+      g.globalCompositeOperation = 'destination-in';
+      const fade = g.createRadialGradient(r, r, r * 0.08, r, r, r);
+      fade.addColorStop(0, 'rgba(0,0,0,0.0)'); fade.addColorStop(0.18, 'rgba(0,0,0,0.9)');
+      fade.addColorStop(0.55, 'rgba(0,0,0,0.55)'); fade.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = fade; g.fillRect(0, 0, 2 * r, 2 * r);
+    });
+    const glow = tex((g, r) => {
+      const gr = g.createRadialGradient(r, r, 0, r, r, r);
+      gr.addColorStop(0, 'rgba(255,236,170,1)'); gr.addColorStop(0.3, 'rgba(255,190,70,0.55)'); gr.addColorStop(1, 'rgba(255,120,40,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, 2 * r, 2 * r);
+    });
+    const mat = (map, opacity) => new THREE.MeshBasicMaterial({ map, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, toneMapped: false });
+    const center = nova ? [0.6, 1.7, -3.4] : [0.0, 1.6, -3.4];
+    const burst = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), mat(rays, 0.7));
+    burst.position.set(...center); burst.rotation.z = 0.12;
+    const halo = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), mat(glow, 0.75));
+    halo.position.set(center[0], center[1], center[2] + 0.05);
+    const warm = new THREE.DirectionalLight(0xffc860, 3.2); warm.position.set(3.5, 4.5, -5);
+    const cool = new THREE.DirectionalLight(0x9fc0ff, 2.2); cool.position.set(-4.5, 3.5, -4);
+    const aim = new THREE.Object3D(); aim.position.set(0, 1.3, 0.3);
+    warm.target = aim; cool.target = aim;
+    scene.add(burst, halo, warm, cool, aim);
+    thumbFx = { burst, halo };
+  }
+
   function renderThumbnail() {
     const t = 1.3;
+    ensureThumbFx();
+    tito.group.position.set(-0.5, 0, 0.8); // tighter group so the cast fills the right side bigger
     locations.set(thumbLocation);
     locations.update(t);
     tito.update({ t, mouth: 0, emotion: episode?.thumbnailTitoEmotion ?? 'surprised', lookAt: PROFE_FACE, mouthShape: 'O' });

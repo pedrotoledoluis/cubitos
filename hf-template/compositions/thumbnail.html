@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=1280, height=720" />
     <title>Historia en Cubitos - thumbnail</title>
     <style>
+      /* Thumbnail v2 ("epic"). Brand rules: headline in the left ~60%, cast on the right, logo bottom-left,
+         nothing important bottom-right (YouTube timestamp). Must read at 320x180. */
       @font-face {
         font-family: "HC Display";
         src: url("../assets/fonts/ariblk.ttf") format("truetype");
@@ -16,7 +18,7 @@
         width: 1280px;
         height: 720px;
         overflow: hidden;
-        background: #0d1226;
+        background: #0b1230;
       }
       #root {
         position: relative;
@@ -31,35 +33,74 @@
         height: 100%;
         display: block;
       }
-      /* Brand rule: headline in the left ~60% over a dark gradient; character reaction on the right. */
+      /* Dark left side for the headline + vignette on every edge. */
       #shade {
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(8, 10, 24, 0.88) 0%, rgba(8, 10, 24, 0.7) 45%, rgba(8, 10, 24, 0) 62%);
+        background:
+          linear-gradient(90deg, rgba(6, 8, 22, 0.92) 0%, rgba(6, 8, 22, 0.78) 38%, rgba(6, 8, 22, 0.25) 56%, rgba(6, 8, 22, 0) 66%),
+          radial-gradient(ellipse 75% 85% at 62% 50%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.6) 100%);
+      }
+      #text {
+        position: absolute;
+        left: 34px;
+        top: 70px;
+        width: 720px;
+        height: 520px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      #badge {
+        display: none;
+        margin: 0 0 18px 8px;
+        padding: 6px 22px 8px;
+        background: #ffd23a;
+        color: #0a0a14;
+        font-family: "HC Display", sans-serif;
+        font-weight: 900;
+        font-size: 44px;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        border: 6px solid #0a0a14;
+        border-radius: 14px;
+        box-shadow: 6px 8px 0 #0a0a14;
+        rotate: -6deg;
+      }
+      #bigtext {
+        margin: 0;
+        text-align: left;
+        color: #ffd23a;
+        font-family: "HC Display", sans-serif;
+        font-weight: 900;
+        font-size: 104px;
+        line-height: 1.04;
+        text-transform: uppercase;
+        -webkit-text-stroke: 18px #0a0a14;
+        paint-order: stroke fill;
+        text-shadow: 0 10px 0 #0a0a14, 0 18px 14px rgba(0, 0, 0, 0.55);
+        rotate: -3deg;
+      }
+      /* The starred key word: white on a red tilted box (contrasting with the yellow headline). */
+      #bigtext .key {
+        display: inline-block;
+        margin: 6px 0 10px;
+        padding: 0 18px 8px;
+        color: #ffffff;
+        background: #e0402f;
+        border: 7px solid #0a0a14;
+        border-radius: 12px;
+        box-shadow: 8px 10px 0 #0a0a14;
+        text-shadow: none;
+        rotate: 2deg;
       }
       #logo {
         position: absolute;
         left: 22px;
         bottom: 16px;
         width: 150px;
-      }
-      #bigtext {
-        position: absolute;
-        top: 50%;
-        left: 3%;
-        width: 55%;
-        translate: 0 -54%;
-        margin: 0;
-        text-align: center;
-        color: #ffe14a;
-        font-family: "HC Display", sans-serif;
-        font-weight: 900;
-        font-size: 92px;
-        line-height: 1.08;
-        -webkit-text-stroke: 16px #000000;
-        paint-order: stroke fill;
-        text-shadow: 0 9px 0 rgba(0, 0, 0, 0.7);
-        rotate: -3deg;
       }
     </style>
     <script src="../vendor/gsap.min.js"></script>
@@ -72,7 +113,10 @@
     <div id="root" data-composition-id="thumbnail" data-start="0" data-duration="1" data-width="1280" data-height="720">
       <canvas id="stage" width="1280" height="720"></canvas>
       <div id="shade"></div>
-      <div id="bigtext"></div>
+      <div id="text">
+        <div id="badge"></div>
+        <div id="bigtext"></div>
+      </div>
       <img id="logo" src="../assets/logo.png" alt="Historia en Cubitos" />
     </div>
     <script>
@@ -82,17 +126,35 @@
     <script type="module">
       import { createStage } from "../src/stage.js";
 
-      // thumbnailText: wrap one key word in *stars* to render it white (brand rule).
+      const ep = window.EPISODE ?? {};
+      // thumbnailText: the one key word wrapped in *stars* gets the red box.
       const big = document.getElementById("bigtext");
-      (window.EPISODE?.thumbnailText ?? "").split(/(\*[^*]+\*)/).forEach((part) => {
+      (ep.thumbnailText ?? "").split(/(\*[^*]+\*)/).forEach((part) => {
+        if (!part) return;
         const span = document.createElement("span");
         span.textContent = part.replace(/\*/g, "");
-        if (part.startsWith("*")) span.style.color = "#ffffff";
+        if (part.startsWith("*")) span.className = "key";
         big.appendChild(span);
       });
-      const stage = createStage({ canvas: document.getElementById("stage"), width: 1280, height: 720, mode: "thumbnail", episode: window.EPISODE });
+      // Optional sticker (episode field thumbnailBadge, e.g. "31 OCT").
+      const badge = document.getElementById("badge");
+      if (ep.thumbnailBadge) { badge.textContent = ep.thumbnailBadge; badge.style.display = "inline-block"; }
+
+      // Shrink the headline until it fits its box (deterministic: depends only on text and font metrics).
+      const box = document.getElementById("text");
+      function fit() {
+        let size = 104;
+        big.style.fontSize = `${size}px`;
+        while (size > 60 && (box.scrollHeight > box.clientHeight || big.scrollWidth > box.clientWidth)) {
+          size -= 4;
+          big.style.fontSize = `${size}px`;
+          big.style.webkitTextStroke = `${Math.round(size * 0.17)}px #0a0a14`;
+        }
+      }
+
+      const stage = createStage({ canvas: document.getElementById("stage"), width: 1280, height: 720, mode: "thumbnail", episode: ep });
       window.addEventListener("hf-seek", () => stage.renderAt(1.3));
-      document.fonts.load('900 92px "HC Display"').then(() => stage.renderAt(1.3));
+      document.fonts.load('900 104px "HC Display"').then(() => { fit(); stage.renderAt(1.3); });
     </script>
   </body>
 </html>

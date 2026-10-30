@@ -29,7 +29,7 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
 ## Tasks
 - [x] T1 Pipeline + rules: description template (per-episode `summary`, no CHANNEL_LINE), per-character caption
       colors, PRODUCTION.md rules for 35–55 s / 9–12 lines / loop ending / hashtags. Route: delegated (writer trigger, 3+ files).
-- [ ] T2 Epic thumbnail v2 (`compositions/thumbnail.html`). Route: delegated (preparation trigger).
+- [x] T2 Epic thumbnail v2 (`compositions/thumbnail.html`). Route: delegated (preparation trigger).
 - [ ] T3 New costumes + locations for 019–022. Route: delegated (writer trigger).
 - [ ] T4 Scripts 019–022 (JSON) + duration check with build-audio (35–55 s). Route: delegated (4 files).
 - [ ] T5 Render 019–022 one at a time, verify sheets/reports/thumbnails. Route: inline per-action.
@@ -46,7 +46,16 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
   PRODUCTION.md rules (§2 hook/9-12 lines/loop/title/description/tags, §3 format, §10 JSON, §12 checklist), README.
   Evidence: `node --check` OK on make-episode.mjs and stage.js; `--print-description` on 018 prints title,
   sources, hashtags (no channel line), with a test `summary` it appears after the title; snapshot of 018 at 2 s
-  (Tito, yellow caption) and 11 s (Profe, cream caption); leftover check 0. Published `videos/` untouched.
+  (Tito, yellow caption) and 11 s (Profe, cream caption); leftover check 0. Published `videos/` untouched. Commit `cc5192e`.
+
+- T2 (delegated writer): `compositions/thumbnail.html` v2 (dark left shade + vignette, 104 px auto-fit headline with
+  18 px ink stroke + hard shadow, starred word in a red tilted box, optional `thumbnailBadge` yellow sticker, logo
+  bottom-left). `src/stage.js` thumbnail mode: additive yellow sunburst + glow behind the cast, warm/cool rim lights,
+  closer `thumb`/`thumb3` cameras, Tito moved next to Profe. `build-audio.mjs` passes `thumbnailBadge`.
+  Evidence: thumbnail rendered for 018 (badge "31 OCT" injected temporarily, `episode-data.js` restored) to the
+  session scratchpad `thumb-v2-preview.png`, inspected at 1280x720 and 320x180 (headline, key word and faces read);
+  3 iterations. `hyperframes check`: only `audio_src_not_found` for `assets/audio/mix.wav` (pre-existing, audio not
+  built on this machine). Not visually verified: a three-character (`thumb3`, Nova) thumbnail. Leftover check 0.
 
 ## Next step
-T1.
+T3.
