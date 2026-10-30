@@ -31,9 +31,9 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
       colors, PRODUCTION.md rules for 35–55 s / 9–12 lines / loop ending / hashtags. Route: delegated (writer trigger, 3+ files).
 - [x] T2 Epic thumbnail v2 (`compositions/thumbnail.html`). Route: delegated (preparation trigger).
 - [x] T3 New costumes + locations for 019–022. Route: delegated (writer trigger).
-- [ ] T4 Scripts 019–022 (JSON) + duration check with build-audio (35–55 s). Route: delegated (4 files).
-- [ ] T5 Render 019–022 one at a time, verify sheets/reports/thumbnails. Route: inline per-action.
-- [ ] T6 Update AGENT_GUIDE.md §8 state. Route: inline (one mechanical file).
+- [x] T4 Scripts 019–022 (JSON) + duration check with build-audio (35–55 s). Route: delegated (4 files).
+- [x] T5 Render 019–022 one at a time, verify sheets/reports/thumbnails. Route: inline per-action.
+- [x] T6 Update AGENT_GUIDE.md §8 state. Route: inline (one mechanical file).
 
 ## Acceptance
 - Each episode 35–55 s, 1080x1920, 30 fps, ~-15 LUFS, captions not over board, thumbnail readable at 320x180.
@@ -81,6 +81,23 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
   C:/Python314, no HYPERFRAMES_PYTHON). Voices unchanged, nothing installed. Estimated durations only (not proof):
   019 52.8 s, 020 53.4 s, 021 53.3 s, 022 50.9 s; all near the 55 s cap, so expect to cut a line if real TTS runs long.
 
+  UNBLOCKED (parent, inline): installed `kokoro-onnx soundfile` (AGENT_GUIDE §3 setup step) into Python 3.14;
+  fixed `build-audio.mjs` SFX path hard-coded to the old PC user (now found in the npx cache or
+  `HYPERFRAMES_SFX_DIR`), commit `a6b8b22`. Real `timeline:` durations: 019 51.272 s, 020 53.169 s,
+  021 51.669 s, 022 51.038 s (all within 35-55 s). Script commit `5260025`. T4 done.
+- Review assessment after T1+T2 (base `d8663e8`, untracked excluded): medium, `under_budget` (321 lines) — pending in slice.
+
+- T5 (parent, inline per-action): `make-episode` for 019-022 one at a time (~110 s each on this GPU PC).
+  Reports: 019 51.3 s / -15 LUFS, 020 53.2 s / -15, 021 51.7 s / -14.9, 022 51.07 s / -14.9; all 1080x1920 h264
+  30 fps + aac, 0 black segments, `hyperframes check` 0 errors. Sheets + thumbnails inspected: captions above the
+  boards, costumes/locations readable. Fixed: starred word + "?" wrapped onto its own line (commit `44d4284`).
+  Known cosmetic: in the three-character thumbnail (`thumb3`) Tito is half hidden behind Profe (020, 022).
+  Deliverables commit `a00d3ab`. Leftover check 0.
+- T6 (parent, inline): AGENT_GUIDE.md format rules + §8 state updated.
+- Native review: assess on base `d8663e8` (untracked excluded) = medium, `slice_budget_reached` (1373 lines), due.
+  Preflight STATUS returned `collect: intended_untracked_selection_required`; every submitted selection was refused
+  as not exact `gentle-ai.review-intended-untracked-selection/v1` JSON (schema not discoverable via
+  `gentle-ai review schema`). Review UNAVAILABLE for this slice; no approval claimed.
+
 ## Next step
-Install `pip install kokoro-onnx soundfile` (owner decision), run `build-audio` on 019-022 one at a time, record the
-real `timeline:` durations (35-55 s), cut if over; then T5.
+Owner reviews the 4 videos; then upload 019-022 for 2026-10-31 (daily upload limit: 8 used on 2026-10-30).

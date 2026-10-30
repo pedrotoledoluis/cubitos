@@ -14,7 +14,7 @@ with all three characters).
 
 - YouTube channel **Historia en Cubitos** (`@HistoriaEnCubitos`, channel ID `UCPymQjNXfUgWwTrX-ETRM0w`).
   Formerly "Baul de Manhwas".
-- Spanish vertical **Shorts, 60–90 s**, comedy sketches that explain real history, science and current topics.
+- Spanish vertical **Shorts, 35–55 s** (since ep 019; older episodes are 60–90 s), comedy sketches that explain real history, science and current topics.
 - Low-poly box characters rendered with **Three.js inside HyperFrames** (HTML → MP4, deterministic, GPU).
 - Cast:
   - **Profe Claudio** — cardboard cube, glasses, mustache. Calm, deadpan expert. Wears a **costume** of the
@@ -106,20 +106,21 @@ node scripts/processes.mjs                                       # should list n
    invent numbers. Add "no es asesoría financiera" / responsible-gambling notes where relevant.
 2. **Copy an existing episode JSON** to `hf-template/episodes/NNN-slug.json` (next free number) and edit it.
    Follow `PRODUCTION.md` §2 and §10. Key rules:
-   - Line 1: hook question (Tito or Nova), shot `wide` (`wide3` with Nova).
-   - **16–18 lines** → lands in 60–90 s. Profe lines ≤ ~22 words, Tito lines 1–8 words.
-   - 4–6 Profe lines with a board graphic, spread out.
-   - Last line: Tito's punchline, Profe `facepalm`.
+   - Line 1: hook that states the absurd premise in the first second (Tito or Nova), shot `wide` (`wide3` with Nova).
+   - **9–12 lines** → lands in 35–55 s. Profe lines ≤ ~18 words, Tito lines 1–7 words.
+   - 3–4 Profe lines with a board graphic, spread out.
+   - Last line: Tito's punchline, Profe `facepalm`, worded so it loops back into line 1.
+   - Fill `summary` (1–2 unique sentences), 3–5 topic hashtags, `thumbnailBadge` when there is a date hook.
    - Use `say` to spell numbers and hard names for the TTS ("1859" → "mil ochocientos cincuenta y nueve").
    - Choose `costume` and `location` per scene from `PRODUCTION.md` §5–6.
    - Fill title, description, sources, tags, `thumbnailText`.
 3. **Check duration fast**: `node scripts/build-audio.mjs episodes/NNN-slug.json` → read the `timeline:` total.
-   Over 90 s → cut lines; under 60 s → add a joke.
-4. **Render**: `node scripts/make-episode.mjs episodes/NNN-slug.json` (8–30 min depending on the PC).
+   Over 55 s → cut lines; under 35 s → add a joke.
+4. **Render**: `node scripts/make-episode.mjs episodes/NNN-slug.json` (~2 min on a GPU PC, up to 30 min on slow ones).
    Only one at a time.
 5. **Verify** (`PRODUCTION.md` §12): open `.build/verify/NNN-slug-sheet.jpg` and the transition images.
    Heads inside the frame, captions never over the board, costume/location readable, thumbnail headline
-   readable. Open `NNN-slug-report.json`: 60–90 s, 1080x1920, 30 fps, ~-15 LUFS, no black segments.
+   readable. Open `NNN-slug-report.json`: 35–55 s, 1080x1920, 30 fps, ~-15 LUFS, no black segments.
 6. Fix and re-run if needed (voices are cached, so re-runs are faster).
 7. **Leftover check**: `node scripts/processes.mjs` then `--kill` if anything is listed.
 
@@ -167,12 +168,12 @@ or `-description.txt`, set the thumbnail PNG, "Not made for kids", Schedule with
 | Ep | Slug | Status |
 | --- | --- | --- |
 | 001–002 | emu, napoleon-conejos | Made, owner chose not to upload. |
-| 003–010 | baile-1518 … agujeros-negros | Uploaded and published/scheduled 2026-10-29. |
-| 011 | casas-de-apuestas | Scheduled 2026-10-30 06:00 (`wNqTjf9qk-4`). |
-| 012 | ia-cripto | Scheduled 2026-10-30 08:00 (`v4PxdvpKOeA`). |
-| 013–018 | ipo-anthropic, memoria-hbm, juegos-con-ia, fenomeno-el-nino, origen-halloween, halloween-lima | Rendered, **not uploaded** (hit daily limit). 017–018 are Halloween: must go out by Oct 31. |
+| 003–011 | baile-1518 … casas-de-apuestas | Public. |
+| 012–018 | ia-cripto … halloween-lima | Uploaded, scheduled through 2026-10-30 (Peru): 012 08:00, 013 09:00, 014 10:30, 017 13:00, 015 15:00, 016 16:30, 018 18:00. |
+| 019–022 | cancion-criolla, desfile-james-bond, momias-incas, catrina-burla | New 35–55 s format, rendered and verified, **not uploaded** (waiting for owner OK). Topical for Oct 31–Nov 2. |
 
-All video IDs are in `uploader/uploaded.json`.
+All video IDs are in `uploader/uploaded.json`. Channel on 2026-10-30: 6 subscribers, 321 views; best videos open on
+one absurd premise (see `reports/Estrategia de Shorts virales.md` for the research behind the new format).
 
 Known cosmetic issues to fix later: emoji icons on the new boards (`scenes-v5.js`) barely render in headless
 Chrome (draw icons with shapes instead); ep13 newspaper headline cut at the sides; Nova looks bluer under the
