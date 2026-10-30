@@ -19,8 +19,11 @@ Last update: 2026-10-30 ~17:30 Peru. Read this first after `/clear`, then `AGENT
 - NOT INSTALLED YET: owner must run, in an elevated PowerShell,
   `powershell -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\install-service.ps1`.
   Without the service nothing uploads and the dashboard gets no new snapshots.
-- T8 in progress: the WHOLE dashboard becomes a left-edge notch with an animated flaming pumpkin; hover opens the full
-  panel, mouse leave collapses to only the pumpkin, thumbtack pins. Owner will share a reference notch later.
+- T8 done (5e4acca): the WHOLE dashboard is a left-edge notch with an animated flaming pumpkin; hover opens the full
+  panel (~224 ms), leaving collapses to only the pumpkin after 0.5 s, thumbtack pins, right-click tab = pin/exit.
+  Exe: `publisher\src\Cubitos.Publisher.Desktop\bin\Debug\net10.0-windows\Cubitos.Publisher.Desktop.exe --theme=halloween`.
+  Owner will share a reference notch later. Known: commit ddad850 accidentally contains 3 staged T8 file moves (does
+  not build alone); HEAD builds. Fix only with owner OK (history rewrite, unpushed).
 - Native review (gentle-ai RDD) is UNAVAILABLE on this repo: preflight asks for `intended_untracked_selection` and
   every submission returns `invalid_request`. Recorded per task; no approval claimed.
 - Push / PRs: owner decides. Chain strategy chosen: stacked-to-main, one PR per task.
