@@ -35,6 +35,9 @@ export const SHOTS = {
   titoProfe: { target: [-0.1, 1.7, 0.2], dist: 8.6, az: 0.25, el: 0.08, fov: 34 },
   profeNova: { target: [1.75, 1.7, 0.25], dist: 8.2, az: -0.3, el: 0.08, fov: 34 },
   thumb3: { target: [-0.5, 1.5, 0], dist: 7.9, az: 0.1, el: 0.06, fov: 36 },
+  // Shorts cover (9:16): target raised so the cast sits in the lower half, headline above
+  cover: { target: [0.2, 2.55, 0], dist: 9.9, az: 0.1, el: 0.05, fov: 40 },
+  cover3: { target: [0.6, 2.6, 0], dist: 11.6, az: 0.06, el: 0.05, fov: 40 },
 };
 
 // World props that episode lines can show with `"props": ["name"]` (pop in on the first line of a run).
@@ -360,7 +363,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
       board.texture.needsUpdate = true;
     }
     if (nova) nova.update({ t, mouth: 0, emotion: 'smug', lookAt: TITO_FACE });
-    placeCamera(nova ? 'thumb3' : 'thumb', null, t);
+    placeCamera(height > width ? (nova ? 'cover3' : 'cover') : (nova ? 'thumb3' : 'thumb'), null, t);
     renderer.render(scene, camera);
   }
 
