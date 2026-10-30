@@ -40,7 +40,7 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
       bucketing in Peru time). Route: delegated (writer trigger).
 - [x] T2 Infrastructure: SQLite store, YouTube adapter (upload + thumbnail + status + stats + channel video list),
       uploaded.json sync. Route: delegated.
-- [ ] T3 Worker: Windows Service host, publish loop, stats loop, CLI `enqueue`/`list`, install/uninstall scripts.
+- [x] T3 Worker: Windows Service host, publish loop, stats loop, CLI `enqueue`/`list`, install/uninstall scripts.
       Route: delegated.
 - [ ] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
 - [ ] T5 Cut-over: install the service, enqueue the 019-022 replacements (replacing the session cron job so nothing
@@ -73,6 +73,31 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
     parse/merge) is unit-tested.
   - `dotnet build publisher`: success, 0 warnings, 0 errors.
   - `dotnet test publisher`: Core 64 passed; Infrastructure 41 passed; 0 failed, 0 skipped.
+  - Commit 68b7267. Native review for T2: UNAVAILABLE (same cause as T1).
+- T3 done (delegated writer): `Cubitos.Publisher.Worker` (Microsoft.NET.Sdk.Worker, `AddWindowsService`
+  "CubitosPublisher") and `Cubitos.Publisher.Worker.Tests`.
+  - `PublishCycle` (depends only on Core ports): planner actions in order, every transition persisted at once,
+    per-item error isolation; upload limit -> WaitingForQuota via `UploadLimitBackoff` over upload-log times; API
+    quota -> WaitingForQuota at next Pacific midnight + 5 min (new Core `QuotaReset`); other errors ->
+    `TransientRetryPolicy`; replacement Keep check before upload; thumbnail and upload-log failures only logged;
+    `RecoverInterruptedAsync` fails items left Uploading at service start (avoids double uploads).
+  - `StatsCycle`: refreshes `videos` (episode id from upload log, `-oldN` stripped) and writes one snapshot per video.
+  - `PublishWorker`/`StatsWorker` (PeriodicTimer, stats run at start); Event Log when a service, console otherwise,
+    plus `DailyFileLoggerProvider` -> `publisher/data/logs/publisher-YYYYMMDD.log` (Peru date, created lazily).
+  - CLI in the same exe: `enqueue`, `list`, `cancel`, `run-once`, `stats`, `help`; `--Publisher:Key=value` overrides.
+    `LazyYouTubePlatform` only reads secrets on the first YouTube call.
+  - Core additions: `QueueStatus.Cancelled` + `Cancel`, `Keep` also from WaitingForQuota, `FailOldVideoHide`
+    (Published replacement -> Failed), `IsActive`, ports `IVideoCatalog`/`CatalogVideo` (moved from Infrastructure)
+    and `IEpisodeReader`; `PublisherOptions.LogDirectory`; options validated at startup.
+  - Scripts: `publisher/scripts/install-service.ps1` (elevation check, self-contained publish to `publisher/dist/worker`,
+    `sc.exe create|config` delayed-auto, description, failure restart actions, event source, start),
+    `uninstall-service.ps1`, `publisher/cubitos-publisher.cmd`; `publisher/README.md`; `.gitignore` adds dist/, data/.
+  - Test-first: RED observed as compile failure (missing Cancel/IsActive/QuotaReset/ports/Worker types), then GREEN.
+  - `dotnet build publisher`: success, 0 warnings, 0 errors.
+  - `dotnet test publisher`: Core 73, Infrastructure 41, Worker 29 passed; 0 failed, 0 skipped.
+  - `dotnet run --project publisher/src/Cubitos.Publisher.Worker -- list --Publisher:DatabasePath=<scratch>`:
+    "Queue is empty.", exit 0, no `publisher/data` created. Also exercised enqueue/duplicate/cancel/stats against
+    the scratch DB. Size ~1,770 changed lines (over the ~400 heuristic: worker, CLI, scripts, tests are one unit).
 
 ## Next step
-T3 Worker (Windows Service host, publish and stats loops, CLI `enqueue`/`list`, install scripts).
+T4 Dashboard MAUI (reads `publisher/data/publisher.db`), then T5 cut-over (install service, enqueue 019-022).

@@ -16,4 +16,6 @@ public enum QueueStatus
     Failed,
     /// <summary>Upload limit hit; retry at <see cref="QueueItem.RetryAt"/>.</summary>
     WaitingForQuota,
+    /// <summary>Removed by the owner before upload.</summary>
+    Cancelled,
 }

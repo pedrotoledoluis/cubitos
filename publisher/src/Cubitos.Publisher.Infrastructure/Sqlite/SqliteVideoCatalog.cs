@@ -1,14 +1,11 @@
+using Cubitos.Publisher.Core.Ports;
 using static Cubitos.Publisher.Infrastructure.Sqlite.SqliteDatabase;
 
 namespace Cubitos.Publisher.Infrastructure.Sqlite;
 
-/// <summary>A channel video known to the service; <see cref="EpisodeId"/> links it to a repo episode when known.</summary>
-public sealed record CatalogVideo(string VideoId, string Title, DateTimeOffset? PublishedAt, string? EpisodeId);
-
 /// <summary>The <c>videos</c> table: which channel videos exist, for stats polling and the dashboard.</summary>
-public sealed class SqliteVideoCatalog(SqliteDatabase db)
+public sealed class SqliteVideoCatalog(SqliteDatabase db) : IVideoCatalog
 {
-    /// <summary>Inserts or updates by video id. A null episode id keeps the stored one.</summary>
     public async Task UpsertAsync(CatalogVideo video, CancellationToken ct = default)
     {
         await using var conn = await db.OpenAsync(ct);

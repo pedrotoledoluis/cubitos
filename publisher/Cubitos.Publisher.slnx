@@ -2,9 +2,11 @@
   <Folder Name="/src/">
     <Project Path="src/Cubitos.Publisher.Core/Cubitos.Publisher.Core.csproj" />
     <Project Path="src/Cubitos.Publisher.Infrastructure/Cubitos.Publisher.Infrastructure.csproj" />
+    <Project Path="src/Cubitos.Publisher.Worker/Cubitos.Publisher.Worker.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Cubitos.Publisher.Core.Tests/Cubitos.Publisher.Core.Tests.csproj" />
     <Project Path="tests/Cubitos.Publisher.Infrastructure.Tests/Cubitos.Publisher.Infrastructure.Tests.csproj" />
+    <Project Path="tests/Cubitos.Publisher.Worker.Tests/Cubitos.Publisher.Worker.Tests.csproj" />
   </Folder>
 </Solution>

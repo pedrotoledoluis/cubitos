@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Cubitos.Publisher.Core.Episodes;
+using Cubitos.Publisher.Core.Ports;
 
 namespace Cubitos.Publisher.Infrastructure.Episodes;
 
@@ -7,7 +8,7 @@ namespace Cubitos.Publisher.Infrastructure.Episodes;
 /// Builds an <see cref="EpisodePackage"/> from <c>videos/&lt;id&gt;/</c>, mirroring <c>uploader/upload.mjs</c>:
 /// <c>metadata.json</c> (title, tags, categoryId, languages, optional <c>files</c> overrides) plus the description file.
 /// </summary>
-public sealed class EpisodePackageReader(string repoRoot)
+public sealed class EpisodePackageReader(string repoRoot) : IEpisodeReader
 {
     public const int MaxTitleLength = 100;
     private static readonly string[] DefaultTags = ["historia", "curiosidades", "humor", "historia en cubitos", "Shorts"];

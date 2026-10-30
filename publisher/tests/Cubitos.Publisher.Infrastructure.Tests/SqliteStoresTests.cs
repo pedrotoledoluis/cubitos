@@ -1,3 +1,4 @@
+using Cubitos.Publisher.Core.Ports;
 using Cubitos.Publisher.Core.Queue;
 using Cubitos.Publisher.Core.Stats;
 using Cubitos.Publisher.Infrastructure.Sqlite;

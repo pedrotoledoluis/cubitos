@@ -19,6 +19,14 @@ public sealed class QueueItem
     public DateTimeOffset CreatedAt { get; }
     public DateTimeOffset UpdatedAt { get; private set; }
 
+    /// <summary>False once the item reached a final state (a published replacement still has to hide the old video).</summary>
+    public bool IsActive => Status switch
+    {
+        QueueStatus.Pending or QueueStatus.Uploading or QueueStatus.Scheduled or QueueStatus.WaitingForQuota => true,
+        QueueStatus.Published => ReplacesVideoId is not null,
+        _ => false,
+    };
+
     /// <summary>Rehydrates an item from storage without validation of history.</summary>
     public QueueItem(
         Guid id, string episodeId, string episodeDir, DateTimeOffset publishAt,
@@ -88,8 +96,9 @@ public sealed class QueueItem
     /// <summary>Skips the replacement because the old video earned enough views.</summary>
     public void Keep(DateTimeOffset now)
     {
-        Require(nameof(Keep), QueueStatus.Pending);
+        Require(nameof(Keep), QueueStatus.Pending, QueueStatus.WaitingForQuota);
         RequireReplacement(nameof(Keep));
+        RetryAt = null;
         Move(QueueStatus.Kept, now);
     }
 
@@ -116,6 +125,23 @@ public sealed class QueueItem
         LastError = error;
         RetryAt = null;
         Move(QueueStatus.Failed, now);
+    }
+
+    /// <summary>The replacement is public but the old video could not be hidden (e.g. it no longer exists).</summary>
+    public void FailOldVideoHide(string error, DateTimeOffset now)
+    {
+        Require(nameof(FailOldVideoHide), QueueStatus.Published);
+        RequireReplacement(nameof(FailOldVideoHide));
+        LastError = error;
+        Move(QueueStatus.Failed, now);
+    }
+
+    /// <summary>Owner cancellation; only before the upload starts.</summary>
+    public void Cancel(DateTimeOffset now)
+    {
+        Require(nameof(Cancel), QueueStatus.Pending, QueueStatus.WaitingForQuota);
+        RetryAt = null;
+        Move(QueueStatus.Cancelled, now);
     }
 
     private void Require(string transition, params QueueStatus[] allowed)

@@ -18,6 +18,12 @@ public sealed class PublisherOptions
     public string ResolvedDatabasePath =>
         string.IsNullOrWhiteSpace(DatabasePath) ? Path.Combine(RepoRoot, "publisher", "data", "publisher.db") : DatabasePath;
 
+    /// <summary>Defaults to <c>&lt;RepoRoot&gt;/publisher/data/logs</c>.</summary>
+    public string LogDirectory { get; set; } = "";
+
+    public string ResolvedLogDirectory =>
+        string.IsNullOrWhiteSpace(LogDirectory) ? Path.Combine(RepoRoot, "publisher", "data", "logs") : LogDirectory;
+
     public string ResolvedSecretsDir => string.IsNullOrWhiteSpace(SecretsDir) ? Path.Combine(RepoRoot, "secrets") : SecretsDir;
     public string ClientSecretPath => Path.Combine(ResolvedSecretsDir, "client_secret.json");
     public string TokenPath => Path.Combine(ResolvedSecretsDir, "token.json");

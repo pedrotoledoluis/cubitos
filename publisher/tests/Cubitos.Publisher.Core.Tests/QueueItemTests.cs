@@ -171,6 +171,71 @@ public class QueueItemTests
             Assert.Throws<InvalidQueueTransitionException>(() => Apply(item, transition));
     }
 
+    [Fact]
+    public void Cancel_from_pending_or_waiting_for_quota_is_terminal()
+    {
+        var pending = NewItem();
+        pending.Cancel(Now);
+        var waiting = Uploading();
+        waiting.WaitForQuota(Now.AddHours(1), "limit", Now);
+        waiting.Cancel(Now);
+
+        Assert.Equal(QueueStatus.Cancelled, pending.Status);
+        Assert.Equal(QueueStatus.Cancelled, waiting.Status);
+        Assert.Null(waiting.RetryAt);
+        Assert.False(pending.IsActive);
+        Assert.Throws<InvalidQueueTransitionException>(() => pending.StartUpload(Now));
+    }
+
+    [Fact]
+    public void Cancel_is_rejected_once_upload_started()
+    {
+        var scheduled = Uploading();
+        scheduled.MarkScheduled("v", Now);
+        Assert.Throws<InvalidQueueTransitionException>(() => Uploading().Cancel(Now));
+        Assert.Throws<InvalidQueueTransitionException>(() => scheduled.Cancel(Now));
+    }
+
+    [Fact]
+    public void Keep_is_allowed_while_waiting_for_quota()
+    {
+        var item = Uploading("old1");
+        item.WaitForQuota(Now.AddHours(1), "limit", Now);
+        item.Keep(Now);
+        Assert.Equal(QueueStatus.Kept, item.Status);
+        Assert.Null(item.RetryAt);
+    }
+
+    [Fact]
+    public void FailOldVideoHide_moves_published_replacement_to_failed()
+    {
+        var item = Published("old1");
+        item.FailOldVideoHide("old video not found", Now);
+        Assert.Equal(QueueStatus.Failed, item.Status);
+        Assert.Equal("old video not found", item.LastError);
+        Assert.Throws<InvalidQueueTransitionException>(() => Published().FailOldVideoHide("x", Now));
+        Assert.Throws<InvalidQueueTransitionException>(() => Uploading("old1").FailOldVideoHide("x", Now));
+    }
+
+    [Fact]
+    public void IsActive_is_true_until_the_item_reaches_its_final_state()
+    {
+        var scheduled = Uploading();
+        scheduled.MarkScheduled("v", Now);
+        var kept = NewItem("old1");
+        kept.Keep(Now);
+        var hidden = Published("old1");
+        hidden.MarkOldHidden(Now);
+
+        Assert.True(NewItem().IsActive);
+        Assert.True(Uploading().IsActive);
+        Assert.True(scheduled.IsActive);
+        Assert.True(Published("old1").IsActive);
+        Assert.False(Published().IsActive);
+        Assert.False(kept.IsActive);
+        Assert.False(hidden.IsActive);
+    }
+
     private static void Apply(QueueItem item, string transition)
     {
         switch (transition)
