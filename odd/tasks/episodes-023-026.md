@@ -31,7 +31,7 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
 
 ## Tasks
 - [x] T1 Moderate coaster look in the template. Route: delegated (preparation trigger). Commit 2426805.
-- [ ] T2 023 guaguas de pan: script, assets, render, verify. Route: delegated (writer trigger).
+- [x] T2 023 guaguas de pan: script, assets, render, verify. Route: delegated (writer trigger). Commit 2c7c2f6.
 - [ ] T3 024 San Martín de Porres: script, assets, render, verify. Route: delegated (writer trigger).
 - [ ] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger).
 - [ ] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger).
@@ -51,8 +51,20 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
   headline crisp, sunburst excluded from bloom; space_blackhole scratch copy — holo board readable, disk glow moderate.
   `hyperframes check` page errors seen once (colorSpace bug) and fixed before the final snapshots. No visual test
   runner: RED/GREEN not applicable. `videos/` untouched.
-- Pending: per-episode `"look"` JSON field needs `scripts/build-audio.mjs` to copy `look` into `episode-data.js`
-  (outside T1 edit surface). Global toggle `LOOK.enabled` works now.
+- Per-episode `"look"` JSON field: done in T2 (`scripts/build-audio.mjs` writes `look: ep.look ?? null` into `episode-data.js`).
+- T1 native review: assess (untracked excluded) = medium, `slice_budget_reached`; preflight STATUS blocks on
+  `intended_untracked_selection_required` (same as publisher-service). Recorded as unavailable; no approval claimed.
+  Parent spot check: compare frame 45 s OFF/ON viewed — ON warmer, subtle vignette, board identical.
+- T2 (023-guaguas-de-pan, delegated writer): 12 lines (Tito hook "¡En Arequipa bautizan panes!", loop punchline
+  "¡Lo bautizan y se lo comen!..."), Tito+Profe+Nova. New assets: costume `panadero` (chullo + floury apron,
+  `src/costumes.js`), location `andes_panaderia` (sillar arches, clay oven fire/smoke, guaguas counter with a rocking
+  guagua, offering table candles), board icons `guagua` and `caballito` (`src/board/scenes-v7.js`). Look default ON.
+  Checks: `.build/verify/023-guaguas-de-pan-report.json` 1080x1920 h264 30 fps, aac, LUFS -15, no black segments;
+  final mp4 with the 0.1 s cover prepended (rendered `compositions/cover.html`, concat + 100 ms audio delay, same as
+  019–022): 50.08 s, -15.0 LUFS, true peak -1.6 dB, blackdetect empty. Sheet + transition viewed: heads in frame,
+  captions above the board, chullo/oven readable, poof hides the swap. Thumbnail readable but the headline covers
+  most of Tito (3-character thumbnail layout). Leftover check: 0. No RED/GREEN (content). Native review not run by
+  the writer (parent owns it).
 
 ## Next step
-T2 (and decide on the one-line build-audio pass-through for `look`).
+T3 (024 San Martín de Porres).
