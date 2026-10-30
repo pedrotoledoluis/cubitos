@@ -170,7 +170,7 @@ or `-description.txt`, set the thumbnail PNG, "Not made for kids", Schedule with
 | 001–002 | emu, napoleon-conejos | Made, owner chose not to upload. |
 | 003–011 | baile-1518 … casas-de-apuestas | Public. |
 | 012–018 | ia-cripto … halloween-lima | Uploaded, scheduled through 2026-10-30 (Peru): 012 08:00, 013 09:00, 014 10:30, 017 13:00, 015 15:00, 016 16:30, 018 18:00. |
-| 019–022 | cancion-criolla, desfile-james-bond, momias-incas, catrina-burla | New 35–55 s format, rendered and verified, **not uploaded** (waiting for owner OK). Topical for Oct 31–Nov 2. |
+| 019–022 | cancion-criolla, desfile-james-bond, momias-incas, catrina-burla | New 35–55 s format. Uploaded 2026-10-30, all scheduled 2026-10-30 12:00 Peru (17:00Z): Mn7luaowBwU, Y_NQYVvqhAY, olIqXwWlFMY, lBK8IypZTVY. |
 
 All video IDs are in `uploader/uploaded.json`. Channel on 2026-10-30: 6 subscribers, 321 views; best videos open on
 one absurd premise (see `reports/Estrategia de Shorts virales.md` for the research behind the new format).
