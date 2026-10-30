@@ -48,34 +48,40 @@ cubitos-publisher stats
 
 ## Dashboard
 
-`src/Cubitos.Publisher.Dashboard` is a .NET MAUI Windows app (unpackaged exe) that reads the same SQLite DB
-**read-only** (it never creates or writes it) and refreshes every 30 s, plus an "Actualizar" button:
+`src/Cubitos.Publisher.Desktop` is a native WPF app (`net10.0-windows`) that reads the same SQLite DB **read-only**
+(it never creates or writes it) and refreshes every 30 s, plus an "Actualizar" button. All numbers come from
+`Cubitos.Publisher.Dashboard.Core` (DB reader, builders, formatting, notch state machine), which has its own tests.
 
 - **Ranking**: videos by total views with +1 h / +24 h, likes, comments and a 24 h sparkline; top 3 on a podium.
 - **Horas pico**: 7 x 24 heatmap of views gained (Peru time, last 4 weeks) and the 3 best hours to publish.
 - **Primeras 24 h**: cumulative views per hour since publish for one video against the channel average (average uses
   only videos with a full first day that the service measured from the start).
 - **Cola de publicación**: queue items with status badges, publish/retry times, last error and a link to the video.
-- Header KPIs: total views, views today (Peru day), videos published, next publish with countdown.
+- Header KPIs: total views, views today (Peru day), videos published, next publish with title and countdown.
 
-Themes (selector in the header, remembered): **Cubitos**, **Halloween: Cazadragones** (animated embers, glow orbs and
-lanterns; pauses while minimized) and **Neón**. The Halloween headings use Cinzel Decorative (SIL OFL 1.1, license in
-`Resources/Fonts/OFL-CinzelDecorative.txt`).
+Themes (selector in the title bar, remembered in `%LOCALAPPDATA%\CubitosPublisher\desktop-settings.json`): **Cubitos**,
+**Halloween: Cazadragones** (animated embers, glow orbs and lanterns, gold flourishes) and **Neón**. Switching themes
+cross-fades. The Halloween headings use Cinzel Decorative (SIL OFL 1.1, license in `Fonts/OFL-CinzelDecorative.txt`).
 
 ```powershell
-dotnet build publisher\src\Cubitos.Publisher.Dashboard
-publisher\src\Cubitos.Publisher.Dashboard\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Cubitos.Publisher.Dashboard.exe
+dotnet build publisher
+publisher\src\Cubitos.Publisher.Desktop\bin\Debug\net10.0-windows\Cubitos.Publisher.Desktop.exe
 ```
 
 The DB path comes from `--db <path>` (or `--Publisher:DatabasePath=<path>`), then `Publisher__DatabasePath`, then
 `appsettings.json` next to the exe, then `D:\PROYECTS\cubitos\publisher\data\publisher.db`. `--theme=<cubitos|halloween|neon>`,
 `--section=<ranking|heatmap|firstday|queue>`, `--screenshot=<file.png>` (render the window to PNG and exit),
-`--size=<W>x<H>` (window size) and `--notch=<collapsed|expanded|pinned>` (forced, not remembered) exist for smoke tests.
+`--size=<W>x<H>` (window size), `--notch=<collapsed|expanded|pinned>` (forced, not remembered) and
+`--fps-log=<file>` (frame times for 10 s while the notch toggles and, after 4 s, the window resizes every frame) exist
+for smoke tests.
 
-Navigation lives in a notch on the left edge with an animated flaming pumpkin: hovering opens the panel, leaving closes
-it after 0.4 s, and the pin button keeps it open beside the content (remembered). The "next publish" KPI shows the
-episode title from its `metadata.json` (repo-relative folders are looked up above the DB), else the uploaded video's
-title, else the folder name.
+Navigation lives in a notch on the left edge (`Notch/`, behind the `INavigationNotch` interface) with an animated
+flaming pumpkin: hovering opens the panel, leaving closes it after 0.4 s, and the pin keeps it open beside the content
+(remembered). Smoothness: one `CompositionTarget.Rendering` frame clock drives every animation with real elapsed time
+(paused while minimized or the session is locked); animated layers are `DrawingVisual`s redrawn without layout; charts
+render from their current size; brushes and geometries are frozen; card shadows are vector layers instead of blur
+effects; the ranking list is virtualized. The window uses custom chrome with rounded corners on Windows 11 and is
+per-monitor DPI aware.
 
 ## Files
 

@@ -18,7 +18,8 @@ service must snapshot counts itself and diff them.
     and the refresh token in `secrets/token.json`), SQLite store (Microsoft.Data.Sqlite), `uploader/uploaded.json` sync.
   - `Cubitos.Publisher.Worker`: Windows Service (BackgroundService) with a publish loop and a stats loop, plus a CLI
     (`enqueue`, `list`) that Claude uses to add pending videos.
-  - `Cubitos.Publisher.Dashboard`: MAUI Windows (unpackaged) app reading the same SQLite DB.
+  - `Cubitos.Publisher.Dashboard`: MAUI Windows (unpackaged) app reading the same SQLite DB (replaced by the WPF app
+    `Cubitos.Publisher.Desktop` in T7).
   - `Cubitos.Publisher.Core.Tests`: xUnit tests for domain rules.
 - Replacement flow: an item may replace an old video; before upload it checks the old video's views and keeps it
   (item skipped, reported) when views >= a threshold; after the new video is public, the old one is set to private.
@@ -44,6 +45,7 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
       Route: delegated.
 - [x] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
 - [x] T6 Dashboard polish (owner feedback 2026-10-30, `ideas/EVIDENCIAS/Screenshot_14.png`): responsive layout without clipping on resize (podium cards, long titles, KPI "Próxima misión"), smooth resize; sidebar becomes a left-edge notch with an animated flaming pumpkin that expands on hover and can be pinned open. Route: delegated.
+- [x] T7 Replace the MAUI dashboard with WPF (owner 2026-10-30: MAUI resize/animation not smooth). Reuse Dashboard.Core; notch to be refined after the owner shares a reference notch. Route: delegated.
 - [ ] T5 Cut-over: install the service, enqueue the 019-022 replacements (replacing the session cron job so nothing
       uploads twice), update AGENT_GUIDE.md. Route: inline.
 
@@ -162,3 +164,33 @@ T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionall
     halloween-ranking-pinned, cubitos-ranking-1640, neon-ranking-1640, halloween-queue-1100, halloween-heatmap-2560,
     neon-firstday-1100. No clipping or overlap observed.
   - Gaps: hover/pin interaction and resize smoothness verified only by forced states (no pointer automation).
+- T6 commit `7372487`. Native review for T6 UNAVAILABLE (same cause).
+- T7 done (delegated writer, 2026-10-30): `publisher/src/Cubitos.Publisher.Desktop` (WPF, `net10.0-windows`) replaces the
+  MAUI app (`src/Cubitos.Publisher.Dashboard` removed from the .slnx and deleted). Feature parity: KPIs (next mission
+  title + countdown), theme picker (Cubitos, Halloween: Cazadragones with the owner palette, gold flourishes and Cinzel
+  Decorative OFL, Neón), ranking podium 2-1-3 + rows + sparklines, heatmap + best 3 hours, first-24 h curve vs channel
+  average with video picker, queue, 30 s auto refresh + manual, last update time, empty state, read-only DB, switches
+  `--db --theme --section --size --notch --screenshot` and hidden `--fps-log`.
+  - Smoothness: single `CompositionTarget.Rendering` frame clock (Stopwatch delta, paused while minimized or the session
+    is locked); ambient particles, notch and pumpkin are `DrawingVisual` layers redrawn without layout; frozen brushes
+    and geometries; charts render from current size in `OnRender` and keep aspect through `MeasureOverride`; podium and
+    even-wrap custom panels; 2-line clamps via `TextWrapping` + `TextTrimming` + `MaxHeight`; ornate frames are vector
+    paths drawn at the element's size; card shadows/glow are vector layers (blur `Effect`s were re-blurred every frame
+    under the animated background: 54 -> 85-93 fps idle); ranking list virtualized (pixel scrolling). Custom
+    `WindowChrome` title bar, DWM rounded corners + dark mode + theme border color, PerMonitorV2 manifest. Section
+    switch fade/slide 200 ms, theme cross-fade 280 ms (snapshot overlay), card hover lift + glow, count-up numbers.
+  - Notch in `Notch/` behind `INavigationNotch` (`NotchControl`, `NotchSurface`, `PumpkinRenderer`), driven by
+    `NotchStateMachine`; ready to be redone from the owner's reference design.
+  - Dashboard.Core additions (WPF-independent, tested): `Presentation/NumberTween`, `FrameTimeStats`, `KeyedListSync`,
+    `DesktopSettingsStore`, `Sections`. Test-first: RED observed (CS0234 missing `Presentation` namespace), then GREEN.
+  - Fix: `Dashboard.Core/Data/ReadOnlyDashboardStore.cs` was never committed (matched the `data/` ignore rule on a
+    case-insensitive FS); now force-added so a clean clone builds.
+  - `dotnet build publisher`: 0 warnings, 0 errors. `dotnet test publisher`: Core 75, Dashboard 87, Infrastructure 41,
+    Worker 29 passed; 0 failed.
+  - Screenshots (`%TEMP%\cubitos-t7-*.png`, copy of the real DB and the T4 seeded DB): halloween-ranking-1100/-1640/-2560
+    (collapsed), halloween-ranking-expanded, halloween-ranking-pinned, cubitos-ranking-1640, neon-ranking-1640,
+    halloween-heatmap, halloween-firstday, halloween-queue, cubitos-empty (missing DB: empty state, no folder created).
+  - fps log (Halloween ranking, 100 Hz display, RTX 3060 Ti): overall avg 62.8 fps, worst 36.2 ms, p95 25.7 ms; notch
+    only 90.7 fps; while resizing every frame 44.5 fps (heatmap/queue 50 fps = every other vsync). Live resize is the
+    remaining cost: each WM_SIZE lays out and renders synchronously (~20 ms for the ranking view).
+  - Gaps: hover/pin verified by the fps script and forced states, not by real pointer automation.

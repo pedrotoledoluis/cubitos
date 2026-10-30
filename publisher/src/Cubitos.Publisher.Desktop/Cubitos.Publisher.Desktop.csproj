@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Native WPF panel: runs next to the Windows Service on the same machine. -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Cubitos.Publisher.Desktop</RootNamespace>
+    <AssemblyName>Cubitos.Publisher.Desktop</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>Historia en Cubitos — Panel</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WPF and WinForms both define these; keep the WPF meaning unambiguous. -->
+    <Using Remove="System.Drawing" />
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\CinzelDecorative-Bold.ttf" />
+    <Resource Include="appicon.png" />
+    <None Include="Fonts\OFL-CinzelDecorative.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cubitos.Publisher.Dashboard.Core\Cubitos.Publisher.Dashboard.Core.csproj" />
+  </ItemGroup>
+
+</Project>

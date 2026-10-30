@@ -2,7 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/Cubitos.Publisher.Core/Cubitos.Publisher.Core.csproj" />
     <Project Path="src/Cubitos.Publisher.Dashboard.Core/Cubitos.Publisher.Dashboard.Core.csproj" />
-    <Project Path="src/Cubitos.Publisher.Dashboard/Cubitos.Publisher.Dashboard.csproj" />
+    <Project Path="src/Cubitos.Publisher.Desktop/Cubitos.Publisher.Desktop.csproj" />
     <Project Path="src/Cubitos.Publisher.Infrastructure/Cubitos.Publisher.Infrastructure.csproj" />
     <Project Path="src/Cubitos.Publisher.Worker/Cubitos.Publisher.Worker.csproj" />
   </Folder>
