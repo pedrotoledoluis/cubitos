@@ -123,3 +123,32 @@ public class FirstDayCurveTests
     public void No_snapshots_gives_flat_zero_curve() =>
         Assert.All(FirstDayCurve.Compute(Pub, []), v => Assert.Equal(0, v));
 }
+
+public class ViewsWindowTests
+{
+    private static readonly DateTimeOffset T0 = new(2026, 10, 30, 17, 0, 0, TimeSpan.Zero);
+
+    private static VideoSnapshot Snap(string id, DateTimeOffset at, long views) => new(id, "t", at, views, 0, 0);
+
+    [Fact]
+    public void Views_between_sums_time_shares_of_all_videos()
+    {
+        // a: 60 views over 12:00-13:00 (30 inside 12:30-13:00); b: 10 views over 12:40-12:50.
+        var total = HourlyViewsCalculator.ViewsBetween([
+            Snap("a", T0, 0), Snap("a", T0.AddHours(1), 60),
+            Snap("b", T0.AddMinutes(40), 5), Snap("b", T0.AddMinutes(50), 15),
+        ], T0.AddMinutes(30), T0.AddHours(1));
+
+        Assert.Equal(40, total, 6);
+    }
+
+    [Fact]
+    public void Hourly_series_has_one_bucket_per_hour_ending_at_end()
+    {
+        // 30 views between end-90 min and end-30 min: 15 in bucket [-2h,-1h), 15 in [-1h,end).
+        var end = T0.AddHours(5);
+        var series = HourlyViewsCalculator.HourlySeries([Snap("a", end.AddMinutes(-90), 0), Snap("a", end.AddMinutes(-30), 30)], end, 4);
+
+        Assert.Equal([0, 0, 15, 15], series.Select(v => Math.Round(v, 6)));
+    }
+}

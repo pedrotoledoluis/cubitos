@@ -46,6 +46,32 @@ cubitos-publisher stats
 - Configuration can be overridden per call with `--Publisher:<Key>=<value>`, for example
   `--Publisher:DatabasePath=C:\temp\test.db`, or with environment variables like `Publisher__DatabasePath`.
 
+## Dashboard
+
+`src/Cubitos.Publisher.Dashboard` is a .NET MAUI Windows app (unpackaged exe) that reads the same SQLite DB
+**read-only** (it never creates or writes it) and refreshes every 30 s, plus an "Actualizar" button:
+
+- **Ranking**: videos by total views with +1 h / +24 h, likes, comments and a 24 h sparkline; top 3 on a podium.
+- **Horas pico**: 7 x 24 heatmap of views gained (Peru time, last 4 weeks) and the 3 best hours to publish.
+- **Primeras 24 h**: cumulative views per hour since publish for one video against the channel average (average uses
+  only videos with a full first day that the service measured from the start).
+- **Cola de publicación**: queue items with status badges, publish/retry times, last error and a link to the video.
+- Header KPIs: total views, views today (Peru day), videos published, next publish with countdown.
+
+Themes (selector in the header, remembered): **Cubitos**, **Halloween: Cazadragones** (animated embers, glow orbs and
+lanterns; pauses while minimized) and **Neón**. The Halloween headings use Cinzel Decorative (SIL OFL 1.1, license in
+`Resources/Fonts/OFL-CinzelDecorative.txt`).
+
+```powershell
+dotnet build publisher\src\Cubitos.Publisher.Dashboard
+publisher\src\Cubitos.Publisher.Dashboard\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Cubitos.Publisher.Dashboard.exe
+```
+
+The DB path comes from `--db <path>` (or `--Publisher:DatabasePath=<path>`), then `Publisher__DatabasePath`, then
+`appsettings.json` next to the exe, then `D:\PROYECTS\cubitos\publisher\data\publisher.db`. `--theme=<cubitos|halloween|neon>`,
+`--section=<ranking|heatmap|firstday|queue>` and `--screenshot=<file.png>` (render the window to PNG and exit) exist
+for smoke tests.
+
 ## Files
 
 | What | Where |

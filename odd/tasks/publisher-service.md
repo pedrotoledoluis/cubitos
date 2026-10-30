@@ -42,7 +42,7 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
       uploaded.json sync. Route: delegated.
 - [x] T3 Worker: Windows Service host, publish loop, stats loop, CLI `enqueue`/`list`, install/uninstall scripts.
       Route: delegated.
-- [ ] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
+- [x] T4 Dashboard MAUI: ranking, hourly heatmap, queue view, per-video 24 h curve, auto-refresh. Route: delegated.
 - [ ] T5 Cut-over: install the service, enqueue the 019-022 replacements (replacing the session cron job so nothing
       uploads twice), update AGENT_GUIDE.md. Route: inline.
 
@@ -98,6 +98,37 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
   - `dotnet run --project publisher/src/Cubitos.Publisher.Worker -- list --Publisher:DatabasePath=<scratch>`:
     "Queue is empty.", exit 0, no `publisher/data` created. Also exercised enqueue/duplicate/cancel/stats against
     the scratch DB. Size ~1,770 changed lines (over the ~400 heuristic: worker, CLI, scripts, tests are one unit).
+  - Commit 407a155. Native review for T3: UNAVAILABLE (same cause as T1/T2).
+- T4 done (delegated writer): `Cubitos.Publisher.Dashboard.Core` (net10.0, testable without MAUI) and
+  `Cubitos.Publisher.Dashboard` (MAUI, `net10.0-windows10.0.19041.0`, unpackaged, Windows App SDK self-contained).
+  - `ReadOnlyDashboardStore`: `Mode=ReadOnly`, no pooling, no schema creation; missing file -> null (empty state
+    "El servicio todavía no juntó datos"); missing tables -> empty lists; unknown status strings skipped. Loads
+    snapshots of the last 28 days plus the latest snapshot per video, and launch snapshots (first 25 h after
+    `published_at`, via `julianday`).
+  - `DashboardBuilder` reuses Core `HourlyViewsCalculator` (Rank, Heatmap, new `ViewsBetween`/`HourlySeries`) and
+    `FirstDayCurve`: KPIs (total, views since Peru midnight, videos, next publish), ranking + 24 h sparkline, Monday-first
+    7x24 heatmap + 3 best hours of day, cumulative launch curves and channel average (only complete curves whose first
+    snapshot is <= 3 h after publish), queue (active by time, then finished newest first, youtu.be links).
+  - Formatting (Spanish, Peru time, fixed day/month names), countdown, status labels, DB path resolution
+    (`--db`, `--Publisher:DatabasePath=`, `Publisher__DatabasePath`, appsettings.json, default path).
+  - UI: one window "Historia en Cubitos — Panel" (1440x900, min 1100x720), sidebar nav, header KPIs, theme picker
+    (Preferences), refresh button, "Última actualización hh:mm" (Peru), 30 s auto-refresh, 1 s countdown tick. Charts
+    are `GraphicsView` drawables (sparkline, crest, heatmap, first-day chart, ornate frame, ambient background).
+    Themes are ResourceDictionaries built in C# and swapped in `Application.Resources.MergedDictionaries` at runtime
+    (all XAML uses DynamicResource): Cubitos (navy/yellow/red, hard black shadows, Arial Black), Halloween:
+    Cazadragones (owner palette 2026-10-30: midnight/plum background, indigo panels, gold corner flourishes, Cinzel
+    Decorative OFL font, shield crests with roman ranks, "Salón de los Héroes"/"Misiones", rising embers + slow
+    jellyfish-like glow orbs + header lantern string at ~25 fps, paused when the window is stopped/minimized), Neón.
+    App icon cropped from the logo's "C" cube. Smoke hooks: `--theme=`, `--section=`, `--screenshot=<png>`.
+  - Test-first: RED observed as compile failure (missing Dashboard.Core namespaces, `ViewsBetween`, `HourlySeries`),
+    then GREEN. Exception: XAML/drawables have no runnable unit test; covered by the screenshot smoke test.
+  - `dotnet build publisher`: success, 0 warnings, 0 errors (includes the MAUI project).
+  - `dotnet test publisher`: Core 75, Infrastructure 41, Worker 29, Dashboard 33 passed; 0 failed, 0 skipped.
+  - Smoke test: scratch DB `%TEMP%\cubitos-dash-smoke\publisher.db` seeded with the Infrastructure stores (12 videos,
+    5,660 snapshots, 7 queue rows). Screenshots (window rendered by the app itself; desktop capture via PowerShell
+    was denied by the permission classifier): `%TEMP%\cubitos-dash-{cubitos,halloween,neon}-{ranking,heatmap,firstday,queue}.png`
+    and `%TEMP%\cubitos-dash-cubitos-empty.png` (missing DB: empty state, no file or folder created).
+  - Size ~2,780 added lines incl. a 93-line font license (over the ~400 heuristic: one UI unit with its tests).
 
 ## Next step
-T4 Dashboard MAUI (reads `publisher/data/publisher.db`), then T5 cut-over (install service, enqueue 019-022).
+T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionally publish the dashboard exe.
