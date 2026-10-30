@@ -129,7 +129,8 @@
       const ep = window.EPISODE ?? {};
       // thumbnailText: the one key word wrapped in *stars* gets the red box.
       const big = document.getElementById("bigtext");
-      (ep.thumbnailText ?? "").split(/(\*[^*]+\*)/).forEach((part) => {
+      // Punctuation right after the starred word moves into its box so it never wraps onto its own line.
+      (ep.thumbnailText ?? "").replace(/\*([^*]+)\*([?!.,:;…]+)/g, "*$1$2*").split(/(\*[^*]+\*)/).forEach((part) => {
         if (!part) return;
         const span = document.createElement("span");
         span.textContent = part.replace(/\*/g, "");
