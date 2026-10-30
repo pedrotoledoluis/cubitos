@@ -11,13 +11,14 @@ import { MODERN_LOCATIONS } from './modern.js';
 import lima_pena_1944 from './lima_pena_1944.js';
 import cdmx_muertos from './cdmx_muertos.js';
 import cusco_inca from './cusco_inca.js';
+import andes_panaderia from './andes_panaderia.js';
 
 // Location registry. A location preset is `{ name, build({ boardTexture }) }` where build returns
 // { group, update(t), background, fog: [color, near, far], exposure, boardStyle }.
 // To add one: create src/locations/<name>.js (copy athens.js as a starting point), keep the in-world board
 // surface at BOARD (use boardScreen()), keep the area x -2.2..1.9, z -0.6..0.9 clear for the characters,
 // and register it here.
-export const LOCATIONS = { office, athens, sanfrancisco1870, medieval_italy, uraniborg, mission_control, space_blackhole, ...MODERN_LOCATIONS, lima_pena_1944, cdmx_muertos, cusco_inca };
+export const LOCATIONS = { office, athens, sanfrancisco1870, medieval_italy, uraniborg, mission_control, space_blackhole, ...MODERN_LOCATIONS, lima_pena_1944, cdmx_muertos, cusco_inca, andes_panaderia };
 export { BOARD };
 
 /**

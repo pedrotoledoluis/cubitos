@@ -13,6 +13,7 @@ import { SCENES_V3 } from './scenes-v3.js';
 import { SCENES_V4 } from './scenes-v4.js';
 import { SCENES_V5 } from './scenes-v5.js';
 import './scenes-v6.js'; // extra icons (019-022)
+import './scenes-v7.js'; // extra icons (023)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).
 const EUROPE = [[140, 640], [170, 520], [120, 430], [210, 360], [300, 380], [330, 300], [270, 230], [360, 150], [470, 130],

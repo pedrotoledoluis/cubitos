@@ -501,7 +501,37 @@ function posada(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada };
+/** Andean baker for Todos los Santos: striped knit chullo with ear flaps, braids and pompoms, floury white apron. */
+function panadero(p) {
+  const g = new THREE.Group();
+  const KNIT = [0xd23a2a, 0xffd23a, 0x2a8a5a, 0x2a5ab0, 0xf4efe6], APRON = 0xf4f0e6;
+  // white apron hanging in front of the legs, with a flour handprint, a pocket and side strings
+  g.add(at(box(1.04, 0.52, 0.04, APRON, { bevel: 0.015 }), 0, -0.2, p.faceZ + 0.05));
+  g.add(at(box(0.3, 0.15, 0.02, 0xe2dccc), -0.2, -0.26, p.faceZ + 0.08)); // pocket
+  g.add(at(box(0.16, 0.12, 0.02, 0xd8c8a0), 0.22, -0.12, p.faceZ + 0.08)); // dough smudge
+  for (let i = 0; i < 4; i++) g.add(at(box(0.04, 0.09, 0.02, 0xd8c8a0), 0.16 + i * 0.045, -0.02, p.faceZ + 0.08)); // fingers
+  for (const sx of [-1, 1]) g.add(at(box(0.04, 0.04, 0.6, APRON), sx * 0.5, 0.02, p.faceZ - 0.2));
+  // chullo: snug knit cap with colored stripe rings, a tapered top and a pompom
+  const cap = at(new THREE.Group(), 0, p.S, -0.02);
+  cap.add(at(box(p.S + 0.1, 0.3, p.D + 0.1, KNIT[0], { bevel: 0.06 }), 0, 0.12, 0));
+  [[KNIT[1], 0.02], [KNIT[4], 0.12], [KNIT[2], 0.22]].forEach(([c, y]) => cap.add(at(box(p.S + 0.13, 0.05, p.D + 0.13, c), 0, y, 0)));
+  for (let i = 0; i < 6; i++) cap.add(at(box(0.08, 0.08, 0.03, KNIT[3]), -0.5 + i * 0.2, 0.17, p.D / 2 + 0.07)); // knit diamonds
+  cap.add(at(box(p.S * 0.55, 0.22, p.D * 0.55, KNIT[0], { bevel: 0.06 }), 0, 0.36, 0));
+  cap.add(at(box(0.22, 0.22, 0.22, KNIT[1], { bevel: 0.09 }), 0, 0.54, 0)); // pompom
+  // ear flaps on the side faces (face stays clear), each ending in a braid with a little pompom
+  for (const sx of [-1, 1]) {
+    const flap = at(new THREE.Group(), sx * (p.S / 2 + 0.05), p.S - 0.02, 0.05);
+    flap.add(at(box(0.08, 0.42, 0.5, KNIT[0], { bevel: 0.03 }), 0, -0.2, 0));
+    flap.add(at(box(0.09, 0.06, 0.52, KNIT[1]), 0, -0.12, 0), at(box(0.09, 0.06, 0.52, KNIT[2]), 0, -0.3, 0));
+    for (let i = 0; i < 3; i++) flap.add(at(box(0.06, 0.12, 0.06, i % 2 ? KNIT[1] : KNIT[0]), 0, -0.47 - i * 0.12, 0.02));
+    flap.add(at(box(0.12, 0.12, 0.12, KNIT[3], { bevel: 0.05 }), 0, -0.86, 0.02));
+    g.add(flap);
+  }
+  g.add(cap);
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero };
 
 /** Criollo guitar, held by the neck, body hanging below the hand. */
 function guitar() {

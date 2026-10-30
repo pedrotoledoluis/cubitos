@@ -1,0 +1,40 @@
+{
+  "id": "023-guaguas-de-pan",
+  "title": "Guaguas de pan: ¡bautizadas y comidas!",
+  "summary": "Entre el 1 y el 2 de noviembre (Todos los Santos y Difuntos), en los Andes de Perú, Bolivia y Ecuador se hornean guaguas de pan (de wawa, bebé en quechua) y caballitos para la mesa de ofrendas; en Arequipa, además, se las 'bautiza' con padrinos y un cura de mentira.",
+  "thumbnailText": "PAN BAUTIZADO... ¡Y *COMIDO*!",
+  "thumbnailBadge": "1 NOV",
+  "thumbnailBoard": { "scene": "showcase", "icon": "guagua", "scale": 1.1, "sparkle": true },
+  "thumbnailLocation": "andes_panaderia",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "scared",
+  "costume": "panadero",
+  "costumeFrom": 2,
+  "locations": ["office", "andes_panaderia"],
+  "sources": [
+    "https://andina.pe/agencia/noticia-dia-todos-los-santos-pasco-celebra-feria-las-tanta-wawas-y-flores-961264.aspx",
+    "https://diariocorreo.pe/edicion/ayacucho/ayacucho-huamanga-elaboran-el-tradicional-tanta-wawa-por-todos-los-santos-noticia/",
+    "https://elbuho.pe/?p=178063",
+    "https://andina.pe/agencia/noticia-arequipenos-bautizaran-a-guagua-gigante-por-primera-vez-llevara-careta-sillar-962911.aspx",
+    "https://www.exitosanoticias.pe/cultural/las-guaguas-dia-todos-santos-n86743",
+    "https://www.kpbs.org/news/2016/11/02/bread-babies-and-purple-drink-ecuadors-spin-on",
+    "https://www.vozdeamerica.com/a/bolivia-todos-santos-la-tradicion-de-las-t-anta-wawas-para-recordar-a-los-difuntos/6814273.html",
+    "Nota: el origen exacto del ritual no está documentado; se cree que mezcla ritos andinos prehispánicos con la fiesta católica. El bautizo arequipeño se describe en J. G. Carpio Muñoz, 'Arequipa: sus fiestas y comida típica'."
+  ],
+  "hashtags": ["#guaguasdepan", "#todoslossantos", "#peru", "#tradiciones"],
+  "tags": ["guaguas de pan", "guagua de pan", "tanta wawa", "tantawawa", "wawa", "guaguas", "todos los santos", "dia de los difuntos", "bautizo de guaguas", "arequipa", "caballitos de pan", "pan de muertos peru"],
+  "lines": [
+    { "speaker": "tito", "text": "¡En Arequipa bautizan panes! ¡Con padrino y todo!", "shot": "wide", "emotion": "surprised", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "location": "andes_panaderia", "text": "Cierto, Tito. Son las guaguas de pan: wawa, en quechua, significa bebé. Salen por Todos los Santos.", "say": "Cierto, Tito. Son las guaguas de pan: guaua, en quechua, significa bebé. Salen por Todos los Santos.", "board": {"scene": "labelled", "icon": "guagua", "label": "WAWA = BEBÉ", "title": "1 DE NOVIEMBRE", "scale": 1.15}, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Pan con forma de bebé y carita de yeso. ¡Qué ternura, causa!", "shot": "nova", "emotion": "happy", "titoEmotion": "skeptical" },
+    { "speaker": "tito", "text": "¿Y a mí me toca bebé?", "shot": "tito", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "En Ayacucho, a las niñas les regalan wawas, y a los niños, caballitos de pan.", "board": {"scene": "equation", "items": [{"icon": "guagua", "label": "NIÑAS"}, "vs",{"icon": "caballito", "label": "NIÑOS"}], "pad": 220, "title": "TRADICIÓN EN AYACUCHO"}, "titoEmotion": "happy", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¡Bacán! Caballito crocante, al toque.", "emotion": "happy", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Y van a la mesa de ofrendas: se cree que esos días los difuntos vuelven de visita.", "board": {"scene": "equation", "items": [{"icon": "guagua", "label": "PAN"}, "+",{"icon": "candle", "label": "VELAS"}, "→",{"icon": "person", "label": "LAS ALMAS", "scale": 1.4 }], "pad": 230, "title": "MESA DE OFRENDAS"}, "titoEmotion": "scared", "novaEmotion": "neutral" },
+    { "speaker": "nova", "text": "Dicen que mezcla ritos andinos con la fiesta católica. Fusión, como el chifa.", "emotion": "smug", "titoEmotion": "neutral" },
+    { "speaker": "profe", "text": "En Arequipa, un amigo hace de cura, le inventan un nombre chistoso y los compadres se lo toman en serio.", "board": { "scene": "equation", "items": [{ "icon": "person", "label": "CURA", "scale": 1.4 }, "+", { "icon": "guagua", "label": "AHIJADO", "scale": 0.85 }, "=", { "icon": "person", "count": 2, "label": "COMPADRES", "scale": 1.6 }], "pad": 200, "title": "BAUTIZO EN AREQUIPA" }, "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "¿Y al final de la fiesta?", "shot": "nova", "emotion": "curious", "titoEmotion": "happy" },
+    { "speaker": "profe", "text": "Cada invitado se lleva su tajada de guagua.", "pose": "shrug", "titoEmotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "tito", "text": "¡Lo bautizan y se lo comen! Profe, a mí nunca me lleven a Arequipa.", "shot": "wide", "dutch": true, "emotion": "scared", "profePose": "facepalm", "novaEmotion": "happy" }
+  ]
+}
