@@ -38,7 +38,7 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
 ## Tasks
 - [x] T1 Core domain + ports + unit tests (queue state machine, replacement rule, upload-limit backoff, hourly delta
       bucketing in Peru time). Route: delegated (writer trigger).
-- [ ] T2 Infrastructure: SQLite store, YouTube adapter (upload + thumbnail + status + stats + channel video list),
+- [x] T2 Infrastructure: SQLite store, YouTube adapter (upload + thumbnail + status + stats + channel video list),
       uploaded.json sync. Route: delegated.
 - [ ] T3 Worker: Windows Service host, publish loop, stats loop, CLI `enqueue`/`list`, install/uninstall scripts.
       Route: delegated.
@@ -58,6 +58,21 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
   `Cubitos.Publisher.Core.Tests`. Test-first: RED observed as compile failure (18 errors), then GREEN.
   - `dotnet build publisher`: success, 0 warnings, 0 errors.
   - `dotnet test publisher`: 64 passed, 0 failed, 0 skipped.
+  - Commit 8fa81f2. Native review for T1: UNAVAILABLE (preflight requires `intended_untracked_selection`; every
+    submission returned `invalid_request`).
+- T2 done (delegated writer): `Cubitos.Publisher.Infrastructure` with `SqliteDatabase` (WAL, `CREATE TABLE IF NOT
+  EXISTS` schema: queue_items, snapshots + (video_id, taken_at) index, videos), `SqliteQueueStore`,
+  `SqliteSnapshotStore`, `SqliteVideoCatalog`, `UploadedJsonLog` (atomic write, unknown keys kept, `-old`/`-oldN`
+  on re-upload), `EpisodePackageReader` (mirrors `upload.mjs` metadata/fallbacks), `YouTubePlatform` (refresh-token
+  `UserCredential`; `NodeTokenDataStore` merges refreshed tokens back into token.json), `YouTubeErrors`
+  (`uploadLimitExceeded`/message -> `UploadLimitExceededException`; `quotaExceeded`/`dailyLimitExceeded` -> new Core
+  `PlatformQuotaExceededException`), `PublisherOptions`, `SystemClock`. Core `EpisodePackage` gained nullable
+  `ThumbnailPath` and CategoryId/languages/MadeForKids with defaults.
+  - Test-first: RED observed as compile failure (missing Infrastructure namespaces), then GREEN.
+  - Exception: YouTube network calls are not tested; only pure mapping (errors, status, privacy, batching, token
+    parse/merge) is unit-tested.
+  - `dotnet build publisher`: success, 0 warnings, 0 errors.
+  - `dotnet test publisher`: Core 64 passed; Infrastructure 41 passed; 0 failed, 0 skipped.
 
 ## Next step
-T2 Infrastructure (SQLite store, YouTube adapter, uploaded.json sync).
+T3 Worker (Windows Service host, publish and stats loops, CLI `enqueue`/`list`, install scripts).
