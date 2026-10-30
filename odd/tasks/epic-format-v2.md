@@ -30,7 +30,7 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
 - [x] T1 Pipeline + rules: description template (per-episode `summary`, no CHANNEL_LINE), per-character caption
       colors, PRODUCTION.md rules for 35–55 s / 9–12 lines / loop ending / hashtags. Route: delegated (writer trigger, 3+ files).
 - [x] T2 Epic thumbnail v2 (`compositions/thumbnail.html`). Route: delegated (preparation trigger).
-- [ ] T3 New costumes + locations for 019–022. Route: delegated (writer trigger).
+- [x] T3 New costumes + locations for 019–022. Route: delegated (writer trigger).
 - [ ] T4 Scripts 019–022 (JSON) + duration check with build-audio (35–55 s). Route: delegated (4 files).
 - [ ] T5 Render 019–022 one at a time, verify sheets/reports/thumbnails. Route: inline per-action.
 - [ ] T6 Update AGENT_GUIDE.md §8 state. Route: inline (one mechanical file).
@@ -57,5 +57,18 @@ ask-on-risk. Forecast ~1,500+ authored lines (assets + scripts); slices recorded
   3 iterations. `hyperframes check`: only `audio_src_not_found` for `assets/audio/mix.wav` (pre-existing, audio not
   built on this machine). Not visually verified: a three-character (`thumb3`, Nova) thumbnail. Leftover check 0.
 
+- T3 (delegated writer): costumes `criollo` (+ `profeProp: "guitar"`), `bond`, `inca`, `posada` in `src/costumes.js`
+  (handheld props generalized to `{ lamp, guitar }`; shared `blackBow()` hides the teal bowtie); locations
+  `lima_pena_1944`, `cdmx_muertos`, `cusco_inca` (own files, built with the now-exported `makeLocation()` from
+  `modern.js`); board icons `guitar candle calavera catrina fancyHat clapper mummy litter unku marigold`
+  (`scenes-v6.js`, canvas shapes), `decree` `cross: false`, `equation` `pad`, `labelled` tag auto-fit. PRODUCTION.md §5/§6/§7.
+  Evidence: `node --check` OK on all 9 edited/new JS files. Kokoro is not installed on this machine, so
+  snapshots were driven by a scratchpad preview timeline (character-count estimate calibrated on 018: 94.5 s
+  estimated vs 88.2 s real before removing a 0.35 s pad), `src/episode-data.js` restored afterwards. Snapshots
+  of 019-022 (wide, board, Profe/Tito/Nova close-ups) inspected over 3 iterations; fixed: props outside the
+  portrait frame (moved into |x| < 3.2), dim peña lighting, teal bowtie showing, scarf bars, garlands over captions,
+  equation/labelled labels clipped at the board edge, flat Cusco backdrop, condor crossing captions, cathedral
+  windows floating. Not verified: thumbnails of 019-022, motion of animated props in a real render. Leftover check 0.
+
 ## Next step
-T3.
+T4 duration check (needs Kokoro), then T5.

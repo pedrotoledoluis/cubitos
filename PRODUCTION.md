@@ -88,6 +88,10 @@ overrides only that line. When the costume changes, a **poof** cloud + pop SFX p
 | `hacker` | dark hoodie with folded hood and drawstrings, gold coin pin (crypto / tech) |
 | `druid` | brown hooded Celtic cloak (face open), oak-leaf crown, mistletoe pin (Samhain) |
 | `fisherman` | Peruvian fisherman: wide yellow rain hat, orange life vest with reflective strips |
+| `criollo` | 1940s Lima criollo musician: dark suit, white silk scarf, black bowtie, straw hat with black band. Prop: `profeProp: "guitar"` (held by the neck in his free hand; pair with pose `lamp` to show it) |
+| `bond` | tuxedo: black jacket with satin lapels, white shirt front, black bowtie over the teal one, cempasúchil boutonniere |
+| `inca` | Sapa Inca: multicolor llauto band with a small red mascapaicha fringe (forehead center only) and black/white feathers, gold ear disks, tocapu-checker unku |
+| `posada` | 1910 engraver (José Guadalupe Posada): black bowler hat, dark waistcoat with watch chain, black bowtie, printer's apron with an ink smear |
 | `none` | plain Profe (bowtie) |
 
 **Add one:** in `hf-template/src/costumes.js` write a builder using bevelled `box()` pieces in Profe's body space
@@ -121,6 +125,12 @@ Modern locations (`src/locations/modern.js`, one small `makeLocation()` factory:
 | `peru_coast` | Lima's Costa Verde by day: cliffs, sea, moving waves, caballito de totora, beach umbrella, flying seagull | `wood` |
 | `celtic_night` | night hills with standing stones, flickering bonfire, glowing carved turnip | `wood` |
 | `lima_night` | Lima street at night (reportage): lit buildings and colonial balcony, neon BAR/PEÑA/PIZZAS signs, flickering neon frames, street lamps, passing combi, pumpkin, pink/cyan light | `poster` |
+| `lima_pena_1944` | old Lima peña / callejón at night (own file, built with `makeLocation()`): pastel colonial facades, balcón limeño, swaying lantern, chasing string of warm bulbs, small stage with guitars and a cajón, wooden chairs | `wood` |
+| `cdmx_muertos` | Mexico City Zócalo on Día de Muertos at dusk: cathedral silhouette, swaying papel picado garlands (high, above the captions), cempasúchil arches, ofrenda with flickering candles, giant calavera float drifting across | `poster` |
+| `cusco_inca` | Cusco at golden hour: fitted Inca stone walls with a trapezoidal doorway, snowy Andes, terraces, chewing/swaying llama, condor circling high | `wood` |
+
+Portrait framing: the `wide` shot only sees about x -3.2..3.2 at the board depth, so put the props that must read
+on camera inside that band (outside the character area); anything at |x| > 4 only shows at the frame edges.
 
 Tito reporter mic: `"titoProp": "mic"` at episode level (all lines + thumbnail) or per line; the mic stays upright in his right hand.
 
@@ -147,7 +157,9 @@ and (`scenes-v5.js`, modern topics, icons are **emoji** via the system color-emo
 `equation` items: icon names, operators `+ = → vs`, or `{ icon, cross, label, scale, count }`.
 Icons: `rabbit person dancer doctor soldier human carrot napoleon shell chest note musician jar bowl hands legs
 feather pluckedChicken lamp crown capitol norton angry bucket swords formula star nose noseBroken metalNose island moose
-beer stairs`. All icons are drawn at 1.15x (`ICON_SCALE` in `chalk.js`).
+beer stairs` and (`scenes-v6.js`, shapes, no emoji) `guitar candle calavera catrina fancyHat clapper mummy litter unku marigold`.
+All icons are drawn at 1.15x (`ICON_SCALE` in `chalk.js`). `decree` takes `cross: false` (keep the icon), `equation` takes
+`pad` (side margin; ~200-300 when edge items carry long labels), and `labelled` shrinks long tag labels to fit.
 
 **Add a scene:** a deterministic function `(g, W, H, u, d, params)` on the 1280x886 canvas (dark background is
 drawn for you; use light chalk colors), register it in `SCENES`. Titles go at the top or bottom edge; the

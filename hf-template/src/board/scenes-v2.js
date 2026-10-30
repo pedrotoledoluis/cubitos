@@ -178,7 +178,10 @@ function labelled(g, W, H, u, d, p) {
     g.save(); g.translate(W / 2 + 260, H / 2 - 40); g.rotate(0.12 - (1 - k) * 0.8); g.scale(k, k);
     chalkStyle(g, CHALK, 4); drawPath(g, [[-150, 0], [-300, 60]], 1, 3);
     g.fillStyle = '#f1ead8'; g.fillRect(-150, -60, 330, 120);
-    text(g, p.label ?? 'HOMBRE', 15, 4, 78, '#5a2e12');
+    const label = p.label ?? 'HOMBRE';
+    g.font = '900 78px "HC Display", "Arial Black", sans-serif';
+    const fit = Math.min(78, Math.floor((78 * 300) / Math.max(1, g.measureText(label).width))); // shrink long labels to fit the tag
+    text(g, label, 15, 4, fit, '#5a2e12');
     g.restore();
   }
   if (p.title) text(g, p.title, W / 2, H - 60, 52, YELLOW, prog(u, 1.8, 0.3));
@@ -215,7 +218,7 @@ function newspaper(g, W, H, u, d, p) {
   if (p.sub) text(g, p.sub, W / 2, H / 2 + 70, 46, '#1a1a1a', prog(u, 1.4, 0.3));
 }
 
-/** decree: a scroll titled DECRETO with an icon that gets crossed out. params: { label, icon, title } */
+/** decree: a scroll titled DECRETO with an icon that gets crossed out (`cross: false` keeps it). params: { label, icon, title, cross } */
 function decree(g, W, H, u, d, p) {
   const k = ease(prog(u, 0.1, 0.7));
   const w = 820 * k, h = 640, x0 = W / 2 - w / 2, y0 = 60;
@@ -224,7 +227,7 @@ function decree(g, W, H, u, d, p) {
   if (k > 0.95) {
     text(g, p.label ?? 'DECRETO', W / 2, y0 + 80, 84, '#5a2e12', prog(u, 0.8, 0.3));
     pop(g, W / 2, y0 + 420, backOut(prog(u, 1.1, 0.4)), () => icon(g, p.icon ?? 'capitol', 0, 0, 1.2, u));
-    crossOut(g, W / 2, y0 + 330, 200, prog(u, 1.9, 0.6));
+    if (p.cross !== false) crossOut(g, W / 2, y0 + 330, 200, prog(u, 1.9, 0.6));
     g.fillStyle = '#b3261e'; pop(g, x0 + w - 110, y0 + h - 90, backOut(prog(u, 2.6, 0.3)), () => { g.beginPath(); g.arc(0, 0, 48, 0, Math.PI * 2); g.fill(); });
   }
   if (p.title) text(g, p.title, W / 2, H - 70, 56, YELLOW, prog(u, 2.4, 0.3));

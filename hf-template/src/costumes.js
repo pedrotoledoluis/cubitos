@@ -365,7 +365,159 @@ function fisherman(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman };
+/** Brimmed hat on top of the head: brim slab + crown + band. Returns the hat group (y = 0 at the head top). */
+function brimHat(p, g, { brim = 0.36, crownW = 0.78, crownH = 0.38, color, band, bevel = 0.05 }) {
+  const hat = at(new THREE.Group(), 0, p.S + 0.01, -0.02);
+  hat.add(at(box(p.S + brim, 0.06, p.D + brim, color, { bevel: 0.02 }), 0, 0.03, 0));
+  hat.add(at(box(p.S * crownW, crownH, p.D * crownW, color, { bevel }), 0, 0.05 + crownH / 2, 0));
+  if (band != null) hat.add(at(box(p.S * crownW + 0.03, 0.1, p.D * crownW + 0.03, band), 0, 0.12, 0));
+  g.add(hat);
+  return hat;
+}
+
+/** Black bowtie placed in front of Profe's teal one (hides it). */
+function blackBow(p, g) {
+  const bow = at(new THREE.Group(), 0, 0.14, p.faceZ + 0.1);
+  for (const sx of [-1, 1]) bow.add(at(box(0.23, 0.22, 0.06, 0x111116, { bevel: 0.02 }), sx * 0.12, 0, 0));
+  bow.add(at(box(0.09, 0.1, 0.08, 0x22222a, { bevel: 0.015 }), 0, 0, 0.01));
+  g.add(bow);
+}
+
+/** 1940s Lima criollo musician: dark suit, white silk scarf, thin black tie, straw hat with a black band. */
+function criollo(p) {
+  const g = new THREE.Group();
+  const SUIT = 0x2b2b36, SCARF = 0xf6f3ea;
+  shell(p, g, SUIT, 0.6);
+  // jacket buttons + pocket square
+  for (const sx of [-1, 1]) g.add(at(box(0.05, 0.05, 0.04, 0x15151a), sx * 0.44, 0.1, p.faceZ + 0.06));
+  g.add(at(box(0.14, 0.07, 0.03, 0xd23a2a), 0.62, 0.27, p.faceZ + 0.06));
+  // silk scarf: loop over the shoulders, ends hanging down the front edges (outside the face area)
+  g.add(at(box(p.S + 0.12, 0.09, 0.26, SCARF, { bevel: 0.03 }), 0, p.S * 0.6, -p.D / 2 + 0.1));
+  for (const sx of [-1, 1]) {
+    g.add(at(box(0.06, 0.12, p.D * 0.9, SCARF, { bevel: 0.02 }), sx * (p.S / 2 + 0.06), p.S * 0.56, 0));
+    g.add(at(box(0.12, 0.34, 0.05, SCARF, { bevel: 0.02 }), sx * 0.64, 0.2, p.faceZ + 0.07));
+    for (let i = 0; i < 3; i++) g.add(at(box(0.03, 0.07, 0.03, SCARF), sx * 0.64 + (i - 1) * 0.04, 0.0, p.faceZ + 0.07)); // fringe
+  }
+  blackBow(p, g); // black "michi" bowtie over Profe's teal one
+  brimHat(p, g, { color: 0xe3c98a, band: 0x15151a, crownH: 0.34 });
+  return g;
+}
+
+/** Tuxedo (Bond-style): black jacket with satin lapels, white shirt front, black bowtie, marigold boutonniere. */
+function bond(p) {
+  const g = new THREE.Group();
+  const BLACK = 0x111116, SATIN = 0x2c2c36;
+  shell(p, g, BLACK, 0.62);
+  g.add(at(box(0.62, 0.27, 0.03, 0xf8f8f4), 0, 0.135, p.faceZ + 0.03)); // shirt front
+  for (const sx of [-1, 1]) {
+    const lapel = at(box(0.12, 0.42, 0.04, SATIN, { metalness: 0.3, roughness: 0.35 }), sx * 0.42, 0.2, p.faceZ + 0.06);
+    lapel.rotation.z = sx * 0.45;
+    g.add(lapel);
+  }
+  blackBow(p, g); // black bowtie in front of Profe's teal one
+  // cempasúchil (marigold) boutonniere on the lapel
+  const flower = at(new THREE.Group(), 0.6, 0.42, p.faceZ + 0.08);
+  for (let i = 0; i < 5; i++) {
+    const a = (i / 5) * Math.PI * 2;
+    flower.add(at(box(0.07, 0.07, 0.05, 0xff8a10, { bevel: 0.015 }), Math.cos(a) * 0.05, Math.sin(a) * 0.05, 0));
+  }
+  flower.add(at(box(0.06, 0.06, 0.06, 0xffc020), 0, 0, 0.01));
+  g.add(flower);
+  return g;
+}
+
+/** Sapa Inca: woven llauto headband with a red mascapaicha fringe and feathers, gold ear disks, tocapu unku. */
+function inca(p) {
+  const g = new THREE.Group();
+  const RED = 0xc8241e, GOLDY = 0xf0b72a, BLACK = 0x1a1a1e, WHITE = 0xf2eee2, BLUE = 0x2a4f9a, OCHRE = 0xd98a1e;
+  const TOCAPU = [RED, GOLDY, BLACK, WHITE, BLUE, OCHRE];
+  // llauto: multicolor woven band around the top edge
+  const y = p.S + 0.03;
+  for (let i = 0; i < 8; i++) {
+    const c = TOCAPU[i % TOCAPU.length];
+    const w = (p.S + 0.08) / 8;
+    g.add(at(box(w, 0.14, 0.06, c), -p.S / 2 - 0.04 + w * (i + 0.5), y, p.faceZ + 0.02)); // front
+    g.add(at(box(w, 0.14, 0.06, c), -p.S / 2 - 0.04 + w * (i + 0.5), y, -p.D / 2 - 0.02)); // back
+  }
+  for (const sx of [-1, 1]) g.add(at(box(0.06, 0.14, p.D + 0.06, RED), sx * (p.S / 2 + 0.02), y, 0));
+  // mascapaicha: red wool tassels hanging from the band onto the forehead center (between the brows)
+  for (let i = 0; i < 4; i++) g.add(at(box(0.05, 0.16, 0.04, RED, { bevel: 0.01 }), -0.09 + i * 0.06, p.S - 0.1, p.faceZ + 0.05));
+  g.add(at(box(0.3, 0.05, 0.05, GOLDY, { metalness: 0.4 }), 0, p.S - 0.015, p.faceZ + 0.06));
+  // feathers (qorikenke style) standing up from the band
+  const plume = at(new THREE.Group(), 0, p.S + 0.1, p.faceZ - 0.12);
+  [[BLACK, -0.12, 0.25], [WHITE, 0, 0], [BLACK, 0.12, -0.25]].forEach(([c, x, rz]) => {
+    const f = at(box(0.1, 0.42, 0.05, c, { bevel: 0.02 }), x, 0.2, 0);
+    f.rotation.z = rz;
+    plume.add(f);
+  });
+  g.add(plume);
+  // big gold ear disks on both sides, at eye height
+  for (const sx of [-1, 1]) {
+    const disk = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.06, 14), mat(GOLDY, { metalness: 0.55, roughness: 0.3 }));
+    disk.rotation.z = Math.PI / 2;
+    disk.castShadow = true;
+    g.add(at(disk, sx * (p.S / 2 + 0.05), p.eyeY - 0.12, 0.15));
+    g.add(at(box(0.07, 0.12, 0.12, 0xb07a18, { metalness: 0.5 }), sx * (p.S / 2 + 0.09), p.eyeY - 0.12, 0.15));
+  }
+  // unku tunic: side panels with a tocapu checker, back, and a woven front band over the bowtie
+  const tocapuPanel = (cols, rows, cell, seed) => {
+    const panel = new THREE.Group();
+    for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+      panel.add(at(box(cell * 0.96, cell * 0.96, 0.04, TOCAPU[(i * 3 + j * 2 + seed) % TOCAPU.length]), (i - (cols - 1) / 2) * cell, (j - (rows - 1) / 2) * cell, 0));
+    }
+    return panel;
+  };
+  for (const sx of [-1, 1]) {
+    const side = tocapuPanel(5, 4, p.D / 5, sx > 0 ? 1 : 4);
+    side.rotation.y = Math.PI / 2;
+    g.add(at(side, sx * (p.S / 2 + 0.03), p.S * 0.3, 0));
+  }
+  g.add(at(box(p.S + 0.06, p.S * 0.6, 0.05, RED), 0, p.S * 0.3, -p.D / 2 - 0.02));
+  g.add(at(tocapuPanel(8, 2, (p.S + 0.06) / 8, 2), 0, 0.13, p.faceZ + 0.1));
+  return g;
+}
+
+/** José Guadalupe Posada (c. 1910 engraver): bowler hat, dark waistcoat, printer's apron with ink stains. */
+function posada(p) {
+  const g = new THREE.Group();
+  const VEST = 0x3a2c24, APRON = 0x8a7458, INK = 0x1a1a22;
+  blackBow(p, g);
+  shell(p, g, VEST, 0.58);
+  for (const sx of [-1, 1]) for (let i = 0; i < 2; i++) g.add(at(box(0.05, 0.05, 0.04, 0xc9a24a, { metalness: 0.4 }), sx * 0.44, 0.1 + i * 0.13, p.faceZ + 0.06));
+  // watch chain across the vest
+  g.add(at(box(0.3, 0.03, 0.03, 0xe2b33c, { metalness: 0.5 }), 0.58, 0.2, p.faceZ + 0.07));
+  // printer's apron hanging below the body, in front of the legs, with ink smudges
+  g.add(at(box(1.0, 0.5, 0.04, APRON, { bevel: 0.015 }), 0, -0.2, p.faceZ + 0.05));
+  g.add(at(box(0.3, 0.16, 0.02, 0x6a5640), 0.18, -0.24, p.faceZ + 0.08)); // pocket
+  g.add(at(box(0.18, 0.07, 0.02, INK), -0.22, -0.12, p.faceZ + 0.08), at(box(0.07, 0.12, 0.02, INK), -0.16, -0.17, p.faceZ + 0.08)); // ink smear
+  for (const sx of [-1, 1]) g.add(at(box(0.04, 0.04, 0.6, APRON), sx * 0.48, 0.02, p.faceZ - 0.2)); // apron strings
+  // bowler hat: rounded crown + short curled brim
+  const hat = at(new THREE.Group(), 0, p.S + 0.01, -0.02);
+  hat.add(at(box(p.S + 0.22, 0.06, p.D + 0.22, INK, { bevel: 0.025 }), 0, 0.03, 0));
+  for (const sx of [-1, 1]) hat.add(at(box(0.06, 0.08, p.D + 0.22, INK, { bevel: 0.02 }), sx * (p.S / 2 + 0.11), 0.07, 0));
+  hat.add(at(box(p.S * 0.76, 0.36, p.D * 0.76, INK, { bevel: 0.17 }), 0, 0.22, 0));
+  hat.add(at(box(p.S * 0.75, 0.08, p.D * 0.75, 0x3a3a44), 0, 0.1, 0));
+  g.add(hat);
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada };
+
+/** Criollo guitar, held by the neck, body hanging below the hand. */
+function guitar() {
+  const g = new THREE.Group();
+  const WOOD = 0xc98a42, DARK = 0x3a2412;
+  g.add(at(box(0.07, 0.42, 0.04, DARK), 0, -0.12, 0)); // neck (fretboard)
+  g.add(at(box(0.1, 0.12, 0.05, DARK, { bevel: 0.015 }), 0, 0.12, 0)); // head
+  const body = at(new THREE.Group(), 0, -0.55, 0);
+  body.add(at(box(0.3, 0.24, 0.1, WOOD, { bevel: 0.04 }), 0, 0.12, 0));
+  body.add(at(box(0.38, 0.3, 0.1, WOOD, { bevel: 0.05 }), 0, -0.15, 0));
+  body.add(at(box(0.09, 0.09, 0.02, 0x1a1008), 0, 0.03, 0.055)); // sound hole
+  body.add(at(box(0.16, 0.03, 0.02, DARK), 0, -0.18, 0.055)); // bridge
+  g.add(body);
+  for (let i = 0; i < 3; i++) g.add(at(box(0.008, 0.66, 0.008, 0xf2f2f0), -0.02 + i * 0.02, -0.33, 0.06)); // strings
+  return { group: g, flame: null };
+}
 
 /** Handheld oil lamp (Diogenes). Hangs from the hand; the flame flickers. */
 function oilLamp() {
@@ -393,26 +545,29 @@ export function attachCostumes(profe) {
     built[name].visible = false;
     p.body.add(built[name]);
   }
-  const lamp = oilLamp();
-  lamp.group.scale.setScalar(1.8);
-  lamp.group.visible = false;
-  p.armL.hand.add(lamp.group);
+  // handheld props (free hand): `profeProp: "lamp" | "guitar"`
+  const props = { lamp: oilLamp(), guitar: guitar() };
+  props.lamp.group.scale.setScalar(1.8);
+  props.guitar.group.scale.setScalar(1.25);
+  for (const pr of Object.values(props)) { pr.group.visible = false; p.armL.hand.add(pr.group); }
   const _q = new THREE.Quaternion();
 
   function update({ name = 'none', k = 1, prop = null, t = 0 }) {
     if (!built[name]) throw new Error(`Unknown costume "${name}". Known: ${Object.keys(COSTUMES).join(', ')}`);
+    if (prop && !props[prop]) throw new Error(`Unknown profeProp "${prop}". Known: ${Object.keys(props).join(', ')}`);
     for (const [n, g] of Object.entries(built)) g.visible = n === name && k > 0.001;
     const s = Math.max(0.001, easeOutBack(clamp(k)));
     built[name].scale.setScalar(s);
-    lamp.group.visible = prop === 'lamp';
-    if (lamp.group.visible) {
-      // keep the lamp hanging upright whatever the arm does
+    for (const [n, pr] of Object.entries(props)) pr.group.visible = n === prop;
+    const held = props[prop];
+    if (held) {
+      // keep the prop hanging upright whatever the arm does
       p.armL.pivot.updateMatrixWorld(true);
       p.body.getWorldQuaternion(_q);
       const handQ = new THREE.Quaternion();
       p.armL.hand.getWorldQuaternion(handQ);
-      lamp.group.quaternion.copy(handQ.invert().multiply(_q));
-      lamp.flame.scale.set(1, 1 + 0.25 * Math.sin(t * 17) + 0.1 * Math.sin(t * 41), 1);
+      held.group.quaternion.copy(handQ.invert().multiply(_q));
+      if (held.flame) held.flame.scale.set(1, 1 + 0.25 * Math.sin(t * 17) + 0.1 * Math.sin(t * 41), 1);
     }
   }
   update({});

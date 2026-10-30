@@ -12,6 +12,7 @@ import { SCENES_V2, crossOut } from './scenes-v2.js';
 import { SCENES_V3 } from './scenes-v3.js';
 import { SCENES_V4 } from './scenes-v4.js';
 import { SCENES_V5 } from './scenes-v5.js';
+import './scenes-v6.js'; // extra icons (019-022)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).
 const EUROPE = [[140, 640], [170, 520], [120, 430], [210, 360], [300, 380], [330, 300], [270, 230], [360, 150], [470, 130],
@@ -111,9 +112,10 @@ function counter(g, W, H, u, d, p) {
 function equation(g, W, H, u, d, p) {
   const items = p.items ?? [];
   const y = H / 2 + 70;
-  const step = (W - 200) / Math.max(1, items.length - 1);
+  const pad = p.pad ?? 100; // side margin; raise it when edge items carry long labels
+  const step = (W - 2 * pad) / Math.max(1, items.length - 1);
   items.forEach((it, i) => {
-    const x = items.length === 1 ? W / 2 : 100 + i * step;
+    const x = items.length === 1 ? W / 2 : pad + i * step;
     const at = 0.2 + i * 0.45;
     if (it === '+' || it === '=' || it === '→') { text(g, it, x, y - 40, 120, YELLOW, prog(u, at, 0.2)); return; }
     if (it === 'vs') { text(g, 'VS', x, y - 40, 110, RED, prog(u, at, 0.2)); return; }

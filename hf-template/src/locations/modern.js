@@ -329,4 +329,5 @@ const lima_night = makeLocation('lima_night', {
   lights: { hemi: [0x8a7cff, 0x181020, 0.9], key: [0xd8d0ff, 1.1], fill: [0xffc0e0, 0.9] },
 });
 
+export { makeLocation, glow, blinkers };
 export const MODERN_LOCATIONS = { casino, trading_floor, data_center, game_studio, peru_coast, celtic_night, lima_night };
