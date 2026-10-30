@@ -132,3 +132,10 @@ ask-on-risk. Forecast ~2,500 authored lines (5 projects + tests + scripts). Chai
 
 ## Next step
 T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionally publish the dashboard exe.
+
+- T4 commit `4233cdb`. Native review for T4 UNAVAILABLE (same cause).
+- T5 (parent, inline, PARTIAL 2026-10-30 13:24 Peru): enqueued 019-022 replacements for 2026-10-31 (12:00, 13:00,
+  18:00, 19:00 Peru; replaces Mn7luaowBwU, olIqXwWlFMY, Y_NQYVvqhAY, lBK8IypZTVY; keep if >= 100 views). Session cron
+  job cancelled so nothing uploads twice. Real `run-once`: upload limit detected, all 4 items WaitingForQuota; stats
+  cycle wrote 21 snapshots (first real YouTube calls OK). Dashboard launched on the real DB. PENDING: service install
+  needs an elevated PowerShell (owner). Known cosmetic: theme picker label can show "Cubitos" while another theme is active.
