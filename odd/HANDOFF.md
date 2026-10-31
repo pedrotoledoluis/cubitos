@@ -15,6 +15,12 @@ Last update: 2026-10-31 ~11:45 Peru. Read this first after `/clear`, then `AGENT
   - 031 latinoamerica-celebra-muertos: 2026-11-01 10:30, WaitingForQuota, retry 2026-10-31 11:53 (job 6c7a2e3d)
   - 032 krampus: 2026-11-01 11:30, Pending (job d6241ce8)
 - YouTube upload limit: ~10–12 uploads per rolling 24 h; the service waits and retries by itself.
+- RULE (owner, 2026-10-31): Shorts only, thumbnails are ALWAYS the 9:16 cover, never 16:9 (commit d3d9e86;
+  make-episode copies the cover as `<id>-thumbnail.png`). Don't spend tokens on 16:9 thumbnail layouts.
+- PENDING: 027/028/029 were uploaded with the old 16:9 thumbnail. Replacing them hit YouTube's
+  "uploaded too many thumbnails recently" limit. Retry later with
+  `node uploader/upload.mjs videos/<NNN-slug> --set-thumbnail <videoId>` (new flag, uncommitted in the dirty
+  `uploader/upload.mjs`). 030–032 get the vertical thumbnail on upload.
 
 ## Feature `odd/tasks/episodes-027-032.md` (same branch, unpushed) — DONE
 - U1 `media` board scene (real photo / <= 5 s clip + credit; clips gitignored, frames cached in
