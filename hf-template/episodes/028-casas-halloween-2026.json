@@ -1,0 +1,38 @@
+{
+  "id": "028-casas-halloween-2026",
+  "title": "Las 5 casas de Halloween más locas de 2026",
+  "summary": "Noche de Halloween en un barrio decorado: Profe, Tito y Nova arman nuestro top 5 de casas de Halloween 2026 en Estados Unidos, ordenado por tamaño y visitas según la prensa local: el ovni hecho con una antena parabólica en Mauldin (Carolina del Sur), Disturbia of Appleton (Wisconsin) a beneficio de St. Jude y Harbor House, la mini calle de magos de Dallas (unas 2.500 visitas el año pasado), Halloween Herm en Cold Spring (Kentucky) con casi 300 adornos y un intento de récord Guinness, y la casa de los McClellan en Glendale (Arizona): 20 cuartos, más de 20 actores y unas 8.000 personas el año pasado. No hay fotos con licencia de estas casas: cada una se muestra como una recreación ilustrada; la única foto real es una calle cualquiera de Los Ángeles (CC0).",
+  "thumbnailText": "¡20 CUARTOS DE *TERROR*!",
+  "thumbnailBadge": "TOP 5",
+  "thumbnailBoard": { "scene": "houseCard", "num": 1, "icon": "hauntedMaze", "title": "GLENDALE, ARIZONA", "value": "20", "label": "CUARTOS", "sparkle": true },
+  "thumbnailLocation": "suburbio_halloween",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "scared",
+  "costume": "anchor",
+  "costumeFrom": 1,
+  "locations": ["suburbio_halloween"],
+  "sources": [
+    "https://hoodline.com/2026/10/glendale-family-turns-home-into-20-room-haunt-draws-8-000-visitors/",
+    "https://hoodline.com/2026/10/cold-spring-man-s-300-prop-halloween-graveyard-chases-world-record/",
+    "https://www.wkyt.com/2025/10/08/nky-halloween-display-looking-set-guinness-world-record",
+    "https://www.lawnstarter.com/blog/?p=156022",
+    "Foto de la calle: \"Halloween in a Sun Valley street, Los Angeles, October 2024\", Alexis Doine, CC0 (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Halloween_in_a_Sun_Valley_street,_Los_Angeles,_October_2024.JPG",
+    "Notas: datos consultados el 31/10/2026. McClellan, Glendale (AZ): 20 cuartos, más de 20 actores, unas 8.000 visitas el año pasado (Hoodline, 15/10/2026). Halloween Herm (Herman Reinecke), Cold Spring (KY): casi 300 adornos; busca un récord Guinness que aún no tiene (Hoodline, 26/10/2026). Mauldin (SC): ovni de unos 3 m (10 pies) hecho con una antena parabólica; Disturbia of Appleton (WI): arco de calabazas y esqueletos gigantes, a beneficio de St. Jude y Harbor House; mini calle de magos en Old East Dallas: unas 2.500 visitas el año pasado (LawnStarter, actualizado 13/10/2026). El orden del top es nuestro (tamaño y visitas reportadas). Las casas se muestran como recreaciones ilustradas, no son fotos reales."
+  ],
+  "hashtags": ["#halloween", "#halloween2026", "#decoracion", "#casaembrujada"],
+  "tags": ["casas de halloween", "casa embrujada", "halloween herm", "decoracion halloween", "halloween 2026", "jalouin", "haunted house", "casas decoradas", "estados unidos", "noche de halloween"],
+  "lines": [
+    { "speaker": "nova", "text": "¡Una familia convirtió su casa en un laberinto de 20 cuartos!", "say": "¡Una familia convirtió su casa en un laberinto de veinte cuartos!", "shot": "wide", "emotion": "smug", "titoEmotion": "scared", "profePose": "shrug" },
+    { "speaker": "tito", "text": "¡Wow, qué espeluznante!… no me da miedo.", "say": "¡Wow, qué espeluznante!... no me da miedo.", "shot": "tito", "dutch": true, "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Top 5 de casas de Halloween 2026, según la prensa local de Estados Unidos.", "say": "Top cinco de casas de Jálouin dos mil veintiséis, según la prensa local de Estados Unidos.", "board": { "scene": "media", "image": "assets/media/028/sun-valley-street.jpg", "focus": [0.5, 0.36], "zoom": 1.05, "title": "ASÍ SE DECORA EN EE. UU.", "credit": "Foto: Alexis Doine · CC0 · Wikimedia Commons" }, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "profe", "text": "Quinto: Mauldin, Carolina del Sur. Un ovni de tres metros hecho con una antena parabólica.", "say": "Quinto: Móldin, Carolina del Sur. Un ovni de tres metros hecho con una antena parabólica.", "board": { "scene": "houseCard", "num": 5, "icon": "ufoDish", "title": "MAULDIN, CAROLINA DEL SUR", "value": "3 m", "label": "OVNI-ANTENA" }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y los marcianos cobran entrada?", "shot": "tito", "emotion": "skeptical", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Cuarto: Appleton, Wisconsin. Arco de calabazas, esqueletos gigantes y todo a beneficio.", "say": "Cuarto: Ápelton, Uisconsin. Arco de calabazas, esqueletos gigantes y todo a beneficio.", "board": { "scene": "houseCard", "num": 4, "icon": "pumpkinArch", "title": "APPLETON, WISCONSIN", "value": "BENÉFICA", "label": "PARA CARIDAD" }, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "profe", "text": "Tercero: Dallas. Una mini calle de magos que recibió unas 2500 visitas.", "say": "Tercero: Dálas. Una mini calle de magos que recibió unas dos mil quinientas visitas.", "board": { "scene": "houseCard", "num": 3, "icon": "wizardStreet", "title": "DALLAS, TEXAS", "value": "2.500", "label": "VISITAS" }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "profe", "text": "Segundo: Halloween Herm, en Kentucky. Casi 300 adornos… y busca un récord Guinness.", "say": "Segundo: Jálouin Herm, en Kentaki. Casi trescientos adornos... y busca un récord Guínes.", "board": { "scene": "houseCard", "num": 2, "icon": "graveyard", "title": "COLD SPRING, KENTUCKY", "value": "≈300", "label": "ADORNOS" }, "titoEmotion": "scared", "novaEmotion": "surprised", "sfx": [["impact-bass-1",0.4]] },
+    { "speaker": "tito", "text": "¡Trescientos sustos! Y yo con un zapallo.", "shot": "tito", "dutch": true, "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Y primero: los McClellan, en Arizona. Veinte cuartos y más de veinte actores.", "say": "Y primero: los Mak-Clélan, en Arizona. Veinte cuartos y más de veinte actores.", "board": { "scene": "houseCard", "num": 1, "icon": "hauntedMaze", "title": "GLENDALE, ARIZONA", "value": "20", "label": "CUARTOS", "sparkle": true }, "titoEmotion": "scared", "novaEmotion": "happy", "sfx": [["sparkle",1]] },
+    { "speaker": "nova", "text": "El año pasado fueron unas ocho mil personas, primo.", "shot": "nova", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¡Wow, qué espeluznante!… pero que sean diecinueve cuartos, ¿ya?", "say": "¡Wow, qué espeluznante!... pero que sean diecinueve cuartos, ¿ya?", "shot": "wide", "dutch": true, "emotion": "scared", "profePose": "facepalm", "novaEmotion": "smug" }
+  ]
+}

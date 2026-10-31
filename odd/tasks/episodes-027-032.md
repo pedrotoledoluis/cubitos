@@ -29,8 +29,8 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   Drafts in `odd/scripts/027-032-drafts.md`. Owner tuning 2026-10-31 10:15: 027 set in a dark bedroom, the trio under a
   bedsheet fort around one flashlight, scaring themselves with their imagination; 028 approved as drafted (board
   recreations, no licensed house photos); 029 add well-known Latin American legends (La Llorona etc.); 030–032 approved.
-- [x] U3 027 render + enqueue 19:00. Route: delegated (writer trigger: location + board scenes + costume + episode).
-- [ ] U4 028 render + enqueue 20:00. Route: delegated.
+- [x] U3 027 render + enqueue 19:00. Route: delegated (writer trigger: location + board scenes + costume + episode). Commit 3e3d93e.
+- [x] U4 028 render + enqueue 20:00. Route: delegated (writer trigger: location + board scenes + episode + media).
 - [ ] U5 029 render + enqueue 21:00. Route: delegated.
 - [ ] U6 030–032 render + enqueue 2026-11-01. Route: delegated.
 
@@ -53,3 +53,18 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   Facts re-checked 2026-10-31 on rottentomatoes.com: 97/93/86/78/65 % unchanged; Halloween budget ~US$325k
   (Box Office Mojo), script keeps "poco presupuesto". Checks: snapshots of hook/cards/gag/#1 (faces lit, cards
   legible), `hyperframes check` passed. RED/GREEN not applicable (visual pipeline, no test runner).
+- U4 (2026-10-31): `028-casas-halloween-2026` (12 lines, script as drafted). New location `suburbio_halloween`
+  (src/locations/suburbio_halloween.js: painted gabled houses with lit windows, roof string lights and porch pumpkins,
+  3D jack-o'-lanterns, gravestones, waving giant yard skeleton, picket fence with blinking orange/purple lights;
+  projector-style `screen` board). New board scene `houseCard` (ranked house with fitted value + "RECREACIÓN" tag)
+  and generic icons ufoDish/pumpkinArch/wizardStreet/graveyard/hauntedMaze (src/board/scenes-v12.js). Costume
+  `anchor` (reused). Only real photo: CC0 "Halloween in a Sun Valley street, Los Angeles, October 2024" (Alexis
+  Doine, license checked via Commons API) in assets/media/028/, shown as generic "ASÍ SE DECORA EN EE. UU." with credit.
+  Facts re-checked 2026-10-31: Hoodline 15/10 (McClellan, Glendale AZ: 20 rooms, 20+ actors, ~8,000 visitors last
+  year), Hoodline 26/10 (Halloween Herm: nearly 300 props, Guinness attempt not awarded), LawnStarter upd. 13/10
+  (Mauldin 10-ft satellite-dish UFO; Appleton pumpkin arch + giant skeletons for St. Jude / Harbor House; Dallas
+  ~2,500 visitors last year). No fact changes. Caption text uses "2500" (not "2.500") because the caption pager
+  splits on the period. Checks: snapshots of hook/photo/all 5 cards/ending (cards legible; #4 skeleton moved off the
+  value), `hyperframes check` passed, verify sheet looked at, report 54.478 s 1080x1920 30 fps -15 LUFS no black,
+  cover ok. Enqueued in publisher: job 33ef407b, Pending, 2026-10-31 20:00 Peru. RED/GREEN not applicable (visual
+  pipeline, no test runner).
