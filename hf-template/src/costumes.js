@@ -639,7 +639,23 @@ function pijama(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot, pijama };
+/** 1692 Puritan: black coat, tall black capotain hat with a silver buckle, white flat falling-band collar. */
+function puritano(p) {
+  const g = new THREE.Group();
+  const BLACK = 0x18171d, WHITE = 0xf4f1ea, SILVER = 0xc9ccd4;
+  shell(p, g, BLACK, 0.7);
+  // white falling-band collar over the bowtie (below the face area)
+  g.add(at(box(0.64, 0.2, 0.04, WHITE, { bevel: 0.015 }), 0, 0.15, p.faceZ + 0.08));
+  g.add(at(box(0.04, 0.2, 0.02, 0xd8d4ca), 0, 0.15, p.faceZ + 0.11)); // collar split
+  // tall capotain hat, slightly tapered via a narrower top block
+  const hat = brimHat(p, g, { brim: 0.42, crownW: 0.74, crownH: 0.5, color: BLACK, band: 0x2a2830, bevel: 0.04 });
+  hat.add(at(box(p.S * 0.66, 0.16, p.D * 0.66, BLACK, { bevel: 0.04 }), 0, 0.62, 0));
+  hat.add(at(box(0.24, 0.16, 0.03, SILVER, { metalness: 0.6, roughness: 0.3 }), 0, 0.12, p.D * 0.37 + 0.02)); // buckle
+  hat.add(at(box(0.12, 0.07, 0.04, 0x2a2830), 0, 0.12, p.D * 0.37 + 0.03)); // buckle hole
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot, pijama, puritano };
 
 /** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
 function broom() {

@@ -19,6 +19,7 @@ import { SCENES_V9 } from './scenes-v9.js'; // newsCard + icons (025)
 import { SCENES_V10 } from './scenes-v10.js'; // andesRoute, iconStat + icons (026)
 import { SCENES_V11 } from './scenes-v11.js'; // titleCard, shadowScare + icons (027)
 import { SCENES_V12 } from './scenes-v12.js'; // houseCard + icons (028)
+import './scenes-v13.js'; // extra icons (029)
 import { SCENES_MEDIA } from './media.js'; // media: real photo / short clip + credit (027+)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).

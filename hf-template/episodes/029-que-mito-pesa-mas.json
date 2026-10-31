@@ -1,0 +1,41 @@
+{
+  "id": "029-que-mito-pesa-mas",
+  "title": "¿Qué mito pesa más? Viernes 13, la Llorona o Salem",
+  "summary": "Torneo de mitos en noche de Halloween: 2026 tuvo tres viernes 13 (febrero, marzo y el último, el 13 de noviembre). Ronda uno: viernes 13 contra martes 13, ninguno con un origen comprobado. Ronda dos: el 31 de octubre viene de la víspera de Todos los Santos y tendría raíces en el Samhain celta; las brujas se sumaron después. Ronda tres: la Llorona, leyenda mexicana con un llanto parecido ya registrado en una crónica del siglo XVI, contra el Tunche de la Amazonía peruana, cuyo silbido, dicen, suena lejos cuando está cerca. Gana Salem 1692 porque pasó de verdad: 19 personas ahorcadas, ninguna quemada, y la última acusada fue exonerada recién en 2022.",
+  "thumbnailText": "¿QUÉ MITO *PESA* MÁS?",
+  "thumbnailBadge": "13 NOV",
+  "thumbnailBoard": { "scene": "equation", "items": [{ "icon": "fri13", "label": "VIERNES 13" }, "vs", { "icon": "llorona", "label": "LA LLORONA" }], "pad": 260, "title": "¿QUIÉN GANA?" },
+  "thumbnailLocation": "celtic_night",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "scared",
+  "costume": "none",
+  "locations": ["office", "celtic_night"],
+  "sources": [
+    "https://www.24horas.cl/internacional/noticias-bbc/viernes-13-como-origino-supersticion-mala-suerte",
+    "https://mentalfloss.com/article/537446/facts-about-friday-13th",
+    "https://www.razon.com.mx/estilos/2025/05/12/ni-te-cases-ni-te-embarques-este-es-el-origen-del-dicho-del-martes-13/",
+    "https://www.biobiochile.cl/noticias/sociedad/curiosidades/2023/06/13/martes-13-dia-de-la-mala-suerte-cual-es-su-origen-y-en-que-se-diferencia-del-viernes-13.shtml",
+    "https://en.wikipedia.org/wiki/Halloween",
+    "https://www.mexicodesconocido.com.mx/el-origen-mexicano-de-la-llorona.html",
+    "https://andina.pe/ingles/noticia-el-tunche-es-este-ser-mitologico-de-selva-y-por-apodan-asi-a-jose-rivera--980513.aspx",
+    "https://www.wgbh.org/news/national/2022-05-26/after-329-years-a-woman-accused-of-being-a-witch-in-salem-has-been-exonerated",
+    "https://witchesmassbay.com/2022/08/24/last-convicted-salem-witch-exonerated",
+    "Grabado: \"The Witch No. 1\", Joseph E. Baker, c. 1892, dominio público (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:TheWitch-no1.jpg",
+    "Notas: datos revisados el 31/10/2026. En 2026 cayeron en viernes el 13 de febrero, el 13 de marzo y el 13 de noviembre (calendario). El miedo al viernes 13 casi no aparece escrito antes del siglo XIX y el vínculo con los templarios es moderno; el martes 13 («ni te cases ni te embarques») no tiene origen documentado. Halloween viene de la víspera de Todos los Santos (All Hallows' Eve) y, según una teoría muy difundida (que algunos historiadores discuten), tiene raíces en el Samhain celta; la imagen de las brujas llegó después con la cultura popular. La Llorona: leyenda mexicana que tomó forma en la época colonial; fray Bernardino de Sahagún (siglo XVI) recogió un presagio previo a la conquista con una mujer que lloraba de noche por sus hijos, y su relación con la diosa Cihuacóatl es una hipótesis (México Desconocido). El Tunche: espíritu de la Amazonía peruana que se anuncia con un silbido agudo; según la leyenda, si el silbido suena lejos está cerca, y si suena cerca está lejos (Andina, 03/04/2024). Salem 1692: 19 personas ahorcadas, Giles Corey murió aplastado con piedras, nadie fue quemado; Elizabeth Johnson Jr., la última acusada sin limpiar su nombre, fue exonerada por Massachusetts en 2022 (NPR/WGBH)."
+  ],
+  "hashtags": ["#mitos", "#viernes13", "#lallorona", "#salem"],
+  "tags": ["viernes 13", "martes 13", "la llorona", "el tunche", "leyendas latinoamericanas", "brujas de salem", "salem 1692", "noche de brujas", "samhain", "sauin", "halloween", "mitos y leyendas"],
+  "lines": [
+    { "speaker": "nova", "text": "¡2026 tuvo tres viernes 13! Y el último es el 13 de noviembre.", "say": "¡Dos mil veintiséis tuvo tres viernes trece! Y el último es el trece de noviembre.", "shot": "wide3", "emotion": "smug", "titoEmotion": "scared", "profePose": "shrug" },
+    { "speaker": "tito", "text": "Ya fue. Me mudo a otro calendario.", "shot": "tito", "dutch": true, "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Torneo de mitos. Ronda uno: viernes 13 contra martes 13. Ninguno tiene origen comprobado.", "say": "Torneo de mitos. Ronda uno: viernes trece contra martes trece. Ninguno tiene origen comprobado.", "board": { "scene": "equation", "items": [{ "icon": "fri13", "label": "VIERNES 13" }, "vs", { "icon": "tue13", "label": "MARTES 13" }], "pad": 260, "title": "«NI TE CASES NI TE EMBARQUES»" }, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "profe", "text": "Ronda dos: el 31 viene de la víspera de Todos los Santos y tendría raíces en el Samhain celta.", "say": "Ronda dos: el treintaiuno viene de la víspera de Todos los Santos y tendría raíces en el Sáuin celta.", "location": "celtic_night", "costume": "druid", "board": { "scene": "equation", "items": [{ "icon": "candle", "label": "SAMHAIN" }, "+", { "icon": "calavera", "label": "1 NOV" }, "=", { "icon": "pumpkin", "label": "31 OCT" }], "pad": 150, "title": "LAS BRUJAS LLEGARON DESPUÉS" }, "titoEmotion": "curious", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y las brujas? ¿De relleno?", "shot": "tito", "emotion": "skeptical", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Ronda tres: la Llorona, leyenda mexicana. Un llanto así ya aparece en una crónica del siglo XVI.", "say": "Ronda tres: la Llorona, leyenda mexicana. Un llanto así ya aparece en una crónica del siglo dieciséis.", "board": { "scene": "equation", "items": [{ "icon": "llorona", "label": "LA LLORONA" }, "vs", { "icon": "tunche", "label": "EL TUNCHE" }], "pad": 260, "title": "MÉXICO VS AMAZONÍA PERUANA" }, "titoEmotion": "scared", "novaEmotion": "curious", "sfx": [["impact-bass-2",0.6]] },
+    { "speaker": "nova", "text": "Y en la selva peruana, el Tunche: si su silbido suena lejos, está cerca.", "shot": "nova", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¡Entonces que me silbe en la oreja!", "shot": "tito", "dutch": true, "emotion": "happy", "novaEmotion": "surprised" },
+    { "speaker": "profe", "text": "Final: Salem, 1692. Ahorcaron a 19 acusados de brujería. A nadie lo quemaron.", "say": "Final: Sálem, mil seiscientos noventa y dos. Ahorcaron a diecinueve acusados de brujería. A nadie lo quemaron.", "location": "office", "costume": "puritano", "board": { "scene": "media", "image": "assets/media/029/the-witch-no1-1892.jpg", "focus": [0.55, 0.45], "zoom": 1.05, "title": "SALEM 1692 · 19 AHORCADOS", "credit": "Grabado: Joseph E. Baker, 1892 · Dominio público · Wikimedia Commons" }, "titoEmotion": "scared", "novaEmotion": "surprised", "sfx": [["impact-bass-1",0.4]] },
+    { "speaker": "nova", "text": "Gana Salem, porque pasó de verdad. La última acusada fue exonerada recién en 2022.", "say": "Gana Sálem, porque pasó de verdad. La última acusada fue exonerada recién en dos mil veintidós.", "shot": "profeNova", "costume": "puritano", "emotion": "smug", "titoEmotion": "surprised", "sfx": [["sparkle",0.3]] },
+    { "speaker": "tito", "text": "Nada me asusta… ¿cuándo era el próximo viernes 13?", "say": "Nada me asusta... ¿cuándo era el próximo viernes trece?", "shot": "wide3", "dutch": true, "costume": "puritano", "emotion": "scared", "profePose": "facepalm", "novaEmotion": "smug" }
+  ]
+}

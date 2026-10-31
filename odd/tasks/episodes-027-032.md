@@ -30,8 +30,8 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   bedsheet fort around one flashlight, scaring themselves with their imagination; 028 approved as drafted (board
   recreations, no licensed house photos); 029 add well-known Latin American legends (La Llorona etc.); 030–032 approved.
 - [x] U3 027 render + enqueue 19:00. Route: delegated (writer trigger: location + board scenes + costume + episode). Commit 3e3d93e.
-- [x] U4 028 render + enqueue 20:00. Route: delegated (writer trigger: location + board scenes + episode + media).
-- [ ] U5 029 render + enqueue 21:00. Route: delegated.
+- [x] U4 028 render + enqueue 20:00. Route: delegated (writer trigger: location + board scenes + episode + media). Commit ae44e80.
+- [x] U5 029 render + enqueue 21:00. Route: delegated (writer trigger: costume + board icons + episode + media).
 - [ ] U6 030–032 render + enqueue 2026-11-01. Route: delegated.
 
 ## Progress / evidence
@@ -68,3 +68,16 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   value), `hyperframes check` passed, verify sheet looked at, report 54.478 s 1080x1920 30 fps -15 LUFS no black,
   cover ok. Enqueued in publisher: job 33ef407b, Pending, 2026-10-31 20:00 Peru. RED/GREEN not applicable (visual
   pipeline, no test runner).
+- U5 (2026-10-31): `029-que-mito-pesa-mas` (11 lines, myth tournament). Owner change applied: added La Llorona and El
+  Tunche (Peruvian Amazon) as round 3. Cuts vs draft: martes 13 merged into round 1 (proverb kept as board footer),
+  combi gag and Inocentes bonus dropped. New costume `puritano` (src/costumes.js: black coat, buckled capotain hat,
+  white falling-band collar), kept through the ending; reused `druid`, locations `office` + `celtic_night`. New
+  board icons fri13/tue13/llorona/tunche (src/board/scenes-v13.js) used via `equation`. Only real image: "The Witch
+  No. 1" (Joseph E. Baker, c. 1892, public domain, license checked via Commons API) in assets/media/029/, credited.
+  Facts re-checked 2026-10-31: Fridays 13th in 2026 = Feb, Mar, Nov (computed); Salem 19 hanged, Elizabeth Johnson Jr.
+  last accused cleared 2022 (NPR/WGBH); Halloween/Samhain link kept as a theory ("tendría raíces", Wikipedia notes it
+  is contested); La Llorona as Mexican legend, a similar weeping woman recorded by Sahagún in the 16th c., Cihuacóatl
+  link only a hypothesis (México Desconocido); Tunche whistle "far = near, near = far" (Andina 03/04/2024). Checks:
+  snapshots (boards legible, costume persistence bug found and fixed), `hyperframes check` passed, verify sheet looked
+  at, report 53.476 s 1080x1920 30 fps -15 LUFS no black, cover ok. Enqueued: job 5c54e1d3, Pending, 2026-10-31 21:00
+  Peru. RED/GREEN not applicable (visual pipeline, no test runner).
