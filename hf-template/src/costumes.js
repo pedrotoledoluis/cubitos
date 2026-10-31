@@ -531,7 +531,41 @@ function panadero(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero };
+/** Dominican friar (San Martín de Porres): white tunic and scapular, open black cloak with a folded black hood, rosary. */
+function dominico(p) {
+  const g = new THREE.Group();
+  const WHITE = 0xf2efe6, BLACK = 0x17161c;
+  // white tunic + scapular in front of the legs (below the face area)
+  g.add(at(box(0.62, 0.62, 0.04, WHITE, { bevel: 0.015 }), 0, -0.04, p.faceZ + 0.04));
+  g.add(at(box(0.5, 0.05, 0.02, 0xe2ddd0), 0, 0.16, p.faceZ + 0.07)); // scapular fold line
+  // open black cloak: sides, back and front edges framing the white tunic
+  for (const sx of [-1, 1]) {
+    g.add(at(box(0.06, p.S * 0.95, p.D + 0.06, BLACK, { bevel: 0.015 }), sx * (p.S / 2 + 0.03), p.S * 0.95 / 2 - 0.12, 0));
+    g.add(at(box(0.24, 0.62, 0.05, BLACK, { bevel: 0.015 }), sx * (p.S / 2 - 0.12), -0.02, p.faceZ + 0.03));
+  }
+  g.add(at(box(p.S + 0.08, p.S * 0.95, 0.06, BLACK), 0, p.S * 0.95 / 2 - 0.12, -p.D / 2 - 0.03));
+  // hood folded on the shoulders behind the head
+  g.add(at(box(p.S * 0.92, 0.36, 0.32, BLACK, { bevel: 0.09 }), 0, p.S - 0.08, -p.D / 2 - 0.16));
+  // leather belt + rosary hanging on the right side (black beads, small wooden cross)
+  g.add(at(box(0.66, 0.06, 0.02, 0x3a2412), 0, 0.27, p.faceZ + 0.07));
+  for (let i = 0; i < 6; i++) g.add(at(box(0.05, 0.05, 0.05, 0x24180e, { bevel: 0.015 }), 0.3 + (i % 2) * 0.03, 0.2 - i * 0.07, p.faceZ + 0.09));
+  g.add(at(box(0.04, 0.16, 0.03, 0x8a5a2a), 0.31, -0.28, p.faceZ + 0.09), at(box(0.11, 0.035, 0.03, 0x8a5a2a), 0.31, -0.24, p.faceZ + 0.09));
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico };
+
+/** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
+function broom() {
+  const g = new THREE.Group();
+  const STRAW = 0xd9b45a;
+  g.add(at(box(0.05, 1.05, 0.05, 0x7a4a24), 0, 0.05, 0)); // handle
+  g.add(at(box(0.16, 0.06, 0.1, 0xb0402a, { bevel: 0.015 }), 0, -0.5, 0)); // binding
+  g.add(at(box(0.2, 0.14, 0.12, STRAW, { bevel: 0.03 }), 0, -0.6, 0));
+  g.add(at(box(0.34, 0.2, 0.12, STRAW, { bevel: 0.03 }), 0, -0.76, 0));
+  for (let i = 0; i < 5; i++) g.add(at(box(0.025, 0.08, 0.13, 0xb8923a), -0.14 + i * 0.07, -0.84, 0)); // bristle tips
+  return { group: g, flame: null };
+}
 
 /** Criollo guitar, held by the neck, body hanging below the hand. */
 function guitar() {
@@ -575,8 +609,8 @@ export function attachCostumes(profe) {
     built[name].visible = false;
     p.body.add(built[name]);
   }
-  // handheld props (free hand): `profeProp: "lamp" | "guitar"`
-  const props = { lamp: oilLamp(), guitar: guitar() };
+  // handheld props (free hand): `profeProp: "lamp" | "guitar" | "broom"`
+  const props = { lamp: oilLamp(), guitar: guitar(), broom: broom() };
   props.lamp.group.scale.setScalar(1.8);
   props.guitar.group.scale.setScalar(1.25);
   for (const pr of Object.values(props)) { pr.group.visible = false; p.armL.hand.add(pr.group); }

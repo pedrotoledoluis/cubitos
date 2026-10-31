@@ -1,0 +1,38 @@
+{
+  "id": "024-san-martin-de-porres",
+  "title": "San Martín de Porres: ¡gato y ratón!",
+  "summary": "Fray Martín de Porres (Lima, 1579-1639), barbero y enfermero del convento dominico del Rosario, fue canonizado en 1962 por Juan XXIII y se le celebra cada 3 de noviembre; la leyenda cuenta que hizo comer del mismo plato a un perro, un gato y un ratón.",
+  "thumbnailText": "PERRO, GATO Y RATÓN... *¡JUNTOS!*",
+  "thumbnailBadge": "3 NOV",
+  "thumbnailBoard": { "scene": "equation", "items": [{ "icon": "dog", "label": "PERRO", "scale": 1.3 }, "+", { "icon": "cat", "label": "GATO", "scale": 1.3 }, "+", { "icon": "mouse", "label": "RATÓN", "scale": 1.1 }], "pad": 190, "title": "UN SOLO PLATO" },
+  "thumbnailLocation": "lima_claustro",
+  "thumbnailPose": "lamp",
+  "thumbnailProp": "broom",
+  "thumbnailTitoEmotion": "surprised",
+  "costume": "dominico",
+  "costumeFrom": 2,
+  "locations": ["office", "lima_claustro"],
+  "sources": [
+    "https://es.wikipedia.org/wiki/Mart%C3%ADn_de_Porres",
+    "https://www.ewtn.com/es/catolicismo/santos/martin-de-porres-15008",
+    "https://trome.com/respuestas/por-que-el-3-de-noviembre-se-celebra-a-san-martin-de-porres-efemerides-peru-san-martin-de-porras-nnda-nnlt-noticia/",
+    "https://fundacionbbva.pe/educacion-en-casa/leer-en-casa/descargables/ficha-10-los-ratones-de-fray-martin-ricardo-palma.pdf",
+    "Nota: el perro, el gato y el ratón en un plato y los ratones mudados a la huerta son leyendas de la tradición popular, recogidas por Ricardo Palma en 'Los ratones de fray Martín' (Tradiciones peruanas)."
+  ],
+  "hashtags": ["#sanmartindeporres", "#3denoviembre", "#peru", "#historia"],
+  "tags": ["san martin de porres", "san martín de porres", "san martin de porras", "fray martin", "fray escoba", "perro gato y raton", "los ratones de fray martin", "ricardo palma", "santo de la escoba", "lima colonial", "3 de noviembre"],
+  "lines": [
+    { "speaker": "tito", "text": "¡Perro, gato y ratón comiendo juntos!", "shot": "wide", "emotion": "surprised", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "location": "lima_claustro", "text": "Cuenta la leyenda que lo logró fray Martín de Porres, en Lima, hace casi 400 años.", "say": "Cuenta la leyenda que lo logró fray Martín de Porres, en Lima, hace casi cuatrocientos años.", "board": { "scene": "equation", "items": [{ "icon": "dog", "label": "PERRO", "scale": 1.3 }, "+", { "icon": "cat", "label": "GATO", "scale": 1.3 }, "+", { "icon": "mouse", "label": "RATÓN", "scale": 1.1 }], "pad": 190, "title": "CUENTA LA LEYENDA" }, "profeProp": "broom", "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "¿El ratón almorzando con el gato? ¡Qué valiente, causa!", "shot": "wide", "emotion": "happy", "titoEmotion": "skeptical", "profeProp": "broom" },
+    { "speaker": "tito", "text": "Yo no comparto ni mi Inca Kola.", "shot": "tito", "emotion": "skeptical", "novaEmotion": "smug", "profeProp": "broom" },
+    { "speaker": "profe", "text": "Nació en Lima en 1579, hijo de un español y de una mujer libre nacida en Panamá.", "say": "Nació en Lima en mil quinientos setenta y nueve, hijo de un español y de una mujer libre nacida en Panamá.", "board": { "scene": "labelled", "icon": "broom", "label": "LIMA, 1579", "title": "NACE FRAY MARTÍN DE PORRES", "scale": 1.3 }, "profeProp": "broom", "titoEmotion": "neutral", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¿Y de qué chambeaba?", "emotion": "skeptical", "novaEmotion": "neutral", "profeProp": "broom" },
+    { "speaker": "profe", "text": "Fue barbero y enfermero en el convento del Rosario, curaba gratis y le decían «fray Escoba».", "say": "Fue barbero y enfermero en el convento del Rosario, curaba gratis, y le decían fray Escoba.", "board": { "scene": "equation", "items": [{ "icon": "scissors", "label": "BARBERO", "scale": 1.3 }, "+", { "icon": "doctor", "label": "ENFERMERO" }, "+", { "icon": "broom", "label": "FRAY ESCOBA", "scale": 1.1 }], "pad": 200, "title": "CONVENTO DEL ROSARIO" }, "profeProp": "broom", "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y al ratón le cortaba el bigote?", "emotion": "happy", "novaEmotion": "smug", "profePose": "shrug", "profeProp": "broom" },
+    { "speaker": "nova", "text": "Otra leyenda: les pidió a los ratones mudarse a la huerta. ¡Y se fueron en fila!", "emotion": "explaining", "titoEmotion": "surprised", "profeProp": "broom" },
+    { "speaker": "profe", "text": "En 1962, Juan XXIII lo canonizó: primer santo mulato de América. Su fiesta: 3 de noviembre.", "say": "En mil novecientos sesenta y dos, Juan veintitrés lo canonizó: primer santo mulato de América. Su fiesta: tres de noviembre.", "board": { "scene": "bigStat", "title": "CANONIZADO POR JUAN XXIII", "value": "1962", "label": "PRIMER SANTO MULATO DE AMÉRICA", "sub": "FIESTA: 3 DE NOVIEMBRE" }, "profeProp": "broom", "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "nova", "text": "Tito, ¿tú lo intentaste con tus mascotas?", "shot": "nova", "emotion": "curious", "titoEmotion": "neutral", "profeProp": "broom" },
+    { "speaker": "tito", "text": "Sí... y el ratón fue el almuerzo.", "shot": "wide", "dutch": true, "emotion": "scared", "profePose": "facepalm", "novaEmotion": "surprised", "profeProp": "broom" }
+  ]
+}
