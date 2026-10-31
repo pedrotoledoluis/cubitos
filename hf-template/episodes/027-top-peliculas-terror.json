@@ -1,0 +1,41 @@
+{
+  "id": "027-top-peliculas-terror",
+  "title": "Top 5 películas de terror para Halloween",
+  "summary": "Noche de Halloween bajo un fuerte de sábanas: Profe, Tito y Nova arman, con linterna, un top 5 de clásicos famosos del terror ordenados por el Tomatómetro (crítica) de Rotten Tomatoes, consultado el 31/10/2026: Chucky (1988) 65 %, El Exorcista (1973) 78 %, El Conjuro (2013) 86 %, Pesadilla en Elm Street (1984) 93 % y Halloween (1978) 97 %. Es nuestra selección de títulos famosos, no una lista oficial de Rotten Tomatoes, y los puntajes cambian con el tiempo. No se usa ninguna imagen ni escena de las películas: solo tarjetas con íconos genéricos.",
+  "thumbnailText": "LA REINA DEL *TERROR*",
+  "thumbnailBadge": "31 OCT",
+  "thumbnailBoard": { "scene": "titleCard", "num": 1, "icon": "pumpkin", "title": "HALLOWEEN (1978)", "value": "97%", "label": "CRÍTICA", "sparkle": true },
+  "thumbnailLocation": "sheet_fort",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "scared",
+  "costume": "pijama",
+  "costumeFrom": 1,
+  "locations": ["sheet_fort"],
+  "look": { "bloom": {"strength": 0.75, "radius": 0.55}, "grade": {"shadowTint": [0.9,0.95,1.12], "shadowAmount": 0.55, "highTint": [1.1,1,0.86], "highAmount": 0.55, "saturation": 1.08, "contrast": 0.1}, "vignette": 0.4 },
+  "sources": [
+    "https://www.rottentomatoes.com/m/1009113-halloween",
+    "https://www.rottentomatoes.com/m/a_nightmare_on_elm_street",
+    "https://www.rottentomatoes.com/m/the_conjuring",
+    "https://www.rottentomatoes.com/m/exorcist",
+    "https://www.rottentomatoes.com/m/childs_play",
+    "https://www.boxofficemojo.com/title/tt0077651/",
+    "Notas: Tomatómetro (crítica) consultado el 31/10/2026: Halloween (1978) 97 % (90 reseñas), Pesadilla en Elm Street (1984) 93 % (69), El Conjuro (2013) 86 % (228), El Exorcista (1973) 78 % (178), Chucky / Child's Play (1988) 65 % (96). Ranking hecho por nosotros con cinco clásicos famosos; los puntajes cambian con el tiempo. El presupuesto de Halloween (1978) suele citarse en unos 300.000 a 325.000 dólares. Que El Conjuro se basa en casos de los Warren es lo que dicen el estudio y la prensa. No se usa material de las películas (ni pósters, ni escenas): solo tarjetas con íconos genéricos."
+  ],
+  "hashtags": ["#halloween", "#peliculasdeterror", "#terror", "#cine"],
+  "tags": ["halloween 1978", "halloween", "jalouin", "el conjuro", "the conjuring", "chucky", "chuky", "el exorcista", "pesadilla en elm street", "rotten tomatoes", "peliculas de terror", "top peliculas de terror", "fuerte de sabanas", "noche de halloween"],
+  "lines": [
+    { "speaker": "nova", "text": "¡Una peli de 1978 sigue siendo la reina del terror!", "say": "¡Una peli de mil novecientos setenta y ocho sigue siendo la reina del terror!", "shot": "wide", "emotion": "smug", "titoEmotion": "scared", "profePose": "shrug" },
+    { "speaker": "tito", "text": "Ja. A mí nada me da miedo.", "shot": "tito", "dutch": true, "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Según la crítica de Rotten Tomatoes. Quinto: Chucky, 65 %.", "say": "Según la crítica de Rotten Tomeitos. Quinto: Chaki, sesenta y cinco por ciento.", "board": {"scene": "titleCard", "num": 5, "icon": "doll", "title": "CHUCKY (1988)", "value": "65%", "label": "CRÍTICA", "sub": "TOMATÓMETRO DE ROTTEN TOMATOES · 31/10/2026"}, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¡Ay! ¿¡Qué es esa sombra!?", "shot": "board", "board": {"scene": "shadowScare", "phase": "scare", "title": "¿¡QUÉ ES ESO!?"}, "emotion": "scared", "novaEmotion": "surprised", "profePose": "shrug", "sfx": [["impact-bass-1",0]] },
+    { "speaker": "nova", "text": "Tranqui, primo. Es tu llamita de peluche.", "shot": "board", "board": {"scene": "shadowScare", "phase": "reveal", "title": "ERA LA LLAMITA", "sub": "(ESTABA PEGADA A LA LINTERNA)"}, "emotion": "smug", "titoEmotion": "surprised", "sfx": [["pop",1]] },
+    { "speaker": "profe", "text": "Cuarto: El Exorcista, 78 %. Tercero: El Conjuro, 86 %.", "say": "Cuarto: El Exorcista, setenta y ocho por ciento. Tercero: El Conjuro, ochenta y seis por ciento.", "board": {"scene": "titleCard", "items": [{"num": 4, "icon": "cross", "title": "EL EXORCISTA (1973)", "value": "78%"},{"num": 3, "icon": "musicBox", "title": "EL CONJURO (2013)", "value": "86%"}], "sub": "TOMATÓMETRO · CRÍTICA"}, "titoEmotion": "scared", "novaEmotion": "neutral" },
+    { "speaker": "nova", "text": "Dicen que se basa en casos que los Warren juraban reales, pe.", "say": "Dicen que se basa en casos que los Guórren juraban reales, pe.", "shot": "nova", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Reales? ¡Menos mal que hay sábana!", "shot": "tito", "dutch": true, "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Segundo: Pesadilla en Elm Street, 93 %. El villano te ataca en sueños.", "say": "Segundo: Pesadilla en Elm Strit, noventa y tres por ciento. El villano te ataca en sueños.", "board": {"scene": "titleCard", "num": 2, "icon": "bedMoon", "title": "PESADILLA EN ELM STREET (1984)", "value": "93%", "label": "CRÍTICA"}, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Shh… ¿Escucharon eso?", "say": "Shh... ¿Escucharon eso?", "shot": "wide", "emotion": "surprised", "titoEmotion": "scared", "profePose": "idle", "sfx": [["impact-bass-2",1.3]] },
+    { "speaker": "tito", "text": "¡Perdón, fue mi barriga! No cené.", "shot": "tito", "emotion": "happy", "novaEmotion": "curious" },
+    { "speaker": "profe", "text": "Y primero: Halloween, de 1978, con 97 %. Hecha con poco presupuesto.", "say": "Y primero: Jálouin, de mil novecientos setenta y ocho, con noventa y siete por ciento. Hecha con poco presupuesto.", "board": {"scene": "titleCard", "num": 1, "icon": "pumpkin", "title": "HALLOWEEN (1978)", "value": "97%", "label": "CRÍTICA", "sparkle": true}, "titoEmotion": "surprised", "novaEmotion": "happy", "sfx": [["sparkle",1]] },
+    { "speaker": "tito", "text": "No me da miedo… ¡pero la de 1978 la vemos con luz, ¿ya?!", "say": "No me da miedo... ¡pero la de mil novecientos setenta y ocho la vemos con luz, ¿ya?!", "shot": "wide", "dutch": true, "emotion": "scared", "profePose": "facepalm", "novaEmotion": "smug" }
+  ]
+}

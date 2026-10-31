@@ -17,6 +17,7 @@ import './scenes-v7.js'; // extra icons (023)
 import './scenes-v8.js'; // extra icons (024)
 import { SCENES_V9 } from './scenes-v9.js'; // newsCard + icons (025)
 import { SCENES_V10 } from './scenes-v10.js'; // andesRoute, iconStat + icons (026)
+import { SCENES_V11 } from './scenes-v11.js'; // titleCard, shadowScare + icons (027)
 import { SCENES_MEDIA } from './media.js'; // media: real photo / short clip + credit (027+)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).
@@ -289,5 +290,5 @@ function idle(g, W, H) {
   text(g, 'en cubitos', W / 2, H / 2 + 50, 80, CHALK_DIM);
 }
 
-export const SCENES = { mapPin, route, counter, equation, stage, questionCrowd, scroll, treatyMap, swarm, carriage, idle, ...SCENES_V2, ...SCENES_V3, ...SCENES_V4, ...SCENES_V5, ...SCENES_V9, ...SCENES_V10, ...SCENES_MEDIA };
+export const SCENES = { mapPin, route, counter, equation, stage, questionCrowd, scroll, treatyMap, swarm, carriage, idle, ...SCENES_V2, ...SCENES_V3, ...SCENES_V4, ...SCENES_V5, ...SCENES_V9, ...SCENES_V10, ...SCENES_V11, ...SCENES_MEDIA };
 export { ORANGE };

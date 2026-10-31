@@ -621,7 +621,25 @@ function pilot(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot };
+/** Pajamas for a sleepover (027 sheet fort): blue-striped pajama shell and a floppy nightcap with a pompom. */
+function pijama(p) {
+  const g = new THREE.Group();
+  const PJ = 0x5a7ad0, STRIPE = 0xe8eefc;
+  shell(p, g, PJ, 0.6);
+  for (const sx of [-1, 1]) for (let i = 0; i < 3; i++) g.add(at(box(0.06, p.S * 0.6, 0.03, STRIPE), sx * (p.S / 2 + 0.05), p.S * 0.3, -p.D / 2 + 0.15 + i * (p.D - 0.3) / 2));
+  for (const sx of [-1, 1]) g.add(at(box(0.05, 0.3, 0.03, STRIPE), sx * (p.S / 2 - 0.15), 0.15, p.faceZ + 0.05));
+  for (let i = 0; i < 2; i++) g.add(at(box(0.05, 0.05, 0.03, 0xf4f4f0), 0.42, 0.08 + i * 0.13, p.faceZ + 0.06)); // buttons
+  // nightcap: band, a cone bent to one side in 3 segments, pompom at the tip
+  const cap = at(new THREE.Group(), 0, p.S, -0.02);
+  cap.add(at(box(p.S + 0.1, 0.12, p.D + 0.1, STRIPE, { bevel: 0.04 }), 0, 0.04, 0));
+  const segs = [[p.S * 0.9, 0.3, 0, 0.22, 0], [p.S * 0.6, 0.28, 0.12, 0.48, -0.35], [p.S * 0.34, 0.26, 0.34, 0.66, -0.9]];
+  segs.forEach(([w, h, x, y, rz], i) => { const m = at(box(w, h, w * 0.9, i % 2 ? STRIPE : PJ, { bevel: 0.05 }), x, y, 0); m.rotation.z = rz; cap.add(m); });
+  cap.add(at(box(0.2, 0.2, 0.2, 0xf4f4f0, { bevel: 0.09 }), 0.62, 0.7, 0));
+  g.add(cap);
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot, pijama };
 
 /** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
 function broom() {

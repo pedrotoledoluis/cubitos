@@ -36,6 +36,15 @@ export function background(g, W, H, style = 'chalk') {
   if (style === 'poster') { // newsprint border
     g.strokeStyle = 'rgba(241,234,216,0.5)'; g.lineWidth = 8; g.strokeRect(18, 18, W - 36, H - 36);
   }
+  if (style === 'sheet') { // dark soft-edged card "projected" on a bedsheet (sheet_fort): alpha fades out at the edges
+    g.clearRect(0, 0, W, H);
+    g.save(); g.translate(W / 2, H / 2); g.scale(1, H / W);
+    const pool = g.createRadialGradient(0, 0, 60, 0, 0, W * 0.56);
+    pool.addColorStop(0, 'rgba(22,12,8,0.9)'); pool.addColorStop(0.7, 'rgba(22,12,8,0.82)'); pool.addColorStop(1, 'rgba(22,12,8,0)');
+    g.fillStyle = pool; g.fillRect(-W, -W, W * 2, W * 2);
+    g.restore();
+    return;
+  }
   if (style === 'screen' || style === 'holo') { // monitor bezel glow + scanlines
     g.strokeStyle = style === 'holo' ? 'rgba(120,230,255,0.7)' : 'rgba(140,200,255,0.45)'; g.lineWidth = 10; g.strokeRect(14, 14, W - 28, H - 28);
     g.fillStyle = 'rgba(255,255,255,0.03)';

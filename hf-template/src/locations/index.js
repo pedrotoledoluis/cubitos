@@ -15,13 +15,14 @@ import andes_panaderia from './andes_panaderia.js';
 import lima_claustro from './lima_claustro.js';
 import news_studio from './news_studio.js';
 import fap_helipad from './fap_helipad.js';
+import sheet_fort from './sheet_fort.js';
 
 // Location registry. A location preset is `{ name, build({ boardTexture }) }` where build returns
 // { group, update(t), background, fog: [color, near, far], exposure, boardStyle }.
 // To add one: create src/locations/<name>.js (copy athens.js as a starting point), keep the in-world board
 // surface at BOARD (use boardScreen()), keep the area x -2.2..1.9, z -0.6..0.9 clear for the characters,
 // and register it here.
-export const LOCATIONS = { office, athens, sanfrancisco1870, medieval_italy, uraniborg, mission_control, space_blackhole, ...MODERN_LOCATIONS, lima_pena_1944, cdmx_muertos, cusco_inca, andes_panaderia, lima_claustro, news_studio, fap_helipad };
+export const LOCATIONS = { office, athens, sanfrancisco1870, medieval_italy, uraniborg, mission_control, space_blackhole, ...MODERN_LOCATIONS, lima_pena_1944, cdmx_muertos, cusco_inca, andes_panaderia, lima_claustro, news_studio, fap_helipad, sheet_fort };
 export { BOARD };
 
 /**
