@@ -102,4 +102,23 @@ public sealed class CliCommandsTests
         await Run("enqueue", @"D:\repo\videos\019-x");
         Assert.Equal("videos/019-x", Assert.Single(_queue.Items).EpisodeDir);
     }
+    [Fact]
+    public async Task Export_stats_passes_the_out_path_and_prints_the_result()
+    {
+        string? received = "unset";
+        var cli = new CliCommands(_queue, _episodes, _snapshots, new FakeClock(Now), @"D:epo", _out,
+            exportStats: (path, _) =>
+            {
+                received = path;
+                return Task.FromResult("Exported 3 videos.");
+            });
+
+        Assert.Equal(0, await cli.RunAsync(["export-stats", "--out", "out/stats.json"]));
+        Assert.Equal("out/stats.json", received);
+        Assert.Contains("Exported 3 videos.", _out.ToString());
+
+        Assert.Equal(0, await cli.RunAsync(["export-stats"]));
+        Assert.Null(received);
+        Assert.Equal(2, await cli.RunAsync(["export-stats", "--out"]));
+    }
 }

@@ -24,6 +24,21 @@ public sealed class PublisherOptionsTests
     }
 
     [Fact]
+    public void Stats_export_path_defaults_to_the_site_and_resolves_relative_paths_from_the_repo()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "repo");
+        var o = new PublisherOptions { RepoRoot = root };
+
+        Assert.Equal(Path.Combine(root, "site", "data", "channel-stats.json"), o.ResolvedStatsExportPath);
+        Assert.Equal(Path.Combine(root, "out", "s.json"), o.ResolveRepoPath("out/s.json"));
+        var absolute = Path.Combine(Path.GetTempPath(), "abs.json");
+        Assert.Equal(absolute, o.ResolveRepoPath(absolute));
+
+        o.StatsExportPath = "custom/stats.json";
+        Assert.Equal(Path.Combine(root, "custom", "stats.json"), o.ResolvedStatsExportPath);
+    }
+
+    [Fact]
     public void System_clock_returns_utc_now()
     {
         var before = DateTimeOffset.UtcNow;

@@ -3,6 +3,7 @@ using Cubitos.Publisher.Core.Ports;
 using Cubitos.Publisher.Infrastructure;
 using Cubitos.Publisher.Infrastructure.Episodes;
 using Cubitos.Publisher.Infrastructure.Sqlite;
+using Cubitos.Publisher.Infrastructure.Stats;
 using Cubitos.Publisher.Infrastructure.UploadLog;
 using Cubitos.Publisher.Worker.Application;
 using Cubitos.Publisher.Worker.Cli;
@@ -52,6 +53,8 @@ services.AddSingleton<IVideoCatalog, SqliteVideoCatalog>();
 services.AddSingleton<IUploadLog>(sp => new UploadedJsonLog(Opt(sp).UploadLogPath));
 services.AddSingleton<IEpisodeReader>(sp => new EpisodePackageReader(Opt(sp).RepoRoot));
 services.AddSingleton<IVideoPlatform, LazyYouTubePlatform>();
+services.AddSingleton<IChannelStatsWriter>(sp => new JsonChannelStatsWriter(Opt(sp).ResolvedStatsExportPath));
+services.AddSingleton<ChannelStatsExport>();
 services.AddSingleton<PublishCycle>();
 services.AddSingleton<StatsCycle>();
 
@@ -92,6 +95,12 @@ var cli = new CliCommands(
     {
         await sp.GetRequiredService<PublishCycle>().RunOnceAsync(clock.UtcNow, ct);
         await sp.GetRequiredService<StatsCycle>().RunOnceAsync(clock.UtcNow, ct);
+    },
+    async (outPath, ct) =>
+    {
+        var target = new JsonChannelStatsWriter(outPath is null ? options.ResolvedStatsExportPath : options.ResolveRepoPath(outPath));
+        var report = await sp.GetRequiredService<ChannelStatsExport>().RunAsync(clock.UtcNow, target, ct);
+        return $"Exported {report.Videos.Count} videos, {report.DailyViews.Count} days, {report.Queue.Upcoming.Count} queued to {target.Path}";
     });
 try
 {

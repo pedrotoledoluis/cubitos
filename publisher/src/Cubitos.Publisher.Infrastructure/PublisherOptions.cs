@@ -24,6 +24,16 @@ public sealed class PublisherOptions
     public string ResolvedLogDirectory =>
         string.IsNullOrWhiteSpace(LogDirectory) ? Path.Combine(RepoRoot, "publisher", "data", "logs") : LogDirectory;
 
+    /// <summary>Public stats JSON for the website; relative paths are under <see cref="RepoRoot"/>. Defaults to <c>site/data/channel-stats.json</c>.</summary>
+    public string StatsExportPath { get; set; } = "";
+
+    public string ResolvedStatsExportPath =>
+        ResolveRepoPath(string.IsNullOrWhiteSpace(StatsExportPath) ? Path.Combine("site", "data", "channel-stats.json") : StatsExportPath);
+
+    /// <summary>Absolute paths are kept; relative ones are taken from <see cref="RepoRoot"/>.</summary>
+    public string ResolveRepoPath(string path) =>
+        Path.IsPathRooted(path) ? path : Path.GetFullPath(Path.Combine(RepoRoot, path));
+
     public string ResolvedSecretsDir => string.IsNullOrWhiteSpace(SecretsDir) ? Path.Combine(RepoRoot, "secrets") : SecretsDir;
     public string ClientSecretPath => Path.Combine(ResolvedSecretsDir, "client_secret.json");
     public string TokenPath => Path.Combine(ResolvedSecretsDir, "token.json");

@@ -26,10 +26,46 @@ public sealed class StatsCycleTests
         var written = await new StatsCycle(platform, catalog, snapshots, log, NullLogger<StatsCycle>.Instance).RunOnceAsync(Now);
 
         Assert.Equal(2, written);
-        Assert.Equal(new CatalogVideo("v1", "One", Now.AddDays(-2), "001-emu"), catalog.Videos["v1"]);
+        Assert.Equal(new CatalogVideo("v1", "One", Now.AddDays(-2), "001-emu", VideoPrivacy.Public), catalog.Videos["v1"]);
         Assert.Equal("002-x", catalog.Videos["v2"].EpisodeId);
         Assert.Equal(["v1", "v2"], Assert.Single(platform.StatsRequests).Order());
         Assert.All(snapshots.Snapshots, s => Assert.Equal(Now, s.TakenAt));
         Assert.Equal(120, snapshots.Snapshots.Single(s => s.VideoId == "v1").Views);
+    }
+    [Fact]
+    public async Task Exports_channel_stats_after_writing_snapshots()
+    {
+        var platform = new FakePlatform();
+        platform.ChannelVideos.Add(new ChannelVideo("v1", "One", Now.AddDays(-2), VideoPrivacy.Public));
+        platform.Views["v1"] = 120;
+        var catalog = new FakeCatalog();
+        var snapshots = new FakeSnapshotStore();
+        var writer = new FakeStatsWriter();
+        var export = new ChannelStatsExport(snapshots, catalog, new FakeQueueStore(), new FakeUploadLog(), new FakeEpisodeReader(),
+            writer, NullLogger<ChannelStatsExport>.Instance);
+
+        await new StatsCycle(platform, catalog, snapshots, new FakeUploadLog(), NullLogger<StatsCycle>.Instance, export).RunOnceAsync(Now);
+
+        Assert.Equal(VideoPrivacy.Public, catalog.Videos["v1"].Privacy);
+        var row = Assert.Single(Assert.Single(writer.Written).Videos);
+        Assert.Equal(("v1", (long?)120), (row.VideoId, row.Views));
+    }
+
+    [Fact]
+    public async Task A_failing_export_does_not_fail_the_stats_cycle()
+    {
+        var platform = new FakePlatform();
+        platform.ChannelVideos.Add(new ChannelVideo("v1", "One", Now.AddDays(-2), VideoPrivacy.Public));
+        platform.Views["v1"] = 5;
+        var snapshots = new FakeSnapshotStore();
+        var writer = new FakeStatsWriter { Error = new IOException("disk full") };
+        var export = new ChannelStatsExport(snapshots, new FakeCatalog(), new FakeQueueStore(), new FakeUploadLog(), new FakeEpisodeReader(),
+            writer, NullLogger<ChannelStatsExport>.Instance);
+
+        var written = await new StatsCycle(platform, new FakeCatalog(), snapshots, new FakeUploadLog(), NullLogger<StatsCycle>.Instance, export)
+            .RunOnceAsync(Now);
+
+        Assert.Equal(1, written);
+        Assert.Single(snapshots.Snapshots);
     }
 }

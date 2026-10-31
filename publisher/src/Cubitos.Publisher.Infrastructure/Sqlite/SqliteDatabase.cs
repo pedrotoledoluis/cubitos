@@ -38,7 +38,8 @@ public sealed class SqliteDatabase(string path)
             video_id TEXT PRIMARY KEY,
             title TEXT NOT NULL,
             published_at TEXT NULL,
-            episode_id TEXT NULL
+            episode_id TEXT NULL,
+            privacy TEXT NULL
         );
         """;
 
@@ -79,12 +80,27 @@ public sealed class SqliteDatabase(string path)
             await using var cmd = conn.CreateCommand();
             cmd.CommandText = Schema;
             await cmd.ExecuteNonQueryAsync(ct);
+            await AddMissingColumnAsync(conn, "videos", "privacy", "TEXT NULL", ct);
             _schemaReady = true;
         }
         finally
         {
             _schemaLock.Release();
         }
+    }
+
+    /// <summary>Additive migration for tables created by older versions.</summary>
+    private static async Task AddMissingColumnAsync(SqliteConnection conn, string table, string column, string definition, CancellationToken ct)
+    {
+        await using (var info = conn.CreateCommand())
+        {
+            info.CommandText = $"SELECT COUNT(*) FROM pragma_table_info('{table}') WHERE name = $column;";
+            info.Parameters.AddWithValue("$column", column);
+            if (Convert.ToInt64(await info.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture) > 0) return;
+        }
+        await using var alter = conn.CreateCommand();
+        alter.CommandText = $"ALTER TABLE {table} ADD COLUMN {column} {definition};";
+        await alter.ExecuteNonQueryAsync(ct);
     }
 
     /// <summary>Fixed-width ISO 8601 UTC text, so string order equals time order.</summary>

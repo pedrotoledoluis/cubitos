@@ -140,6 +140,40 @@ public sealed class SqliteStoresTests : IDisposable
     }
 
     [Fact]
+    public async Task Catalog_stores_privacy_and_keeps_it_when_new_value_is_null()
+    {
+        var catalog = new SqliteVideoCatalog(_db);
+        await catalog.UpsertAsync(new CatalogVideo("v1", "T", T0, null, VideoPrivacy.Private));
+        await catalog.UpsertAsync(new CatalogVideo("v1", "T", T0, null, VideoPrivacy.Public));
+        await catalog.UpsertAsync(new CatalogVideo("v1", "T", T0, null));
+
+        Assert.Equal(VideoPrivacy.Public, (await catalog.GetAllAsync()).Single().Privacy);
+    }
+
+    [Fact]
+    public async Task Legacy_videos_table_gains_the_privacy_column()
+    {
+        var path = _dir.File("legacy.db");
+        await using (var conn = new SqliteConnection($"Data Source={path}"))
+        {
+            await conn.OpenAsync();
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                CREATE TABLE videos (video_id TEXT PRIMARY KEY, title TEXT NOT NULL, published_at TEXT NULL, episode_id TEXT NULL);
+                INSERT INTO videos VALUES ('v1', 'Old', NULL, '001-a');
+                """;
+            await cmd.ExecuteNonQueryAsync();
+        }
+        SqliteConnection.ClearAllPools();
+
+        var catalog = new SqliteVideoCatalog(new SqliteDatabase(path));
+
+        Assert.Null((await catalog.GetAllAsync()).Single().Privacy);
+        await catalog.UpsertAsync(new CatalogVideo("v1", "Old", null, null, VideoPrivacy.Unlisted));
+        Assert.Equal(new CatalogVideo("v1", "Old", null, "001-a", VideoPrivacy.Unlisted), (await catalog.GetAllAsync()).Single());
+    }
+
+    [Fact]
     public async Task Schema_creation_is_idempotent_across_instances()
     {
         await new SqliteQueueStore(_db).AddAsync(QueueItem.Create("a", "videos/a", T0, T0));

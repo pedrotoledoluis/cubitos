@@ -14,9 +14,10 @@ public sealed partial class CliCommands(
     IClock clock,
     string repoRoot,
     TextWriter output,
-    Func<CancellationToken, Task>? runOnce = null)
+    Func<CancellationToken, Task>? runOnce = null,
+    Func<string?, CancellationToken, Task<string>>? exportStats = null)
 {
-    public static readonly string[] Commands = ["enqueue", "list", "cancel", "run-once", "stats", "help"];
+    public static readonly string[] Commands = ["enqueue", "list", "cancel", "run-once", "stats", "export-stats", "help"];
 
     public const string Usage = """
         Usage: cubitos-publisher <command>
@@ -25,6 +26,7 @@ public sealed partial class CliCommands(
           cancel <itemId>
           run-once
           stats
+          export-stats [--out <path>]
         Config overrides: --Publisher:<Key>=<value> (e.g. --Publisher:DatabasePath=C:\temp\p.db)
         """;
 
@@ -41,6 +43,7 @@ public sealed partial class CliCommands(
                 "cancel" => await CancelAsync(args, ct),
                 "run-once" => await RunOnceAsync(ct),
                 "stats" => await StatsAsync(ct),
+                "export-stats" => await ExportStatsAsync(args, ct),
                 "help" => Print(Usage),
                 _ => UsageError($"Unknown command '{args[0]}'."),
             };
@@ -144,6 +147,19 @@ public sealed partial class CliCommands(
         }).ToList();
         PrintTable(["#", "VIDEO", "VIEWS", "LAST 1H", "LAST 24H", "TITLE"], rows);
         return 0;
+    }
+
+    /// <summary>Writes the public stats JSON; <c>--out</c> overrides the configured path (relative to the repo root).</summary>
+    private async Task<int> ExportStatsAsync(IReadOnlyList<string> args, CancellationToken ct)
+    {
+        if (exportStats is null) return Error("export-stats is not available.");
+        string? outPath = null;
+        for (var i = 1; i < args.Count; i += 2)
+        {
+            if (args[i] != "--out") throw new CliUsageException($"Unknown option '{args[i]}'.");
+            outPath = i + 1 < args.Count ? args[i + 1] : throw new CliUsageException("--out needs a path.");
+        }
+        return Print(await exportStats(outPath, ct));
     }
 
     /// <summary>Stores folders repo-relative with forward slashes, like <c>videos/019-x</c>.</summary>
