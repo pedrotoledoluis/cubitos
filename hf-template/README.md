@@ -18,14 +18,20 @@ What it does, in order (each step has a hard timeout; leftover processes are sto
    Writes `assets/audio/mix.wav`, `src/episode-data.js` and updates `index.html` durations.
 2. `npx hyperframes check`
 3. `npx hyperframes render` → `renders/<id>.mp4` (1080x1920, 30 fps; ~20 min on this machine)
-4. Renders `compositions/thumbnail.html` and grabs a 1280x720 PNG.
-5. Writes the description (title, `summary`, sources, hashtags; no fixed channel paragraph) and `metadata.json`, copies everything to `../videos/<id>/`:
+4. Renders `compositions/thumbnail.html` and grabs a 1280x720 PNG, and renders the 9:16 Shorts cover
+   `compositions/cover.html` → `renders/<id>-cover.png`.
+5. Prepends the cover to the video: the cover PNG is held for 0.1 s (3 frames at 30 fps) before `renders/<id>.mp4`,
+   audio delayed 100 ms, re-encoded libx264 crf 18 + aac 192k. Shorts ignore custom thumbnails for non-partner
+   channels, so the owner picks this first frame as the cover in the YouTube app.
+6. Writes the description (title, `summary`, sources, hashtags; no fixed channel paragraph) and `metadata.json`, copies everything to `../videos/<id>/`:
    `<id>.mp4`, `<id>-thumbnail.png`, `<id>-description.txt`, `metadata.json`
    (title, description, tags, `categoryId` 27 Education, language `es`, `madeForKids` false — for a future uploader).
-6. Verification: `.build/verify/<id>-sheet.jpg` (one frame per line) and `<id>-report.json`
-   (duration, streams, LUFS, black segments, step timings). Look at the sheet before publishing.
+7. Verification (on the delivered mp4, line times shifted by the cover): `.build/verify/<id>-sheet.jpg` (one frame
+   per line) and `<id>-report.json` (duration, streams, LUFS, black segments, `cover` = first-frame PSNR against
+   the cover PNG with `ok` at ≥ 30 dB, step timings). Look at the sheet before publishing.
 
-`--skip-render` reuses existing renders (re-writes deliverables and the report only).
+`--skip-render` reuses existing renders (re-writes deliverables and the report only); the cover is still prepended,
+and rendered first if `renders/<id>-cover.png` is missing.
 `--print-description` prints the description text and exits (nothing is built or written).
 The report warns when the duration is outside 35–55 s.
 
@@ -150,6 +156,7 @@ highlights, cool shadows), slightly tightened location fog and a soft vignette. 
 | --- | --- |
 | `index.html` | Main 1080x1920 composition (Three.js canvas + caption + mix audio) |
 | `compositions/thumbnail.html` | 1280x720 thumbnail (text from `thumbnailText`) |
+| `compositions/cover.html` | 1080x1920 Shorts cover, prepended as the first 0.1 s of the delivered mp4 |
 | `src/stage.js` | Camera shots, acting (poses/emotions/look-at), captions, board updates |
 | `src/look.js` | Post-processing look (bloom, grade, vignette, fog scale) |
 | `src/locations/` | Location presets (`office`, `athens`, `sanfrancisco1870`), `BOARD` placement, shared props (chicken, pigeon) |
