@@ -20,6 +20,7 @@ import { SCENES_V10 } from './scenes-v10.js'; // andesRoute, iconStat + icons (0
 import { SCENES_V11 } from './scenes-v11.js'; // titleCard, shadowScare + icons (027)
 import { SCENES_V12 } from './scenes-v12.js'; // houseCard + icons (028)
 import './scenes-v13.js'; // extra icons (029)
+import './scenes-v14.js'; // extra icons (030)
 import { SCENES_MEDIA } from './media.js'; // media: real photo / short clip + credit (027+)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).
@@ -35,8 +36,8 @@ function europe(g, u, { britain = false } = {}) {
 }
 
 /** Title line near the bottom of the board (clear of the caption block above the board). */
-function footer(g, W, H, str, u, at = 0.4, color = YELLOW) {
-  if (str) text(g, str, W / 2, H - 70, 62, color, prog(u, at, 0.35));
+function footer(g, W, H, str, u, at = 0.4, color = YELLOW, size = 62) {
+  if (str) text(g, str, W / 2, H - 70, size, color, prog(u, at, 0.35));
 }
 
 // ------------------------------------------------------------- generic scenes
@@ -116,6 +117,7 @@ function counter(g, W, H, u, d, p) {
  * equation: icons separated by operators that pop in one after another.
  * params: { items: ['rabbit', '+', 'human', '=', 'carrot'], title, scales: { carrot: 1 } }
  * An item may be { icon, count, scale } to draw a small group (e.g. "more dancers").
+ * Optional labelSize / titleSize (default 44 / 62) enlarge the text when the board is small in frame.
  */
 function equation(g, W, H, u, d, p) {
   const items = p.items ?? [];
@@ -136,10 +138,10 @@ function equation(g, W, H, u, d, p) {
         icon(g, o.icon, ox, oy + 80, (o.scale ?? 1) * (n === 1 ? 1 : 0.6), u * 2 + j * 1.3, { color: j % 3 === 1 ? YELLOW : CHALK });
       }
     });
-    if (o.label) text(g, o.label, x, y + 150, 44, CHALK, prog(u, at + 0.3, 0.3));
+    if (o.label) text(g, o.label, x, y + 150, p.labelSize ?? 44, CHALK, prog(u, at + 0.3, 0.3));
     if (o.cross) crossOut(g, x, y - 20, 110, prog(u, at + 0.5, 0.5)); // item { icon, cross: true } = "no X"
   });
-  footer(g, W, H, p.title, u, 0.3 + items.length * 0.45);
+  footer(g, W, H, p.title, u, 0.3 + items.length * 0.45, YELLOW, p.titleSize ?? 62);
 }
 
 /**

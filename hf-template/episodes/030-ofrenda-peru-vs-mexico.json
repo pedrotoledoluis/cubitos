@@ -1,0 +1,41 @@
+{
+  "id": "030-ofrenda-peru-vs-mexico",
+  "title": "Ofrenda peruana vs mexicana: ¿cuál gana?",
+  "summary": "En la ofrenda mexicana de Día de Muertos el agua calma la sed de las almas tras su viaje, la sal purifica, el cempasúchil marca el camino, las velas guían, el papel picado representa el aire, la foto dice quién regresa y el pan de muerto es afecto. En Perú el 1 de noviembre es Todos los Santos y el 2, Difuntos: en los Andes se ponen guaguas de pan y la comida favorita del difunto, y en Lima y la costa se va al cementerio con música, flores y comida. No hay ganador: solo cambia el menú.",
+  "thumbnailText": "¿AGUA Y SAL PA'L *MUERTO*?",
+  "thumbnailBadge": "1 NOV",
+  "thumbnailBoard": { "scene": "equation", "items": [{ "icon": "flagMx", "label": "MÉXICO" }, "vs", { "icon": "flagPe", "label": "PERÚ" }], "pad": 320, "labelSize": 80, "titleSize": 84, "title": "¿CUÁL GANA?" },
+  "thumbnailLocation": "cdmx_muertos",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "surprised",
+  "costume": "posada",
+  "costumeFrom": 2,
+  "locations": ["office", "cdmx_muertos", "andes_panaderia"],
+  "sources": [
+    "https://nuevaescuelamexicana.sep.gob.mx/contenido/recurso/elementos-basicos-para-la-ofrenda-de-dia-de-muertos/",
+    "https://www.personal.unam.mx/Docs/Cendi/dia-de-muertos-elementos-de-la-ofrenda.pdf",
+    "https://www.cronica.com.mx/nacional/2026/10/27/dia-de-muertos-2026-elementos-que-no-pueden-faltar-en-la-ofrenda-y-su-significado/",
+    "https://andina.pe/agencia/noticia-dia-todos-los-santos-mas-20000-personas-visitaron-cementerio-chimbote-961311.aspx",
+    "https://andina.pe/agencia/noticia-dia-todos-los-santos-punenos-celebraron-feriado-respetando-las-tradiciones-andinas-961292.aspx",
+    "https://www.infobae.com/peru/2023/11/01/dia-de-todos-los-santos-en-peru-en-vivo-recorrido-cementerios-nueva-esperanza-el-angel-baquijano-callao-parque-del-recuerdo-jardines-de-la-paz-videos-fotos/",
+    "https://andina.pe/agencia/noticia-dia-todos-los-santos-pasco-celebra-feria-las-tanta-wawas-y-flores-961264.aspx",
+    "Foto: \"Elementos ofrenda\", Nohemí FuentesN, 2012, CC BY-SA 3.0 (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Elementos_ofrenda.JPG",
+    "Foto: \"Día de Todos los Santos, cementerio Virgen de Lourdes, Villa María del Triunfo, Lima\", Yiauhece, 2010, CC BY-SA 4.0 (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:D%C3%8DA_DE_TODOS_LOS_SANTOS_CEMENTERIO_DE_VIRGEN_DE_LOURDES_VILLA_MAR%C3%8DA_DEL_TRIUNFO_LIMA_PERU.jpg",
+    "Notas: datos revisados el 31/10/2026. Significados según la SEP (Nueva Escuela Mexicana): el agua mitiga la sed de las ánimas tras su recorrido, la sal purifica, la flama de las velas guía a los muertos a casa, el papel picado representa el aire, el retrato identifica al ser querido que visitará y el pan de muerto representa afecto y fraternidad; los significados cambian según la familia y la región. En Perú, el 1 de noviembre es Todos los Santos y el 2, Día de los Difuntos; en los Andes se preparan guaguas (tanta wawas) y mesas con la comida que le gustaba al difunto (Andina, Puno y Pasco); en los cementerios de la costa hay bandas, responsos con guitarra y violín, y familias que almuerzan junto a las tumbas: en Chimbote, cabrito, cebiche, arroz con pato y pollo a la brasa (Andina); en Nueva Esperanza, Lima, uno de los platos más vendidos fue el chicharrón (Infobae, 2023)."
+  ],
+  "hashtags": ["#diademuertos", "#todoslossantos", "#peru", "#mexico", "#ofrenda"],
+  "tags": ["ofrenda de muertos", "altar de muertos", "cempasuchil", "cempasuchitl", "pan de muerto", "papel picado", "todos los santos peru", "dia de difuntos", "guaguas de pan", "tanta wawa", "dia de muertos mexico", "cementerio nueva esperanza"],
+  "lines": [
+    { "speaker": "tito", "text": "¡Les dejan agua y sal a los muertos! ¿Están a dieta?", "shot": "wide", "emotion": "surprised", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "location": "cdmx_muertos", "text": "Es la ofrenda mexicana. El agua calma su sed tras el viaje; la sal purifica.", "board": { "scene": "equation", "items": [{ "icon": "waterGlass", "label": "AGUA = SED", "scale": 1.2 }, "+", { "icon": "saltBowl", "label": "SAL = PURIFICA", "scale": 1.2 }], "pad": 330, "labelSize": 64, "titleSize": 84, "title": "OFRENDA MEXICANA" }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "Y el cempasúchil marca el camino con sus pétalos, ¿no, Profe?", "shot": "nova", "emotion": "smug", "titoEmotion": "curious" },
+    { "speaker": "profe", "text": "Velas para guiar, papel picado por el aire, y la foto de quien regresa.", "board": { "scene": "media", "image": "assets/media/030/ofrenda-elementos.jpg", "focus": [0.5, 0.45], "zoom": 1.05, "title": "FLOR, PAN Y PAPEL PICADO", "credit": "Foto: Nohemí FuentesN · CC BY-SA 3.0 · Wikimedia Commons" }, "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Y el pan de muerto?", "shot": "tito", "emotion": "happy", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Es afecto y compartir. En Perú: el 1 es Todos los Santos; el 2, Difuntos.", "say": "Es afecto y compartir. En Perú: el uno es Todos los Santos; el dos, Difuntos.", "board": { "scene": "equation", "items": [{ "icon": "flagMx", "label": "MÉXICO", "scale": 1.2 }, "vs", { "icon": "flagPe", "label": "PERÚ", "scale": 1.2 }], "pad": 320, "labelSize": 80, "titleSize": 84, "title": "1 Y 2 DE NOVIEMBRE" }, "titoEmotion": "curious", "novaEmotion": "curious" },
+    { "speaker": "profe", "location": "andes_panaderia", "costume": "panadero", "text": "En los Andes: guaguas de pan y una mesa con la comida favorita del difunto.", "board": { "scene": "equation", "items": [{ "icon": "guagua", "label": "GUAGUAS", "scale": 1.1 }, "+", { "icon": "dish", "label": "SU PLATO", "scale": 1.2 }], "pad": 320, "labelSize": 76, "titleSize": 84, "title": "MESA ANDINA" }, "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "nova", "costume": "panadero", "text": "Y en Lima, al cementerio con banda, flores… ¡y chicharrón!", "board": { "scene": "media", "image": "assets/media/030/cementerio-lima-2010.jpg", "focus": [0.5, 0.5], "zoom": 1.05, "title": "LIMA · 1 DE NOVIEMBRE", "credit": "Foto: Yiauhece · CC BY-SA 4.0 · Wikimedia Commons" }, "emotion": "happy", "titoEmotion": "surprised" },
+    { "speaker": "tito", "costume": "panadero", "text": "¿Serenata pa'l abuelo? ¡Bacán!", "shot": "tito", "emotion": "happy", "novaEmotion": "smug" },
+    { "speaker": "profe", "costume": "panadero", "text": "No hay ganador, Tito: las dos honran a los suyos. Solo cambia el menú.", "shot": "profe", "pose": "shrug", "titoEmotion": "curious", "novaEmotion": "happy" },
+    { "speaker": "tito", "costume": "panadero", "text": "Al abuelo le llevo ceviche… ¡y agua con sal, pa' la dieta!", "say": "Al abuelo le llevo ceviche... ¡y agua con sal, pa' la dieta!", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "happy" }
+  ]
+}

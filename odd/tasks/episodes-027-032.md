@@ -31,7 +31,7 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   recreations, no licensed house photos); 029 add well-known Latin American legends (La Llorona etc.); 030–032 approved.
 - [x] U3 027 render + enqueue 19:00. Route: delegated (writer trigger: location + board scenes + costume + episode). Commit 3e3d93e.
 - [x] U4 028 render + enqueue 20:00. Route: delegated (writer trigger: location + board scenes + episode + media). Commit ae44e80.
-- [x] U5 029 render + enqueue 21:00. Route: delegated (writer trigger: costume + board icons + episode + media).
+- [x] U5 029 render + enqueue 21:00. Route: delegated (writer trigger: costume + board icons + episode + media). Commit c243113.
 - [ ] U6 030–032 render + enqueue 2026-11-01. Route: delegated.
 
 ## Progress / evidence
@@ -81,3 +81,16 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   snapshots (boards legible, costume persistence bug found and fixed), `hyperframes check` passed, verify sheet looked
   at, report 53.476 s 1080x1920 30 fps -15 LUFS no black, cover ok. Enqueued: job 5c54e1d3, Pending, 2026-10-31 21:00
   Peru. RED/GREEN not applicable (visual pipeline, no test runner).
+- U6/030 (2026-10-31): `030-ofrenda-peru-vs-mexico` (11 lines, script as drafted). Reused locations office ->
+  cdmx_muertos -> andes_panaderia, costumes posada -> panadero (repeated on every line from 7). New board icons waterGlass,
+  saltBowl, dish, flagMx, flagPe (src/board/scenes-v14.js; flags drawn because flag emoji do not render headless) and
+  optional `labelSize`/`titleSize` params on `equation` (defaults unchanged: 44/62). Real photos (license checked via
+  Commons API): "Elementos ofrenda" (Nohemí FuentesN, CC BY-SA 3.0; shows cempasúchil, pan de muerto, papel picado,
+  so it moved from line 2 to line 4 and line 2 became a drawn agua/sal board) and Lima cemetery on 1 Nov 2010 (Yiauhece,
+  CC BY-SA 4.0) on Nova's line 8, both credited on the board and in the description. Facts re-checked 2026-10-31: SEP
+  (agua = sed tras el recorrido, sal purifica, velas guían, papel picado = aire, retrato, pan = afecto y fraternidad),
+  Andina Chimbote (bands, guitar/violin responsos, lunch at graves incl. cebiche), Infobae 2023 (chicharrón among most
+  sold at Nueva Esperanza). Fact change: date board says both countries keep 1 and 2 Nov (draft had México "2 NOV").
+  Checks: snapshots (boards legible after enlarging labels), `hyperframes check` passed, verify sheet looked at, report
+  44.153 s 1080x1920 30 fps -14.9 LUFS no black, cover ok, thumbnail ok. Enqueued: job 284dfa73, Pending, 2026-11-01
+  09:00 Peru. RED/GREEN not applicable (visual pipeline, no test runner).
