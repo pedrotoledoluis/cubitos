@@ -32,7 +32,7 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
 ## Tasks
 - [x] T1 Moderate coaster look in the template. Route: delegated (preparation trigger). Commit 2426805.
 - [x] T2 023 guaguas de pan: script, assets, render, verify. Route: delegated (writer trigger). Commit 2c7c2f6.
-- [ ] T3 024 San Martín de Porres: script, assets, render, verify. Route: delegated (writer trigger).
+- [x] T3 Automate the Shorts cover in make-episode + 024 San Martín de Porres. Route: delegated (writer trigger). Commits 59b75ad, 8b8e7d3.
 - [ ] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger).
 - [ ] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger).
 - [ ] T6 Update AGENT_GUIDE.md §8 and odd/HANDOFF.md. Route: inline.
@@ -65,6 +65,21 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
   captions above the board, chullo/oven readable, poof hides the swap. Thumbnail readable but the headline covers
   most of Tito (3-character thumbnail layout). Leftover check: 0. No RED/GREEN (content). Native review not run by
   the writer (parent owns it).
+- T3a (commit 59b75ad): `scripts/make-episode.mjs` renders `compositions/cover.html` -> `renders/<id>-cover.png` (also on
+  `--skip-render` when the PNG is missing) and always delivers `videos/<id>/<id>.mp4` = cover looped 0.1 s (3 frames)
+  + render, audio `adelay` 100 ms, libx264 crf 18, aac 192k. Verify uses the delivered mp4 with line times shifted by
+  0.1 s; the report gains `cover` (first-frame PSNR vs the cover PNG, `ok` at >= 30 dB). Documented in
+  `hf-template/README.md`. No test runner: checked by the 024 run (cover ok, PSNR 47.0 dB; first frame grab viewed).
+- T3b (commit 8b8e7d3, 024-san-martin-de-porres): 12 lines, Tito+Profe+Nova, hook "¡Perro, gato y ratón comiendo
+  juntos!", punchline "Sí... y el ratón fue el almuerzo." (Tito's own pets; never the saint/faith/race). Legends hedged
+  ("Cuenta la leyenda", "Otra leyenda"). New assets: costume `dominico` (white tunic/scapular, open black cloak, folded
+  hood, rosary) + `profeProp: "broom"`; location `lima_claustro` (ochre arcade, blue/yellow tile dado, pink bell tower,
+  fountain with drops, lantern, leaning broom, table with dog/cat/mouse eating from one plate); board icons `dog cat
+  mouse broom scissors` (`src/board/scenes-v8.js`, canvas shapes: emoji do not render in headless snapshots/renders).
+  Checks: report 46.82 s, 1080x1920 h264 30 fps, aac, -15.0 LUFS, true peak -1.8 dB, no black segments, cover ok.
+  Sheet + transition viewed: captions above the board, heads in frame, poof hides the swap, animals readable above
+  Tito in his close-ups. Thumbnail readable (first try orphaned "¡" -> starred `*¡JUNTOS!*`, re-rendered). Leftover
+  check: 0. No RED/GREEN (content). Native review not run by the writer (parent owns it).
 
 ## Next step
-T3 (024 San Martín de Porres).
+T4 (025 cinco noticias raras).
