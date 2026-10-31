@@ -3,7 +3,7 @@ using static Cubitos.Publisher.Infrastructure.Sqlite.SqliteDatabase;
 
 namespace Cubitos.Publisher.Infrastructure.Sqlite;
 
-/// <summary>The <c>videos</c> table: which channel videos exist, for stats polling and the dashboard.</summary>
+/// <summary>The <c>videos</c> table: which channel videos exist, for stats polling and the stats export.</summary>
 public sealed class SqliteVideoCatalog(SqliteDatabase db) : IVideoCatalog
 {
     public async Task UpsertAsync(CatalogVideo video, CancellationToken ct = default)

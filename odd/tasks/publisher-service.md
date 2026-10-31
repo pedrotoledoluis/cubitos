@@ -228,3 +228,6 @@ T5 cut-over (install service, enqueue 019-022, update AGENT_GUIDE.md); optionall
     while animating avg 73.4 fps, worst 20.8 ms; open time avg 223.7 ms, max 232.2 ms (target 220 ms).
   - Gaps: real pointer hover/guards verified by unit tests and simulated hover only; a monitor left of the primary with a
     different DPI could rescale the parked panel; pinned window position is not remembered (size is).
+- 2026-10-30 (feature `channel-stats-page`, S1): the WPF dashboard (`Cubitos.Publisher.Desktop`) and its support
+  library `Cubitos.Publisher.Dashboard.Core` (+ `Dashboard.Tests`) were removed at the owner's request; channel stats
+  now go to a public JSON (`export-stats`) shown on the GitHub Pages site. See `odd/tasks/channel-stats-page.md`.

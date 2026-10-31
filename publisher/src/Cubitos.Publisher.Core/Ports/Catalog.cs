@@ -5,7 +5,7 @@ namespace Cubitos.Publisher.Core.Ports;
 /// <summary>A channel video known to the service; <see cref="EpisodeId"/> links it to a repo episode when known.</summary>
 public sealed record CatalogVideo(string VideoId, string Title, DateTimeOffset? PublishedAt, string? EpisodeId);
 
-/// <summary>Which channel videos exist, for stats polling and the dashboard.</summary>
+/// <summary>Which channel videos exist, for stats polling and the stats export.</summary>
 public interface IVideoCatalog
 {
     /// <summary>Inserts or updates by video id. A null episode id keeps the stored one.</summary>

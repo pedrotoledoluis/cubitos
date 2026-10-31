@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Cubitos.Publisher.Infrastructure.Sqlite;
 
-/// <summary>Opens connections to the shared publisher DB, creating the schema once. WAL lets the dashboard read while the service writes.</summary>
+/// <summary>Opens connections to the shared publisher DB, creating the schema once. WAL lets the CLI read while the service writes.</summary>
 public sealed class SqliteDatabase(string path)
 {
     private const string Schema = """

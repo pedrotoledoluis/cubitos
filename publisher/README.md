@@ -46,56 +46,6 @@ cubitos-publisher stats
 - Configuration can be overridden per call with `--Publisher:<Key>=<value>`, for example
   `--Publisher:DatabasePath=C:\temp\test.db`, or with environment variables like `Publisher__DatabasePath`.
 
-## Dashboard
-
-`src/Cubitos.Publisher.Desktop` is a native WPF app (`net10.0-windows`) that reads the same SQLite DB **read-only**
-(it never creates or writes it) and refreshes every 30 s, plus an "Actualizar" button. All numbers come from
-`Cubitos.Publisher.Dashboard.Core` (DB reader, builders, formatting, notch state machine and docking), which has its own tests.
-
-- **Ranking**: videos by total views with +1 h / +24 h, likes, comments and a 24 h sparkline; top 3 on a podium.
-- **Horas pico**: 7 x 24 heatmap of views gained (Peru time, last 4 weeks) and the 3 best hours to publish.
-- **Primeras 24 h**: cumulative views per hour since publish for one video against the channel average (average uses
-  only videos with a full first day that the service measured from the start).
-- **Cola de publicación**: queue items with status badges, publish/retry times, last error and a link to the video.
-- Header KPIs: total views, views today (Peru day), videos published, next publish with title and countdown.
-
-The app behaves like a screen notch. While collapsed (the default) the only thing on screen is a small dark tab on
-the primary screen's left edge, vertically centered, with an animated flaming jack-o'-lantern (borderless, transparent
-around the tab, always on top, never takes focus, click-through outside the tab, no taskbar or Alt+Tab entry; right
-click it for "Fijar / soltar el panel" and "Salir"). Hovering the pumpkin slides the whole dashboard out of the notch in
-about 220 ms (default 70% x 80% of the work area, left-anchored, vertically centered; the last size is remembered).
-Leaving both the panel and the notch collapses it after 0.5 s; coming back in time cancels it, and an open dropdown or a
-mouse button pressed inside (resize, drag) keeps it open. The thumbtack in the header pins the panel: it becomes a normal
-movable, resizable, minimizable window that stays open; unpinning docks it back to hover mode. Sections are tabs in the
-panel header. The app has no taskbar entry at all: the notch is its presence, and the panel's close button (or "Salir")
-quits it.
-
-Themes (selector in the panel header, remembered with the pin and panel size in
-`%LOCALAPPDATA%\CubitosPublisher\desktop-settings.json`): **Cubitos**, **Halloween: Cazadragones** (animated embers,
-glow orbs and lanterns, gold flourishes) and **Neón**. Switching themes cross-fades. The Halloween headings use Cinzel
-Decorative (SIL OFL 1.1, license in `Fonts/OFL-CinzelDecorative.txt`).
-
-```powershell
-dotnet build publisher
-publisher\src\Cubitos.Publisher.Desktop\bin\Debug\net10.0-windows\Cubitos.Publisher.Desktop.exe
-```
-
-The DB path comes from `--db <path>` (or `--Publisher:DatabasePath=<path>`), then `Publisher__DatabasePath`, then
-`appsettings.json` next to the exe, then `D:\PROYECTS\cubitos\publisher\data\publisher.db`. `--theme=<cubitos|halloween|neon>`
-and `--section=<ranking|heatmap|firstday|queue>` pick the start theme and tab. For smoke tests: `--notch=<collapsed|expanded|pinned>`
-(app state: only the notch, panel open as if hovered, pinned window; not remembered), `--size=<W>x<H>` (panel size),
-`--screenshot=<file.png>` (collapsed: the notch window; otherwise the panel with the notch drawn at its real offset; then
-exits) and `--fps-log=<file>` (frame times and open times over 10 s of simulated hover open/close cycles).
-
-How it stays smooth: the panel window is created once and kept alive (rendered, alpha 0, click-through, parked left of
-the primary screen), so opening only moves the window (no resize, no layout) and fades its DWM alpha
-(`SetLayeredWindowAttributes`, no per-pixel copy) while the content trails in and a glow bursts from the notch. One
-`CompositionTarget.Rendering` frame clock drives everything with real elapsed time (paused while the session is locked);
-the pointer is polled each frame across both windows; the background animation stops while the panel is hidden. Docking
-follows the primary work area and DPI and re-docks on display or taskbar changes. Code: `Notch/NotchController.cs`
-(windows, docking, hover polling), `Notch/NotchWindow.cs`, `Notch/NotchTab.cs`, and `NotchStateMachine` / `NotchDock`
-in `Cubitos.Publisher.Dashboard.Core` (tested).
-
 ## Files
 
 | What | Where |
