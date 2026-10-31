@@ -19,9 +19,11 @@ Last update: 2026-10-30 ~22:30 Peru. Read this first after `/clear`, then `AGENT
 ## Feature `odd/tasks/channel-stats-page.md` (same branch)
 - WPF Desktop + Dashboard.Core removed. `export-stats` CLI + service hook write `site/data/channel-stats.json`
   every stats pass; section "Estadísticas del canal" at the end of `site/index.html`. 163 tests green.
-- PENDING owner: reinstall the service (elevated `publisher/scripts/install-service.ps1`) so it runs the new build;
-  confirm video `VPAJvfUvI1s` ("Lo humillaron por ser un simple CONSERJE…", July) is public before pushing the page;
-  push to GitHub Pages is the owner's decision.
+- Service reinstalled with the new build (privacy recorded; private `VPAJvfUvI1s` excluded). Page LIVE at
+  https://pedrotoledoluis.github.io/ (Pages repo `pedrotoledoluis.github.io`, branch master, commit 6359a2e).
+- S4 (commit 7db3723): `publisher/scripts/sync-pages.ps1` (+ `-DryRun`) and `install-pages-sync.ps1` (per-user
+  hourly task `CubitosPagesSync`). PENDING owner: run the installer (agent was blocked from registering persistence).
+  Log: `%LOCALAPPDATA%\Cubitos\pages-sync.log`.
 
 ## Branch notes
 - `feat/episodes-023-026` was cut from `feat/publisher-service` (unpushed). Commit ddad850 on the publisher branch
