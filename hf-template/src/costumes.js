@@ -583,7 +583,45 @@ function anchor(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor };
+/**
+ * Helicopter pilot: olive flight suit with zipper, name tag and a red-white-red flag patch, grey flight helmet with
+ * the dark visor raised on the forehead, ear cups and a boom mic at the side (the mouth stays visible).
+ */
+function pilot(p) {
+  const g = new THREE.Group();
+  const SUIT = 0x55603e, DARK = 0x3a4228, HELMET = 0xc9ced4, VISOR = 0x1a2230;
+  shell(p, g, SUIT, 0.62);
+  g.add(at(box(0.6, 0.28, 0.03, SUIT), 0, 0.14, p.faceZ + 0.03)); // suit front (covers the shirt)
+  for (const sx of [-1, 1]) { // collar flaps in front of Profe's bowtie
+    const collar = at(box(0.3, 0.18, 0.06, DARK, { bevel: 0.015 }), sx * 0.14, 0.17, p.faceZ + 0.1);
+    collar.rotation.z = sx * -0.3;
+    g.add(collar);
+  }
+  g.add(at(box(0.04, 0.26, 0.04, 0xb8bcc0, { metalness: 0.6 }), 0, 0.08, p.faceZ + 0.07)); // zipper
+  g.add(at(box(0.26, 0.1, 0.03, 0x2a2e22), -0.45, 0.27, p.faceZ + 0.06)); // name tag
+  g.add(at(box(0.2, 0.04, 0.035, 0xffd23a), -0.45, 0.27, p.faceZ + 0.065)); // wings on the tag
+  for (const [i, c] of [0xd2202e, 0xf4f4f0, 0xd2202e].entries()) { // flag patch on the right chest
+    g.add(at(box(0.07, 0.14, 0.03, c), 0.38 + i * 0.07, 0.27, p.faceZ + 0.06));
+  }
+  // flight helmet: shell over the head top, side ear cups, raised visor above the glasses
+  const helmet = at(new THREE.Group(), 0, p.S, -0.02);
+  helmet.add(at(box(p.S + 0.12, 0.36, p.D + 0.12, HELMET, { bevel: 0.14, metalness: 0.2, roughness: 0.45 }), 0, 0.12, 0));
+  helmet.add(at(box(p.S * 0.5, 0.08, p.D * 0.6, 0xaab0b8, { bevel: 0.03 }), 0, 0.32, 0)); // top ridge
+  helmet.add(at(box(p.S * 0.86, 0.16, 0.1, VISOR, { metalness: 0.5, roughness: 0.2 }), 0, 0.02, p.D / 2 + 0.1)); // raised visor
+  helmet.add(at(box(p.S * 0.9, 0.05, 0.06, 0x8a9098), 0, 0.12, p.D / 2 + 0.1)); // visor track
+  g.add(helmet);
+  for (const sx of [-1, 1]) {
+    g.add(at(box(0.08, 0.36, 0.5, HELMET, { bevel: 0.03 }), sx * (p.S / 2 + 0.05), p.S - 0.12, -0.05)); // helmet sides
+    g.add(at(box(0.12, 0.3, 0.3, 0x2a2a30, { bevel: 0.04 }), sx * (p.S / 2 + 0.08), p.eyeY - 0.05, 0.05)); // ear cups
+  }
+  const boom = at(box(0.05, 0.05, 0.55, 0x15151a), -(p.S / 2 + 0.09), p.eyeY - 0.28, p.faceZ - 0.05);
+  boom.rotation.y = -0.35;
+  g.add(boom);
+  g.add(at(box(0.12, 0.09, 0.09, 0x3a3a40, { bevel: 0.02 }), -(p.S / 2 - 0.05), p.eyeY - 0.3, p.faceZ + 0.12));
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot };
 
 /** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
 function broom() {

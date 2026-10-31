@@ -1,0 +1,38 @@
+{
+  "id": "026-papacoptero",
+  "title": "Papacóptero: el helicóptero del papa",
+  "summary": "A fines de octubre de 2026, la Fuerza Aérea del Perú presentó el «Papacóptero FAP», un helicóptero Mi-17 que llevará al papa León XIV, exobispo de Chiclayo, durante su visita al Perú desde el 11 de noviembre, incluido el vuelo de Chiclayo a Santa Cruz, en la sierra de Cajamarca.",
+  "thumbnailText": "¡EXISTE EL *PAPACÓPTERO*!",
+  "thumbnailBadge": "11 NOV",
+  "thumbnailBoard": { "scene": "iconStat", "icon": "helicopter", "scale": 1.25, "value": "MI-17", "label": "PAPACÓPTERO FAP", "title": "FUERZA AÉREA DEL PERÚ", "color": "#ffe27a" },
+  "thumbnailLocation": "fap_helipad",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "surprised",
+  "costume": "pilot",
+  "costumeFrom": 2,
+  "locations": ["office", "fap_helipad"],
+  "sources": [
+    "https://www.infobae.com/peru/2026/10/28/el-papacoptero-de-la-fap-que-trasladara-al-papa-leon-xiv-en-el-peru-asi-es-el-helicoptero-mi-17-que-volara-hasta-cajamarca/",
+    "https://panamericana.pe/locales/476564-ministerio-defensa-presenta-papacoptero-fap-helicoptero-trasladara-papa-leon-xiv-visita-peru",
+    "https://www.infobae.com/peru/2026/08/05/itinerario-del-papa-leon-xiv-en-peru-fechas-dias-y-ciudades-que-visitara-el-sumo-pontifice-en-noviembre/",
+    "https://andina.pe/agencia/noticia-de-chiclayo-al-vaticano-eleccion-leon-xiv-lleno-gozo-a-todo-peru-2025-1056041.aspx",
+    "https://www.elcomercio.com/actualidad/mundo/papa-leon-xiv-pastor-peru-tres-decadas.html",
+    "https://www.aciprensa.com/noticias/108927/mercedes-benz-presenta-al-papa-francisco-nuevo-papamovil-electrico",
+    "Notas: la FAP presentó el Mi-17 el 28/10/2026 (hasta 24 pasajeros y 6 tripulantes, unas 3 horas de autonomía según Infobae; Panamericana indica hasta 3,5 horas). Las fechas de la visita varían según la fuente (11 al 16 o al 17 de noviembre). Santa Cruz de Succhabamba está a unos 2.000 metros y no tiene pista para aviones, según Infobae. El papamóvil eléctrico Mercedes Clase G fue entregado al Vaticano en diciembre de 2024."
+  ],
+  "hashtags": ["#papaleonxiv", "#peru", "#papacoptero", "#curiosidades"],
+  "tags": ["papacoptero", "papacóptero", "papa coptero", "helicoptero del papa", "mi-17", "mi 17", "fap", "fuerza aerea del peru", "papa leon xiv", "leon 14", "papa en peru", "visita del papa peru", "chiclayo", "cajamarca", "santa cruz de succhabamba", "papamovil", "papa movil"],
+  "lines": [
+    { "speaker": "tito", "text": "¡Existe un papacóptero!", "say": "¡Existe un papacóptero!", "shot": "wide", "emotion": "surprised", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "location": "fap_helipad", "text": "Existe. La Fuerza Aérea del Perú presentó el Mi-17 que llevará al papa León XIV.", "say": "Existe. La Fuerza Aérea del Perú presentó el Mi diecisiete que llevará al papa León catorce.", "board": { "scene": "iconStat", "icon": "helicopter", "scale": 1.25, "value": "MI-17", "label": "PAPACÓPTERO FAP", "title": "FUERZA AÉREA DEL PERÚ", "sub": "VISITA DEL PAPA: DESDE EL 11 DE NOVIEMBRE", "color": "#ffe27a" }, "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "¿Y el papamóvil? ¿Se quedó en Roma, pe?", "shot": "nova", "emotion": "curious", "titoEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Es que volará de Chiclayo a la sierra de Cajamarca, donde no hay pista de aviones.", "board": { "scene": "andesRoute", "from": "CHICLAYO", "to": "SANTA CRUZ", "alt": "~2.000 M", "title": "CHICLAYO → CAJAMARCA", "sub": "VUELO DE 30 A 40 MINUTOS" }, "titoEmotion": "neutral", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¡En combi llegaba para Navidad!", "shot": "tito", "emotion": "happy", "novaEmotion": "happy", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Y no va solo: el helicóptero lleva hasta 24 pasajeros y seis tripulantes.", "say": "Y no va solo: el helicóptero lleva hasta veinticuatro pasajeros y seis tripulantes.", "board": { "scene": "iconStat", "icon": "helicopter", "scale": 1.1, "value": "24", "label": "PASAJEROS", "title": "CAPACIDAD DEL MI-17", "sub": "+ 6 TRIPULANTES · UNAS 3 HORAS DE VUELO" }, "titoEmotion": "surprised", "novaEmotion": "neutral" },
+    { "speaker": "tito", "text": "¡Una combi en hora punta mete más!", "shot": "wide", "emotion": "skeptical", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "nova", "text": "Además, el papa ya se conoce la ruta. ¡Es chiclayano de corazón, causa!", "shot": "nova", "emotion": "smug", "titoEmotion": "surprised" },
+    { "speaker": "profe", "text": "Así es: fue obispo de Chiclayo hasta 2023 y es peruano nacionalizado desde 2015.", "say": "Así es: fue obispo de Chiclayo hasta dos mil veintitrés, y es peruano nacionalizado desde dos mil quince.", "board": { "scene": "iconStat", "icon": "idCard", "scale": 1.15, "value": "2015", "label": "NACIONALIDAD PERUANA", "title": "LEÓN XIV, PAPA PERUANO", "sub": "OBISPO DE CHICLAYO: 2015–2023" }, "titoEmotion": "happy", "novaEmotion": "happy" },
+    { "speaker": "profe", "text": "Dato extra: en 2024 el Vaticano recibió su primer papamóvil eléctrico, un Mercedes Clase G.", "say": "Dato extra: en dos mil veinticuatro el Vaticano recibió su primer papamóvil eléctrico, un Mercedes Clase G.", "shot": "profe", "pose": "explain", "titoEmotion": "surprised", "novaEmotion": "curious" },
+    { "speaker": "tito", "text": "¿Me prestan el papacóptero pa' la Javier Prado?", "say": "¿Me prestan el papacóptero pa la Javier Prado?", "shot": "wide", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "surprised" }
+  ]
+}
