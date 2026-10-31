@@ -33,7 +33,7 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
 - [x] T1 Moderate coaster look in the template. Route: delegated (preparation trigger). Commit 2426805.
 - [x] T2 023 guaguas de pan: script, assets, render, verify. Route: delegated (writer trigger). Commit 2c7c2f6.
 - [x] T3 Automate the Shorts cover in make-episode + 024 San Martín de Porres. Route: delegated (writer trigger). Commits 59b75ad, 8b8e7d3.
-- [ ] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger).
+- [x] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger). Commit dfcc161.
 - [ ] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger).
 - [ ] T6 Update AGENT_GUIDE.md §8 and odd/HANDOFF.md. Route: inline.
 
@@ -81,5 +81,23 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
   Tito in his close-ups. Thumbnail readable (first try orphaned "¡" -> starred `*¡JUNTOS!*`, re-rendered). Leftover
   check: 0. No RED/GREEN (content). Native review not run by the writer (parent owns it).
 
+- T4 (commit dfcc161, 025-noticias-raras-semana, delegated writer): 12 lines, Tito+Profe+Nova, hook "¡Le robaron seis
+  mil millones a Binance!", countdown 5→1 with one `newsCard` board per item (5 boards), loop punchline "¡Bacán! Le
+  presto mi laptop a la IA..." (Profe facepalm -> replays into the robbery hook). Facts re-verified 2026-10-30:
+  Binance (Proceso 30/10: "más de 6 mil millones", TRM ~6.360 M; compromised personal computer "may" be involved;
+  TraderTraitor/North Korea per TRM/Chainalysis, Binance does not confirm -> board "SE SOSPECHA"); 2026 ED138 (WGBH
+  27/10, Rubin, 600–1,500 km uncertain); D-rex (ScienceDaily 26/10, PopSci 14/10; up to 50 cm, new family
+  Dianjunaceae); Catrina Zócalo 33.411 m Guinness (La Razón 29/10); OpenAI (Al Jazeera 27/10: local smoothing
+  conjecture + ETH refutation claims, MIT's Ryan Williams still verifying, calls method "mysterious"). CNN Español
+  URL kept from the parent's research (HTTP 451 to the writer, not re-read). "No es asesoría financiera" in the notes.
+  New assets: costume `anchor` (navy suit, collar hiding the teal bowtie, red tie, lapel mic, earpiece), location
+  `news_studio` (`src/locations/news_studio.js`: world-map video wall, side desks, globe, studio camera with tally,
+  "AL AIRE" sign, floor ticker), scene `newsCard` + icons `laptop planet mushroom robot` (`src/board/scenes-v9.js`,
+  canvas shapes). Checks: report 53.60 s, 1080x1920 h264 30 fps, aac, -15 LUFS, true peak -2.0 dB, no black
+  segments, cover ok (PSNR 47.3 dB). Sheet + transition viewed: captions above the board, heads in frame, boards
+  readable, poof hides the swap; first render showed the teal bowtie under the red tie (read as a tongue) -> collar
+  added, re-rendered. Thumbnail readable ("TOP 5" badge, RARAS box); Tito mostly hidden behind the headline (same
+  3-character layout issue as 023). Leftover check: 0. No RED/GREEN (content). Native review not run by the writer.
+
 ## Next step
-T4 (025 cinco noticias raras).
+T5 (026 papacóptero).
