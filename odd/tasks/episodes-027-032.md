@@ -93,4 +93,20 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   sold at Nueva Esperanza). Fact change: date board says both countries keep 1 and 2 Nov (draft had México "2 NOV").
   Checks: snapshots (boards legible after enlarging labels), `hyperframes check` passed, verify sheet looked at, report
   44.153 s 1080x1920 30 fps -14.9 LUFS no black, cover ok, thumbnail ok. Enqueued: job 284dfa73, Pending, 2026-11-01
-  09:00 Peru. RED/GREEN not applicable (visual pipeline, no test runner).
+  09:00 Peru. RED/GREEN not applicable (visual pipeline, no test runner). Commit 08538db.
+- U6/031 (2026-10-31): `031-latinoamerica-celebra-muertos` (11 lines, script as drafted with cautious wording). Reused
+  locations office -> cdmx_muertos (line 10), costume none, `equation` with flagPe/flagMx; no new code. Real photos
+  (license checked via Commons API, 1280 px API thumbnails, each looked at): "Ñatitas 9796" (Larvadelibelula, 2021,
+  CC BY-SA 4.0, own work with camera EXIF; chosen over the draft's photo, which shows an identifiable visitor, and over
+  a CC0 1080 px upload without EXIF dated after the festival = copyvio risk), "Festival Barriletes en Sumpango"
+  (SantiagoGG, CC BY-SA 4.0), "Fiambre - 11042021 (cropped)" (Gobierno de Guatemala, CC0), "Colada morada with guagua
+  de pan from Cyrano bakery in Quito" (Taty2007, CC BY 4.0); all credited on the board and in the description. Haiti
+  beat not used. Facts re-checked 2026-10-31: AP 2024 (WSLS) + AP 2022 (La Hora): 8 Nov, Cementerio General, flowers,
+  colored caps/hats, coca, cigarettes, favors (health, money, love); bishops do not recognize it but tolerate it; AP
+  says "hundreds" of devotees. Sumpango festival Sun 1 Nov 2026, category A 10–15 m (La Hora 2025). Fiambre cold
+  salad of up to 50 ingredients served 1 Nov (E&N). Fact changes: "miles van igual" -> "No lo reconoce, pero lo
+  tolera. Y cientos van igual."; "ofrendas que son Patrimonio de la UNESCO" -> "una fiesta que es Patrimonio de la
+  UNESCO" (UNESCO inscribed the indigenous festivity, not the ofrendas). Checks: snapshots of all lines (photos and
+  captions legible), `hyperframes check` passed, verify sheet looked at, report 42.212 s 1080x1920 30 fps -15 LUFS no
+  black, cover ok, thumbnail ok. Enqueued: job 6c7a2e3d, Pending, 2026-11-01 10:30 Peru. RED/GREEN not applicable
+  (visual pipeline, no test runner).
