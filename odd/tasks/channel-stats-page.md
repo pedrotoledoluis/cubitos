@@ -27,6 +27,10 @@ interactive HTML on their existing GitHub Pages site.
 - [x] S1 Remove WPF Desktop (+ Dashboard.Core if unused). Route: delegated (writer trigger). Commit `e7e6cc5`.
 - [x] S2 Stats export (CLI + service hook) with tests. Route: delegated (writer trigger). Commit `e721c6d`.
 - [x] S3 Stats section in `site/index.html`. Route: delegated (writer trigger). Commit `42dae4d`.
+- [ ] S4 Hourly push of `site/data/channel-stats.json` to the Pages repo (`pedrotoledoluis.github.io`, `master`,
+  `data/channel-stats.json`): `publisher/scripts/sync-pages.ps1` + per-user task installer
+  `publisher/scripts/install-pages-sync.ps1`. Route: delegated (writer trigger). Scripts written, owner installs
+  (stays unchecked until the owner registers the task and the first real push succeeds).
 
 ## Progress / evidence
 - S1 (`e7e6cc5`): removed `src/Cubitos.Publisher.Desktop`, `src/Cubitos.Publisher.Dashboard.Core` and
@@ -47,8 +51,15 @@ interactive HTML on their existing GitHub Pages site.
   SVG chart with crosshair tooltip + keyboard, sortable table with `aria-sort`, empty state), JS in
   `site/assets/channel-stats.js`, light/dark tokens via `prefers-color-scheme`. Screenshots (served with
   `python -m http.server`): 1280 light, 1280 dark, 375 dark (no horizontal overflow), 375 empty state.
+- S4 (scripts only): `sync-pages.ps1` (clone at `%LOCALAPPDATA%\Cubitos\pages-repo`, fetch + hard reset, copy,
+  commit/push only on change, JSON + forbidden-text validation, `-DryRun`, log `%LOCALAPPDATA%\Cubitos\pages-sync.log`)
+  and `install-pages-sync.ps1` (task `CubitosPagesSync`, hourly from next full hour, Interactive logon, hidden,
+  `-Uninstall`). Both parse with 0 errors; `-DryRun` cloned the Pages repo and reported "WOULD commit and push";
+  clone stayed clean at `origin/master` (`6359a2e`), no commit. Task not registered, nothing pushed. No PowerShell
+  test runner, so RED/GREEN not applicable.
 - Native review: not run by the writer (parent decides under RDD).
 
 ## Next step
 Owner reinstalls/restarts the service (elevated `publisher/scripts/install-service.ps1`) so it records privacy and
-rewrites `site/data/channel-stats.json` every 15 min; pushing to GitHub Pages stays manual.
+rewrites `site/data/channel-stats.json` every 15 min. For S4 the owner runs `sync-pages.ps1` once for real, then
+`install-pages-sync.ps1` to schedule it hourly.

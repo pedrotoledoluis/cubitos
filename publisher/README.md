@@ -50,9 +50,29 @@ cubitos-publisher export-stats [--out <path>]
   It holds only public videos (id, title, publish date, views/likes/comments, views per hour over 24 h), channel
   totals, a daily total-views series (Peru days, up to 30) and the waiting queue (episode slug, title, status, times).
   No paths, errors, tokens or private video ids. Subscribers are not recorded, so they are not exported. Pushing the
-  file to GitHub Pages is a manual step.
+  file to GitHub Pages is done by `scripts/sync-pages.ps1` (see below).
 - Configuration can be overridden per call with `--Publisher:<Key>=<value>`, for example
   `--Publisher:DatabasePath=C:\temp\test.db`, or with environment variables like `Publisher__DatabasePath`.
+
+## Push the stats to GitHub Pages (hourly)
+
+The Pages site lives in a separate repo (`pedrotoledoluis/pedrotoledoluis.github.io`, branch `master`).
+`scripts/sync-pages.ps1` keeps its own clone at `%LOCALAPPDATA%\Cubitos\pages-repo` (fetch + hard reset each run),
+copies `site/data/channel-stats.json` to `data/channel-stats.json` and commits/pushes only that file, only when it
+changed (`chore: update channel stats`). It refuses a JSON that does not parse, lacks `schemaVersion` or contains
+`:\`, `secrets` or `token`. It never prompts for credentials (git must already be able to push, e.g. via Git
+Credential Manager) and exits non-zero on failure. One line per run goes to `%LOCALAPPDATA%\Cubitos\pages-sync.log`.
+
+```powershell
+# Try it without committing or pushing (reports whether it would push):
+powershell -NoProfile -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\sync-pages.ps1 -DryRun
+# Real run once:
+powershell -NoProfile -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\sync-pages.ps1
+# Schedule it hourly (per-user task CubitosPagesSync, no admin, runs only while you are logged on):
+powershell -NoProfile -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\install-pages-sync.ps1
+# Remove the schedule:
+powershell -NoProfile -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\install-pages-sync.ps1 -Uninstall
+```
 
 ## Files
 
