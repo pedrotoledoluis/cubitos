@@ -24,6 +24,8 @@ with all three characters).
     asks about modern/theoretical physics and current tech. Sometimes exasperates Tito.
 - Output per episode lives in `videos/NNN-slug/`: `NNN-slug.mp4`, `NNN-slug-thumbnail.png`,
   `NNN-slug-description.txt`, `metadata.json` (title, description, tags used by the uploader).
+- RULE: Shorts-only channel. The thumbnail is always the 9:16 cover (1080x1920, `compositions/cover.html`);
+  never render or deliver 16:9 thumbnails. If something can't be done vertically, ask the owner.
 
 ## 2. How to behave with the owner
 

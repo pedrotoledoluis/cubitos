@@ -1,4 +1,4 @@
-// One command per episode: audio -> check -> render video -> render thumbnail + cover -> description/metadata -> deliverables.
+// One command per episode: audio -> check -> render video -> render 9:16 cover (also the thumbnail) -> description/metadata -> deliverables.
 // Usage: node scripts/make-episode.mjs episodes/NNN-slug.json [--skip-render] [--print-description]
 //   --print-description  prints the description text and exits (no audio, render or file writes).
 // Deliverables: ../videos/<id>/<id>.mp4, <id>-thumbnail.png, <id>-description.txt, metadata.json
@@ -73,12 +73,10 @@ try {
   await step('audio', () => run('node', ['scripts/build-audio.mjs', epFile], 20 * MIN));
   await step('check', () => run('npx', ['--yes', HF, 'check'], 10 * MIN));
   const video = path.join(renders, `${id}.mp4`);
-  const thumbVideo = path.join(renders, `${id}-thumbnail.mp4`);
   const coverVideo = path.join(renders, `${id}-cover.mp4`);
   const coverPng = path.join(renders, `${id}-cover.png`);
   if (!skipRender) {
     await step('render', () => run('npx', ['--yes', HF, 'render', '-o', video, '--quiet'], 60 * MIN));
-    await step('thumbnail', () => run('npx', ['--yes', HF, 'render', '-c', 'compositions/thumbnail.html', '-o', thumbVideo, '--quiet'], 15 * MIN));
   }
   // The cover is cheap (1 s composition), so --skip-render still renders it when it is missing.
   if (!skipRender || !fs.existsSync(coverPng)) {
@@ -96,7 +94,8 @@ try {
     '-filter_complex', `[0:v]scale=1080:1920,setsar=1,format=yuv420p[c];[1:v]setsar=1,format=yuv420p[v];[c][v]concat=n=2:v=1:a=0[vo];[1:a]adelay=${ms}:all=1[ao]`,
     '-map', '[vo]', '-map', '[ao]', '-r', String(FPS), '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', final], 10 * MIN));
-  spawnSync('ffmpeg', ['-y', '-v', 'error', '-ss', '0.5', '-i', thumbVideo, '-frames:v', '1', path.join(outDir, `${id}-thumbnail.png`)], { windowsHide: true });
+  // Shorts only: the thumbnail is the 9:16 cover, never a 16:9 frame.
+  fs.copyFileSync(coverPng, path.join(outDir, `${id}-thumbnail.png`));
   fs.writeFileSync(path.join(outDir, `${id}-description.txt`), description, 'utf8');
   const tags = [...new Set([...(ep.tags ?? []), ...(ep.hashtags ?? []).map((h) => h.replace(/^#/, ''))])];
   fs.writeFileSync(path.join(outDir, 'metadata.json'), JSON.stringify({
