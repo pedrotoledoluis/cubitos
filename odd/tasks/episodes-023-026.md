@@ -35,7 +35,7 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
 - [x] T3 Automate the Shorts cover in make-episode + 024 San Martín de Porres. Route: delegated (writer trigger). Commits 59b75ad, 8b8e7d3.
 - [x] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger). Commit dfcc161.
 - [x] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger). Commit a18ae53.
-- [ ] T6 Update AGENT_GUIDE.md §8 and odd/HANDOFF.md. Route: inline.
+- [x] T6 Update AGENT_GUIDE.md §8 and odd/HANDOFF.md. Route: inline.
 
 ## Acceptance
 - Each episode 35–55 s, 1080x1920, 30 fps, ~-15 LUFS, captions not over board, thumbnail readable, cover frame

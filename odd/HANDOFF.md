@@ -1,50 +1,38 @@
 # Handoff — current state (overwrite this file; history lives in git)
 
-Last update: 2026-10-30 ~17:30 Peru. Read this first after `/clear`, then `AGENT_GUIDE.md` and the feature doc named below.
+Last update: 2026-10-30 ~22:30 Peru. Read this first after `/clear`, then `AGENT_GUIDE.md` and the feature docs named below.
 
-## Channel state
-- Shorts 003–018 public or scheduled on 2026-10-30. 019–022 (new 35–55 s format) are public since 2026-10-30 12:00 Peru
-  with a random frame as cover: Mn7luaowBwU (019), Y_NQYVvqhAY (020), olIqXwWlFMY (021), lBK8IypZTVY (022).
-- Shorts ignore custom thumbnails for non-partner channels. New `hf-template/compositions/cover.html` renders a 9:16
-  cover that is prepended as the first 0.1 s of each video (commit d706bf8); the owner picks that frame in the
-  YouTube mobile app. `videos/019..022/*.mp4` already contain the cover.
-- YouTube upload limit: ~12 uploads per rolling 24 h on this channel ("exceeded the number of videos they may upload").
+## Channel / queue
+- Publisher service `CubitosPublisher` INSTALLED and running (delayed-auto start, auto-restart, waits for the upload
+  limit and retries). Check with `publisher/cubitos-publisher.cmd list`.
+- Queue: 023 guaguas + 025 noticias ASAP; 019–022 cover replacements 2026-10-31 (019 Kept, old had >= 100 views);
+  026 papacóptero 2026-11-01 18:00; 024 San Martín 2026-11-02 12:00 (Peru). Upload limit hit on 2026-10-30;
+  retry ~2026-10-31 06:56.
+- YouTube upload limit: ~10–12 uploads per rolling 24 h. Queue has 8 items, so they spread over ~2 days.
 
-## Publisher service (feature doc: `odd/tasks/publisher-service.md`, branch `feat/publisher-service`)
-- .NET 10 solution in `publisher/`: Core, Infrastructure (SQLite WAL + YouTube adapter + uploaded.json sync), Worker
-  (Windows Service `CubitosPublisher` + CLI `publisher/cubitos-publisher.cmd enqueue|list|cancel|run-once|stats`),
-  Desktop (WPF dashboard; MAUI removed), Dashboard.Core (+ tests). 232 tests green at cbc5f25.
-- Queue (real DB `publisher/data/publisher.db`): 019–022 replacements with cover, publish 2026-10-31 12:00 / 13:00 /
-  18:00 / 19:00 Peru, replace the old IDs above, keep the old one if it has >= 100 views. Status WaitingForQuota.
-- NOT INSTALLED YET: owner must run, in an elevated PowerShell,
-  `powershell -ExecutionPolicy Bypass -File D:\PROYECTS\cubitos\publisher\scripts\install-service.ps1`.
-  Without the service nothing uploads and the dashboard gets no new snapshots.
-- T8 done (5e4acca): the WHOLE dashboard is a left-edge notch with an animated flaming pumpkin; hover opens the full
-  panel (~224 ms), leaving collapses to only the pumpkin after 0.5 s, thumbtack pins, right-click tab = pin/exit.
-  Exe: `publisher\src\Cubitos.Publisher.Desktop\bin\Debug\net10.0-windows\Cubitos.Publisher.Desktop.exe --theme=halloween`.
-  Owner will share a reference notch later. Known: commit ddad850 accidentally contains 3 staged T8 file moves (does
-  not build alone); HEAD builds. Fix only with owner OK (history rewrite, unpushed).
-- Native review (gentle-ai RDD) is UNAVAILABLE on this repo: preflight asks for `intended_untracked_selection` and
-  every submission returns `invalid_request`. Recorded per task; no approval claimed.
-- Push / PRs: owner decides. Chain strategy chosen: stacked-to-main, one PR per task.
+## Feature `odd/tasks/episodes-023-026.md` (branch `feat/episodes-023-026`, unpushed)
+- T1 cinematic look (`hf-template/src/look.js`, per-episode `"look"` override), T2–T5 episodes 023–026 done and
+  verified, make-episode prepends the cover automatically. T6 docs done.
+- Known: three-character 16:9 thumbnails — the headline covers Tito (fix in `compositions/thumbnail.html`).
+- Native review (gentle-ai RDD) unavailable on this repo: preflight blocks on `intended_untracked_selection_required`.
 
-## Coaster Short prototype (idea from `ideas/idea1.mp4`, no SpongeBob/copyrighted elements)
-- Scratch prototype (outside repo):
-  `C:\Users\User\AppData\Local\Temp\claude\D--PROYECTS-cubitos\b83a4feb-5171-422a-a9f3-ff675e8c6df2\scratchpad\coaster\`
-  (Three.js r169 + KayKit Halloween Bits CC0 + Poly Haven HDRI; bloom, ACES, color grade, 60 fps, 12 s renders in
-  ~53 s). Draft `coaster-draft.mp4`. Owner rated it ~20 % of the reference quality. Scratch may be wiped: copy into
-  the repo before relying on it.
-- Owner decision: try Kling FREE tier only (66 credits/day) with Tito/Profe reference images; owner must log in.
-- Blender is not installed; estimate for 1 h of agent work = 5–10 s rough EEVEE scene (not validated).
+## Feature `odd/tasks/channel-stats-page.md` (same branch)
+- WPF Desktop + Dashboard.Core removed. `export-stats` CLI + service hook write `site/data/channel-stats.json`
+  every stats pass; section "Estadísticas del canal" at the end of `site/index.html`. 163 tests green.
+- PENDING owner: reinstall the service (elevated `publisher/scripts/install-service.ps1`) so it runs the new build;
+  confirm video `VPAJvfUvI1s` ("Lo humillaron por ser un simple CONSERJE…", July) is public before pushing the page;
+  push to GitHub Pages is the owner's decision.
 
-## Next 4 videos (format unchanged: 35–55 s comedy explainer, Profe/Tito/Nova, Peruvian slang in Tito's lines)
-- Apply the coaster's look moderately: bloom on lights, ACES + light color grade, soft fog, vignette. Keep 30 fps.
-- Approved topics: San Martín de Porres (3 Nov; dog, cat and mouse eating from one plate, told as legend);
-  guaguas de pan (1–2 Nov, Andes). Rejected: Yma Sumac, Abraham Valdelomar.
-- Candidates to confirm: Nueva Esperanza (Villa María del Triunfo, called the largest cemetery in Latin America;
-  families celebrate with music and dancing at the tombs on 1 Nov); Lisbon earthquake on All Saints' Day (1 Nov 1755); why the US votes on a Tuesday
-  (midterms 3 Nov 2026); Guy Fawkes and the mask (5 Nov); Callao tsunami of 1746.
+## Branch notes
+- `feat/episodes-023-026` was cut from `feat/publisher-service` (unpushed). Commit ddad850 on the publisher branch
+  still contains 3 stray staged moves (HEAD builds); fix only with owner OK.
+- Dirty tree not ours: `uploader/*`, `videos/0xx` line endings, regenerated `hf-template/index.html`,
+  `src/episode-data.js`, `.hyperframes/*.json`.
+
+## Ideas parked
+- Coaster prototype (scratch, may be wiped) and Kling free tier with owner login.
+- Weekly "5 noticias más raras" format if 025 performs.
 
 ## Owner preferences
 - Spanish replies with voseo, short, one question at a time. Save tokens but keep quality.
-- Upload only with owner OK or explicit schedule. Never read/print `secrets/`.
+- Uploads go through the publisher queue; owner OKs. Never read/print `secrets/`.
