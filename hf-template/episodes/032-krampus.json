@@ -1,0 +1,41 @@
+{
+  "id": "032-krampus",
+  "title": "Krampus: el diablo que persigue malcriados",
+  "summary": "En los Alpes, la noche del 5 de diciembre el Krampus, un diablo peludo con cuernos, lengua larga, cadenas y varas, acompaña a San Nicolás: el santo premia a los niños buenos y el Krampus asusta a los malcriados. Hoy sale en desfiles llamados Krampuslauf, hay registros de él desde el siglo XVI, y en 1953 la revista Time contó que el jefe de los jardines de infancia de Viena advertía con un folleto que \"el Krampus es un hombre malo\".",
+  "thumbnailText": "EL ANTI *PAPÁ NOEL*",
+  "thumbnailBadge": "5 DIC",
+  "thumbnailBoard": { "scene": "media", "image": "assets/media/032/poertschach-krampuslauf.jpg", "focus": [0.5, 0.35], "zoom": 1.2, "title": "KRAMPUSLAUF · AUSTRIA", "credit": "Foto: Johann Jaritz · CC BY-SA 3.0 AT" },
+  "thumbnailLocation": "alpine_village",
+  "thumbnailPose": "shrug",
+  "thumbnailTitoEmotion": "scared",
+  "costume": "nikolaus",
+  "costumeFrom": 2,
+  "locations": ["alpine_village"],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Krampus",
+    "https://content.time.com/time/subscriber/article/0,33009,890728,00.html",
+    "https://www.mentalfloss.com/holidays/christmas/9-facts-about-krampus-st-nicks-demonic-companion",
+    "https://www.livescience.com/who-is-krampus",
+    "Foto: \"Nikolaus und Krampus\", autor desconocido, inicios del siglo XX, dominio público (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Nikolaus_und_Krampus.jpg",
+    "Foto: \"Gruss vom Krampus\", autor desconocido, c. 1900, dominio público (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Gruss_vom_Krampus.jpg",
+    "Video: \"Krampus in Berchtesgaden\", David Campbell, 2013, CC BY 3.0 (Wikimedia Commons; fragmento de 4,5 s desde el segundo 19): https://commons.wikimedia.org/wiki/File:Krampus_in_Berchtesgaden.webm",
+    "Foto: \"Felberturmmuseum - Mittersill 042\", WOKRIE, 2006, CC BY-SA 4.0 (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Felberturmmuseum_-_Mittersill_042.jpg",
+    "Foto: \"Poertschach Krampuslauf 30112012 544\", Johann Jaritz, 2012, CC BY-SA 3.0 AT (Wikimedia Commons): https://commons.wikimedia.org/wiki/File:Poertschach_Krampuslauf_30112012_544.jpg",
+    "Notas: datos revisados el 31/10/2026. El Krampus acompaña a San Nicolás la noche del 5 de diciembre (Krampusnacht), víspera de la fiesta del santo; Nicolás premia a los niños buenos y el Krampus castiga a los malcriados con varas de abedul; se lo describe con cuernos, pelaje negro, lengua larga, cadenas con campanas y una canasta o saco para llevarse a los niños; no está documentado antes del siglo XVI; hoy sale en desfiles (Krampuslauf) donde jóvenes disfrazados asustan al público (Wikipedia, \"Krampus\"). Time, 7 de diciembre de 1953 (\"Austria: Throw Out Krampus\"): el Dr. Ernst Kotbauer, jefe de educación preescolar de Viena, advirtió a los padres que el Krampus podía marcar a los niños, con un folleto titulado \"Krampus is an evil man\". En el video aparecen los Buttnmandl de Berchtesgaden (Baviera), figuras de paja que acompañan al Krampus."
+  ],
+  "hashtags": ["#krampus", "#navidad", "#austria", "#tradiciones"],
+  "tags": ["krampus", "krampusnacht", "krampuslauf", "crampus", "san nicolas", "austria navidad", "diablo de navidad", "anti papa noel", "tradiciones navideñas", "alpes"],
+  "lines": [
+    { "speaker": "tito", "text": "¡En Austria, un diablo peludo persigue a los malcriados!", "shot": "wide3", "emotion": "scared", "novaEmotion": "smug", "profePose": "shrug" },
+    { "speaker": "profe", "text": "Es el Krampus. Sale la noche del 5 de diciembre, junto a San Nicolás.", "say": "Es el Krámpus. Sale la noche del cinco de diciembre, junto a San Nicolás.", "board": { "scene": "media", "image": "assets/media/032/nikolaus-krampus.jpg", "fit": "contain", "zoom": 1.04, "title": "SAN NICOLÁS Y KRAMPUS", "credit": "Postal c. 1900 · Dominio público" }, "titoEmotion": "scared", "novaEmotion": "curious" },
+    { "speaker": "nova", "text": "San Nicolás premia a los buenos. El Krampus asusta a los malcriados.", "say": "San Nicolás premia a los buenos. El Krámpus asusta a los malcriados.", "shot": "nova", "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "tito", "text": "¿Y yo en qué lista estoy?", "shot": "tito", "emotion": "scared", "novaEmotion": "smug" },
+    { "speaker": "profe", "text": "Cuernos, lengua larga, cadenas y varas. Y una canasta para llevarse malcriados.", "board": { "scene": "media", "image": "assets/media/032/gruss-vom-krampus.jpg", "fit": "contain", "zoom": 1.04, "title": "«SALUDOS DEL KRAMPUS»", "credit": "Postal c. 1900 · Dominio público" }, "titoEmotion": "scared", "novaEmotion": "surprised" },
+    { "speaker": "tito", "text": "Yo ya tengo antena. Casi cuernos.", "shot": "tito", "emotion": "happy", "novaEmotion": "skeptical" },
+    { "speaker": "profe", "text": "Hoy hay Krampuslauf: desfiles de jóvenes disfrazados que corren asustando, como este en Baviera.", "say": "Hoy hay Krámpus-lauf: desfiles de jóvenes disfrazados que corren asustando, como este en Baviera.", "board": { "scene": "media", "clip": "assets/media/032/krampus-berchtesgaden.webm", "start": 19, "duration": 4.5, "title": "BERCHTESGADEN · BAVIERA", "credit": "Video: David Campbell · CC BY 3.0" }, "titoEmotion": "surprised", "novaEmotion": "surprised", "sfx": [["whoosh", 0.2]] },
+    { "speaker": "nova", "text": "Y hay registros desde el siglo dieciséis. ¡Quinientos añitos asustando!", "board": { "scene": "media", "image": "assets/media/032/felberturm-krampus.jpg", "focus": [0.5, 0.3], "zoom": 1.06, "title": "TRAJE DE KRAMPUS · MUSEO EN AUSTRIA", "credit": "Foto: WOKRIE · CC BY-SA 4.0" }, "emotion": "smug", "titoEmotion": "scared" },
+    { "speaker": "profe", "text": "En 1953, la revista Time contó que el jefe de los nidos de Viena advertía: «El Krampus es un hombre malo».", "say": "En mil novecientos cincuenta y tres, la revista Taim contó que el jefe de los nidos de Viena advertía: el Krámpus es un hombre malo.", "board": { "scene": "decree", "label": "FOLLETO · VIENA", "icon": "krampusHead", "title": "«ES UN HOMBRE MALO»" }, "titoEmotion": "surprised", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "¿Folletos? Acá nos asustaban con el cuco.", "shot": "tito", "emotion": "skeptical", "novaEmotion": "happy" },
+    { "speaker": "tito", "text": "Tranqui: me porto bien… ¡hasta el 6 de diciembre!", "say": "Tranqui: me porto bien... ¡hasta el seis de diciembre!", "shot": "wide3", "dutch": true, "emotion": "happy", "profePose": "facepalm", "novaEmotion": "happy" }
+  ]
+}

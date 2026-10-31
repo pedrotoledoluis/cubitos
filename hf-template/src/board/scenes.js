@@ -21,6 +21,7 @@ import { SCENES_V11 } from './scenes-v11.js'; // titleCard, shadowScare + icons 
 import { SCENES_V12 } from './scenes-v12.js'; // houseCard + icons (028)
 import './scenes-v13.js'; // extra icons (029)
 import './scenes-v14.js'; // extra icons (030)
+import './scenes-v15.js'; // extra icons (032)
 import { SCENES_MEDIA } from './media.js'; // media: real photo / short clip + credit (027+)
 
 // Simplified cartoon Europe coastline in board coordinates (1280x886 canvas).

@@ -655,7 +655,40 @@ function puritano(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot, pijama, puritano };
+/** St Nicholas (Krampus night): red cope with gold edging, white beard under the mouth, red-and-gold mitre with a cross. */
+function nikolaus(p) {
+  const g = new THREE.Group();
+  const RED = 0xb3202a, WHITE = 0xf6f4ee;
+  shell(p, g, RED, 0.75);
+  // gold edging down the open front of the cope + clasp
+  for (const sx of [-1, 1]) g.add(at(box(0.07, 0.62, 0.03, GOLD, { metalness: 0.4, roughness: 0.4 }), sx * (p.S / 2 - 0.3), 0.31, p.faceZ + 0.05));
+  // full white beard below the mouth, side whiskers up to the glasses (mouth stays visible)
+  const beard = at(new THREE.Group(), 0, 0, p.faceZ + 0.04);
+  beard.add(at(box(1.02, 0.3, 0.14, WHITE, { bevel: 0.06 }), 0, 0.12, 0));
+  beard.add(at(box(0.8, 0.26, 0.14, WHITE, { bevel: 0.06 }), 0, -0.08, 0.01));
+  beard.add(at(box(0.5, 0.2, 0.14, WHITE, { bevel: 0.06 }), 0, -0.26, 0.02));
+  for (let i = 0; i < 6; i++) beard.add(at(box(0.13, 0.13, 0.1, 0xe8e4da, { bevel: 0.04 }), -0.38 + i * 0.152, 0.02 - (i % 2) * 0.05, 0.08)); // curls
+  for (const sx of [-1, 1]) {
+    beard.add(at(box(0.2, 0.7, 0.12, WHITE, { bevel: 0.05 }), sx * 0.6, 0.48, -0.02)); // side whiskers to the glasses
+    beard.add(at(box(0.16, 0.18, 0.12, WHITE, { bevel: 0.05 }), sx * 0.44, 0.24, 0)); // join whiskers to the beard
+  }
+  g.add(beard);
+  // mitre: two tall pointed panels (front/back) with gold borders, a gold cross on the front
+  const mitre = at(new THREE.Group(), 0, p.S + 0.01, 0);
+  const shape = [[-0.42, 0], [0.42, 0], [0.42, 0.38], [0, 0.66], [-0.42, 0.38]]; // kept low: a tall mitre hides the board's credit line
+  for (const z of [0.12, -0.12]) mitre.add(at(meshOf(extrudeShape(shape, 0.12), RED, { roughness: 0.6 }), 0, 0, z));
+  mitre.add(at(box(0.9, 0.12, 0.42, GOLD, { metalness: 0.4, roughness: 0.4 }), 0, 0.06, 0)); // headband
+  mitre.add(at(box(0.08, 0.52, 0.03, GOLD, { metalness: 0.4, roughness: 0.4 }), 0, 0.36, 0.2)); // vertical orphrey
+  mitre.add(at(box(0.26, 0.07, 0.03, GOLD, { metalness: 0.4, roughness: 0.4 }), 0, 0.44, 0.21)); // cross bar
+  for (const sx of [-1, 1]) { // gold edges along the sloped top
+    const e = at(box(0.52, 0.05, 0.03, GOLD, { metalness: 0.4 }), sx * 0.21, 0.52, 0.2);
+    e.rotation.z = sx * -0.59; mitre.add(e);
+  }
+  g.add(mitre);
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor, pilot, pijama, puritano, nikolaus };
 
 /** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
 function broom() {
