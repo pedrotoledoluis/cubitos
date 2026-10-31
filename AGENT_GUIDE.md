@@ -172,6 +172,7 @@ or `-description.txt`, set the thumbnail PNG, "Not made for kids", Schedule with
 | 012–018 | ia-cripto … halloween-lima | Uploaded, scheduled through 2026-10-30 (Peru): 012 08:00, 013 09:00, 014 10:30, 017 13:00, 015 15:00, 016 16:30, 018 18:00. |
 | 019–022 | cancion-criolla, desfile-james-bond, momias-incas, catrina-burla | New 35–55 s format. Uploaded 2026-10-30, all scheduled 2026-10-30 12:00 Peru (17:00Z): Mn7luaowBwU, Y_NQYVvqhAY, olIqXwWlFMY, lBK8IypZTVY. Replacements with cover queued in the publisher (019 kept: old one had >= 100 views). |
 | 023–026 | guaguas-de-pan, san-martin-de-porres, noticias-raras-semana, papacoptero | Made 2026-10-30 with the cinematic look and auto cover. Queued in the publisher service: 023 and 025 ASAP, 026 2026-11-01 18:00, 024 2026-11-02 12:00 (Peru). |
+| 027–032 | top-peliculas-terror, casas-halloween-2026, que-mito-pesa-mas, ofrenda-peru-vs-mexico, latinoamerica-celebra-muertos, krampus | Halloween + Día de Muertos batch made 2026-10-31 with real licensed photos/clips on the board (`media` scene). Queued in the publisher: 027 2026-10-31 19:00, 028 20:00, 029 21:00 (scheduled: s8MRJgKMMi4, WH1v9dcQ1t8, v84iQDY-UVU); 030 2026-11-01 09:00, 031 10:30, 032 11:30 (waiting for upload quota) (Peru). |
 
 Uploads now go through the publisher Windows Service (`publisher/cubitos-publisher.cmd enqueue <episodeDir> [--publish-at ...]`,
 `list`); it waits for the YouTube upload limit and retries by itself. `make-episode.mjs` prepends the 0.1 s Shorts

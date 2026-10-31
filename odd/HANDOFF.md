@@ -1,14 +1,32 @@
 # Handoff — current state (overwrite this file; history lives in git)
 
-Last update: 2026-10-30 ~22:30 Peru. Read this first after `/clear`, then `AGENT_GUIDE.md` and the feature docs named below.
+Last update: 2026-10-31 ~11:45 Peru. Read this first after `/clear`, then `AGENT_GUIDE.md` and the feature docs named below.
 
 ## Channel / queue
 - Publisher service `CubitosPublisher` INSTALLED and running (delayed-auto start, auto-restart, waits for the upload
   limit and retries). Check with `publisher/cubitos-publisher.cmd list`.
-- Queue: 023 guaguas + 025 noticias ASAP; 019–022 cover replacements 2026-10-31 (019 Kept, old had >= 100 views);
-  026 papacóptero 2026-11-01 18:00; 024 San Martín 2026-11-02 12:00 (Peru). Upload limit hit on 2026-10-30;
-  retry ~2026-10-31 06:56.
-- YouTube upload limit: ~10–12 uploads per rolling 24 h. Queue has 8 items, so they spread over ~2 days.
+- Queue (publisher `list`, 2026-10-31 ~11:40 Peru): 023 + 025 Published; 019 Kept (old had >= 100 views);
+  021 2026-10-31 13:00, 020 18:00, 022 19:00 Scheduled; 026 2026-11-01 18:00 and 024 2026-11-02 12:00 Scheduled.
+- Episodes 027–032 (Peru times):
+  - 027 top-peliculas-terror: 2026-10-31 19:00, Scheduled `s8MRJgKMMi4` (job 04439c94)
+  - 028 casas-halloween-2026: 2026-10-31 20:00, Scheduled `WH1v9dcQ1t8` (job 33ef407b)
+  - 029 que-mito-pesa-mas: 2026-10-31 21:00, Scheduled `v84iQDY-UVU` (job 5c54e1d3)
+  - 030 ofrenda-peru-vs-mexico: 2026-11-01 09:00, WaitingForQuota, retry 2026-10-31 11:53 (job 284dfa73)
+  - 031 latinoamerica-celebra-muertos: 2026-11-01 10:30, WaitingForQuota, retry 2026-10-31 11:53 (job 6c7a2e3d)
+  - 032 krampus: 2026-11-01 11:30, Pending (job d6241ce8)
+- YouTube upload limit: ~10–12 uploads per rolling 24 h; the service waits and retries by itself.
+
+## Feature `odd/tasks/episodes-027-032.md` (same branch, unpushed) — DONE
+- U1 `media` board scene (real photo / <= 5 s clip + credit; clips gitignored, frames cached in
+  `assets/media/_frames/`). U3–U6 episodes 027–032 rendered, verified and enqueued (commits 3e3d93e, ae44e80,
+  c243113, 08538db, 574924d, 70a04d3).
+- New template pieces: locations `sheet_fort`, `suburbio_halloween`, `alpine_village`; costumes `pijama`,
+  `puritano`, `nikolaus`; board scenes `titleCard`, `shadowScare`, `houseCard` + icons in `src/board/scenes-v11.js`
+  .. `scenes-v15.js`; `equation` accepts `labelSize` / `titleSize`.
+- Learnings: a line's `costume` lasts only that line (use episode `costume` + `costumeFrom`, or repeat it); the
+  caption pager splits at periods (write 2500, not 2.500); tall hats can hide the board credit line, check it in
+  snapshots; Commons filter: check license via the API extmetadata and reject likely copyvio (small file, no camera
+  EXIF, dated after the event); Commons rate-limits fast downloads (HTTP 429), space requests a few seconds apart.
 
 ## Feature `odd/tasks/episodes-023-026.md` (branch `feat/episodes-023-026`, unpushed)
 - T1 cinematic look (`hf-template/src/look.js`, per-episode `"look"` override), T2–T5 episodes 023–026 done and

@@ -32,7 +32,7 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
 - [x] U3 027 render + enqueue 19:00. Route: delegated (writer trigger: location + board scenes + costume + episode). Commit 3e3d93e.
 - [x] U4 028 render + enqueue 20:00. Route: delegated (writer trigger: location + board scenes + episode + media). Commit ae44e80.
 - [x] U5 029 render + enqueue 21:00. Route: delegated (writer trigger: costume + board icons + episode + media). Commit c243113.
-- [ ] U6 030–032 render + enqueue 2026-11-01. Route: delegated.
+- [x] U6 030–032 render + enqueue 2026-11-01. Route: delegated (writer trigger: episodes + media; 032 also location + costume + icon). Commits 08538db, 574924d, 70a04d3.
 
 ## Progress / evidence
 - U1 (2026-10-31): board scene `media` (src/board/media.js) with `image` (cover/contain, Ken Burns, title band, credit strip)
@@ -109,4 +109,30 @@ Template: real photos / ≤5 s clips shown on Profe's projector/board.
   UNESCO" (UNESCO inscribed the indigenous festivity, not the ofrendas). Checks: snapshots of all lines (photos and
   captions legible), `hyperframes check` passed, verify sheet looked at, report 42.212 s 1080x1920 30 fps -15 LUFS no
   black, cover ok, thumbnail ok. Enqueued: job 6c7a2e3d, Pending, 2026-11-01 10:30 Peru. RED/GREEN not applicable
-  (visual pipeline, no test runner).
+  (visual pipeline, no test runner). Commit 574924d.
+- U6/032 (2026-10-31): `032-krampus` (11 lines, script as drafted with fact-checked wording). New location
+  `alpine_village` (src/locations/alpine_village.js: painted snowy peaks + chalets + onion-dome church, 3D pines, snow
+  drifts, two flickering lantern posts, market stall with string lights, deterministic falling snow; `screen` board),
+  new costume `nikolaus` (src/costumes.js: red cope with gold edging, full white beard below the mouth, low red-and-gold
+  mitre with a cross; kept low because a tall mitre hid the board credit line), from line 2 via `costumeFrom: 2`; new
+  board icon `krampusHead` (src/board/scenes-v15.js) used in `decree`. Real media (license checked via Commons API,
+  each looked at): postcards "Nikolaus und Krampus" (early 20th c., PD) and "Gruss vom Krampus" (c. 1900, PD), clip
+  "Krampus in Berchtesgaden" (David Campbell, 2013, CC BY 3.0, Vimeo license review 2019) cut 19.0 s + 4.5 s on the
+  Krampuslauf line (Buttnmandl straw figures), "Felberturmmuseum - Mittersill 042" (WOKRIE, CC BY-SA 4.0, camera EXIF)
+  and "Poertschach Krampuslauf 30112012 544" (Johann Jaritz, CC BY-SA 3.0 AT, camera EXIF) in the thumbnail; clip is
+  gitignored (source URL in `sources`). Facts re-checked 2026-10-31: Wikipedia "Krampus" (night of 5 Dec with St
+  Nicholas; rods, chains, long tongue, basket; not attested before the 16th c.; Krampuslauf); Time 7 Dec 1953 "Austria:
+  Throw Out Krampus" read directly. Fact changes: line 9 "Austria repartía folletos" -> "En 1953, la revista Time contó
+  que el jefe de los nidos de Viena advertía: «El Krampus es un hombre malo»" (Time names Dr. Ernst Kotbauer, Vienna's
+  head of kindergarten education, not the government); "como en Múnich" -> "como este en Baviera" (the clip is from
+  Berchtesgaden); "aparece escrito desde el siglo dieciséis" -> "hay registros desde el siglo dieciséis". Checks:
+  snapshots (credits visible after lowering the mitre, clip frame shows the parade), `hyperframes check` passed, verify
+  sheet looked at, ffprobe 47.609 s 1080x1920 30 fps, report -14.9 LUFS no black, cover ok, thumbnail ok (headline
+  covers Tito, known). Enqueued: job d6241ce8, Pending, 2026-11-01 11:30 Peru. RED/GREEN not applicable (visual
+  pipeline, no test runner). Commit 70a04d3.
+
+## Next step
+- Owner: decide push / PR for `feat/episodes-023-026` (unpushed).
+- Follow-up: three-character 16:9 thumbnails — the headline covers Tito (`compositions/thumbnail.html`).
+- 030 and 031 are WaitingForQuota; the publisher retries by itself (check `publisher/cubitos-publisher.cmd list`).
+
