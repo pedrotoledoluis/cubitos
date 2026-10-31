@@ -553,7 +553,37 @@ function dominico(p) {
   return g;
 }
 
-export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico };
+/** TV news anchor: navy suit with lapels, light-blue shirt front, red tie (covers the bowtie), lapel mic, earpiece. */
+function anchor(p) {
+  const g = new THREE.Group();
+  const SUIT = 0x1c2a4a, LAPEL = 0x15203a, SHIRT = 0xcfe2f6, TIE = 0xc8202e;
+  shell(p, g, SUIT, 0.62);
+  g.add(at(box(0.6, 0.28, 0.03, SHIRT), 0, 0.14, p.faceZ + 0.03)); // shirt front
+  for (const sx of [-1, 1]) {
+    const lapel = at(box(0.13, 0.42, 0.04, LAPEL, { roughness: 0.5 }), sx * 0.42, 0.2, p.faceZ + 0.06);
+    lapel.rotation.z = sx * 0.45;
+    g.add(lapel);
+    g.add(at(box(0.05, 0.05, 0.04, 0x0d1424), sx * 0.44, 0.06, p.faceZ + 0.07)); // buttons
+  }
+  // red tie: knot over Profe's bowtie + blade down the shirt
+  // shirt collar in front of Profe's teal bowtie (hides it), then the tie on top
+  for (const sx of [-1, 1]) {
+    const collar = at(box(0.3, 0.2, 0.06, SHIRT, { bevel: 0.015 }), sx * 0.14, 0.15, p.faceZ + 0.12);
+    collar.rotation.z = sx * -0.3;
+    g.add(collar);
+  }
+  g.add(at(box(0.16, 0.13, 0.08, TIE, { bevel: 0.02 }), 0, 0.15, p.faceZ + 0.17));
+  g.add(at(box(0.12, 0.17, 0.05, TIE), 0, 0.04, p.faceZ + 0.15));
+  // white pocket square + small black lapel mic
+  g.add(at(box(0.15, 0.07, 0.03, 0xf8f8f4), 0.62, 0.27, p.faceZ + 0.06));
+  g.add(at(box(0.07, 0.1, 0.06, 0x111116, { bevel: 0.015 }), -0.5, 0.36, p.faceZ + 0.08));
+  // earpiece with a coiled wire on the right side of the head
+  g.add(at(box(0.08, 0.12, 0.1, 0xe8d8c0, { bevel: 0.02 }), p.S / 2 + 0.04, p.eyeY - 0.08, 0.05));
+  g.add(at(box(0.03, 0.4, 0.03, 0xe8d8c0), p.S / 2 + 0.05, p.eyeY - 0.34, -0.05));
+  return g;
+}
+
+export const COSTUMES = { none: () => new THREE.Group(), napoleon, greek, norton, roman, medieval, tycho, nasa, einstein, croupier, hacker, druid, fisherman, criollo, bond, inca, posada, panadero, dominico, anchor };
 
 /** Straw broom (fray Escoba), held by the handle; the handle sticks up past the hand, the brush hangs below. */
 function broom() {
