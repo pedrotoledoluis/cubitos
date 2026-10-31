@@ -4,7 +4,7 @@ import { createChicken } from './locations/common.js';
 import { createProfe, createTito, createNova } from './characters/index.js';
 import { clamp, lerp, smooth } from './characters/util.js';
 import { attachCostumes, createPoof } from './costumes.js';
-import { drawBoard, normalizeBoard } from './board/index.js';
+import { drawBoard, normalizeBoard, preloadBoards } from './board/index.js';
 import { createLook, resolveLook } from './look.js';
 
 // Deterministic stage for HyperFrames: every frame is a pure function of time t.
@@ -138,6 +138,13 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
 
   const boardCtx = board.canvas.getContext('2d');
   let lastBoardKey = '';
+  // Real photos / clip frames on the board (scene "media"): the renderer waits on this buildReady promise before
+  // capturing, so no frame is drawn before its image is decoded. Then force a board redraw.
+  const mediaReady = preloadBoards([...lines.map((l) => l.board), episode?.thumbnailBoard ?? null])
+    .then(() => { lastBoardKey = ''; if (lastT !== null) api.renderAt(lastT); }); // preview: repaint once loaded
+  window.__hf = window.__hf || {};
+  window.__hf.buildReady = window.__hf.buildReady || {};
+  window.__hf.buildReady.boardMedia = mediaReady;
 
   function lineIndexAt(t) {
     let idx = -1;
@@ -370,5 +377,7 @@ export function createStage({ canvas, width, height, mode = 'video', episode = n
     look.render();
   }
 
-  return { renderAt: (t) => (mode === 'video' ? renderVideo(t) : renderThumbnail()) };
+  let lastT = null;
+  const api = { renderAt: (t) => { lastT = t; return mode === 'video' ? renderVideo(t) : renderThumbnail(); }, mediaReady };
+  return api;
 }

@@ -2,8 +2,14 @@
 // board: null (idle) | "sceneName" | { scene: "sceneName", ...params }. See scenes.js for the library.
 import { background } from './chalk.js';
 import { SCENES } from './scenes.js';
+import { mediaSources, preloadMedia } from './media.js';
 
 export { SCENES };
+
+/** Preloads every photo / clip frame the given boards show; resolves when all are decoded. */
+export function preloadBoards(boards) {
+  return preloadMedia(mediaSources(boards.map(normalizeBoard)));
+}
 
 export function normalizeBoard(board) {
   if (!board) return null;

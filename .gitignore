@@ -13,3 +13,9 @@ hf-template/.build/
 build/
 out/
 *.log
+
+# Board media: source clips stay local like other video (mp4 is ignored above); frames are rebuilt by build-audio
+hf-template/assets/media/_frames/
+hf-template/assets/media/**/*.webm
+hf-template/assets/media/**/*.mov
+hf-template/assets/media/**/*.m4v

@@ -162,6 +162,11 @@ beer stairs` and (`scenes-v6.js`, shapes, no emoji) `guitar candle calavera catr
 All icons are drawn at 1.15x (`ICON_SCALE` in `chalk.js`). `decree` takes `cross: false` (keep the icon), `equation` takes
 `pad` (side margin; ~200-300 when edge items carry long labels), and `labelled` shrinks long tag labels to fit.
 
+**Real photos / ≤5 s clips:** `board: { "scene": "media", "image" | "clip": "assets/media/<NNN>/file", "credit": "Foto: Autor · Licencia", "title" }`
+(details in `hf-template/README.md`). Only media we may publish (public domain, Creative Commons with the credit on
+the board, or our own); no clips from copyrighted films. Small jpg/png/webp are committed; clips stay local
+(mp4/webm are gitignored, like rendered videos), so record each clip's source URL next to it in the episode sources.
+
 **Add a scene:** a deterministic function `(g, W, H, u, d, params)` on the 1280x886 canvas (dark background is
 drawn for you; use light chalk colors), register it in `SCENES`. Titles go at the top or bottom edge; the
 board shot keeps the whole board below the caption block.

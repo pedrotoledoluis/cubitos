@@ -115,6 +115,28 @@ human carrot napoleon shell chest note musician`).
 To add one: write a function in `scenes.js` (or a new file) and add it to `SCENES`. Must be deterministic
 (use `hash()`, never `Math.random`/clocks). Board canvas is 1280x886.
 
+### Real photos and short clips (`media` scene, `src/board/media.js`)
+
+```jsonc
+"board": { "scene": "media", "image": "assets/media/027/house.jpg", "title": "CASA EN OHIO",
+           "credit": "Foto: Autor · CC BY-SA 4.0", "fit": "cover", "zoom": 1.08, "focus": [0.5, 0.4] }
+"board": { "scene": "media", "clip": "assets/media/027/bats.mp4", "start": 3.0, "duration": 4,
+           "credit": "Clip: NASA · Dominio público", "loop": false }
+```
+
+- Paths are relative to `hf-template/`; files live in `assets/media/<NNN>/` (see `assets/media/README.md`).
+  `scripts/build-audio.mjs` fails with `line N: board media: file not found: ...` if a file is missing.
+- `image`: jpg/png/webp, `fit` `cover` (default) or `contain`, slow Ken Burns zoom to `zoom` (default 1.08)
+  around `focus` (0..1). `clip`: mp4/webm/mov, uses `start` .. `start + duration` (max 5 s), muted.
+- `title` (optional) sits on a dark band at the bottom of the photo; `credit` (author + license, always give it)
+  is a dark strip under it. The build warns when `credit` is missing.
+- Clips are deterministic because they are not `<video>` on the board: the build extracts the cut to a 30 fps
+  JPEG sequence in `assets/media/_frames/<hash>/` (gitignored, cached) and the scene shows frame
+  `floor(u * 30)` (holds the last frame after the cut, or `loop: true`). A DOM `<video>` cannot feed the WebGL board
+  texture frame-accurately; HyperFrames only frame-locks DOM videos. All photos/frames are decoded before the
+  first capture through `window.__hf.buildReady.boardMedia` (registered in `src/stage.js`).
+- The board material is `toneMapped: false` and does not feed the selective bloom, so photos keep their colors.
+
 ## Layout rules (portrait)
 
 - Captions: top-center block, 13%..~30% of the frame, max 3 lines (pages + font guard), fill colored by speaker
