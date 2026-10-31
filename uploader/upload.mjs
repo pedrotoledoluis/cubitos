@@ -22,6 +22,7 @@ function parseArgs(argv) {
     if (argv[i] === '--publish-at') args.publishAt = argv[++i];
     else if (argv[i] === '--auth') args.authOnly = true;
     else if (argv[i] === '--force') args.force = true;
+    else if (argv[i] === '--set-thumbnail') args.thumbnailFor = argv[++i];
     else args.dir = argv[i];
   }
   return args;
@@ -94,6 +95,14 @@ async function main() {
 
   const dir = path.resolve(ROOT, args.dir);
   const meta = loadMetadata(dir);
+  if (args.thumbnailFor) {
+    // Replace only the thumbnail of an already uploaded video: --set-thumbnail <videoId>
+    const youtube = google.youtube({ version: 'v3', auth });
+    const body = fs.createReadStream(path.join(dir, meta.files.thumbnail));
+    await youtube.thumbnails.set({ videoId: args.thumbnailFor, media: { mimeType: 'image/png', body } });
+    console.log(`Thumbnail set for ${args.thumbnailFor}`);
+    return;
+  }
   const log = fs.existsSync(LOG) ? JSON.parse(fs.readFileSync(LOG, 'utf8')) : {};
   if (log[meta.id] && !args.force) {
     console.log(`Already uploaded: https://youtu.be/${log[meta.id].videoId} (use --force to upload again)`);
