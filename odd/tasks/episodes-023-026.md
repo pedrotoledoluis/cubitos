@@ -34,7 +34,7 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
 - [x] T2 023 guaguas de pan: script, assets, render, verify. Route: delegated (writer trigger). Commit 2c7c2f6.
 - [x] T3 Automate the Shorts cover in make-episode + 024 San Martín de Porres. Route: delegated (writer trigger). Commits 59b75ad, 8b8e7d3.
 - [x] T4 025 cinco noticias raras: script, assets, render, verify. Route: delegated (writer trigger). Commit dfcc161.
-- [ ] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger).
+- [x] T5 026 papacóptero: script, assets, render, verify. Route: delegated (writer trigger). Commit a18ae53.
 - [ ] T6 Update AGENT_GUIDE.md §8 and odd/HANDOFF.md. Route: inline.
 
 ## Acceptance
@@ -99,5 +99,24 @@ ask-on-risk. Forecast ~600–900 authored lines (4 episode JSONs + possible cost
   added, re-rendered. Thumbnail readable ("TOP 5" badge, RARAS box); Tito mostly hidden behind the headline (same
   3-character layout issue as 023). Leftover check: 0. No RED/GREEN (content). Native review not run by the writer.
 
+- T5 (commit a18ae53, 026-papacoptero, delegated writer): 11 lines, Tito+Profe+Nova, hook "¡Existe un papacóptero!",
+  loop punchline "¿Me prestan el papacóptero pa' la Javier Prado?" (Profe facepalm -> replays into the hook). Jokes on
+  the vehicle, combis and Lima traffic only. Facts re-verified 2026-10-30: Infobae 28/10 (FAP presented the
+  "Papacóptero FAP" Mi-17 at Grupo Aéreo N.º 8; up to 24 passengers + 6 crew; ~3 h endurance, Panamericana says 3.5 h;
+  Chiclayo -> Santa Cruz de Succhabamba, Cajamarca, 30–40 min, ~2,000 m, no airstrip; visit 11–16 Nov); Infobae 05/08
+  itinerary (11–17 Nov; Lima, Chiclayo, Cusco, Pucallpa) -> the script only says "desde el 11 de noviembre" and the
+  description notes the date spread; Andina / El Comercio (bishop of Chiclayo 2015–2023, Peruvian nationality 2015);
+  ACI Prensa (first electric popemobile, Mercedes G-Class, Dec 2024). New assets: costume `pilot` (olive flight suit,
+  flag patch, grey helmet with raised visor, boom mic), location `fap_helipad` (`src/locations/fap_helipad.js`: Andes
+  backdrop, hangar/tower, helipad ring + H, low-poly Mi-17-like helicopter with idling rotor, tail rotor and beacon,
+  windsock, edge lights), scenes `andesRoute` `iconStat` + icons `helicopter idCard plane` (`src/board/scenes-v10.js`,
+  canvas shapes). Checks: report 45.84 s, 1080x1920 h264 30 fps, aac, -15 LUFS, no black segments, cover ok (PSNR
+  47.2 dB). Pre-render snapshots showed the helicopter off-frame at x -5.6 -> moved behind the right side (2.8, -5.8),
+  re-snapshotted, then rendered once. Sheet + transition viewed: captions above the board, heads in frame, poof hides
+  the swap, helicopter visible in wide shots. Thumbnail readable ("11 NOV" badge, red PAPACÓPTERO box); the box covers
+  the top of Tito's head (eyes partly hidden, same 3-character layout issue as 023/025; the layout lives in
+  `compositions/thumbnail.html`, outside this task's edit surface). Leftover check: 0. No RED/GREEN (content). Native
+  review not run by the writer.
+
 ## Next step
-T5 (026 papacóptero).
+T6 (AGENT_GUIDE.md §8 and odd/HANDOFF.md).
